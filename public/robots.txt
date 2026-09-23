@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://officesdk.com/sitemap.xml
