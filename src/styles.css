@@ -91,13 +91,13 @@ h1 em, h2 em { color: var(--indigo-bright); font-style: normal; }
 .document-ruler { position: absolute; top: 5px; left: 50px; right: 28px; display: flex; justify-content: space-around; color: #50607e; font-size: 8px; }
 .document-page { position: relative; width: min(100%, 450px); min-height: 352px; margin: 0 auto; overflow: hidden; background: #fafbff; color: #18223b; box-shadow: 0 12px 22px rgba(0, 0, 0, .24); }
 .document-shell-compact .document-page { min-height: 292px; }
-.docx-page, .xlsx-page, .pptx-page, .pdf-page { height: 100%; min-height: 352px; padding: 33px 40px; }
-.document-shell-compact .docx-page, .document-shell-compact .xlsx-page, .document-shell-compact .pptx-page, .document-shell-compact .pdf-page { min-height: 292px; padding: 26px 31px; }
+.docx-page, .xlsx-page, .pptx-page { height: 100%; min-height: 352px; padding: 33px 40px; }
+.document-shell-compact .docx-page, .document-shell-compact .xlsx-page, .document-shell-compact .pptx-page { min-height: 292px; padding: 26px 31px; }
 .docx-page { background: linear-gradient(124deg, #fff 0%, #f3f6fc 100%); }
 .page-kicker, .slide-kicker { color: #5972b5; font-size: 7px; font-weight: 800; letter-spacing: .14em; }
-.docx-page h3, .pptx-page h3, .pdf-page h3 { margin-top: 30px; font-size: 25px; line-height: 1.07; letter-spacing: 0; }
-.document-shell-compact .docx-page h3, .document-shell-compact .pptx-page h3, .document-shell-compact .pdf-page h3 { margin-top: 22px; font-size: 20px; }
-.docx-page h3 em, .pptx-page h3 em, .pdf-page h3 em { color: #677dce; font-style: normal; }
+.docx-page h3, .pptx-page h3 { margin-top: 30px; font-size: 25px; line-height: 1.07; letter-spacing: 0; }
+.document-shell-compact .docx-page h3, .document-shell-compact .pptx-page h3 { margin-top: 22px; font-size: 20px; }
+.docx-page h3 em, .pptx-page h3 em { color: #677dce; font-style: normal; }
 .page-lede { max-width: 290px; margin-top: 18px; color: #68738b; font-size: 9px; line-height: 1.58; }
 .document-shell-compact .page-lede { margin-top: 13px; font-size: 8px; }
 .page-rule { width: 100%; height: 1px; margin-top: 25px; background: #d4dced; }
@@ -126,15 +126,6 @@ h1 em, h2 em { color: var(--indigo-bright); font-style: normal; }
 .shape-one { width: 220px; height: 220px; top: -86px; right: -37px; background: rgba(116, 103, 246, .78); }
 .shape-two { width: 170px; height: 170px; right: 60px; bottom: -93px; border: 1px solid rgba(121, 206, 255, .4); background: rgba(57, 127, 218, .25); }
 .slide-caption { position: absolute; right: 33px; bottom: 25px; color: #a6afd1; font-size: 8px; line-height: 1.5; text-align: right; }
-.pdf-page { background: #f8f9fd; }
-.pdf-head { display: flex; align-items: center; gap: 9px; color: #6c778c; font-size: 7px; font-weight: 800; letter-spacing: .12em; }
-.pdf-seal { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: #6b76a9; background: #e2e6f6; font-size: 8px; letter-spacing: 0; }
-.pdf-page h3 { margin-top: 42px; font-size: 28px; }
-.document-shell-compact .pdf-page h3 { margin-top: 29px; font-size: 21px; }
-.pdf-page p { max-width: 265px; margin-top: 16px; color: #6a778d; font-size: 9px; line-height: 1.6; }
-.pdf-checks { display: grid; gap: 9px; margin-top: 26px; color: #586b7b; font-size: 9px; }
-.pdf-checks span { display: flex; align-items: center; gap: 7px; }
-.pdf-checks svg { color: #429b7c; }
 .document-side-tools { position: absolute; top: 43px; left: 11px; display: grid; gap: 8px; }
 .document-side-tools button { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 6px; color: #73829f; background: rgba(13, 21, 37, .55); cursor: pointer; }
 .document-side-tools button.active, .document-side-tools button:hover { color: #c3c7ff; border-color: rgba(111, 116, 255, .6); background: rgba(111, 116, 255, .14); }
@@ -303,10 +294,10 @@ pre { min-height: 270px; overflow: auto; margin: 24px 0 0; padding: 19px; border
   .hero-visual { margin-top: 66px; padding: 28px 3px 35px; }
   .document-workspace { min-height: 300px; padding-right: 17px; padding-left: 38px; }
   .document-page { min-height: 265px; }
-  .docx-page, .xlsx-page, .pptx-page, .pdf-page { min-height: 265px; padding: 24px 27px; }
+  .docx-page, .xlsx-page, .pptx-page { min-height: 265px; padding: 24px 27px; }
   .document-shell-compact .document-workspace { min-height: 300px; }
   .document-shell-compact .document-page { min-height: 265px; }
-  .document-shell-compact .docx-page, .document-shell-compact .xlsx-page, .document-shell-compact .pptx-page, .document-shell-compact .pdf-page { min-height: 265px; padding: 24px 27px; }
+  .document-shell-compact .docx-page, .document-shell-compact .xlsx-page, .document-shell-compact .pptx-page { min-height: 265px; padding: 24px 27px; }
   .document-shell-compact .docx-page h3 { font-size: 20px; }
   .document-shell-compact .page-lede { font-size: 8px; }
   .visual-float { transform: scale(.9); }
@@ -367,8 +358,8 @@ pre { min-height: 270px; overflow: auto; margin: 24px 0 0; padding: 19px; border
   .document-ruler { left: 39px; right: 12px; }
   .document-side-tools { left: 7px; }
   .document-page { min-height: 238px; }
-  .docx-page, .xlsx-page, .pptx-page, .pdf-page { min-height: 238px; padding: 20px 20px; }
-  .document-shell-compact .document-workspace, .document-shell-compact .document-page, .document-shell-compact .docx-page, .document-shell-compact .xlsx-page, .document-shell-compact .pptx-page, .document-shell-compact .pdf-page { min-height: 238px; }
+  .docx-page, .xlsx-page, .pptx-page { min-height: 238px; padding: 20px 20px; }
+  .document-shell-compact .document-workspace, .document-shell-compact .document-page, .document-shell-compact .docx-page, .document-shell-compact .xlsx-page, .document-shell-compact .pptx-page { min-height: 238px; }
   .document-shell-compact .docx-page h3 { font-size: 17px; }
   .document-shell-compact .page-lede { max-width: 220px; font-size: 7px; }
   .document-shell-compact .page-rule { margin-top: 18px; }

@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
-import { FileSpreadsheet, FileText, FileType, Presentation } from 'lucide-react'
+import { FileSpreadsheet, FileText, Presentation } from 'lucide-react'
 
-export type FormatKey = 'docx' | 'xlsx' | 'pptx' | 'pdf'
+export type FormatKey = 'docx' | 'xlsx' | 'pptx'
 
 export type FormatOption = {
   key: FormatKey
@@ -36,14 +36,6 @@ export const formatOptions: FormatOption[] = [
     title: 'Product launch narrative.pptx',
     accent: '#ff9d68',
     icon: Presentation,
-  },
-  {
-    key: 'pdf',
-    label: 'PDF',
-    description: 'Review-ready exports',
-    title: 'Vendor security overview.pdf',
-    accent: '#c092ff',
-    icon: FileType,
   },
 ]
 
@@ -91,7 +83,7 @@ export const features = [
   {
     number: '02',
     title: 'One integration for everyday business files',
-    body: 'Give teams one consistent entry point for Word, Excel, PowerPoint, and PDF files, with a format-aware experience that feels native to your product.',
+    body: 'Give teams one consistent entry point for Word, Excel, PowerPoint, and other business files, with a format-aware experience that feels native to your product.',
     label: 'Format coverage',
   },
   {
@@ -112,7 +104,7 @@ export const useCases = [
 export const faqs = [
   {
     question: 'What file formats can I work with?',
-    answer: 'Office SDK is designed around common business documents, including Word, Excel, PowerPoint, and PDF. The public product README also lists image and text formats. Use the current format matrix in the developer documentation to confirm an exact production combination.',
+    answer: 'Office SDK is designed around common business documents, including Word, Excel, and PowerPoint. Use the current format matrix in the developer documentation to confirm an exact production combination.',
   },
   {
     question: 'Can I keep my existing product UI?',

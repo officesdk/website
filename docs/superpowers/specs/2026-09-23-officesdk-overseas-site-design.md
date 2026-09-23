@@ -9,7 +9,7 @@ Create a polished English-language product website for Office SDK that makes the
 - Primary: engineers evaluating an embeddable document viewer/editor for web products.
 - Secondary: product and platform owners comparing deployment, security, and format coverage.
 - Positioning: developer-first document infrastructure for viewing, editing, annotating, and converting business files.
-- Verified public product scope used in copy: Word, Excel, PowerPoint, PDF, format conversion, annotations, customizable UI, JavaScript API, commercial licensing. Performance figures from the upstream README are excluded from proof claims until independently verified.
+- Verified public product scope used in copy: Word, Excel, PowerPoint, format conversion, annotations, customizable UI, JavaScript API, commercial licensing. Performance figures from the upstream README are excluded from proof claims until independently verified.
 
 ## Information Architecture
 

@@ -129,14 +129,6 @@ function DocumentPreview({ format, mode, compact = false }: { format: FormatKey;
               <div className="slide-shape shape-one" /><div className="slide-shape shape-two" /><div className="slide-caption">A product narrative<br />for modern teams</div>
             </div>
           )}
-          {format === 'pdf' && (
-            <div className="pdf-page">
-              <div className="pdf-head"><span className="pdf-seal">OS</span><span>VENDOR SECURITY OVERVIEW</span></div>
-              <h3>Security that fits<br />the way you build.</h3>
-              <p>Deployment, data handling, and access controls should work with your product architecture.</p>
-              <div className="pdf-checks"><span><Check size={12} /> Access control</span><span><Check size={12} /> Watermarking</span><span><Check size={12} /> Audit-ready review</span></div>
-            </div>
-          )}
         </div>
         <div className="document-side-tools">
           <button type="button" aria-label="Select tool"><MousePointer2 size={15} /></button>
@@ -159,7 +151,7 @@ function Hero() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" /> Document infrastructure for modern products</div>
           <h1>Documents should feel <em>native</em> to your product.</h1>
-          <p>Embed reliable viewing, editing, annotation, and conversion for Office and PDF files — with an integration surface your team can actually shape.</p>
+          <p>Embed reliable viewing, editing, annotation, and conversion for Office files — with an integration surface your team can actually shape.</p>
           <div className="hero-actions">
             <button className="button button-primary" type="button" onClick={() => scrollTo('demo')}>Start building <ArrowRight size={17} /></button>
             <a className="button button-ghost" href="#resources">Read the docs <ArrowUpRight size={16} /></a>
@@ -170,12 +162,12 @@ function Hero() {
           <div className="visual-label label-top"><span className="pulse-dot" /> LIVE EMBEDDED SURFACE</div>
           <DocumentPreview format="docx" mode="edit" compact />
           <div className="visual-float float-api"><Braces size={14} /><span><strong>JavaScript API</strong><small>ready to customize</small></span></div>
-          <div className="visual-float float-format"><Layers3 size={14} /><span><strong>DOCX · XLSX · PDF</strong><small>one workflow</small></span></div>
+          <div className="visual-float float-format"><Layers3 size={14} /><span><strong>DOCX · XLSX · PPTX</strong><small>one workflow</small></span></div>
         </div>
       </div>
       <div className="hero-bottom container">
         <span>Built for teams shipping</span>
-        <div className="format-rail"><span>DOCX</span><i /><span>XLSX</span><i /><span>PPTX</span><i /><span>PDF</span><i /><span>+ more business formats</span></div>
+        <div className="format-rail"><span>DOCX</span><i /><span>XLSX</span><i /><span>PPTX</span><i /><span>+ more business formats</span></div>
       </div>
     </section>
   )
