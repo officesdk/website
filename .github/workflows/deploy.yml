@@ -68,8 +68,9 @@ jobs:
         run: |
           set -euo pipefail
           ssh_args=(-i "$HOME/.ssh/officesdk_deploy" -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes)
-          scp "${ssh_args[@]}" "$RUNNER_TEMP/officesdk-${RELEASE_ID}.tgz" "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.tgz"
-          scp "${ssh_args[@]}" deploy/nginx/officesdk.conf "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.conf"
+          scp_args=(-i "$HOME/.ssh/officesdk_deploy" -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes)
+          scp "${scp_args[@]}" "$RUNNER_TEMP/officesdk-${RELEASE_ID}.tgz" "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.tgz"
+          scp "${scp_args[@]}" deploy/nginx/officesdk.conf "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.conf"
 
       - name: Activate release
         shell: bash
