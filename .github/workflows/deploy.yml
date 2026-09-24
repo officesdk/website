@@ -1,0 +1,113 @@
+name: Build and deploy Office SDK website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: officesdk-production
+  cancel-in-progress: false
+
+env:
+  DEPLOY_ROOT: /var/www/officesdk
+  DEPLOY_HOST: ${{ vars.DEPLOY_HOST || '43.172.115.22' }}
+  DEPLOY_PORT: ${{ vars.DEPLOY_PORT || '22' }}
+  DEPLOY_USER: ${{ vars.DEPLOY_USER || 'ubuntu' }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Prepare SSH
+        shell: bash
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_KEY" || { echo 'DEPLOY_SSH_KEY is required'; exit 1; }
+          test -n "$DEPLOY_KNOWN_HOSTS" || { echo 'DEPLOY_KNOWN_HOSTS is required'; exit 1; }
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_KEY" > "$HOME/.ssh/officesdk_deploy"
+          chmod 600 "$HOME/.ssh/officesdk_deploy"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+      - name: Package release
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_id="${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          tar -czf "$RUNNER_TEMP/officesdk-${release_id}.tgz" -C dist .
+          echo "id=$release_id" >> "$GITHUB_OUTPUT"
+
+      - name: Upload release and Nginx configuration
+        shell: bash
+        env:
+          RELEASE_ID: ${{ steps.release.outputs.id }}
+        run: |
+          set -euo pipefail
+          ssh_args=(-i "$HOME/.ssh/officesdk_deploy" -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes)
+          scp "${ssh_args[@]}" "$RUNNER_TEMP/officesdk-${RELEASE_ID}.tgz" "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.tgz"
+          scp "${ssh_args[@]}" deploy/nginx/officesdk.conf "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.conf"
+
+      - name: Activate release
+        shell: bash
+        env:
+          RELEASE_ID: ${{ steps.release.outputs.id }}
+          DEPLOY_SUDO_PASSWORD: ${{ secrets.DEPLOY_SUDO_PASSWORD }}
+        run: |
+          set -euo pipefail
+          ssh_args=(-i "$HOME/.ssh/officesdk_deploy" -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes)
+          cat > "$RUNNER_TEMP/activate.sh" <<'REMOTE'
+          set -euo pipefail
+          release_id="$1"
+          root=/var/www/officesdk
+          artifact="/tmp/officesdk-${release_id}.tgz"
+          config="/tmp/officesdk-${release_id}.conf"
+          install -d -m 755 "$root/releases/$release_id"
+          tar -xzf "$artifact" -C "$root/releases/$release_id"
+          test -s "$root/releases/$release_id/index.html"
+          chown -R ubuntu:ubuntu "$root/releases/$release_id"
+          ln -sfn "$root/releases/$release_id" "$root/current"
+          install -m 644 "$config" /etc/nginx/sites-available/officesdk
+          ln -sfn /etc/nginx/sites-available/officesdk /etc/nginx/sites-enabled/officesdk
+          nginx -t
+          systemctl reload nginx
+          rm -f "$artifact" "$config"
+          curl --fail --silent --show-error --max-time 15 -H 'Host: officesdk.com' http://127.0.0.1/ > /tmp/officesdk-home.html
+          grep -q 'Office SDK' /tmp/officesdk-home.html
+          REMOTE
+          chmod 700 "$RUNNER_TEMP/activate.sh"
+          if [ -n "$DEPLOY_SUDO_PASSWORD" ]; then
+            { printf '%s\n' "$DEPLOY_SUDO_PASSWORD"; cat "$RUNNER_TEMP/activate.sh"; } | ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "sudo -S -p '' bash -s -- '$RELEASE_ID'"
+          else
+            ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "sudo -n bash -s -- '$RELEASE_ID'" < "$RUNNER_TEMP/activate.sh"
+          fi
+
+      - name: Verify public IP
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 20 -H 'Host: officesdk.com' "http://${DEPLOY_HOST}/" | grep -q 'Office SDK'
+          curl --fail --silent --show-error --max-time 20 -H 'Host: officesdk.com' "http://${DEPLOY_HOST}/robots.txt" | grep -q 'Sitemap:'
+          curl --fail --silent --show-error --max-time 20 -H 'Host: officesdk.com' "http://${DEPLOY_HOST}/sitemap.xml" | grep -q 'officesdk.com'

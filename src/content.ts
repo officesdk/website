@@ -2,10 +2,12 @@ import type { ComponentType } from 'react'
 import { FileSpreadsheet, FileText, Presentation } from 'lucide-react'
 
 export type FormatKey = 'docx' | 'xlsx' | 'pptx'
+export type DemoMode = 'preview' | 'edit' | 'review'
 
 export type FormatOption = {
   key: FormatKey
   label: string
+  extension: string
   description: string
   title: string
   accent: string
@@ -16,106 +18,118 @@ export const formatOptions: FormatOption[] = [
   {
     key: 'docx',
     label: 'Word',
-    description: 'Rich text documents',
+    extension: 'DOCX',
+    description: 'Text-heavy documents, contracts, and reports',
     title: 'Q3 customer rollout brief.docx',
-    accent: '#71a5ff',
+    accent: '#356ea8',
     icon: FileText,
   },
   {
     key: 'xlsx',
     label: 'Excel',
-    description: 'Data and calculations',
+    extension: 'XLSX',
+    description: 'Tables, calculations, and operational data',
     title: 'Revenue planning model.xlsx',
-    accent: '#4bd4a2',
+    accent: '#25845b',
     icon: FileSpreadsheet,
   },
   {
     key: 'pptx',
     label: 'PowerPoint',
-    description: 'Slides and presentations',
+    extension: 'PPTX',
+    description: 'Slides, decks, and presentation handoffs',
     title: 'Product launch narrative.pptx',
-    accent: '#ff9d68',
+    accent: '#c35e35',
     icon: Presentation,
   },
 ]
 
-export const codeSamples = {
-  javascript: `const editor = await OfficeSDK.createEditor({
-  element: '#document-editor',
-  file: documentUrl,
-  mode: 'edit',
-});
+export const modeOptions: Array<{ key: DemoMode; label: string; description: string }> = [
+  { key: 'preview', label: 'Preview', description: 'Let people inspect a file before they decide what happens next.' },
+  { key: 'edit', label: 'Edit', description: 'Keep editing inside the product that owns the workflow.' },
+  { key: 'review', label: 'Review', description: 'Keep comments, decisions, and document context together.' },
+]
 
-editor.on('ready', () => {
-  console.log('document is ready');
-});`,
-  react: `import { OfficeEditor } from '@officesdk/react';
-
-export function ContractEditor({ url }) {
-  return (
-    <OfficeEditor
-      file={url}
-      mode="edit"
-      onReady={() => setReady(true)}
-    />
-  );
-}`,
-  vue: `<template>
-  <OfficeEditor
-    :file="documentUrl"
-    mode="edit"
-    @ready="handleReady"
-  />
-</template>
-
-<script setup>
-const handleReady = () => console.log('ready')
-</script>`,
-} as const
-
-export const features = [
+export const workflowThemes = [
+  {
+    eyebrow: 'ONLINE OFFICE VIEWER',
+    title: 'View Office files online',
+    body: 'Give users a fast way to open Word, Excel, and PowerPoint files without leaving your product.',
+    query: 'office document viewer',
+    accent: 'blue',
+  },
+  {
+    eyebrow: 'DOCUMENT EDITOR',
+    title: 'Edit Word, Excel, and PowerPoint files',
+    body: 'Put an editable Office surface next to the records, permissions, and workflows your app already owns.',
+    query: 'online office editor',
+    accent: 'green',
+  },
+  {
+    eyebrow: 'FILE CONVERSION',
+    title: 'Convert Office files for the next step',
+    body: 'Move between editable Office files and delivery formats such as PDF when the workflow calls for it.',
+    query: 'convert office files to pdf',
+    accent: 'orange',
+  },
+  {
+    eyebrow: 'REVIEW WORKFLOW',
+    title: 'Review documents with context',
+    body: 'Keep approvals, annotations, and business records close to the document they explain.',
+    query: 'document review and approval',
+    accent: 'violet',
+  },
+] as const
+export const capabilityRows = [
   {
     number: '01',
-    title: 'A document surface your product can own',
-    body: 'Bring viewing, editing, annotation, and conversion into the workflow you already have. Your navigation, permissions, and brand stay in charge.',
-    label: 'Product control',
+    title: 'Office files inside the product people already use',
+    body: 'Add a familiar document surface to a content platform, workflow tool, education product, or business system.',
+    label: 'Embed the workflow',
   },
   {
     number: '02',
-    title: 'One integration for everyday business files',
-    body: 'Give teams one consistent entry point for Word, Excel, PowerPoint, and other business files, with a format-aware experience that feels native to your product.',
-    label: 'Format coverage',
+    title: 'One experience across everyday Office formats',
+    body: 'Start with the file families your users already bring to work: Word documents, Excel workbooks, and PowerPoint presentations.',
+    label: 'Work with Office files',
   },
   {
     number: '03',
-    title: 'Room for your security model',
-    body: 'Shape deployment, access, watermarking, and UI decisions around your application and its data-handling requirements.',
-    label: 'Deployment choice',
+    title: 'A path from search intent to a real product evaluation',
+    body: 'Use practical Office workflows as the entry point, then confirm the current integration and deployment details against the API reference.',
+    label: 'Move from interest to proof',
   },
-]
+] as const
 
-export const useCases = [
-  { title: 'Document management', body: 'Turn file repositories into a productive workspace with preview, editing, and review in one flow.', tag: 'CONTENT PLATFORMS' },
-  { title: 'Legal & compliance', body: 'Keep agreements, evidence, and approval notes close to the controls that govern them.', tag: 'REVIEW WORKFLOWS' },
-  { title: 'Education & research', body: 'Make course packs, reports, and spreadsheets useful without sending people to another app.', tag: 'LEARNING PRODUCTS' },
-  { title: 'Finance operations', body: 'Move from uploaded statements to reviewable, annotated business documents inside your system.', tag: 'OPERATIONS SOFTWARE' },
-]
+export const solutionCards = [
+  { title: 'Content platforms', body: 'Preview and edit files where teams store and share them.', tag: 'DOCUMENT MANAGEMENT' },
+  { title: 'Review and approval', body: 'Connect a document to the people, notes, and decisions around it.', tag: 'WORKFLOW SOFTWARE' },
+  { title: 'Education and research', body: 'Make reports, course packs, and spreadsheets useful in one place.', tag: 'LEARNING PRODUCTS' },
+  { title: 'Operations and finance', body: 'Keep statements, plans, and business documents close to the system of record.', tag: 'BUSINESS SYSTEMS' },
+] as const
+
+export const fileFamilies = [
+  { name: 'Word documents', formats: 'DOCX, DOC, DOTX, ODT, RTF', accent: '#356ea8' },
+  { name: 'Excel workbooks', formats: 'XLSX, XLS, XLTX, CSV, ODS', accent: '#25845b' },
+  { name: 'PowerPoint decks', formats: 'PPTX, PPT, POTX, ODP', accent: '#c35e35' },
+  { name: 'Delivery formats', formats: 'PDF and image outputs where supported', accent: '#7655a5' },
+] as const
 
 export const faqs = [
   {
-    question: 'What file formats can I work with?',
-    answer: 'Office SDK is designed around common business documents, including Word, Excel, and PowerPoint. Use the current format matrix in the developer documentation to confirm an exact production combination.',
+    question: 'What is Office SDK?',
+    answer: 'Office SDK is an Office file workflow product for teams that want to put document viewing, editing, review, and delivery steps inside their own web product.',
   },
   {
-    question: 'Can I keep my existing product UI?',
-    answer: 'Yes. The integration model is intended to place the document surface inside your existing product, while UI customization lets you align the editor with your navigation, brand, and permission model.',
+    question: 'Which Office files should we evaluate first?',
+    answer: 'Start with the files your users already bring into the workflow. The first product surface focuses on Word documents, Excel workbooks, and PowerPoint presentations, with the current API reference used to confirm exact format behavior.',
   },
   {
-    question: 'Is there a private deployment option?',
-    answer: 'Deployment and support depend on the licensed package. Share your infrastructure and data-handling requirements with the Office SDK team so the production topology can be confirmed before implementation.',
+    question: 'Can Office SDK sit inside an existing product?',
+    answer: 'That is the intended evaluation path. Bring your product context, permission model, and target file workflow to the Office SDK team, then validate the integration details in the current API reference.',
   },
   {
-    question: 'Where should I start as a developer?',
-    answer: 'Start with the JavaScript integration guide, use the interactive demo below to understand the surface, and then validate your target file formats and deployment model with the current documentation.',
+    question: 'Do we need the full developer documentation to get started?',
+    answer: 'No. Start with the workflow and format fit. Detailed API documentation can follow once the product direction, target files, and deployment requirements are clear.',
   },
-]
+] as const
