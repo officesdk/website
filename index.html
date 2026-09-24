@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#151816" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="description" content="Office SDK helps products build Office file workflows for viewing, editing, reviewing, and delivering Word, Excel, and PowerPoint files." />
+    <meta name="description" content="Office SDK helps products add online preview and editing for Word, Excel, and PowerPoint files while their system keeps control of storage, permissions, and workflow." />
     <link rel="canonical" href="https://officesdk.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Office SDK" />
     <meta property="og:title" content="Office SDK | Build Office workflows into your product" />
-    <meta property="og:description" content="Build Office file workflows for viewing, editing, reviewing, and delivering Word, Excel, and PowerPoint files." />
+    <meta property="og:description" content="Add online preview and editing for Word, Excel, and PowerPoint files while your system keeps control of storage, permissions, and workflow." />
     <meta property="og:url" content="https://officesdk.com/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Office SDK | Build Office workflows into your product" />
-    <meta name="twitter:description" content="A practical Office file workflow surface for products that need viewing, editing, review, and delivery." />
+    <meta name="twitter:description" content="A practical Office file preview and editing surface for products that keep control of storage, permissions, and workflow." />
     <title>Office SDK | Build Office workflows into your product</title>
     <script type="application/ld+json">
       {
@@ -32,7 +32,7 @@
             "name": "Office SDK",
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Web, Linux, Windows, macOS",
-            "description": "An Office file workflow product for viewing, editing, reviewing, and delivering Word, Excel, and PowerPoint files inside web products.",
+            "description": "An online document preview and editing service for Word, Excel, and PowerPoint workflows inside web products.",
             "publisher": {"@id": "https://officesdk.com/#organization"}
           },
           {
@@ -41,17 +41,27 @@
               {
                 "@type": "Question",
                 "name": "What is Office SDK?",
-                "acceptedAnswer": {"@type": "Answer", "text": "Office SDK is an Office file workflow product for teams that want to put document viewing, editing, review, and delivery steps inside their own web product."}
+                "acceptedAnswer": {"@type": "Answer", "text": "Office SDK is an online document preview and editing service for teams that want to put Word, Excel, and PowerPoint workflows inside their own web product."}
               },
               {
                 "@type": "Question",
                 "name": "Which Office files should we evaluate first?",
-                "acceptedAnswer": {"@type": "Answer", "text": "Start with the files your users already bring into the workflow. The first product surface focuses on Word documents, Excel workbooks, and PowerPoint presentations, with the current API reference used to confirm exact format behavior."}
+                "acceptedAnswer": {"@type": "Answer", "text": "Start with the files your users already bring into the workflow. The current reference lists Word, Excel, and PowerPoint formats for editing, with broader preview coverage including PDF and other common file types. Confirm exact format behavior before launch."}
               },
               {
                 "@type": "Question",
                 "name": "Can Office SDK sit inside an existing product?",
-                "acceptedAnswer": {"@type": "Answer", "text": "That is the intended evaluation path. Bring your product context, permission model, and target file workflow to the Office SDK team, then validate the integration details in the current API reference."}
+                "acceptedAnswer": {"@type": "Answer", "text": "That is the intended evaluation path. Your system keeps file storage and permission decisions, while Office SDK provides the document surface, callback communication, and JavaScript SDK integration points."}
+              },
+              {
+                "@type": "Question",
+                "name": "Does Office SDK support PDF files?",
+                "acceptedAnswer": {"@type": "Answer", "text": "PDF is listed as a preview format. The current reference lists Word, Excel, and PowerPoint as the editable Office file families; confirm the exact behavior for your workflow in the maintained reference."}
+              },
+              {
+                "@type": "Question",
+                "name": "Who stores the files?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Your system does. Office SDK does not provide file storage. It communicates with your file system through callbacks and returns edited files to your system, while token-based permissions remain under your control."}
               }
             ]
           }

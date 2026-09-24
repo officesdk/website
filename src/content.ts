@@ -47,7 +47,7 @@ export const formatOptions: FormatOption[] = [
 export const modeOptions: Array<{ key: DemoMode; label: string; description: string }> = [
   { key: 'preview', label: 'Preview', description: 'Let people inspect a file before they decide what happens next.' },
   { key: 'edit', label: 'Edit', description: 'Keep editing inside the product that owns the workflow.' },
-  { key: 'review', label: 'Review', description: 'Keep comments, decisions, and document context together.' },
+  { key: 'review', label: 'Review', description: 'Keep the document beside the business context your workflow already owns.' },
 ]
 
 export const workflowThemes = [
@@ -66,16 +66,16 @@ export const workflowThemes = [
     accent: 'green',
   },
   {
-    eyebrow: 'FILE CONVERSION',
-    title: 'Convert Office files for the next step',
-    body: 'Move between editable Office files and delivery formats such as PDF when the workflow calls for it.',
-    query: 'convert office files to pdf',
+    eyebrow: 'FILE WORKFLOW',
+    title: 'Connect the file to the next step',
+    body: 'Use callbacks to supply file information and permissions, then receive the edited file back in your system.',
+    query: 'office document callback api',
     accent: 'orange',
   },
   {
     eyebrow: 'REVIEW WORKFLOW',
     title: 'Review documents with context',
-    body: 'Keep approvals, annotations, and business records close to the document they explain.',
+    body: 'Keep approvals and business records close to the document they explain.',
     query: 'document review and approval',
     accent: 'violet',
   },
@@ -95,9 +95,9 @@ export const capabilityRows = [
   },
   {
     number: '03',
-    title: 'A path from search intent to a real product evaluation',
-    body: 'Use practical Office workflows as the entry point, then confirm the current integration and deployment details against the API reference.',
-    label: 'Move from interest to proof',
+    title: 'Your system keeps control of files and permissions',
+    body: 'Office SDK does not provide file storage. Your system supplies file information and permissions through callbacks, and receives edited files back. Token-based access stays yours to define.',
+    label: 'Keep the data boundary clear',
   },
 ] as const
 
@@ -109,27 +109,35 @@ export const solutionCards = [
 ] as const
 
 export const fileFamilies = [
-  { name: 'Word documents', formats: 'DOCX, DOC, DOTX, ODT, RTF', accent: '#356ea8' },
-  { name: 'Excel workbooks', formats: 'XLSX, XLS, XLTX, CSV, ODS', accent: '#25845b' },
-  { name: 'PowerPoint decks', formats: 'PPTX, PPT, POTX, ODP', accent: '#c35e35' },
-  { name: 'Delivery formats', formats: 'PDF and image outputs where supported', accent: '#7655a5' },
+  { name: 'Word documents', formats: 'Preview: DOC, DOCX, DOT, DOCM, DOTX, DOTM, WPS, WPT · Edit: DOC, DOCX, WPS', accent: '#356ea8' },
+  { name: 'Excel workbooks', formats: 'Preview: XLS, XLSX, CSV, XLSM, XLT, XLTM, ET, ETT · Edit: XLS, XLSX', accent: '#25845b' },
+  { name: 'PowerPoint decks', formats: 'Preview: PPT, PPTX, POT, POTX, POTM, DPS, DPT · Edit: PPT, PPTX', accent: '#c35e35' },
+  { name: 'Broader preview coverage', formats: 'PDF, images, video, audio, text, Markdown, and code', accent: '#7655a5' },
 ] as const
 
 export const faqs = [
   {
     question: 'What is Office SDK?',
-    answer: 'Office SDK is an Office file workflow product for teams that want to put document viewing, editing, review, and delivery steps inside their own web product.',
+    answer: 'Office SDK is an online document preview and editing service for teams that want to put Word, Excel, and PowerPoint workflows inside their own web product.',
   },
   {
     question: 'Which Office files should we evaluate first?',
-    answer: 'Start with the files your users already bring into the workflow. The first product surface focuses on Word documents, Excel workbooks, and PowerPoint presentations, with the current API reference used to confirm exact format behavior.',
+    answer: 'Start with the files your users already bring into the workflow. The current reference lists Word, Excel, and PowerPoint formats for editing, with broader preview coverage including PDF and other common file types. Confirm exact format behavior before launch.',
   },
   {
     question: 'Can Office SDK sit inside an existing product?',
-    answer: 'That is the intended evaluation path. Bring your product context, permission model, and target file workflow to the Office SDK team, then validate the integration details in the current API reference.',
+    answer: 'That is the intended evaluation path. Your system keeps file storage and permission decisions, while Office SDK provides the document surface, callback communication, and JavaScript SDK integration points.',
   },
   {
     question: 'Do we need the full developer documentation to get started?',
     answer: 'No. Start with the workflow and format fit. Detailed API documentation can follow once the product direction, target files, and deployment requirements are clear.',
+  },
+  {
+    question: 'Does Office SDK support PDF files?',
+    answer: 'PDF is listed as a preview format. The current reference lists Word, Excel, and PowerPoint as the editable Office file families; confirm the exact behavior for your workflow in the maintained reference.',
+  },
+  {
+    question: 'Who stores the files?',
+    answer: 'Your system does. Office SDK does not provide file storage. It communicates with your file system through callbacks and returns edited files to your system, while token-based permissions remain under your control.',
   },
 ] as const

@@ -122,7 +122,7 @@ function DocumentPreview({ format, mode, compact = false }: { format: FormatKey;
           <button type="button" aria-label="Edit tool" className={mode === 'edit' ? 'active' : ''}><PenLine size={15} /></button>
           <button type="button" aria-label="Review tool" className={mode === 'review' ? 'active' : ''}><MessageSquare size={15} /></button>
         </div>
-        {mode === 'review' && <div className="review-pin"><MessageSquare size={12} /> 3 review notes</div>}
+        {mode === 'review' && <div className="review-pin"><MessageSquare size={12} /> 3 workflow notes</div>}
       </div>
       <div className="document-footer"><span>Document surface</span><span>{modeLabel}</span><span>{selected.extension}</span></div>
     </div>
@@ -137,7 +137,7 @@ function Hero() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" /> Office file workflows</div>
           <h1>Build Office workflows into the products people <em>already use.</em></h1>
-          <p>Office SDK gives your product a practical document surface for viewing, editing, reviewing, and delivering Word, Excel, and PowerPoint files.</p>
+          <p>Office SDK gives your product a practical document surface for previewing and editing Word, Excel, and PowerPoint files while your system keeps control of storage, permissions, and the workflow around them.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#demo">Explore the workflow <ArrowRight size={17} /></a>
             <a className="button button-ghost" href={API_REFERENCE} target="_blank" rel="noreferrer">Check the API reference <ArrowUpRight size={16} /></a>
@@ -147,11 +147,11 @@ function Hero() {
         <div className="hero-visual" data-reveal="right">
           <div className="visual-label label-top"><span className="pulse-dot" /> OFFICE WORKFLOW</div>
           <DocumentPreview format="docx" mode="edit" compact />
-          <div className="visual-float float-api"><Workflow size={14} /><span><strong>Preview · edit · review</strong><small>one product surface</small></span></div>
+          <div className="visual-float float-api"><Workflow size={14} /><span><strong>Preview · edit · connect</strong><small>one product surface</small></span></div>
           <div className="visual-float float-format"><Layers3 size={14} /><span><strong>DOCX · XLSX · PPTX</strong><small>start with your files</small></span></div>
         </div>
       </div>
-      <div className="hero-bottom container"><span>Office SDK / overseas product entry</span><div className="format-rail"><span>VIEW</span><i className="format-dot format-dot-word" /><span>EDIT</span><i className="format-dot format-dot-excel" /><span>REVIEW</span><i className="format-dot format-dot-powerpoint" /><span>DELIVER</span></div></div>
+      <div className="hero-bottom container"><span>Office SDK / overseas product entry</span><div className="format-rail"><span>VIEW</span><i className="format-dot format-dot-word" /><span>EDIT</span><i className="format-dot format-dot-excel" /><span>CONNECT</span><i className="format-dot format-dot-powerpoint" /><span>WORKFLOW</span></div></div>
     </section>
   )
 }
@@ -192,7 +192,7 @@ function WorkflowThemes() {
   return (
     <section className="section themes-section" id="workflows">
       <div className="container">
-        <div className="section-heading split-heading" data-reveal><div><span className="section-index">02 / START WITH THE JOB</span><h2>Search for the task.<br /><em>Find the product path.</em></h2></div><p>Office is a large category. The first growth surface should meet people at the problem they already describe, then give qualified teams a reason to evaluate the product.</p></div>
+        <div className="section-heading split-heading" data-reveal><div><span className="section-index">02 / START WITH THE JOB</span><h2>Search for the task.<br /><em>Find the product path.</em></h2></div><p>Office is a large category. Meet people at the problem they already describe, then give qualified teams a reason to evaluate the right document workflow.</p></div>
         <div className="theme-grid">{workflowThemes.map((theme, index) => <article className={`theme-card theme-${theme.accent}`} key={theme.title} data-reveal style={{ '--delay': `${index * 70}ms` } as CSSProperties}><div className="theme-top"><span className="theme-icon">{index === 0 ? <Eye size={17} /> : index === 1 ? <PenLine size={17} /> : index === 2 ? <FileOutput size={17} /> : <MessageSquare size={17} />}</span><span className="theme-eyebrow">{theme.eyebrow}</span></div><h3>{theme.title}</h3><p>{theme.body}</p><div className="theme-bottom"><span><Search size={13} /> {theme.query}</span><ArrowUpRight size={18} /></div></article>)}</div>
       </div>
     </section>
@@ -210,7 +210,7 @@ function ProductSection() {
 function FormatsSection() {
   return (
     <section className="section formats-section" id="formats">
-      <div className="container formats-layout"><div className="formats-intro" data-reveal><span className="section-index">04 / OFFICE FILE FORMATS</span><h2>Start with the files your users <em>already have.</em></h2><p>Use the format families below to frame the first conversation. Confirm the exact input, editing, and output behavior in the current API reference before committing to a production workflow.</p><a className="inline-link" href={API_REFERENCE} target="_blank" rel="noreferrer">Review current format details <ArrowRight size={16} /></a></div><div className="format-family-list" data-reveal="right">{fileFamilies.map((family) => <div className="format-family" key={family.name}><span className="format-family-dot" style={{ background: family.accent }} /><div><strong>{family.name}</strong><span>{family.formats}</span></div><ArrowUpRight size={16} /></div>)}<div className="format-note"><FileCheck2 size={16} /><span>Format coverage is a product decision, not a promise to infer from a marketing page.</span></div></div></div>
+      <div className="container formats-layout"><div className="formats-intro" data-reveal><span className="section-index">04 / OFFICE FILE FORMATS</span><h2>Start with the files your users <em>already have.</em></h2><p>Use the format families below to frame the first conversation. Preview and editing support differ by format, so confirm the exact behavior in the current API reference before committing to a production workflow.</p><a className="inline-link" href={API_REFERENCE} target="_blank" rel="noreferrer">Review current format details <ArrowRight size={16} /></a></div><div className="format-family-list" data-reveal="right">{fileFamilies.map((family) => <div className="format-family" key={family.name}><span className="format-family-dot" style={{ background: family.accent }} /><div><strong>{family.name}</strong><span>{family.formats}</span></div><ArrowUpRight size={16} /></div>)}<div className="format-note"><FileCheck2 size={16} /><span>Preview and editing coverage are stated separately so the product boundary stays clear.</span></div></div></div>
     </section>
   )
 }
@@ -226,7 +226,7 @@ function SolutionsSection() {
 function ResourcesSection() {
   const resources = [
     { icon: BookOpen, title: 'Current API reference', body: 'Use the maintained reference when you need exact endpoints, fields, and parameters.', href: API_REFERENCE, external: true },
-    { icon: BarChart3, title: 'Office format fit', body: 'Frame the file families and delivery formats that matter to your users.', href: '#formats' },
+    { icon: BarChart3, title: 'Office format fit', body: 'Frame the preview and editing boundaries that matter to your users.', href: '#formats' },
     { icon: ShieldCheck, title: 'Evaluation conversation', body: 'Bring your workflow, data boundary, and deployment questions to the next discussion.', href: '#faq' },
   ]
   return <section className="section resources-section" id="resources"><div className="container"><div className="resource-intro" data-reveal><span className="section-index">06 / NEXT STEP</span><h2>Start with a clear <em>product question.</em></h2><p>The first version of this site is an orientation layer. It helps the right visitor recognize a use case, see the Office surface, and choose the next proof point.</p></div><div className="resource-list">{resources.map(({ icon: Icon, title, body, href, external }) => <a className="resource-row" href={href} key={title} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} data-reveal><span className="resource-icon"><Icon size={18} /></span><span><strong>{title}</strong><small>{body}</small></span><ArrowUpRight size={18} /></a>)}</div></div></section>
