@@ -21,7 +21,9 @@ Create a public repository at `https://github.com/officesdk/website`, push this 
 | --- | --- |
 | `DEPLOY_SSH_KEY` | The complete private key corresponding to the public key authorized for `ubuntu@43.172.115.22` |
 | `DEPLOY_KNOWN_HOSTS` | The exact host-key line for `43.172.115.22` |
-| `DEPLOY_SUDO_PASSWORD` | The `ubuntu` sudo password; required because this host does not currently allow passwordless sudo |
+| `DEPLOY_SUDO_PASSWORD` | Optional fallback only when the deploy user does not have passwordless sudo; leave unset on the current server |
+
+The current `ubuntu@43.172.115.22` account was verified to run the deployment activation script with `sudo -n bash`, so no sudo password needs to be stored in GitHub Actions for this host.
 
 The workflow has defaults for these repository variables, so variables are optional. They can be set explicitly when the infrastructure changes:
 
