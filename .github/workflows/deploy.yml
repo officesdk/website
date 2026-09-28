@@ -81,24 +81,48 @@ jobs:
           set -euo pipefail
           ssh_args=(-i "$HOME/.ssh/officesdk_deploy" -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes)
           cat > "$RUNNER_TEMP/activate.sh" <<'REMOTE'
-          set -euo pipefail
+          set -Eeuo pipefail
           release_id="$1"
           root="$2"
           deploy_user="$3"
           artifact="/tmp/officesdk-${release_id}.tgz"
           config="/tmp/officesdk-${release_id}.conf"
+          previous_release="$(readlink -f "$root/current" || true)"
+          config_backup="$root/backups/nginx-${release_id}.conf"
+          install -d -m 755 "$root/backups"
+          printf '%s\n' "$previous_release" > "$root/backups/previous-release-${release_id}.txt"
+          if [ -f /etc/nginx/sites-available/officesdk ]; then
+            install -m 644 /etc/nginx/sites-available/officesdk "$config_backup"
+          fi
+          rollback() {
+            result=$?
+            trap - ERR
+            set +e
+            if [ -n "$previous_release" ]; then
+              ln -sfn "$previous_release" "$root/current"
+            fi
+            if [ -f "$config_backup" ]; then
+              install -m 644 "$config_backup" /etc/nginx/sites-available/officesdk
+            fi
+            nginx -t && systemctl reload nginx
+            echo "Activation failed; restored the previous release and Nginx configuration."
+            exit "$result"
+          }
+          trap rollback ERR
           install -d -m 755 "$root/releases/$release_id"
           tar -xzf "$artifact" -C "$root/releases/$release_id"
           test -s "$root/releases/$release_id/index.html"
           chown -R "$deploy_user:$deploy_user" "$root/releases/$release_id"
-          ln -sfn "$root/releases/$release_id" "$root/current"
           install -m 644 "$config" /etc/nginx/sites-available/officesdk
           ln -sfn /etc/nginx/sites-available/officesdk /etc/nginx/sites-enabled/officesdk
           nginx -t
+          ln -sfn "$root/releases/$release_id" "$root/current"
           systemctl reload nginx
-          rm -f "$artifact" "$config"
-          curl --fail --silent --show-error --max-time 15 -H 'Host: officesdk.com' http://127.0.0.1/ > /tmp/officesdk-home.html
+          health_code="$(curl --fail --silent --show-error --max-time 15 -H 'Host: officesdk.com' -H 'X-Forwarded-Proto: https' -o /tmp/officesdk-home.html -w '%{http_code}' http://127.0.0.1/)"
+          test "$health_code" = 200
           grep -q 'Office SDK' /tmp/officesdk-home.html
+          trap - ERR
+          rm -f "$artifact" "$config"
           REMOTE
           chmod 700 "$RUNNER_TEMP/activate.sh"
           if [ -n "$DEPLOY_SUDO_PASSWORD" ]; then
@@ -110,6 +134,16 @@ jobs:
       - name: Verify public IP
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --max-time 20 -H 'Host: officesdk.com' "http://${DEPLOY_HOST}/" | grep -q 'Office SDK'
-          curl --fail --silent --show-error --max-time 20 -H 'Host: officesdk.com' "http://${DEPLOY_HOST}/robots.txt" | grep -q 'Sitemap:'
-          curl --fail --silent --show-error --max-time 20 -H 'Host: officesdk.com' "http://${DEPLOY_HOST}/sitemap.xml" | grep -q 'officesdk.com'
+          origin_headers=(-H 'Host: officesdk.com' -H 'X-Forwarded-Proto: https')
+          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-home.html" -w '%{http_code}' "http://${DEPLOY_HOST}/")"
+          test "$code" = 200
+          grep -q 'Office SDK' "$RUNNER_TEMP/officesdk-home.html"
+          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-blog.html" -w '%{http_code}' "http://${DEPLOY_HOST}/blog")"
+          test "$code" = 200
+          grep -q 'Office SDK Journal' "$RUNNER_TEMP/officesdk-blog.html"
+          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-robots.txt" -w '%{http_code}' "http://${DEPLOY_HOST}/robots.txt")"
+          test "$code" = 200
+          grep -q 'Sitemap:' "$RUNNER_TEMP/officesdk-robots.txt"
+          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-sitemap.xml" -w '%{http_code}' "http://${DEPLOY_HOST}/sitemap.xml")"
+          test "$code" = 200
+          grep -q 'officesdk.com' "$RUNNER_TEMP/officesdk-sitemap.xml"
