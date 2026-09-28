@@ -9,7 +9,7 @@ This repository deploys the static Astro build to the Ubuntu/Nginx origin at `43
 3. The release is extracted into `/var/www/officesdk/releases/<release-id>`.
 4. `/var/www/officesdk/current` is switched atomically to the new release.
 5. Nginx is validated before activation, then reloaded. The previous release target and a copy of its Nginx configuration are retained; activation or origin health-check failures restore both automatically.
-6. The workflow checks the website through the public IP with `Host: officesdk.com` and `X-Forwarded-Proto: https` to reproduce HTTPS traffic from Cloudflare.
+6. The workflow checks the website through the public IP with `Host: officesdk.com` and `X-Forwarded-Proto: https` to reproduce HTTPS traffic from Cloudflare. Each check requires `200` and the expected content, with up to five attempts while the graceful Nginx reload settles.
 
 The deployment does not touch the existing ShimoDocs release tree.
 

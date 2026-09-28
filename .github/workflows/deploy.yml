@@ -135,15 +135,24 @@ jobs:
         run: |
           set -euo pipefail
           origin_headers=(-H 'Host: officesdk.com' -H 'X-Forwarded-Proto: https')
-          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-home.html" -w '%{http_code}' "http://${DEPLOY_HOST}/")"
-          test "$code" = 200
-          grep -q 'Office SDK' "$RUNNER_TEMP/officesdk-home.html"
-          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-blog.html" -w '%{http_code}' "http://${DEPLOY_HOST}/blog")"
-          test "$code" = 200
-          grep -q 'Office SDK Journal' "$RUNNER_TEMP/officesdk-blog.html"
-          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-robots.txt" -w '%{http_code}' "http://${DEPLOY_HOST}/robots.txt")"
-          test "$code" = 200
-          grep -q 'Sitemap:' "$RUNNER_TEMP/officesdk-robots.txt"
-          code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$RUNNER_TEMP/officesdk-sitemap.xml" -w '%{http_code}' "http://${DEPLOY_HOST}/sitemap.xml")"
-          test "$code" = 200
-          grep -q 'officesdk.com' "$RUNNER_TEMP/officesdk-sitemap.xml"
+          check_origin_route() {
+            local route="$1" marker="$2" output="$3" code
+            for attempt in 1 2 3 4 5; do
+              code=000
+              if code="$(curl --fail --silent --show-error --max-time 20 "${origin_headers[@]}" -o "$output" -w '%{http_code}' "http://${DEPLOY_HOST}${route}")"; then
+                if [ "$code" = 200 ] && grep -Fq "$marker" "$output"; then
+                  echo "Origin ready: $route (HTTP 200)"
+                  return 0
+                fi
+              fi
+              echo "Origin not ready: $route (HTTP $code, attempt $attempt/5)"
+              if [ "$attempt" != 5 ]; then
+                sleep 1
+              fi
+            done
+            return 1
+          }
+          check_origin_route / 'Office SDK' "$RUNNER_TEMP/officesdk-home.html"
+          check_origin_route /blog 'Office SDK Journal' "$RUNNER_TEMP/officesdk-blog.html"
+          check_origin_route /robots.txt 'Sitemap:' "$RUNNER_TEMP/officesdk-robots.txt"
+          check_origin_route /sitemap.xml 'officesdk.com' "$RUNNER_TEMP/officesdk-sitemap.xml"
