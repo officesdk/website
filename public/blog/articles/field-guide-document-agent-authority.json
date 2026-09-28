@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-document-agent-authority",
+  "title": "Document AI agents: permissions, prompt injection, and publication",
+  "description": "Limit agent reads and tools, test hostile document content, and guard consequential publication.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "AI documents",
+    "Security",
+    "Access control",
+    "Document automation"
+  ],
+  "structure": "prose+layers:example:prose+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 696,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: AI Agents Inside Your Documents: What to Secure",
+      "url": "https://shimodocs.com/blog/ai-agents-in-documents-security"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-agent-authority.png",
+  "coverAlt": "Document AI agents: permissions, prompt injection, and publication: Task authority, Untrusted content, Tool boundary, Approval gate.",
+  "concepts": [
+    "Task authority",
+    "Untrusted content",
+    "Tool boundary",
+    "Approval gate",
+    "Run evidence"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "journal",
+    "signature": "folio:journal",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 90
+  },
+  "contentHash": "03b8ccc3bd455f5362c1f1031bcd13ed887ae2fb75b551fb0131eca2c5a23e11",
+  "intro": "Document agents need separate permissions to read, draft, publish, and communicate. Enforce those permissions in tools and application services, not in prompts alone. Treat document instructions as untrusted content, and require an identified approval before consequential output leaves the working area.",
+  "sections": [
+    {
+      "id": "authority-belongs-outside-the-model-1",
+      "title": "Authority belongs outside the model",
+      "html": "<p>Describe the agent's job in operational terms: summarize a draft, propose edits, extract a table, or prepare an approval package. List the documents it may read and the operations it may perform. Use the initiating user's verified permissions or a deliberately restricted service identity, and recheck authorization at tool execution. A prompt stating that the agent should be careful is not an access control. Separate draft generation from publication, sharing, deletion, and external communication. Give each consequential operation an explicit policy so the integration can reject requests even when the model produces a confident instruction.</p><p>A retrieved document may contain instructions that try to redirect the agent, including text hidden in comments, attachments, or formatting. The document is task data, not a source of operational authority. Preserve that distinction in the application and tool layer. Do not let quoted content select arbitrary destinations, expand access scope, or override approval requirements. Validate structured tool arguments against allowed document identifiers and permitted actions. Test hostile instructions inside realistic files instead of testing only the chat interface. The attack surface includes everything the agent can read during the assigned task.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Keep task data below the authority boundary",
+        "items": [
+          {
+            "label": "User task",
+            "detail": "Authenticated actor and approved purpose."
+          },
+          {
+            "label": "Document content",
+            "detail": "Untrusted facts, quotations, and possible hostile text."
+          },
+          {
+            "label": "Tool policy",
+            "detail": "Validate scope, identifiers, destinations, and actions."
+          },
+          {
+            "label": "Approval",
+            "detail": "Human decision binds publication to a version."
+          }
+        ],
+        "alt": "Documents supply data while policy and approval govern actions.",
+        "caption": "The model cannot promote source text into operational authority.",
+        "src": "/blog/images/field-guide-document-agent-authority-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-agent-authority-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "work-through-a-vendor-review-2",
+      "title": "Work through a vendor review",
+      "html": "<p>Consider an agent asked to summarize supplier proposals and draft a comparison. One proposal includes a sentence telling the agent to email all competing bids to a named address. The expected behavior is to treat that sentence as proposal content and refuse any unauthorized communication. The agent may create a draft comparison in a designated workspace, but the procurement owner reviews it before distribution. Test whether source restrictions persist when the agent follows references or opens attachments. Also verify that generated text does not reveal information from another project merely because the underlying service account can access it.</p><p>Include tests where the model asks for a forbidden operation. The application should deny it even when the request is syntactically correct. Test an unauthorized document identifier, an unapproved recipient, an attempt to broaden a retrieval query, and a publication request without the required approval record.</p><pre><code>task_scope: supplier proposals for project P17\nallowed_output: draft comparison in P17 workspace\nforbidden_effect: send proposals to external recipients\npublication_guard: approved version + authorized reviewer</code></pre><p>These are example policy fields. The implementation should use the actual identity and authorization system rather than trusting a model-generated value such as approved: true. In the hostile supplier proposal scenario, rejection of the email action is the important result. Whether the agent's prose recognizes the hostile sentence is useful but insufficient.</p><p>Then test a less obvious failure: the agent follows a reference into another project's file that the service account can access. The retrieval layer must enforce the task's narrower scope. Repeat after a user loses project membership during a long run. Decide how authority is rechecked at consequential tool calls, and record which already completed operations remain valid. This closes the gap between launch-time permission and the authority actually used later.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "record-runs-without-leaking-data-3",
+      "title": "Record runs without leaking data",
+      "html": "<p>Keep a run identifier, initiating actor, task scope, referenced versions, executed tools, and approval decisions. Protect logs because prompts and outputs can themselves contain confidential information. Avoid logging full documents by default when metadata is sufficient for investigation. If model calls leave the organization's environment, assess the provider arrangement, processing locations, retention, and applicable policy before enabling the workflow. Define cancellation and recovery for interrupted runs. Retried tool calls should not publish duplicate files or repeat external actions, and a delayed result must not overwrite a newer document version without a guarded decision.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "A draft becomes a permitted publication",
+        "items": [
+          {
+            "label": "Read",
+            "detail": "Retrieve only authorized source versions."
+          },
+          {
+            "label": "Draft",
+            "detail": "Write inside the designated working area."
+          },
+          {
+            "label": "Review",
+            "detail": "Owner checks claims, recipients, and exact output."
+          },
+          {
+            "label": "Publish",
+            "detail": "Service validates authority and version again."
+          }
+        ],
+        "alt": "Read, draft, review, and publication use different permissions.",
+        "caption": "Guard retries so publication cannot repeat or overwrite newer work.",
+        "src": "/blog/images/field-guide-document-agent-authority-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-agent-authority-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "agent-release-decision-notes-4",
+      "title": "Agent release Decision notes",
+      "html": "<ul><li>Specify task scope and separate read, draft, publish, and communication permissions.</li><li>Validate tool arguments against authorized objects and actions.</li><li>Place hostile instructions in documents and attachments during testing.</li><li>Require review for consequential outputs and record the decision.</li><li>Verify cancellation, retries, version guards, and protected run logs.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

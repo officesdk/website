@@ -1,0 +1,128 @@
+{
+  "slug": "field-guide-document-platform-operating-budget",
+  "title": "Self-hosted document platform costs: build the recurring operating budget",
+  "description": "Estimate infrastructure and staff costs using workload, recovery obligations, support duties, and change frequency.",
+  "category": "Operations",
+  "format": "explainer",
+  "tags": [
+    "Self-hosting",
+    "Operations",
+    "Performance",
+    "Backup and recovery"
+  ],
+  "structure": "prose+layers:prose:example:comparison+comparison:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 687,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: What a Self-Hosted Document Platform Costs to Run",
+      "url": "https://shimodocs.com/blog/document-platform-operations-cost"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-platform-operating-budget.png",
+  "coverAlt": "Self-hosted document platform costs: build the recurring operating budget: Workload baseline, Staff effort, Recovery budget, Change costs.",
+  "concepts": [
+    "Workload baseline",
+    "Staff effort",
+    "Recovery budget",
+    "Change costs",
+    "Growth assumptions"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "inset",
+    "signature": "cover-first:inset",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 50
+  },
+  "contentHash": "6ebb938f02e62c4afc614858b225b77653a3301c1c5ba998aafc708c66d937f1",
+  "intro": "Budget a self-hosted document platform from its service promise: workload, supported hours, recovery targets, and change frequency. Include administrator time, test and recovery environments, backups, and support alongside infrastructure and licensing. A deployment quote cannot show what it will cost to keep the service dependable.",
+  "sections": [
+    {
+      "id": "start-with-the-service-promise-1",
+      "title": "Start with the service promise",
+      "html": "<p>Define supported hours, availability expectations, response times, recovery targets, and the document population. Identify the planned number of active editors, peak opening rate, typical file sizes, and conversion workload. These assumptions drive the infrastructure estimate and the operating tasks. Separate production, test, recovery, and administrative environments. A low cost production footprint can be misleading when there is no safe place to rehearse upgrades or recover a backup. Make assumptions explicit and identify who can approve a changed service promise if the estimated budget cannot support the original expectations.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Recurring cost follows the service promise",
+        "items": [
+          {
+            "label": "Production resources",
+            "detail": "Compute, database, storage, and network for the tested workload."
+          },
+          {
+            "label": "Operational effort",
+            "detail": "Identity, incidents, patching, monitoring, and user support."
+          },
+          {
+            "label": "Recovery resources",
+            "detail": "Protected backups, restore environment, and rehearsal effort."
+          },
+          {
+            "label": "Planned changes",
+            "detail": "Upgrade tests and integrations included as named budget items."
+          }
+        ],
+        "alt": "Production, staff, recovery, and change cost layers for a document service.",
+        "caption": "An existing employee's time still consumes operating capacity.",
+        "src": "/blog/images/field-guide-document-platform-operating-budget-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-platform-operating-budget-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "count-recurring-human-effort-2",
+      "title": "Count recurring human effort",
+      "html": "<p>List identity administration, patching, certificate renewal, monitoring review, backup checks, restore rehearsals, incident response, and user support. Estimate effort from observed tasks or a pilot, then attach staff rates or internal capacity costs. Include coordination with storage, database, network, and security teams. A task performed by an existing employee still consumes capacity even if it does not create a new invoice. Record which duties can be automated and the maintenance required for that automation. Avoid assuming the initial installer will silently become the permanent service owner without an agreed allocation of time.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "use-a-cost-worksheet-with-visible-units-3",
+      "title": "Use a cost worksheet with visible units",
+      "html": "<p>Give every line a unit and an assumption. Infrastructure may be priced per month; administrator effort per hour; backup storage per retained byte; support coverage by an agreed arrangement. Keep those units visible so a change in retention or staffing can be recalculated without rebuilding the entire estimate.</p><pre><code>annual baseline =\n  12 × monthly infrastructure\n  + 12 × monthly staff hours × hourly cost\n  + annual license and support\n  + planned change and recovery work</code></pre><p>This is a budgeting relationship, not a vendor pricing model. Add only the categories applicable to the actual proposal, and avoid counting support effort twice if a contract already covers a defined task. Costs excluded from the baseline should still appear as separate assumptions.</p><p>For example, extending support from business hours to continuous coverage affects staffing even if machine usage stays unchanged. Increasing retained versions affects storage and restore work even if the number of users stays flat. Show a base case and one plausible growth case, with the changed inputs highlighted. Ask the service owner to confirm the promised operating outcome for both. That is more useful than an unexplained contingency percentage because reviewers can see which requirement causes the additional cost.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "model-a-concrete-annual-budget-4",
+      "title": "Model a concrete annual budget",
+      "html": "<p>Suppose a service uses infrastructure costing an illustrative 1,200 currency units monthly and requires 30 staff hours at 60 units per hour. Its recurring baseline is 3,000 units monthly, or 36,000 annually, before licensing and project changes. Add separately estimated recovery storage, upgrade rehearsals, and support coverage. The example is arithmetic, not a vendor price or sizing recommendation. Replace each assumption with local evidence. Showing staff effort alongside infrastructure reveals why reducing machine cost by a small amount may be less valuable than simplifying an unreliable maintenance procedure.</p><h3>Expose variable and exceptional costs</h3><p>Storage growth, retained versions, large imports, network transfers, and expanded support hours can change the baseline. Identify which costs grow with users, bytes, activity, or environment count. Budget major upgrades and integration changes as planned events rather than hiding them in a generic contingency. Consider a recoverable failure scenario: replacement infrastructure, investigation effort, communication, and lost staff productivity all affect the decision. Use sensitivity ranges for uncertain inputs. A budget with visible assumptions is easier to revise than a precise total assembled from untested capacity and workload estimates.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "comparison",
+        "title": "Two growth inputs change different costs",
+        "items": [
+          {
+            "label": "More active editors",
+            "detail": "Recheck peak capacity, support activity, and licensed usage units."
+          },
+          {
+            "label": "Longer retention",
+            "detail": "Recheck versions, backup growth, retrieval, and restore duration."
+          }
+        ],
+        "alt": "Editor growth compared with retention growth and the costs each affects.",
+        "caption": "Do not assume all costs scale with headcount.",
+        "src": "/blog/images/field-guide-document-platform-operating-budget-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-platform-operating-budget-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 720
+      }
+    },
+    {
+      "id": "operating-budget-review-5",
+      "title": "Operating-budget review",
+      "html": "<ul><li>Compare actual usage, storage growth, and staff hours with baseline assumptions.</li><li>Include test and recovery environments in infrastructure totals.</li><li>Assign owners to maintenance and support duties.</li><li>Track changes that introduce new integrations or service obligations.</li><li>Recalculate major cost drivers before expanding the user population.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

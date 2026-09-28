@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-document-legal-hold-preservation-workflow",
+  "title": "Legal hold for documents: preserve scope, versions, and custodians",
+  "description": "Connect counsel's scope, technical preservation, custodians, verification, and controlled release of a document hold.",
+  "category": "Security",
+  "format": "playbook",
+  "tags": [
+    "Security",
+    "Audit logs",
+    "Version control",
+    "Business workflows"
+  ],
+  "structure": "prose+flow:example:steps:diagnostic+matrix:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 697,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Legal Hold in Document Platforms",
+      "url": "https://shimodocs.com/blog/legal-hold-document-management"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-legal-hold-preservation-workflow.png",
+  "coverAlt": "Legal hold for documents: preserve scope, versions, and custodians: Counsel scope, Custodian mapping, Preservation controls, Verification.",
+  "concepts": [
+    "Counsel scope",
+    "Custodian mapping",
+    "Preservation controls",
+    "Verification",
+    "Hold release"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "numbered",
+    "signature": "field-notes:numbered",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 71
+  },
+  "contentHash": "0c55d5f73cf00fdddbcb6158a08efd50d23aa8c867906079c7bceb28a3caa2bb",
+  "intro": "Implement a legal hold from a documented instruction by the responsible legal authority. Map its records, custodians, versions, and related material to verified preservation controls and procedures. Test cleanup and employee departure. Release only with authorization and after checking overlapping holds and retention obligations.",
+  "sections": [
+    {
+      "id": "obtain-a-precise-instruction-1",
+      "title": "Obtain a precise instruction",
+      "html": "<p>Ask counsel or the designated authority to identify the matter, custodians, date range, information types, and preservation start point. Record who may change or release the instruction. Avoid making legal scope decisions through a storage administrator's interpretation of a folder name. Relevant material can include versions, attachments, comments, exports, and related records in other systems depending on the instruction. Preserve source identifiers and ownership relationships to support later collection. Legal requirements vary, so the procedure should follow the applicable professional advice rather than treating a product setting as a universal legal solution.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "Translate the legal instruction into tested preservation",
+        "items": [
+          {
+            "label": "Authorized scope",
+            "detail": "Counsel identifies matter, custodians, records, and time range."
+          },
+          {
+            "label": "System mapping",
+            "detail": "Locate covered versions, attachments, and related material."
+          },
+          {
+            "label": "Verified controls",
+            "detail": "Test preservation against ordinary deletion and cleanup."
+          },
+          {
+            "label": "Exception ownership",
+            "detail": "Document gaps and approved additional procedures."
+          }
+        ],
+        "alt": "Instruction scope, system mapping, preservation tests, and exception ownership.",
+        "caption": "The platform implements the instruction; it does not define its legal scope.",
+        "src": "/blog/images/field-guide-document-legal-hold-preservation-workflow-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-legal-hold-preservation-workflow-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "record-the-instruction-and-its-implementation-separately-2",
+      "title": "Record the instruction and its implementation separately",
+      "html": "<p>The hold register should distinguish what must be preserved from how the system preserves it. This prevents a technical setting from silently narrowing counsel's instruction. Link the two records through a hold identifier and retain the authority for scope changes.</p><table><thead><tr><th>Instruction record</th><th>Implementation record</th></tr></thead><tbody><tr><td>Matter and authorized issuer</td><td>Control owner and affected systems</td></tr><tr><td>Custodians and information scope</td><td>Mapped documents, versions, attachments, and exceptions</td></tr><tr><td>Start and release authority</td><td>Activation time, verification, and authorized release event</td></tr></tbody></table><p>The fields are a procedural example, not legal advice or a claim that a platform offers each field. Counsel and records owners should define the applicable scope and evidence. Operators should then identify the actual supported controls and any manual preservation required.</p><p>Test a rule change while the hold is active. For example, a version cleanup schedule may be revised or a storage lifecycle policy applied to a new collection. Verify that held material remains excluded according to the approved procedure. Keep an exception queue for material the platform cannot preserve as required. A visible lock on the current document is insufficient evidence if the instruction also covers comments, earlier revisions, or related objects.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "map-scope-to-actual-controls-3",
+      "title": "Map scope to actual controls",
+      "html": "<p>Verify the selected platform's preservation capabilities and the behavior of storage lifecycle rules, version cleanup, account deletion, and ordinary user actions. A visible document lock may prevent editing without preserving every earlier version or external copy. If the platform lacks a required control, design an approved preservation procedure with counsel and records owners, documenting its limitations. Coordinate with backup and storage administrators so routine expiration does not defeat the instruction. Keep operational access restricted and distinguish preservation from granting broader viewing rights. A hold should not inadvertently make confidential matter content available to new users.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "exercise-an-employee-departure-4",
+      "title": "Exercise an employee departure",
+      "html": "<p>A departing employee owns project documents covered by a hold. Use a test custodian and harmless records to simulate account deactivation, ownership transfer, attempted deletion, version cleanup, and export. Verify that preserved material remains identifiable and retrievable through the approved procedure. Record the relationship between the original custodian and the recovered collection rather than simply assigning every file to an administrator. Test any supporting storage control according to its documented behavior. This example exposes interactions between identity lifecycle and preservation that are easily missed when a hold is tested only on an unchanged active account.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "A custodian departure can affect preserved records",
+        "items": [
+          {
+            "label": "Account deactivation",
+            "detail": "Records remain retrievable through the approved procedure."
+          },
+          {
+            "label": "Ownership transfer",
+            "detail": "Retain the relationship to the original custodian."
+          },
+          {
+            "label": "Version cleanup",
+            "detail": "Covered historical material remains preserved."
+          },
+          {
+            "label": "Export collection",
+            "detail": "Use controlled custody and the required integrity evidence."
+          }
+        ],
+        "alt": "Deactivation, ownership transfer, cleanup, and export tests for held records.",
+        "caption": "Preservation must survive normal identity and maintenance transitions.",
+        "src": "/blog/images/field-guide-document-legal-hold-preservation-workflow-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-legal-hold-preservation-workflow-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "verify-and-release-deliberately-5",
+      "title": "Verify and release deliberately",
+      "html": "<p>Maintain a hold register with scope, instruction date, control implementation, verification result, and responsible owners. Review changes such as folder moves, new versions, and custodian departures against that scope. When release is authorized, check whether another hold or retention obligation still applies before restoring routine disposal. Record the authority, time, and affected collection. Do not automatically delete preserved material just because one hold ends. Provide an accountable collection process for legal requests with controlled exports and integrity evidence appropriate to the case, keeping preservation and external disclosure as separate decisions.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "preservation-checks-6",
+      "title": "Preservation checks",
+      "html": "<ul><li>Retain counsel's scope and the authority to modify or release it.</li><li>Map covered records and custodians to verified technical controls.</li><li>Test deletion, cleanup, account departure, and version retrieval.</li><li>Review changes and preserve identifiers connecting records to their origin.</li><li>Release only after checking overlapping holds and retention obligations.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

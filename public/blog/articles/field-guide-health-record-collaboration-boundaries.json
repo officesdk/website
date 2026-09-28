@@ -1,0 +1,144 @@
+{
+  "slug": "field-guide-health-record-collaboration-boundaries",
+  "title": "HIPAA document collaboration: PHI paths and access decisions",
+  "description": "A workflow assessment for PHI, business associate arrangements, secondary copies, and clinical continuity.",
+  "category": "Security",
+  "format": "decision-brief",
+  "tags": [
+    "Security",
+    "Data privacy",
+    "Access control",
+    "Business workflows"
+  ],
+  "structure": "prose:prose+flow:example:prose:note:comparison+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 723,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: HIPAA-Compliant Document Collaboration",
+      "url": "https://shimodocs.com/blog/hipaa-compliant-document-collaboration"
+    }
+  ],
+  "cover": "/blog/images/field-guide-health-record-collaboration-boundaries.png",
+  "coverAlt": "HIPAA document collaboration: PHI paths and access decisions: PHI inventory, Business associate, Minimum necessary, Access termination.",
+  "concepts": [
+    "PHI inventory",
+    "Business associate",
+    "Minimum necessary",
+    "Access termination",
+    "Recovery evidence"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "alternating",
+    "signature": "report:alternating",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 76
+  },
+  "contentHash": "e73cd64f76f0a2ede91959b90685ddf9f74c4e8fb19309a95925a6fd5bef728e",
+  "intro": "HIPAA document collaboration requires an assessed workflow for protected health information, appropriate agreements, and operating safeguards. Map every PHI copy and access path, then test the roles used in the clinical task. Neither encryption nor a product label establishes compliance for the whole arrangement.",
+  "sections": [
+    {
+      "id": "map-the-information-path-1",
+      "title": "Map the information path",
+      "html": "<p>Identify where protected health information enters the workflow, who uses it, and where copies are created. Include conversion workers, preview caches, backups, support attachments, analytics, and exports. Determine which parties are covered entities or business associates in the specific arrangement with qualified compliance guidance. Obtain the required agreements before placing information into a service that handles it on your behalf. A signed agreement must match the actual service and activities involved; it does not establish that configuration and daily operations satisfy every applicable requirement. Keep technical and contractual boundaries aligned as integrations change.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "design-access-around-the-task-2",
+      "title": "Design access around the task",
+      "html": "<p>Consider a care coordination team preparing a discharge summary. A treating clinician, an administrative scheduler, and an outside rehabilitation provider may require different information and permissions. Apply the minimum necessary principle where it is applicable to the use or disclosure, while recognizing that specific exceptions exist, including certain treatment disclosures. Avoid turning this nuanced rule into a universal field hiding policy. Define roles with the privacy and clinical teams, document authorized uses, and separate content access from administrative control. Shared accounts make it difficult to attribute actions and terminate an individual's access reliably.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "Where a discharge summary creates PHI copies",
+        "items": [
+          {
+            "label": "Clinical draft",
+            "detail": "Treating team prepares the source record."
+          },
+          {
+            "label": "Preview service",
+            "detail": "Rendering may create a controlled cache."
+          },
+          {
+            "label": "Delivery package",
+            "detail": "Approved disclosure uses an identified version."
+          },
+          {
+            "label": "Backup",
+            "detail": "Recovery copy follows the assessed retention process."
+          }
+        ],
+        "alt": "A clinical draft can create preview, delivery, and recovery copies.",
+        "caption": "Include derived copies in the assessed information path.",
+        "src": "/blog/images/field-guide-health-record-collaboration-boundaries-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-health-record-collaboration-boundaries-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "treat-secondary-copies-deliberately-3",
+      "title": "Treat secondary copies deliberately",
+      "html": "<p>A discharge summary downloaded for a phone call can become an unmanaged copy on a workstation. Decide whether that export is permitted, how it is protected, and when it is removed. Configure the workflow to minimize unnecessary duplication without assuming that a disabled download button prevents every possible copy. Review logs and error reports for patient identifiers or full text. Support staff should have an approved route for investigating incidents that limits exposure and records any privileged access. Use synthetic patient data when testing document conversion, editor behavior, and integration failures during ordinary development.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "prepare-for-interrupted-care-4",
+      "title": "Prepare for interrupted care",
+      "html": "<p>If the document service becomes unavailable during discharge, staff need an approved continuity process and a way to reconcile later updates. Set recovery objectives with the clinical operation, test restoration of documents and permission metadata, and verify that the restored record is identifiable and complete. Define how suspected unauthorized disclosure is escalated to privacy and security owners for assessment under applicable rules. Do not let engineers make legal notification decisions from a log message alone. Preserve incident evidence securely, and include supplier response expectations in the service arrangement before a time sensitive event occurs.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "decisions-for-the-discharge-workflow-5",
+      "title": "Decisions for the discharge workflow",
+      "html": "<p>The discharge scenario has two decisions that are easy to conflate: what the external provider needs and how the provider receives it. The care team and privacy owner should determine the permitted information and applicable rules. The service owner then implements the approved delivery route. An engineer should not resolve clinical relevance by deleting fields until the file looks less sensitive.</p><p>Ask whether the recipient needs a fixed discharge package or ongoing access to updates. A fixed package requires a version identifier and a way to communicate corrections. Ongoing access requires membership review, termination, and a clear definition of which records become visible. Test a correction after the first disclosure so staff understand how the recipient receives the newer information.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "a-phi-copy-register-6",
+      "title": "A PHI copy register",
+      "html": "<table><thead><tr><th>Copy</th><th>Owner to identify</th><th>Lifecycle question</th></tr></thead><tbody><tr><td>Working summary</td><td>Clinical document owner</td><td>Which version is authoritative?</td></tr><tr><td>Exported package</td><td>Approved recipient or delivery operator</td><td>How are corrections and expiry handled?</td></tr><tr><td>Preview cache</td><td>Document service operator</td><td>Does deletion or access change invalidate it?</td></tr><tr><td>Support attachment</td><td>Support and privacy owners</td><td>Is PHI necessary and is the route approved?</td></tr></tbody></table><p>Populate this register with the actual deployment, including backup handling. It exposes secondary copies that a patient chart inventory alone can miss, and gives staff an owner to contact when a privacy or continuity question arises.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "decision",
+        "title": "Choose the approved handoff model",
+        "items": [
+          {
+            "label": "Fixed package",
+            "detail": "Bind disclosure to a version; define correction delivery."
+          },
+          {
+            "label": "Ongoing access",
+            "detail": "Define visible records, reviews, and termination."
+          },
+          {
+            "label": "Owner decision",
+            "detail": "Clinical and privacy owners approve the model."
+          }
+        ],
+        "alt": "The handoff can use a fixed package or ongoing access under approval.",
+        "caption": "The technical route follows the assessed clinical use.",
+        "src": "/blog/images/field-guide-health-record-collaboration-boundaries-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-health-record-collaboration-boundaries-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "clinical-decision-notes-decision-notes-7",
+      "title": "Clinical Decision notes Decision notes",
+      "html": "<ul><li>Inventory every location that receives or retains protected information.</li><li>Confirm agreements, permitted uses, and responsibilities for each involved party.</li><li>Test role assignment, individual attribution, and prompt access termination.</li><li>Review exports, logs, support access, and synthetic test data practices.</li><li>Exercise downtime, restoration, and privacy incident escalation with clinical owners.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

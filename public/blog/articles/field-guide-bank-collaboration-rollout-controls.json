@@ -1,0 +1,129 @@
+{
+  "slug": "field-guide-bank-collaboration-rollout-controls",
+  "title": "Bank document collaboration rollout: controls for the first pilot",
+  "description": "Use bounded pilots, access evidence, and operational ownership to introduce collaborative document workflows in banking.",
+  "category": "Office workflows",
+  "format": "playbook",
+  "tags": [
+    "Business workflows",
+    "Collaboration",
+    "Access control",
+    "Audit logs",
+    "Backup and recovery"
+  ],
+  "structure": "prose+decision:steps:example:prose+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 660,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Rolling Out Document Collaboration Across a Bank",
+      "url": "https://shimodocs.com/blog/document-collaboration-financial-services-rollout"
+    }
+  ],
+  "cover": "/blog/images/field-guide-bank-collaboration-rollout-controls.png",
+  "coverAlt": "Bank document collaboration rollout: controls for the first pilot: Risk tiers, Pilot cohort, Approval records, Branch access.",
+  "concepts": [
+    "Risk tiers",
+    "Pilot cohort",
+    "Approval records",
+    "Branch access",
+    "Expansion gates"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "chapter-rail",
+    "signature": "visual-first:chapter-rail",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 45
+  },
+  "contentHash": "2fdc19d5a58a3efdef1bc0ed4e2b33291e6428e442f862925b4250773b2064e3",
+  "intro": "Start a bank document rollout with one bounded workflow, named risk and records owners, verified identity mapping, and a measured recovery test. Expand after ordinary users can complete that workflow with the intended access and approval evidence. Deployment alone does not establish compliance with the bank's applicable requirements.",
+  "sections": [
+    {
+      "id": "select-a-bounded-first-workflow-1",
+      "title": "Select a bounded first workflow",
+      "html": "<p>Choose an activity with a clear business owner, predictable participants, and manageable sensitivity. An internal operating procedure review may be easier to validate than customer credit files involving several existing systems. Document the applicable information classification and local policy requirements with the bank's control owners. Specify whether the workspace stores official records or only working drafts. This boundary determines retention, approval, and integration obligations. Avoid implying that deploying a collaboration tool establishes regulatory compliance; the bank must evaluate its configuration, procedures, and evidence against the requirements that actually apply.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "Choose a bounded banking workflow",
+        "items": [
+          {
+            "label": "Procedure review",
+            "detail": "Known participants and a clear approval-to-publication transition."
+          },
+          {
+            "label": "Customer case files",
+            "detail": "Assess additional systems, information classes, and duties first."
+          }
+        ],
+        "alt": "Bounded procedure review compared with a more complex customer case workflow.",
+        "caption": "Pick the first workflow by its controllable scope.",
+        "src": "/blog/images/field-guide-bank-collaboration-rollout-controls-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-bank-collaboration-rollout-controls-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 720
+      }
+    },
+    {
+      "id": "connect-access-to-staff-roles-2",
+      "title": "Connect access to staff roles",
+      "html": "<p>Map membership to authoritative identity groups and identify who approves exceptions. Branch, department, project, and control functions may need different access scopes. Decide how transfers and departures change existing access and active sessions. Test the candidate's documented behavior for these transitions. Shared service accounts should not erase the identity of individual authors or approvers. Also account for support administrators: privileged troubleshooting may expose documents unless the operating procedure limits access. Record the approved path for support investigations and the evidence retained when a privileged action is performed.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "decide-what-the-pilot-must-prove-3",
+      "title": "Decide what the pilot must prove",
+      "html": "<p>A useful pilot charter specifies the business event, participants, information class, authoritative record, and expansion gate. For a procedure update, the event is publication of revised branch instructions. The record is the approved version and its decision evidence, not whichever working copy staff opened most recently.</p><table><thead><tr><th>Owner</th><th>Pilot decision</th></tr></thead><tbody><tr><td>Operations business owner</td><td>Which task staff must complete and how approval is recorded</td></tr><tr><td>Identity owner</td><td>How branch membership and transfers affect access</td></tr><tr><td>Records owner</td><td>Where the approved artifact is kept and how it is retrieved</td></tr><tr><td>Service owner</td><td>How failed saves and outages are diagnosed and recovered</td></tr></tbody></table><p>Use a branch outside the pilot as a negative access test. Ask its ordinary account to search for and open the draft. Then ask a permitted staff member to retrieve the published instructions without assistance from the author. These two outcomes establish different facts: isolation and usable dissemination. Keep the evidence alongside unresolved exceptions. A pilot should pause when a required result is missing, even if participating users are satisfied with the editor itself.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "pilot-a-procedure-update-4",
+      "title": "Pilot a procedure update",
+      "html": "<p>A regional operations team updates a cash handling procedure. Two branches review the draft, a control officer approves a specific version, and staff receive the final published instructions. Run that sequence with test content and actual role assignments. Verify that a third branch cannot access the draft, that the approver can identify the exact reviewed version, and that a staff member sees the intended final copy. Next, remove a reviewer from the project and restore an earlier version in a separate test. Record user completion time alongside every permission and recovery result.</p><h3>Prepare service ownership early</h3><p>Assign responsibility for identity incidents, missing saves, disputed versions, unavailable editors, and retention exceptions. Establish support intake fields that capture document identifier, approximate time, operation, and safe correlation information. Avoid requiring employees to send confidential content through unapproved channels for diagnosis. Test backup and recovery with the pilot's actual data relationships. Training should explain the approved location for drafts and final procedures, including how to report a failed save. A rollout becomes difficult to reverse when branches independently invent naming rules, folder policies, and unofficial export practices.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Publish instructions with traceable approval",
+        "items": [
+          {
+            "label": "Branch draft",
+            "detail": "Pilot participants review a restricted working version."
+          },
+          {
+            "label": "Control approval",
+            "detail": "Decision identifies the exact version reviewed."
+          },
+          {
+            "label": "Staff publication",
+            "detail": "Permitted staff retrieve the announced final artifact."
+          },
+          {
+            "label": "Recovery check",
+            "detail": "Another operator retrieves the approved record after a test restore."
+          }
+        ],
+        "alt": "Draft, control approval, staff publication, and recovery verification.",
+        "caption": "The rollout gate covers user work, access, records, and operations.",
+        "src": "/blog/images/field-guide-bank-collaboration-rollout-controls-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-bank-collaboration-rollout-controls-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "bank-pilot-gates-5",
+      "title": "Bank pilot gates",
+      "html": "<ul><li>Obtain business, identity, records, and operations approval for the pilot boundary.</li><li>Verify cross branch isolation and staff transfer behavior.</li><li>Bind approvals to the versions actually reviewed.</li><li>Demonstrate recovery and confidential incident handling.</li><li>Expand only after resolving pilot exceptions and assigning ongoing support owners.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

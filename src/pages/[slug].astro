@@ -1,0 +1,33 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import { ArrowUpRight } from 'lucide-react'
+import { SeoPageView, ContactForm } from '../components/SiteSections'
+import { seoPages, type SiteRoute } from '../seo'
+
+export function getStaticPaths() {
+  return Object.values(seoPages).map((page) => ({
+    params: { slug: page.path.slice(1) },
+    props: { page },
+  }))
+}
+
+const { page } = Astro.props as { page: (typeof seoPages)[Exclude<SiteRoute, '/'>] }
+---
+
+<SiteLayout title={page.title} description={page.description} canonical={page.path}>
+  <SeoPageView page={page}>
+    {page.path === '/contact' && (
+      <section class="section contact-section" id="contact-form">
+        <div class="container contact-layout">
+          <div class="contact-intro">
+            <span class="section-index">REAL INTAKE</span>
+            <h2>A useful first message is enough.</h2>
+            <p>We record website submissions in the internal Office SDK sales-lead table so the follow-up has its source and workflow context.</p>
+            <a class="inline-link" href="mailto:support@officesdk.com">Email support@officesdk.com <ArrowUpRight size={16} /></a>
+          </div>
+          <ContactForm client:load />
+        </div>
+      </section>
+    )}
+  </SeoPageView>
+</SiteLayout>

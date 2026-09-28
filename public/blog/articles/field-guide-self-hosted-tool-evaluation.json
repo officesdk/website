@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-self-hosted-tool-evaluation",
+  "title": "Self hosted collaboration tools: tests that decide the shortlist",
+  "description": "Evaluate deployment dependencies, real concurrent work, permission changes, and recoverable data.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Self-hosting",
+    "Product selection",
+    "Collaboration",
+    "Backup and recovery"
+  ],
+  "structure": "prose+matrix:example:prose+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 660,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Self-Hosted Document Collaboration: What to Look For",
+      "url": "https://shimodocs.com/blog/best-self-hosted-document-collaboration-tools"
+    }
+  ],
+  "cover": "/blog/images/field-guide-self-hosted-tool-evaluation.png",
+  "coverAlt": "Self hosted collaboration tools: tests that decide the shortlist: Deployment contract, Session workload, Identity boundary, Recovery drill.",
+  "concepts": [
+    "Deployment contract",
+    "Session workload",
+    "Identity boundary",
+    "Recovery drill",
+    "Upgrade window"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "alternating",
+    "signature": "ledger:alternating",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 80
+  },
+  "contentHash": "97b4d56a79c217ad3132f31f0d02fdb1bd275798cba85b0f66c879cd2baa6188",
+  "intro": "A self hosted collaboration tool belongs on the shortlist only if its supported deployment fits your environment and its document workflows pass acceptance. Test concurrent editing, identity changes, restoration, and upgrades. A successful first install does not establish that your team can run it reliably.",
+  "sections": [
+    {
+      "id": "deployment-and-workload-gates-1",
+      "title": "Deployment and workload gates",
+      "html": "<p>Specify required operating systems, databases, storage, network paths, certificates, and supported deployment patterns for each candidate. Use current documentation and the exact edition being evaluated. Identify which components remain externally dependent, including licensing checks, telemetry, update delivery, and support access. A tool described as self hosted may still have operational dependencies relevant to your requirements. Assign ownership for each service and configuration file. Record how the application receives its first document, persists editing state, and returns files to business storage so failures can be attributed to the correct component.</p><p>Count simultaneous editing sessions, document sizes, conversion requests, and download bursts separately. One hundred logged in users do not necessarily create the same load as one hundred collaborators editing a large workbook. Build a representative test corpus with ordinary files and demanding cases. Measure startup time, interaction latency, export duration, resource consumption, and error rates under repeatable conditions. Preserve both successful and failed examples. Avoid accepting a capacity promise that omits the document mix, infrastructure size, or product version, because those variables materially affect how the deployment will behave.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "matrix",
+        "title": "Four gates to a self hosted shortlist",
+        "items": [
+          {
+            "label": "Architecture",
+            "detail": "Supported topology and external dependencies are known."
+          },
+          {
+            "label": "Workload",
+            "detail": "File mix, concurrency, and conversion bursts are measured."
+          },
+          {
+            "label": "Access",
+            "detail": "Join, role change, guest access, and removal are tested."
+          },
+          {
+            "label": "Recovery",
+            "detail": "Documents, mappings, and permissions restore together."
+          }
+        ],
+        "alt": "Four independent gates test suitability beyond initial installation.",
+        "caption": "Record pass evidence or a named unresolved issue for each gate.",
+        "src": "/blog/images/field-guide-self-hosted-tool-evaluation-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-self-hosted-tool-evaluation-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "exercise-the-administrator-boundary-2",
+      "title": "Exercise the administrator boundary",
+      "html": "<p>For a manufacturing team, test joining a new engineer through the organization's identity system, granting access to one project, sharing with a supplier, and removing access when the assignment ends. Examine whether administrators can trace changes without routine access to confidential content. Verify documented permission behavior through actual requests rather than toolbar visibility alone. Include service accounts, integration credentials, and retained sessions in revocation tests. Write down which system owns group membership and how quickly a change reaches the collaboration service, so support staff understand temporary discrepancies and can respond consistently.</p><p>Use pass or unresolved gates for requirements with material consequences. A candidate cannot earn its way past a failed recovery requirement through attractive authoring features. Preferences can be scored after the gates are satisfied.</p><table><thead><tr><th>Gate</th><th>Pass evidence</th><th>Unresolved evidence</th></tr></thead><tbody><tr><td>Supported deployment</td><td>Documented topology runs with required dependencies</td><td>Custom architecture has no supported upgrade path</td></tr><tr><td>Access lifecycle</td><td>Group changes and revocation reach the document path</td><td>Retained sessions behave unexpectedly</td></tr><tr><td>Recovery</td><td>Users reopen restored content with correct permissions</td><td>Only storage objects have been restored</td></tr><tr><td>Workload</td><td>Expected file mix completes under measured concurrency</td><td>Only a simple single user demo was run</td></tr></tbody></table><p>For the manufacturer, distinguish the supplier's viewing workflow from engineers' simultaneous workbook edits. They create different load and permission needs. Record observed behavior for each, including test configuration and software release. If a gap requires custom integration, estimate its support cost and nominate the maintainer. This keeps the shortlist honest: a workable remedy can remain under consideration, while an unowned workaround cannot masquerade as a completed requirement.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "require-a-credible-recovery-path-3",
+      "title": "Require a credible recovery path",
+      "html": "<p>Back up the data and configuration required to restore a usable service, including identifiers and permission relationships. Then restore into an isolated environment and verify representative documents with ordinary users. A collection of readable storage objects may still be insufficient if collaboration state or mapping metadata is missing. Rehearse an upgrade while monitoring active sessions, and establish the documented rollback limits for schema changes. Assess whether your team can perform these procedures within its staffing and maintenance windows. Vendor assistance can be valuable, but its availability and scope should be part of the contract.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "A source file becomes a recoverable business version",
+        "items": [
+          {
+            "label": "Source owner",
+            "detail": "Application identifies and authorizes the original file."
+          },
+          {
+            "label": "Editing state",
+            "detail": "Integration follows documented state ownership."
+          },
+          {
+            "label": "Publication",
+            "detail": "Validated result maps to the business document version."
+          },
+          {
+            "label": "Restore",
+            "detail": "Content and identity relationships are verified together."
+          }
+        ],
+        "alt": "The document path ends with recovery of content and relationships.",
+        "caption": "Use the candidate's documented state model when implementing this path.",
+        "src": "/blog/images/field-guide-self-hosted-tool-evaluation-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-self-hosted-tool-evaluation-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "evidence-required-for-selection-4",
+      "title": "Evidence required for selection",
+      "html": "<ul><li>Confirm supported architecture and all external operational dependencies.</li><li>Measure the expected session and conversion workload using real file structures.</li><li>Test identity changes, guest access, revocation, and administrator attribution.</li><li>Restore documents with their mappings and permissions in an isolated environment.</li><li>Rehearse an upgrade and document staffing, downtime, and rollback limits.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

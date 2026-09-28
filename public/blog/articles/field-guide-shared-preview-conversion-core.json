@@ -1,0 +1,152 @@
+{
+  "slug": "field-guide-shared-preview-conversion-core",
+  "title": "Preview and conversion consistency: source versions and layout inputs",
+  "description": "Keep preview and converted output aligned through common models, explicit layout inputs, cache versioning, and approval guards.",
+  "category": "Integration",
+  "format": "architecture",
+  "tags": [
+    "Document preview",
+    "Document conversion",
+    "Version control",
+    "API integration"
+  ],
+  "structure": "prose:prose+layers:example:prose:example:comparison+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 695,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeAPI: One engine, two surfaces — conversion and preview from the same core",
+      "url": "https://officeapi.ai/blog/one-engine-two-surfaces/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-shared-preview-conversion-core.png",
+  "coverAlt": "Preview and conversion consistency: source versions and layout inputs: Shared document model, Layout inputs, Engine version, Surface contract.",
+  "concepts": [
+    "Shared document model",
+    "Layout inputs",
+    "Engine version",
+    "Surface contract",
+    "Parity corpus"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "reading-room",
+    "signature": "field-notes:reading-room",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 107
+  },
+  "contentHash": "3406c97556b0e0361eb6f589e5c209a93ab349c29ad83caee562543a1598cfba",
+  "intro": "Preview and conversion agree only when they process the same source state with compatible interpretation and layout inputs. A shared engine can help, but versioning, fonts, configuration, and cache behavior still matter. Bind approvals to the reviewed content so a preview cannot authorize a different converted file.",
+  "sections": [
+    {
+      "id": "identify-the-shared-semantic-model-1",
+      "title": "Identify the shared semantic model",
+      "html": "<p>Map how source bytes become paragraphs, tables, drawings, workbook cells, or slides in the engine's internal representation. The preview path and conversion path should agree on supported content and interpretation, even if their output formats differ. Record how unsupported features are represented or reported. A shared codebase does not prove identical behavior if one path applies different flags or preprocessing. Define source identity, engine version, and configuration as part of each request. This gives operators a way to explain why two outputs differ and to reproduce the same processing conditions during investigation.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "normalize-layout-inputs-2",
+      "title": "Normalize layout inputs",
+      "html": "<p>Fonts, locale, page size, print settings, theme defaults, and external assets can affect rendering. Make those inputs explicit and consistent where parity is required. A server conversion using substitute fonts may paginate differently from a preview rendered with another font collection. For spreadsheets, define whether preview shows the sheet grid or the configured printed pages; those are different contracts. For presentations, specify treatment of notes and animations. Do not label every visible difference a defect before confirming that the surfaces were asked to produce the same representation of the same document state.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Output identity includes more than the file name",
+        "items": [
+          {
+            "label": "Source state",
+            "detail": "Exact content version being processed."
+          },
+          {
+            "label": "Engine state",
+            "detail": "Parser and layout release."
+          },
+          {
+            "label": "Layout inputs",
+            "detail": "Fonts, locale, dimensions, and print settings."
+          },
+          {
+            "label": "Surface contract",
+            "detail": "Preview or conversion representation requested."
+          }
+        ],
+        "alt": "Four input groups determine output and cache identity.",
+        "caption": "Differences are explainable only when these inputs are recorded.",
+        "src": "/blog/images/field-guide-shared-preview-conversion-core-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-shared-preview-conversion-core-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "follow-an-invoice-approval-3",
+      "title": "Follow an invoice approval",
+      "html": "<p>Suppose an accounts payable system previews an invoice before a reviewer approves the PDF archive copy. Bind both operations to the same source version and relevant layout configuration. Generate the preview and converted output, then compare key fields, line items, totals, and page coverage. If the source changes between viewing and conversion, require a new review or an explicit guarded decision. The reviewer must not approve one invoice while the archive stores another. This example shows that engine consistency and application version control are both necessary to make the approval meaningful.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "test-parity-and-cache-behavior-4",
+      "title": "Test parity and cache behavior",
+      "html": "<p>Maintain a representative corpus covering dense tables, special fonts, charts, multilingual text, and unusual page settings. Compare semantic content and visual output after engine or configuration changes. Cache keys should include source version and the processing inputs that affect output, rather than only a filename or business identifier. Invalidate or version caches deliberately when the engine changes. Record which output was generated by which engine release. Test partial failures and avoid serving an old preview beside a newly converted file without a clear label. Monitoring should distinguish parsing failures from rendering and delivery failures.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "cache-identity-includes-processing-inputs-5",
+      "title": "Cache identity includes processing inputs",
+      "html": "<pre><code>source_version: identified immutable input\nengine_release: parser and layout version\nlayout_profile: fonts, locale, page or print settings\nsurface: preview representation or converted format</code></pre><p>These are illustrative cache dimensions, not a prescribed API. Include the inputs that actually affect your implementation. A cache indexed only by business document ID can serve an old preview after the source changes. A cache that ignores a font or engine update can preserve obsolete layout.</p><p>During an engine rollout, decide whether older cached output remains acceptable, is clearly labeled, or must be regenerated. Record the release that produced the output so investigation can reproduce it. Avoid requiring users to infer a processing version from a timestamp.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "define-what-parity-means-for-each-format-6",
+      "title": "Define what parity means for each format",
+      "html": "<table><thead><tr><th>Format</th><th>Parity question</th></tr></thead><tbody><tr><td>Text document</td><td>Content, tables, page coverage, and required layout agree</td></tr><tr><td>Spreadsheet</td><td>Values agree; grid view and print view differences are intentional</td></tr><tr><td>Presentation</td><td>Slide content and geometry agree within the surface contract</td></tr></tbody></table><p>For the invoice, prioritize line items, totals, identity, and page coverage. A harmless antialiasing difference is not the same as an omitted row. Define tolerances and critical checks from the business purpose, then preserve the compared outputs with their source and processing identities.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "sequence",
+        "title": "Approve the invoice that will be archived",
+        "items": [
+          {
+            "label": "Source version",
+            "detail": "Select an identified invoice state."
+          },
+          {
+            "label": "Preview",
+            "detail": "Reviewer sees output tied to that state."
+          },
+          {
+            "label": "Decision",
+            "detail": "Approval records the reviewed version."
+          },
+          {
+            "label": "Conversion",
+            "detail": "Archive output uses matching content and inputs."
+          },
+          {
+            "label": "Guard",
+            "detail": "Reject or re-review if the source changed."
+          }
+        ],
+        "alt": "A version-bound review guards the conversion used for archiving.",
+        "caption": "Shared rendering cannot replace application-level version control.",
+        "src": "/blog/images/field-guide-shared-preview-conversion-core-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-shared-preview-conversion-core-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1350
+      }
+    },
+    {
+      "id": "pdecision-notes-conversion-contract-7",
+      "title": "PDecision notes-conversion contract",
+      "html": "<ul><li>Use the same source version and documented processing configuration.</li><li>Define semantic support and intentional differences between surfaces.</li><li>Normalize fonts, locale, layout, and external asset handling.</li><li>Test parity across a representative corpus and engine upgrades.</li><li>Version caches and bind approvals to the content actually reviewed.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

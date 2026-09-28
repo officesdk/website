@@ -1,0 +1,126 @@
+{
+  "slug": "ai-document-data-minimization",
+  "title": "AI document data minimization: select the context before calling the model",
+  "description": "Reduce unnecessary document exposure with task scoped selection, permission checks, and explicit handling of derived content.",
+  "category": "AI & documents",
+  "format": "architecture",
+  "tags": [
+    "AI documents",
+    "Data privacy",
+    "RAG",
+    "Access control"
+  ],
+  "structure": "example+flow:prose:note:diagnostic+comparison",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 672,
+  "source": null,
+  "references": [
+    {
+      "label": "NIST: AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "cover": "/blog/images/ai-document-data-minimization.png",
+  "coverAlt": "AI document data minimization: select the context before calling the model: Task scope, Access filter, Selected context, Provider retention.",
+  "concepts": [
+    "Task scope",
+    "Access filter",
+    "Selected context",
+    "Provider retention",
+    "Output review"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "wide",
+    "signature": "report:wide",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 28
+  },
+  "contentHash": "5336ac71441ca27548d120ca583dad2007700768735bbf62dd7a38d98cc522b9",
+  "intro": "Send the content needed for the requested task, after checking the user's access to it. Rewriting a selected clause rarely requires an entire contract and its appendices. Preserve necessary definitions and structure, but apply the same permissions and lifecycle rules to extracted chunks, prompts, and stored answers as to their sources.",
+  "sections": [
+    {
+      "id": "start-with-the-task-s-smallest-useful-context-1",
+      "title": "Start with the task's smallest useful context",
+      "html": "<p>Distinguish tasks such as rewriting selected text, summarizing a document, answering a question across a folder, and extracting fields from a form. Each requires different scope. Use the user's selection or a permission filtered retrieval process to identify relevant material. Include necessary headings, table labels, or adjacent explanations so the selected text is not misleading in isolation. Document when additional context is fetched and why. Sending less content is useful only if the task remains meaningful and the selection process does not omit essential qualifications.</p><p>Context selection should produce an inspectable record: the task, authorized source versions, included passages, and the reason additional material was fetched. Keep this record without automatically retaining every prompt body. It gives developers a way to investigate overcollection and gives evaluators a way to explain missing context.</p><table><thead><tr><th>Task</th><th>Likely starting scope</th><th>Reason to expand</th></tr></thead><tbody><tr><td>Rewrite a selection</td><td>The selection and its immediate structure</td><td>A referenced definition is necessary to preserve meaning</td></tr><tr><td>Summarize a document</td><td>Allowed document content under the extraction policy</td><td>An explicitly included attachment forms part of the document</td></tr><tr><td>Answer across a folder</td><td>Permission-filtered relevant passages</td><td>Additional authorized evidence is needed to answer the question</td></tr></tbody></table><p>Separate retrieval relevance from authorization. A highly relevant chunk from a restricted file is still unavailable to this user. Enforce tenant and document filters at the retrieval boundary, and verify the selected source relationships before building the request. For stored answers, consider later permission changes: a previously generated paragraph may disclose the same protected information as its original source even if the citation link is now denied.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "flow",
+        "title": "Context selection happens before model submission",
+        "items": [
+          {
+            "label": "Task scope",
+            "detail": "Identify the selection, document, or authorized collection"
+          },
+          {
+            "label": "Permission filter",
+            "detail": "Resolve current tenant and document access"
+          },
+          {
+            "label": "Relevant passages",
+            "detail": "Include necessary structure and referenced definitions"
+          },
+          {
+            "label": "Model request",
+            "detail": "Send the reviewed context under the configured data policy"
+          }
+        ],
+        "alt": "Task scope and permission checks precede selection of passages for the model.",
+        "caption": "A model request should not default to the entire file when a narrower task is sufficient.",
+        "src": "/blog/images/ai-document-data-minimization-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/ai-document-data-minimization-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "enforce-access-at-retrieval-and-later-viewing-2",
+      "title": "Enforce access at retrieval and later viewing",
+      "html": "<p>Check the user's current permission to the source documents before assembling model input. Search results and cached chunks must respect the same tenant and document boundaries as direct access. Recheck relevant permissions when showing stored answers or citations, especially if access can change between generation and later viewing. Treat embeddings, extracted text, and summaries as derived document data with their own storage and deletion rules. Moving content into a vector index does not remove the need to track which source document and version authorized its use.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "provider-retention-and-local-logs-are-separate-reviews-3",
+      "title": "Provider retention and local logs are separate reviews",
+      "html": "<p>Understand the selected model service's documented data handling for the actual account and configuration being used. Separately review your application's prompt logs, traces, caches, error reports, and support exports. A restrictive provider setting does not prevent your own telemetry from retaining full document text. Redact credentials and unnecessary personal data before submission where the workflow permits, while recognizing that automated redaction can miss context. Record the intended retention and authorized audience for both inputs and generated outputs rather than assuming transient processing leaves no copies anywhere.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "inspect-the-outgoing-request-for-a-selected-clause-4",
+      "title": "Inspect the outgoing request for a selected clause",
+      "html": "<p>Use a synthetic contract with a selected termination clause, a definitions section, and unrelated employee information in an appendix. Provide the clause and any definitions needed to interpret it, but exclude the unrelated appendix. Show the user which source sections informed the summary and preserve the source version. Inspect the actual outgoing request and application logs during acceptance. This example tests whether context selection follows the task, rather than relying on a privacy statement while the implementation still sends the entire file by default.</p><ul><li>Map each AI task to its minimum useful source scope.</li><li>Apply tenant and document authorization before retrieval and when displaying results.</li><li>Track derived chunks and answers back to source versions.</li><li>Review provider settings and local logging independently.</li><li>Test deletion and permission changes across indexes, caches, and stored outputs.</li></ul>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "comparison",
+        "title": "The selected clause needs definitions, not every appendix",
+        "items": [
+          {
+            "label": "Necessary context",
+            "detail": "Clause text plus definitions required to interpret it"
+          },
+          {
+            "label": "Unrelated content",
+            "detail": "Employee appendix excluded from this summary task"
+          },
+          {
+            "label": "Verification",
+            "detail": "Inspect the actual request and local telemetry"
+          }
+        ],
+        "alt": "Relevant clause context is compared with unrelated appendix data and verification evidence.",
+        "caption": "Data minimization is demonstrated by the outgoing payload, not only a privacy statement.",
+        "src": "/blog/images/ai-document-data-minimization-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/ai-document-data-minimization-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    }
+  ]
+}

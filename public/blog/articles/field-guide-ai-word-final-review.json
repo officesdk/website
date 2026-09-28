@@ -1,0 +1,148 @@
+{
+  "slug": "field-guide-ai-word-final-review",
+  "title": "AI Word formatting: a pre-send review of the actual file",
+  "description": "Inspect styles, rendered pages, hidden content, accepted claims, and Word-to-PDF consistency before delivery.",
+  "category": "AI & documents",
+  "format": "walkthrough",
+  "tags": [
+    "Word documents",
+    "AI documents",
+    "Accessibility",
+    "PDF"
+  ],
+  "structure": "prose:prose+layers:example:prose:diagnostic:note+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 733,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: AI Word document formatting: A pre-send checklist",
+      "url": "https://officedex.ai/blog/word-formatting-checklist/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-ai-word-final-review.png",
+  "coverAlt": "AI Word formatting: a pre-send review of the actual file: Semantic styles, Page layout, Hidden content, Reference check.",
+  "concepts": [
+    "Semantic styles",
+    "Page layout",
+    "Hidden content",
+    "Reference check",
+    "Recipient rendering"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "reading-room",
+    "signature": "ledger:reading-room",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 104
+  },
+  "contentHash": "b65a3392087f145cd068eedcf11b0bf56baf9bbca3aec8493cb3832e7df2336b",
+  "intro": "Before sending an AI-generated Word document, inspect semantic structure, rendered pages, factual content, and hidden review data. Verify the final file in the recipient's environment and compare any PDF delivery copy. Successful file generation does not prove readable layout or acceptance of the document's commitments.",
+  "sections": [
+    {
+      "id": "check-structure-before-appearance-1",
+      "title": "Check structure before appearance",
+      "html": "<p>Verify that headings use meaningful styles and form a logical hierarchy. Lists should behave as lists, not as manually typed symbols and spaces. Inspect table structure, labels, captions, and links. These properties support navigation, accessibility, and later editing even when the pages already look attractive. Confirm that sections and page breaks are intentional rather than accidental results of repeated blank paragraphs. If the document uses a template, check that generated content follows its required styles and numbering. A document can appear correct in one view while remaining difficult to revise or interpret with assistive technology.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "render-and-inspect-every-page-2",
+      "title": "Render and inspect every page",
+      "html": "<p>Open the file in the intended application and inspect a rendered version page by page. Look for clipped text, overlapping objects, split table rows, isolated headings, unexpected blank pages, and inconsistent margins. Check headers, footers, page numbers, and any table of contents after updating fields. Pay special attention to long names, multilingual text, and dense tables because they expose layout weaknesses. Keep the original generated file and a review copy so corrections are traceable. A successful file creation message confirms only that a file exists, not that its rendered output is readable or professionally usable.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "The final review has four independent dimensions",
+        "items": [
+          {
+            "label": "Structure",
+            "detail": "Styles, hierarchy, lists, tables, and navigation."
+          },
+          {
+            "label": "Rendering",
+            "detail": "Pagination, clipping, overlap, and fields."
+          },
+          {
+            "label": "Content",
+            "detail": "Figures, scope, assumptions, and supported claims."
+          },
+          {
+            "label": "Disclosure",
+            "detail": "Comments, revisions, metadata, and embedded material."
+          }
+        ],
+        "alt": "Four review dimensions cover more than visible formatting.",
+        "caption": "A neat page cannot compensate for an unsupported commitment.",
+        "src": "/blog/images/field-guide-ai-word-final-review-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-ai-word-final-review-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "test-a-customer-proposal-3",
+      "title": "Test a customer proposal",
+      "html": "<p>Imagine an AI generated proposal containing a scope table, pricing, assumptions, and signature fields. Confirm that the price matches the approved source and that qualifications have not disappeared during summarization. Check whether the scope table continues cleanly across pages and whether each signature label stays with its line. Open the document on a second relevant application or environment if recipient compatibility is important. Export the proposed PDF delivery copy and compare it with the Word file. The recipient should receive the same accepted terms regardless of which supported representation they read.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "remove-unintended-information-4",
+      "title": "Remove unintended information",
+      "html": "<p>Inspect comments, tracked changes, document properties, hidden text, embedded objects, and leftover template instructions. Decide which review annotations should be retained and which should be removed before external circulation. Confirm source references and links resolve to the intended materials and do not expose internal resources unnecessarily. Review generated claims for evidence and identify any placeholders or incomplete sections. A formatting pass must not obscure a substantive issue: a neat table containing an invented commitment remains unacceptable. Keep the final approval tied to the exact file version that will be distributed.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-page-review-log-catches-recurring-defects-5",
+      "title": "A page review log catches recurring defects",
+      "html": "<p>Use a page review log when the document is substantial or formally delivered. Record page, defect, affected content, correction, and verification. This is more reliable than a general Looks fine comment.</p><table><thead><tr><th>Observation</th><th>Possible correction to investigate</th></tr></thead><tbody><tr><td>Heading isolated at page bottom</td><td>Paragraph keep behavior and section structure</td></tr><tr><td>Table text clipped</td><td>Column widths, cell margins, and row height rules</td></tr><tr><td>Signature label separated</td><td>Grouping and intentional page break</td></tr><tr><td>Unexpected blank page</td><td>Section break, empty paragraph, or layout constraint</td></tr></tbody></table><p>Use the editing application's supported controls and verify the rendered result after correction. Changing a font size to fix one page can shift later pages and damage a previously correct table.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "keep-approval-tied-to-the-delivered-file-6",
+      "title": "Keep approval tied to the delivered file",
+      "html": "<p>For the proposal, the approval record should identify the file that was actually checked, not merely the project name. If a later regeneration changes pricing, scope, assumptions, or pagination, determine which checks need repeating and obtain the required approval for the successor.</p><p>Retain the reviewed Word file and delivered PDF with a clear relationship. If the PDF is the authoritative sent record, label that explicitly. A Word file reopened after a font or field update can render differently, so the delivery check should use the final output rather than an earlier preview. Keep the record concise enough for routine use while preserving the evidence needed to explain what was accepted.</p>",
+      "kind": "note",
+      "figure": {
+        "kind": "sequence",
+        "title": "Approve the actual delivery artifacts",
+        "items": [
+          {
+            "label": "Draft file",
+            "detail": "Generated content enters Word review."
+          },
+          {
+            "label": "Render",
+            "detail": "Inspect every required page and correct defects."
+          },
+          {
+            "label": "Delivery output",
+            "detail": "Create and compare the final PDF if required."
+          },
+          {
+            "label": "Approval",
+            "detail": "Identify the accepted versions that will be sent."
+          }
+        ],
+        "alt": "The draft is reviewed, rendered, converted if needed, and approved.",
+        "caption": "Changes after this sequence create a successor that may require renewed review.",
+        "src": "/blog/images/field-guide-ai-word-final-review-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-ai-word-final-review-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "final-delivery-decision-notes-7",
+      "title": "Final delivery Decision notes",
+      "html": "<ul><li>Verify headings, lists, tables, links, and document navigation.</li><li>Inspect rendered pages for clipping, overlap, pagination, and field updates.</li><li>Reconcile figures, scope, assumptions, and commitments with approved sources.</li><li>Review hidden content, comments, revisions, and metadata.</li><li>Compare final Word and PDF outputs and approve the sent version.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "slug": "callback-retries-and-idempotency",
+  "title": "Webhook idempotency for document saves: keys, retries, and recovery",
+  "description": "Design callback handling around authenticated events, durable acknowledgement, and idempotent effects.",
+  "category": "Integration",
+  "format": "walkthrough",
+  "tags": [
+    "Webhooks",
+    "Version control",
+    "API integration",
+    "Document storage"
+  ],
+  "structure": "steps+sequence:prose:example+decision:diagnostic",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 667,
+  "source": null,
+  "references": [
+    {
+      "label": "AWS Builders Library: Making retries safe with idempotent APIs",
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+    }
+  ],
+  "cover": "/blog/images/callback-retries-and-idempotency.png",
+  "coverAlt": "Webhook idempotency for document saves: keys, retries, and recovery: Event receipt, Operation key, Durable decision, Duplicate check.",
+  "concepts": [
+    "Event receipt",
+    "Operation key",
+    "Durable decision",
+    "Duplicate check",
+    "Retry recovery"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "rail-left",
+    "signature": "centered:rail-left",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 5
+  },
+  "contentHash": "4a189445c56c55057247cdab390bcc22b5eb7d1f9df8a5f4471bd454401b78a8",
+  "intro": "A document save webhook can arrive twice even when the first delivery succeeded. Authenticate it, identify the logical operation, and make publication repeatable without creating another version. The deduplication record must also let a crashed worker resume; merely marking an event as seen can permanently lose a save.",
+  "sections": [
+    {
+      "id": "accept-only-after-a-durable-decision-1",
+      "title": "Accept only after a durable decision",
+      "html": "<p>Determine what the provider expects from the callback response and how its retry policy works. Where asynchronous processing is permitted, authenticate and validate the request, record an event durably, and acknowledge that acceptance. A memory only queue cannot support this promise through a process crash. If the contract requires synchronous completion, make the work bounded and make every retry safe. In either design, distinguish acceptance from successful downstream processing in logs and monitoring so an acknowledged event does not disappear into an invisible failure queue.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "Acknowledgement follows durable acceptance",
+        "items": [
+          {
+            "label": "Validate",
+            "detail": "Authenticate sender and verify the document relationship"
+          },
+          {
+            "label": "Record",
+            "detail": "Persist an event with a stable logical identity"
+          },
+          {
+            "label": "Acknowledge",
+            "detail": "Return the response required by the provider contract"
+          },
+          {
+            "label": "Process",
+            "detail": "Retrieve, validate, and publish through recoverable steps"
+          }
+        ],
+        "alt": "A callback is validated and durably recorded before asynchronous acknowledgement and processing.",
+        "caption": "Use this sequence only when the provider contract permits asynchronous completion.",
+        "src": "/blog/images/callback-retries-and-idempotency-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/callback-retries-and-idempotency-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "choose-a-stable-operation-key-2",
+      "title": "Choose a stable operation key",
+      "html": "<p>Use the provider's documented stable event identifier when available, scoped to the integration and tenant. If no such identifier exists, derive a key only from fields whose semantics you understand, such as document, source version, and event type. A timestamp alone is usually insufficient. A hash of the entire payload may also fail if retries contain refreshed links or changing metadata. Record the payload fingerprint alongside the key so that conflicting requests using the same operation identity can be detected and investigated rather than silently accepted.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "track-incomplete-work-as-well-as-duplicates-3",
+      "title": "Track incomplete work as well as duplicates",
+      "html": "<p>A separate check followed by an insert is vulnerable when two workers receive the same event simultaneously. Use a uniqueness constraint or equivalent atomic claim. Track pending, completed, and failed processing states with explicit recovery rules. If file storage and database updates cannot share one transaction, retain intermediate references and reconcile incomplete work. Deduplication should prevent duplicate business effects without permanently suppressing a legitimate retry after a worker crashed between claiming an event and writing its resulting document version.</p><pre><code>event identity: integration + tenant + provider event ID\nprocessing state: accepted → retrieving → published\nresult reference: business document + published version</code></pre><p>This is an illustrative event model, not a provider payload. The event identity needs a uniqueness constraint. The processing state needs a recovery policy. The result reference lets a duplicate return or locate the already completed result without replaying secondary effects.</p><p>Consider a worker that claims the event and crashes before fetching the saved file. A second delivery must discover incomplete work, not interpret the claim as completion. Use a durable job, a bounded processing lease, or another recovery mechanism consistent with your database and queue. Preserve the original identity when work is retried.</p><p>Choose deduplication retention using the provider's delivery and replay behavior plus your own incident recovery process. If an operator can replay an event after the deduplication record expires, a historical replay may create a fresh effect. Either retain the identity long enough, verify the published source version independently, or restrict that replay path. Document which protection applies so maintenance does not accidentally remove it.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "decision",
+        "title": "A repeated event needs a state-aware response",
+        "items": [
+          {
+            "label": "Already published",
+            "detail": "Locate the existing result; do not create another version"
+          },
+          {
+            "label": "Still processing",
+            "detail": "Keep one active attempt and expose its pending state"
+          },
+          {
+            "label": "Attempt interrupted",
+            "detail": "Resume or reclaim incomplete work under the same identity"
+          }
+        ],
+        "alt": "Duplicate delivery is handled according to whether work is complete, active, or interrupted.",
+        "caption": "A deduplication claim is not proof that the business effect finished.",
+        "src": "/blog/images/callback-retries-and-idempotency-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/callback-retries-and-idempotency-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "force-a-lost-response-and-a-worker-crash-4",
+      "title": "Force a lost response and a worker crash",
+      "html": "<p>For a test document, let the callback complete its database change, then intentionally close the connection before sending the response. Deliver the same event again. The expected outcome is one published version and a response consistent with the provider contract. Repeat while two workers process the event concurrently, and once with a changed payload under the same event ID. Use synthetic credentials and a test object. These experiments expose gaps that a happy path test with one successful request cannot reveal.</p><ul><li>Record authentication failures separately from temporary storage or database failures.</li><li>Set a retention period for deduplication records that covers the documented delivery window and replay process.</li><li>Expose counts and age of pending or failed events.</li><li>Provide a controlled replay operation that preserves the original event identity.</li><li>Verify that a duplicate never triggers a second external notification or approval transition.</li></ul>",
+      "kind": "diagnostic"
+    }
+  ]
+}

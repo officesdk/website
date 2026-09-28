@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-document-platform-exit-rehearsals",
+  "title": "Document platform exit planning: test the exported collection",
+  "description": "Test export, metadata recovery, permission translation, and downstream usability as an ongoing portability obligation.",
+  "category": "Migration",
+  "format": "playbook",
+  "tags": [
+    "Migration",
+    "Document conversion",
+    "Version control",
+    "Document storage"
+  ],
+  "structure": "prose+layers:diagnostic:comparison:example+sequence:steps:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 675,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Leaving a Document Platform: Lock-In and the Exit Path",
+      "url": "https://shimodocs.com/blog/document-platform-lock-in-and-exit-planning"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-platform-exit-rehearsals.png",
+  "coverAlt": "Document platform exit planning: test the exported collection: Export rights, Metadata portability, Format readback, Permission translation.",
+  "concepts": [
+    "Export rights",
+    "Metadata portability",
+    "Format readback",
+    "Permission translation",
+    "Exit timing"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "inset",
+    "signature": "masthead:inset",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 49
+  },
+  "contentHash": "bb335a448815647790234ba59807566215c39c609aa17cc9fbe7116b9d7f5f07",
+  "intro": "An exit plan should prove that people can use exported documents without the original platform. Test current files, required versions, metadata, approvals, and access mappings through a small handover. Confirm extraction rights and timing in writing, then measure the effort needed to reconstruct any missing context.",
+  "sections": [
+    {
+      "id": "define-the-portable-collection-1",
+      "title": "Define the portable collection",
+      "html": "<p>List the material the organization must retain after departure: current files, selected earlier versions, folder relationships, ownership, comments, approval evidence, and retention status. Assign importance and a proposed destination to each class. Ask for current export documentation and contract terms covering bulk extraction, assistance, fees, and the period after termination. A right to export should identify the available formats and included metadata. Keep the requirements separate from current capability claims until they have been verified. Some information may need an archival representation rather than continued interactive behavior in the destination.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "What must remain useful after exit",
+        "items": [
+          {
+            "label": "Content",
+            "detail": "Current artifacts and required historical versions."
+          },
+          {
+            "label": "Relationships",
+            "detail": "Source IDs, folders, approval evidence, and linked context."
+          },
+          {
+            "label": "Access intent",
+            "detail": "Owners and audience rules translated for the destination."
+          },
+          {
+            "label": "Runtime needs",
+            "detail": "Tools and rights required to read any retained formats."
+          }
+        ],
+        "alt": "Content, relationships, access intent, and runtime needs in a platform exit.",
+        "caption": "A folder of downloads may preserve content while losing the other layers.",
+        "src": "/blog/images/field-guide-document-platform-exit-rehearsals-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-platform-exit-rehearsals-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "define-a-portable-acceptance-package-2",
+      "title": "Define a portable acceptance package",
+      "html": "<p>Choose a completed project and produce a package that stands on its own. Include a manifest naming source identifiers, versions, exported filenames, formats, and required context. Document which representations are editable and which are preserved only for historical reading.</p><table><thead><tr><th>Package member</th><th>Independent readback</th></tr></thead><tbody><tr><td>Approved report</td><td>Recipient can identify the approved version and its decision</td></tr><tr><td>Calculation model</td><td>Known input gives the expected result in the intended tool</td></tr><tr><td>Access mapping</td><td>Recipient can distinguish intended audience from exported custody</td></tr><tr><td>Exception register</td><td>Missing interactive behavior has an owner and reconstruction plan</td></tr></tbody></table><p>Give the package to someone without an account on the source platform. If that person needs to ask the author which file is final, the export still depends on informal knowledge. Fix the manifest or record relationship and repeat that task.</p><p>Time the extraction and reconstruction separately. Export may be fast while rebuilding links, review history, or permissions is slow. Use these measured stages to estimate the termination window and assistance needed. Keep the package protected: portability concentrates information and can create broader custody than the live workspace allowed.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "distinguish-readable-and-reusable-3",
+      "title": "Distinguish readable and reusable",
+      "html": "<p>A rendered document can preserve appearance while losing formulas, structured headings, comments, or editable objects. Decide which outputs need to remain reusable and which need only a stable historical view. Test both with the software that future users can actually obtain. Keep checksums and a manifest linking exported files to source identifiers and versions. Filenames alone are weak evidence when several documents share a title. If an export depends on proprietary tooling, document licensing, runtime, and long term availability requirements so the archive does not become unreadable after the original service contract ends.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "run-a-project-exit-rehearsal-4",
+      "title": "Run a project exit rehearsal",
+      "html": "<p>Choose one completed project with a spreadsheet, report, presentation, restricted appendix, and approval record. Export it through supported methods, then give the package to a colleague without access to the original workspace. Ask that person to identify the approved report, recompute a known spreadsheet result, and explain who could access the appendix. Attempt an import into the likely replacement or an archival repository. Record what needs reconstruction and how much effort it takes. This scenario turns portability from a vague feature into a measured handover with visible information losses.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "An independent project handover",
+        "items": [
+          {
+            "label": "Supported extraction",
+            "detail": "Use documented export methods and retain the source manifest."
+          },
+          {
+            "label": "Outside readback",
+            "detail": "A colleague without source access identifies and uses the package."
+          },
+          {
+            "label": "Gap reconstruction",
+            "detail": "Measure missing context and assign corrective work."
+          },
+          {
+            "label": "Exit estimate",
+            "detail": "Plan final extraction time, assistance, and verification."
+          }
+        ],
+        "alt": "Export, independent readback, gap reconstruction, and exit estimate.",
+        "caption": "Rehearsal turns portability claims into measured handover work.",
+        "src": "/blog/images/field-guide-document-platform-exit-rehearsals-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-platform-exit-rehearsals-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "plan-the-final-extraction-window-5",
+      "title": "Plan the final extraction window",
+      "html": "<p>Estimate export duration, rate limits, storage, transformation time, and owner review using the rehearsal results. Agree when users stop editing and how final changes are captured. Include identities that may have been removed and documents under preservation obligations. Secure exported packages as carefully as live data; bulk extraction can concentrate confidential material in one place. Define verification before deleting or surrendering the source. The contract should leave enough time to resolve failed batches and obtain assistance, since discovering an incomplete export after account closure creates a much harder recovery problem.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "exit-readiness-6",
+      "title": "Exit readiness",
+      "html": "<ul><li>Confirm extraction rights, available formats, assistance, and termination timing.</li><li>Test representative files and metadata outside the original platform.</li><li>Measure reconstruction effort and assign ownership to known gaps.</li><li>Protect bulk exports and reconcile them against a source manifest.</li><li>Repeat the rehearsal after major platform or workflow changes.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

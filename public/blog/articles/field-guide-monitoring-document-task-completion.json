@@ -1,0 +1,135 @@
+{
+  "slug": "field-guide-monitoring-document-task-completion",
+  "title": "Document platform monitoring: detect failed opens and incomplete saves",
+  "description": "Build document service monitoring from user journeys, queue behavior, persistence evidence, and actionable alerts.",
+  "category": "Operations",
+  "format": "troubleshooting",
+  "tags": [
+    "Operations",
+    "Troubleshooting",
+    "Performance",
+    "Webhooks",
+    "Version control"
+  ],
+  "structure": "prose:diagnostic+comparison:example:diagnostic+sequence:steps:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 710,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Monitoring a Self-Hosted Document Platform",
+      "url": "https://shimodocs.com/blog/monitoring-self-hosted-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-monitoring-document-task-completion.png",
+  "coverAlt": "Document platform monitoring: detect failed opens and incomplete saves: Journey probes, Save convergence, Queue age, Safe correlation.",
+  "concepts": [
+    "Journey probes",
+    "Save convergence",
+    "Queue age",
+    "Safe correlation",
+    "Alert ownership"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "numbered",
+    "signature": "report:numbered",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 64
+  },
+  "contentHash": "14ec2f242bf3d5a34aa3283ae6970e469fa143a9cd1cc5d2e927862efc7b5d5f",
+  "intro": "Monitor completed document journeys alongside infrastructure: login, source fetch, usable editor, durable save, export, and version readback. Track queue age and version lag where supported. A healthy process or successful callback response can coexist with unfinished user work, so alerts need an outcome and a responsible responder.",
+  "sections": [
+    {
+      "id": "observe-the-main-journeys-1",
+      "title": "Observe the main journeys",
+      "html": "<p>Define successful login, source retrieval, first open, editing, durable save, export, and version retrieval for the deployed architecture. Identify where each outcome can be measured through supported interfaces or logs. A launch response is not the same as a usable editor, and an acknowledged event is not necessarily a persisted file. Use harmless test documents for synthetic checks with appropriately scoped accounts. Keep the probe behavior modest and documented so it does not create real records or distort usage. Record latency and failure at each boundary while preserving a safe correlation identifier across services where possible.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "distinguish-saturation-and-failure-2",
+      "title": "Distinguish saturation and failure",
+      "html": "<p>Collect CPU, memory, storage latency, connection usage, error rates, and queue depth with enough context to connect them to document tasks. Queue age often matters as much as queue length because a small stuck backlog can leave saves incomplete for a long time. Monitor exhausted resources and retry growth before users encounter generic timeouts. Establish baselines during representative business periods. A single threshold copied from another deployment may generate noise or miss the actual bottleneck. Document which owner investigates every metric and which user outcome it threatens when the operating range is exceeded.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "comparison",
+        "title": "Queue depth and queue age answer different questions",
+        "items": [
+          {
+            "label": "Depth",
+            "detail": "How much work is waiting at the observed moment?"
+          },
+          {
+            "label": "Age",
+            "detail": "How long has the oldest unfinished work failed to complete?"
+          }
+        ],
+        "alt": "Queue depth measures volume while queue age measures waiting duration.",
+        "caption": "A small queue can still contain an important stuck save.",
+        "src": "/blog/images/field-guide-monitoring-document-task-completion-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-monitoring-document-task-completion-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 720
+      }
+    },
+    {
+      "id": "start-the-alert-from-the-user-symptom-3",
+      "title": "Start the alert from the user symptom",
+      "html": "<p>For a complaint that the saved download is old, establish the expected business version before inspecting CPU graphs. Follow the save through the actual integration and record the last confirmed milestone. This keeps the investigation tied to an outcome rather than whichever dashboard looks unusual first.</p><pre><code>expected document version: current approved test revision\nlast confirmed milestone: candidate object stored\nmissing milestone: current version reference updated\nowner to contact: publication path operator</code></pre><p>The fields are illustrative incident notes, not a universal platform status model. Use the authoritative ordering and version semantics available in the selected implementation. If there is no exposed version lag signal, use a safe synthetic task and documented readback rather than inventing one.</p><p>An actionable alert should answer what is affected, for how long, which evidence is safe to inspect, and what decision the responder can make. Queue depth can remain small while one old job never completes; include age or a comparable completion measure where available. Distinguish that failure from normal bursts that drain within the operating target. Tune thresholds against representative work, and preserve the runbook step that establishes whether a visible edit became durable before allowing manual intervention.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "follow-a-save-delay-incident-4",
+      "title": "Follow a save delay incident",
+      "html": "<p>A project manager sees changes in an editor but the downloaded report remains older. Trace the save event, retrieval job, object write, validation, and current version update according to the actual integration. Measure the time spent at each step using identifiers rather than document contents. If a worker retries a failed storage request, monitor its age and eventual business completion instead of counting only successful HTTP acknowledgements. This scenario suggests an alert on sustained version lag or incomplete publication where the implementation exposes suitable evidence. It also identifies which component should own the first response.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "Trace an edit that is absent from the download",
+        "items": [
+          {
+            "label": "Save event",
+            "detail": "Find the relevant operation and source revision."
+          },
+          {
+            "label": "Candidate retrieval",
+            "detail": "Check result acquisition and retry state."
+          },
+          {
+            "label": "Object persistence",
+            "detail": "Verify validated bytes reached durable storage."
+          },
+          {
+            "label": "Version publication",
+            "detail": "Confirm the authoritative current pointer advanced correctly."
+          }
+        ],
+        "alt": "Save event, retrieval, persistence, and version publication checkpoints.",
+        "caption": "The failed milestone identifies the next owner in the incident.",
+        "src": "/blog/images/field-guide-monitoring-document-task-completion-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-monitoring-document-task-completion-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "make-alerts-lead-to-actions-5",
+      "title": "Make alerts lead to actions",
+      "html": "<p>For each alert, include the affected journey, threshold rationale, relevant environment, safe identifiers, and a short investigation procedure. Route it to an owner who can act, and distinguish urgent service loss from a warning requiring scheduled review. Avoid putting source bytes, prompts, or signed URLs into alert payloads. Test alert delivery and runbook usefulness with a controlled failure in staging. Review repetitive alerts against actual incidents and remove signals that offer no actionable information. Dashboards are most useful when they support a decision, such as reducing admission, repairing a dependency, or restoring a failed worker.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "monitoring-coverage-6",
+      "title": "Monitoring coverage",
+      "html": "<ul><li>Probe essential user journeys with safe documents and scoped accounts.</li><li>Track durable save completion and backlog age where supported.</li><li>Correlate failures without collecting content or reusable credentials.</li><li>Assign an owner and executable action to every alert.</li><li>Recheck coverage after changing integrations, topology, or workload.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

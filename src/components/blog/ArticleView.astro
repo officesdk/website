@@ -1,0 +1,112 @@
+---
+import { ArrowLeft, ArrowUpRight, Check, ChevronDown, Link2 } from 'lucide-react'
+import { BlogCard, EntryMeta, TopicTags } from '../../blog/BlogIndex'
+import { relatedArticles } from '../../blog/data'
+import type { BlogArticleData } from '../../blog/types'
+import InlineFigure from './InlineFigure.astro'
+
+interface Props {
+  article: BlogArticleData
+}
+
+const { article } = Astro.props
+let figureNumber = 0
+const sections = article.sections.map(section => ({ ...section, figureNumber: section.figure ? ++figureNumber : null }))
+---
+
+<article class={`blog-article hero-${article.recipe.hero} body-${article.recipe.body} format-${article.format}`} style={{ '--article-accent': article.recipe.accent, '--article-soft': article.recipe.soft }} data-layout={article.recipe.signature} data-format={article.format} data-structure={article.structure} data-slug={article.slug}>
+  <div class="article-breadcrumb container">
+    <a href="/blog"><ArrowLeft size={15} /> All stories</a>
+    <span>{article.category}</span>
+    <button type="button" title="Copy article link" aria-label="Copy article link" data-copy-article-link={`/blog/${article.slug}`}>
+      <span data-copy-default><Link2 size={17} /></span>
+      <span data-copy-check hidden><Check size={17} /></span>
+    </button>
+    <span class="copy-error" role="status" data-copy-error hidden>Copy the address from your browser.</span>
+  </div>
+  <header class="article-heading container">
+    <div class="article-heading-copy">
+      <EntryMeta entry={article} />
+      <h1>{article.title}</h1>
+      <p class="article-deck">{article.description}</p>
+      <TopicTags tags={article.tags} />
+      <div class="article-byline">
+        <span class="byline-mark" aria-hidden="true">{article.author.slice(0, 1)}</span>
+        <div><strong>{article.author}</strong><span>{article.source ? 'Republished with source attribution' : 'Office SDK Editorial'}</span></div>
+        <span class="article-folio">{String(article.recipe.number).padStart(3, '0')}</span>
+      </div>
+    </div>
+    <figure class="article-cover">
+      <img src={article.cover} alt={article.coverAlt} width="1200" height="760" fetchpriority="high" />
+      <figcaption>{article.category} / {article.source?.name ?? 'Office SDK'}</figcaption>
+    </figure>
+  </header>
+  <div class="article-reading container">
+    <aside class="article-contents is-open">
+      <button type="button" aria-expanded="true" aria-controls="article-contents-nav" data-contents-toggle>In this story <ChevronDown size={16} /></button>
+      <nav id="article-contents-nav" aria-label="Article contents">
+        {article.sections.map((section, index) => <a href={`#${section.id}`}><span>{String(index + 1).padStart(2, '0')}</span>{section.title}</a>)}
+      </nav>
+    </aside>
+    <div class="article-prose">
+      <p class="article-introduction">{article.intro}</p>
+      {sections.map((section, index) => <section class={`article-section section-${section.kind}${section.figure ? ' has-figure' : ''}`} id={section.id}>
+        <div class="chapter-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+        <h2>{section.title}</h2>
+        <div class="article-section-layout">
+          <div class="article-section-content" set:html={section.html} />
+          {section.figure && section.figureNumber && <InlineFigure figure={section.figure} number={section.figureNumber} />}
+        </div>
+      </section>)}
+      <div class="article-sources">
+        <h2>{article.source ? 'Source & further reading' : 'Further reading'}</h2>
+        {article.source && <p>This article was originally published by <a href={article.source.url} target="_blank" rel="noreferrer">{article.source.name} <ArrowUpRight size={13} /></a>. Product names and capabilities refer to the original subject of the article.</p>}
+        {article.references.length > 0 && <ul>{article.references.map(reference => <li><a href={reference.url} target="_blank" rel="noreferrer">{reference.label} <ArrowUpRight size={13} /></a></li>)}</ul>}
+        <a class="article-back" href="/blog"><ArrowLeft size={16} /> Back to all stories</a>
+      </div>
+    </div>
+  </div>
+  <section class="article-related">
+    <div class="container">
+      <div class="article-related-heading"><h2>Keep reading.</h2><a href="/blog">All stories <ArrowUpRight size={16} /></a></div>
+      <div class="journal-grid">{relatedArticles(article).map(entry => <BlogCard entry={entry} />)}</div>
+    </div>
+  </section>
+</article>
+
+<script>
+  const contentsButton = document.querySelector<HTMLButtonElement>('[data-contents-toggle]')
+  const contentsNav = document.getElementById('article-contents-nav')
+  contentsButton?.addEventListener('click', () => {
+    const open = contentsButton.getAttribute('aria-expanded') !== 'true'
+    contentsButton.setAttribute('aria-expanded', String(open))
+    contentsButton.closest('.article-contents')?.classList.toggle('is-open', open)
+    if (contentsNav) contentsNav.style.display = open ? '' : 'none'
+  })
+
+  const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-article-link]')
+  const copyDefault = copyButton?.querySelector<HTMLElement>('[data-copy-default]')
+  const copyCheck = copyButton?.querySelector<HTMLElement>('[data-copy-check]')
+  const copyError = document.querySelector<HTMLElement>('[data-copy-error]')
+  let copyReset: number | undefined
+  const setCopied = (copied: boolean) => {
+    if (!copyButton) return
+    const label = copied ? 'Link copied' : 'Copy article link'
+    copyButton.title = label
+    copyButton.setAttribute('aria-label', label)
+    if (copyDefault) copyDefault.hidden = copied
+    if (copyCheck) copyCheck.hidden = !copied
+  }
+  copyButton?.addEventListener('click', async () => {
+    window.clearTimeout(copyReset)
+    try {
+      await navigator.clipboard.writeText(`${window.location.origin}${copyButton.dataset.copyArticleLink}`)
+      setCopied(true)
+      if (copyError) copyError.hidden = true
+      copyReset = window.setTimeout(() => setCopied(false), 2500)
+    } catch {
+      setCopied(false)
+      if (copyError) copyError.hidden = false
+    }
+  })
+</script>

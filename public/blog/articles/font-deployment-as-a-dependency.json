@@ -1,0 +1,131 @@
+{
+  "slug": "font-deployment-as-a-dependency",
+  "title": "Missing fonts in document conversion: deployment and diagnosis",
+  "description": "Inventory, license, install, and verify fonts across editing and conversion environments to reduce unexplained layout changes.",
+  "category": "Self-hosting",
+  "format": "playbook",
+  "tags": [
+    "Self-hosting",
+    "Document conversion",
+    "Word documents",
+    "Presentations",
+    "Troubleshooting"
+  ],
+  "structure": "diagnostic+matrix:note:steps+flow:example",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 660,
+  "source": null,
+  "references": [
+    {
+      "label": "Microsoft Typography: Fonts and products",
+      "url": "https://learn.microsoft.com/en-us/typography/fonts/"
+    }
+  ],
+  "cover": "/blog/images/font-deployment-as-a-dependency.png",
+  "coverAlt": "Missing fonts in document conversion: deployment and diagnosis: Font inventory, Usage rights, Font install, Layout fixture.",
+  "concepts": [
+    "Font inventory",
+    "Usage rights",
+    "Font install",
+    "Layout fixture",
+    "Release checks"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "rail-right",
+    "signature": "cover-first:rail-right",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 14
+  },
+  "contentHash": "afd0e543dcfdb8ec6af00164f8f5dca250a96fb88d6f83b2bfd0f05040b24fca",
+  "intro": "When line breaks shift or glyphs disappear, compare the fonts available to the rendering workers with those required by the source. Fonts installed on a laptop do not establish what a container can render. Package approved font files consistently, record their versions, and verify output after installation.",
+  "sections": [
+    {
+      "id": "identify-the-font-dependency-behind-the-symptom-1",
+      "title": "Identify the font dependency behind the symptom",
+      "html": "<p>Inspect a representative source corpus for font families, weights, scripts, and special symbols. Include templates, customer supplied files, and documents created by automated systems. A family name alone may not capture differences between font versions or available styles. Record where each font is expected to be used and whether the source embeds it. Verify the rendering engine's supported font discovery and substitution behavior from its documentation. Do not assume that a font installed on an administrator's laptop is available inside a conversion container or remote editor worker.</p><p>Start a layout investigation with the affected script, family, and style. A regular face may be present while the bold face is missing. A substitute can cover Latin letters but lack currency symbols or another writing system. Compare actual file inventories and digests, because two files with a familiar family name need not be the same revision.</p><table><thead><tr><th>Symptom</th><th>First comparison</th></tr></thead><tbody><tr><td>Line wrapping changed</td><td>Family, font revision, and selected substitute</td></tr><tr><td>Empty boxes replace characters</td><td>Glyph coverage for the affected script or symbol</td></tr><tr><td>Only some jobs look wrong</td><td>Font package and cache state across worker replicas</td></tr><tr><td>Bold text changes width unexpectedly</td><td>Installed style files and synthetic-style behavior</td></tr></tbody></table><p>After a change, start a fresh worker through the normal deployment path and render the fixture there. A manual repair on one running container proves little about the next replica. Keep the prior image and approved font package available for rollback, and remember that licensing approval must cover the intended distribution and rendering use, not merely possession of a font file.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "Different font problems leave different evidence",
+        "items": [
+          {
+            "label": "Changed wrapping",
+            "detail": "Compare family, revision, and fallback selection"
+          },
+          {
+            "label": "Missing glyph",
+            "detail": "Inspect coverage for the exact character"
+          },
+          {
+            "label": "Replica differences",
+            "detail": "Compare package digests and font cache state"
+          },
+          {
+            "label": "Style differences",
+            "detail": "Verify regular, bold, and italic files separately"
+          }
+        ],
+        "alt": "Four common rendering symptoms point to specific font comparisons.",
+        "caption": "Use the exact characters and styles from the failing document when reducing a fixture.",
+        "src": "/blog/images/font-deployment-as-a-dependency-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/font-deployment-as-a-dependency-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "licensing-is-part-of-the-package-definition-2",
+      "title": "Licensing is part of the package definition",
+      "html": "<p>Font files are licensed assets. Confirm that the selected license permits the intended server installation, redistribution in images, web delivery, or embedding in output. These are potentially different uses. Retain the license source and approval with the dependency inventory. If a required font cannot be deployed, choose an approved substitute and assess the resulting layout changes with document owners. Avoid downloading similarly named files from an unverified source, because matching a display name does not establish authenticity, technical equivalence, or a usable deployment license.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "install-the-same-files-on-every-rendering-worker-3",
+      "title": "Install the same files on every rendering worker",
+      "html": "<p>Package approved font files through a controlled build or deployment process and record their digests. Apply the engine's documented cache refresh or restart procedure when necessary. Ensure every relevant worker uses the same set; a mixed fleet can produce inconsistent output depending on which node processes a document. Include architecture and operating system differences in the verification plan. Expose a safe inventory or diagnostic command for operators so they can compare environments without searching manually through an opaque container filesystem during an incident.</p><ul><li>Maintain an approved inventory with family, version, digest, license, and installation scope.</li><li>Verify that editor and conversion workers discover the intended files.</li><li>Compare representative output before and after font changes.</li><li>Check that new worker replicas receive the same font package.</li><li>Keep a rollback path for the prior approved font set and associated image.</li></ul>",
+      "kind": "steps",
+      "figure": {
+        "kind": "flow",
+        "title": "Fonts belong in the reproducible worker build",
+        "items": [
+          {
+            "label": "Approved source",
+            "detail": "Record files, digests, licensing, and intended use"
+          },
+          {
+            "label": "Worker package",
+            "detail": "Install through the controlled deployment process"
+          },
+          {
+            "label": "Discovery",
+            "detail": "Run the engine's supported cache or restart procedure"
+          },
+          {
+            "label": "Fixture output",
+            "detail": "Compare glyphs, wrapping, and pagination on a fresh replica"
+          }
+        ],
+        "alt": "Approved font assets move through packaging, discovery, and a rendered verification fixture.",
+        "caption": "A font copied into one live container will not necessarily survive scaling or redeployment.",
+        "src": "/blog/images/font-deployment-as-a-dependency-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/font-deployment-as-a-dependency-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "a-multilingual-fixture-makes-fallback-visible-4",
+      "title": "A multilingual fixture makes fallback visible",
+      "html": "<p>Create a synthetic document with Latin text, Chinese text, numerals, currency symbols, bold and italic runs, and a narrow table near a page boundary. Render it on each worker image and compare line breaks, glyph coverage, table width, and page count. Then intentionally remove one expected font in a test environment to observe the fallback. This makes the dependency visible and provides a recognizable symptom for troubleshooting. Include only scripts relevant to the deployment, while preserving any uncommon symbols that business templates actually require.</p>",
+      "kind": "example"
+    }
+  ]
+}

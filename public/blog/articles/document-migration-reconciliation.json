@@ -1,0 +1,142 @@
+{
+  "slug": "document-migration-reconciliation",
+  "title": "Document migration validation: reconcile every file, version, and permission",
+  "description": "Track every source document through transfer, transformation, permission mapping, and final acceptance with an auditable manifest.",
+  "category": "Migration",
+  "format": "walkthrough",
+  "tags": [
+    "Migration",
+    "Document storage",
+    "Version control",
+    "Access control"
+  ],
+  "structure": "steps:example+flow:comparison:prose:checklist:example+matrix",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 666,
+  "source": null,
+  "references": [
+    {
+      "label": "Microsoft Learn: Migration assessment guidance",
+      "url": "https://learn.microsoft.com/en-us/sharepointmigration/overview-of-the-sharepoint-migration-assessment-tool"
+    }
+  ],
+  "cover": "/blog/images/document-migration-reconciliation.png",
+  "coverAlt": "Document migration validation: reconcile every file, version, and permission: Source manifest, Content transfer, Format transform, Access mapping.",
+  "concepts": [
+    "Source manifest",
+    "Content transfer",
+    "Format transform",
+    "Access mapping",
+    "Cutover evidence"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "wide",
+    "signature": "visual-first:wide",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 33
+  },
+  "contentHash": "cd5dcf060f235790da606f3236eefdc2a4fe0d9dd6a3df026d42ba6e0479c62e",
+  "intro": "Build a source manifest before migrating and give every item a verified destination or an approved exception. File counts alone cannot prove that content, versions, owners, permissions, and links survived. Separate byte-preserving transfers from conversions, because they require different validation evidence.",
+  "sections": [
+    {
+      "id": "create-a-stable-baseline-and-source-manifest-1",
+      "title": "Create a stable baseline and source manifest",
+      "html": "<p>Record a stable source identifier, path, document type, size, version information, owner, permissions, and an integrity digest where appropriate. Include folders and relationships that matter to the business workflow. Distinguish inaccessible or unsupported items from items not yet processed. Protect the manifest because names and access lists can reveal sensitive information even without document bytes. Capture the source snapshot or extraction time and define how later changes are handled. Without a stable baseline, a count difference may reflect ongoing user activity rather than a transfer defect.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "track-mappings-and-rerun-outcomes-2",
+      "title": "Track mappings and rerun outcomes",
+      "html": "<pre><code>source_item_id → destination_document_id\nsource_version → destination_version\ntransfer_mode → copy or documented transformation\noutcome → verified, failed, excluded, or awaiting review</code></pre><p>This is an illustrative reconciliation map. Preserve it across reruns so the migration can resume or update the same destination record instead of creating another copy. The source item ID should remain stable even when its filename changes during a long migration window.</p><p>Decide how to account for changes after the baseline snapshot. You may freeze edits during a defined cutover window, apply a controlled delta pass, or use another supported synchronization method. Each choice has an operational cost. Record which source state the acceptance report represents so a later modification is not mistaken for a missing migration item.</p><p>For transformed documents, retain both the transformation decision and the acceptance result. A digest mismatch is expected after format conversion and cannot distinguish a correct transformation from missing content. Check named values, structure, and rendering according to the document family's requirements. Keep unresolved items out of the verified total; a report that mixes exclusions with successes makes cutover risk difficult to assess.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "flow",
+        "title": "Every source item needs an accountable outcome",
+        "items": [
+          {
+            "label": "Source manifest",
+            "detail": "Stable item, version, owner, access, and content evidence"
+          },
+          {
+            "label": "Transfer decision",
+            "detail": "Copy unchanged bytes or apply a named transformation"
+          },
+          {
+            "label": "Destination mapping",
+            "detail": "Record document and version identities"
+          },
+          {
+            "label": "Reconciliation",
+            "detail": "Verify the result or retain an explicit exception"
+          }
+        ],
+        "alt": "A source manifest drives transfer, destination mapping, and reconciliation.",
+        "caption": "An excluded or unresolved item must not be counted as a verified success.",
+        "src": "/blog/images/document-migration-reconciliation-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-migration-reconciliation-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "validate-copies-differently-from-transformations-3",
+      "title": "Validate copies differently from transformations",
+      "html": "<p>A byte preserving copy can be verified with a compatible digest check. A conversion to another representation requires different evidence because the output bytes are expected to change. Record the transformation performed and validate critical content, structure, and rendering against agreed criteria. Keep the original when policy permits and recovery requires it. Do not call a transformed file identical merely because it has the same filename or opens successfully. Mark lost or unsupported features explicitly so document owners can accept a limitation or choose another migration route.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "resolve-ownership-and-access-mappings-4",
+      "title": "Resolve ownership and access mappings",
+      "html": "<p>Source users, groups, links, and folder inheritance may not have direct equivalents in the destination. Define mappings and default handling for unresolved identities before transfer. A missing group should not silently broaden access to everyone, and an unknown owner should not leave an important document unmanageable. Preserve source to destination identifier mappings for links, audit, and rollback. Test access with representative accounts rather than only an administrator, because administrative visibility can conceal broken ownership or overly restrictive permissions that ordinary users encounter after cutover.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "cutover-accounting-and-exception-review-5",
+      "title": "Cutover accounting and exception review",
+      "html": "<ul><li>Account for every manifest item with a destination or an approved exception.</li><li>Verify content, versions, ownership, and permissions separately.</li><li>Track source changes during the migration window and apply the agreed delta process.</li><li>Test reruns using stable migration identities.</li><li>Keep the source available for the approved recovery period before retirement.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "migrate-a-restricted-project-folder-twice-6",
+      "title": "Migrate a restricted project folder twice",
+      "html": "<p>Migrate a test folder containing current documents, older versions, one restricted subfolder, and one unsupported file. Produce a report with one outcome per source item: verified, failed, excluded by policy, or awaiting review. Check byte integrity for unchanged copies and the agreed content criteria for converted files. Open destination links as a normal project member and as a user outside the project. Then rerun the batch and confirm that the migration resumes or updates according to policy without creating duplicate business documents.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "A project-folder rehearsal tests several migration risks",
+        "items": [
+          {
+            "label": "Ordinary file",
+            "detail": "Verify bytes or agreed transformed content"
+          },
+          {
+            "label": "Historical version",
+            "detail": "Check retained version identity and retrieval"
+          },
+          {
+            "label": "Restricted subfolder",
+            "detail": "Test with both permitted and denied users"
+          },
+          {
+            "label": "Second run",
+            "detail": "Resume or update without duplicate business documents"
+          }
+        ],
+        "alt": "A repeated project migration checks content, history, permissions, and idempotent reruns.",
+        "caption": "Administrative access alone can conceal broken permissions in the destination.",
+        "src": "/blog/images/document-migration-reconciliation-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-migration-reconciliation-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

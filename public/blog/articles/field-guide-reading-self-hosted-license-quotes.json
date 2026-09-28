@@ -1,0 +1,132 @@
+{
+  "slug": "field-guide-reading-self-hosted-license-quotes",
+  "title": "Self-hosted document licensing: questions to resolve before purchase",
+  "description": "Normalize pricing units, deployment rights, optional modules, support coverage, and renewal assumptions before comparing proposals.",
+  "category": "Self-hosting",
+  "format": "decision-brief",
+  "tags": [
+    "Self-hosting",
+    "Product selection",
+    "Integrations",
+    "Operations"
+  ],
+  "structure": "prose+comparison:comparison:note:example+matrix:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 674,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: How Self-Hosted Document Software Is Priced",
+      "url": "https://shimodocs.com/blog/self-hosted-document-platform-pricing"
+    }
+  ],
+  "cover": "/blog/images/field-guide-reading-self-hosted-license-quotes.png",
+  "coverAlt": "Self-hosted document licensing: questions to resolve before purchase: Pricing unit, Deployment rights, Module scope, Support term.",
+  "concepts": [
+    "Pricing unit",
+    "Deployment rights",
+    "Module scope",
+    "Support term",
+    "Renewal basis"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "inset",
+    "signature": "folio:inset",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 54
+  },
+  "contentHash": "95557928d2d839552f87c40caf88772d39e7176e5b68c4ffcc1358fb92df283f",
+  "intro": "Normalize a self-hosted quote by its exact usage unit, environment rights, edition, modules, support, renewal, and export terms. Compare the purchased scope with the tested deployment and measured workload. Similar annual totals can describe substantially different rights and growth exposure.",
+  "sections": [
+    {
+      "id": "clarify-the-billable-unit-1",
+      "title": "Clarify the billable unit",
+      "html": "<p>Ask whether the license measures named users, active users, concurrent sessions, request volume, instances, or another defined unit. Obtain its exact counting rule and enforcement behavior. Determine how guests, service accounts, inactive employees, and automated workflows are treated. For concurrency, ask whether viewing and editing count differently and how abandoned sessions expire. These are commercial questions that require current written terms; do not infer them from a marketing page or another customer's arrangement. Compare the unit with measured pilot activity and expected growth, including short peak periods rather than only average daily use.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Pricing units measure different exposure",
+        "items": [
+          {
+            "label": "Named users",
+            "detail": "Cost depends on the defined population and reassignment rules."
+          },
+          {
+            "label": "Concurrent sessions",
+            "detail": "Cost depends on activity peaks and session-counting behavior."
+          },
+          {
+            "label": "Instances or scope",
+            "detail": "Cost depends on covered environments, deployments, or usage rights."
+          }
+        ],
+        "alt": "Named-user, concurrent-session, and environment-based pricing units.",
+        "caption": "Normalize each proposal using its own written counting rule.",
+        "src": "/blog/images/field-guide-reading-self-hosted-license-quotes-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-reading-self-hosted-license-quotes-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "ask-what-happens-at-the-limit-2",
+      "title": "Ask what happens at the limit",
+      "html": "<p>A counting rule needs an operational consequence. If licensed concurrency is exhausted, determine whether new sessions are rejected, queued, limited, or handled through another contractual mechanism. If the license expires or the environment changes, ask what remains usable and how records can be extracted. Obtain these answers in current written terms.</p><dl><dt>Named-user proposal</dt><dd>Clarify inactive accounts, guests, reassignment, and employees who only view occasionally.</dd><dt>Concurrency proposal</dt><dd>Clarify session types, timeout rules, duplicate tabs, and brief peaks.</dd><dt>Environment proposal</dt><dd>Clarify test, recovery, redundant nodes, region changes, and rebuilt instances.</dd></dl><p>Do not assume a demonstration license behaves like the purchased license. Ask the supplier how the intended deployment will be licensed, including the failover case. A recovery environment that cannot activate during a real outage undermines the service promise even if production works normally.</p><p>Keep technical and commercial exceptions beside each other in the decision brief. For instance, a proposed peak workload may pass testing but exceed the quoted counting limit. That is not a performance defect; it is a scope mismatch needing a revised quote or requirement. Make the difference visible before purchase rather than during rollout.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "enumerate-the-environments-3",
+      "title": "Enumerate the environments",
+      "html": "<p>Specify production, test, development, recovery, and any separate business domains or regional deployments. Confirm which environments and redundant components are covered. Ask whether hardware moves, hostname changes, restored instances, or organizational changes require a license update. Include embedding or integration rights if the editor will appear inside another application. Public source code or a downloadable image does not establish every commercial usage right. Keep the offered edition and enabled modules attached to the quote so the technical pilot and final purchase refer to the same configuration.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "compare-two-illustrative-proposals-4",
+      "title": "Compare two illustrative proposals",
+      "html": "<p>Suppose proposal A is priced per named employee and proposal B per concurrent session. A workforce of 800 employees with 90 observed peak sessions cannot be compared by dividing both totals by 800. Model each proposal using its own counting rules, then test a growth case and a peak activity case. Add required nonproduction rights, support, and modules separately. These figures are illustrative assumptions, not vendor prices. The exercise makes clear which offer is sensitive to headcount and which is sensitive to workload, allowing procurement to evaluate risk as well as the initial total.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "Evaluate the same workload against both quotes",
+        "items": [
+          {
+            "label": "Base workforce",
+            "detail": "Use measured headcount and the proposal's counted population."
+          },
+          {
+            "label": "Peak activity",
+            "detail": "Use observed session peaks under the proposal's definition."
+          },
+          {
+            "label": "Recovery case",
+            "detail": "Verify rights for the alternate environment and rebuilt service."
+          },
+          {
+            "label": "Growth case",
+            "detail": "Show which changed assumption alters the commercial total."
+          }
+        ],
+        "alt": "Workforce, peak, recovery, and growth checks in a proposal comparison.",
+        "caption": "Illustrative arithmetic must be replaced with local measurements and current offers.",
+        "src": "/blog/images/field-guide-reading-self-hosted-license-quotes-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-reading-self-hosted-license-quotes-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "separate-license-and-operation-5",
+      "title": "Separate license and operation",
+      "html": "<p>Clarify support hours, response commitments, included upgrade rights, implementation services, and renewal terms. A software fee may exclude infrastructure, migration, backups, and administrator effort. Ask what happens at expiry: continued use, limited functionality, renewal grace, and export rights should be stated in the contract. Identify optional modules whose later activation changes the commercial basis. Build a multiyear model with explicit assumptions for growth and renewal, using current written offers rather than guessed discounts. Keep uncertainty visible so a low first year price does not hide a poorly understood long term obligation.</p><h3>Purchase scope</h3><ul><li>Obtain precise counting rules for the licensed usage unit.</li><li>Confirm all intended environments, integrations, and redundancy rights.</li><li>Attach edition, modules, and technical pilot configuration to the proposal.</li><li>Separate support, upgrades, services, and infrastructure costs.</li><li>Document renewal, expiry behavior, and extraction rights.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "slug": "editor-permission-lifecycle",
+  "title": "Embedded editor permissions: editing, downloads, and active-session revocation",
+  "description": "Plan authorization checks for session creation, active editing, exports, and revocation across an embedded document workflow.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "Access control",
+    "Embedded editing",
+    "Security",
+    "Multi-tenancy"
+  ],
+  "structure": "comparison+matrix:prose:prose:diagnostic+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 637,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: Authorization Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/editor-permission-lifecycle.png",
+  "coverAlt": "Embedded editor permissions: editing, downloads, and active-session revocation: Role matrix, Session scope, Active rights, Access removal.",
+  "concepts": [
+    "Role matrix",
+    "Session scope",
+    "Active rights",
+    "Access removal",
+    "Denial evidence"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "rail-left",
+    "signature": "folio:rail-left",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 6
+  },
+  "contentHash": "00d6a6b15c7131dec3f5f966026e97bea0c3e4563843b8f3d5df86a356418bf9",
+  "intro": "Authorize document operations separately and decide how permission changes reach an already open editor. A launch-time read only flag cannot, by itself, protect downloads, exports, comments, or later requests. The critical question is what an existing session can still do after access is removed.",
+  "sections": [
+    {
+      "id": "permission-matrix-operation-and-enforcement-point-1",
+      "title": "Permission matrix: operation and enforcement point",
+      "html": "<p>Viewing, editing, commenting, downloading, sharing, printing, and managing versions are distinct business operations. Start with a matrix of roles and allowed actions, then map it to the controls actually supported by the editor and your application. Avoid assuming that a single read only flag expresses every policy. If the product cannot enforce a required distinction, change the workflow or record the limitation before launch. Server authorization should remain responsible for business endpoints even when the embedded interface also hides controls for a better user experience.</p><table><thead><tr><th>Operation</th><th>Where to verify enforcement</th></tr></thead><tbody><tr><td>Open or reopen</td><td>Application authorization and session issuance</td></tr><tr><td>Edit or comment</td><td>Supported editor session permissions and mutation path</td></tr><tr><td>Download or export</td><td>Application endpoint and any independently issued credential</td></tr><tr><td>Change collaborators</td><td>Business permission management endpoint</td></tr></tbody></table><p>Make the matrix concrete for your deployment. If the editor exposes a download action that goes directly to its own service, testing only your application's download endpoint leaves a gap. If a signed object URL remains valid after revocation, record that lifetime as part of the observed behavior.</p><p>Choose the strictest requirement first. An organization that requires immediate loss of all interactive access needs a supported termination or continuously enforced authorization mechanism. Where the product only changes permissions on the next open, that limitation affects workflow design. Do not hide it behind a successful role update in your database. For in-flight work, decide whether previously accepted edits finish publication and how an administrator can recover them without reopening the user's access.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "matrix",
+        "title": "Different operations cross different permission checks",
+        "items": [
+          {
+            "label": "Open session",
+            "detail": "Application checks user, tenant, document, and intended mode"
+          },
+          {
+            "label": "Mutate content",
+            "detail": "Editor enforces its documented session permissions"
+          },
+          {
+            "label": "Retrieve bytes",
+            "detail": "Download or export path authorizes the requested version"
+          },
+          {
+            "label": "Manage access",
+            "detail": "Business service checks collaborator administration rights"
+          }
+        ],
+        "alt": "Four document operations map to their respective authorization boundaries.",
+        "caption": "Test direct requests as well as visible controls for each supported operation.",
+        "src": "/blog/images/editor-permission-lifecycle-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/editor-permission-lifecycle-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "launch-credentials-carry-a-narrow-purpose-2",
+      "title": "Launch credentials carry a narrow purpose",
+      "html": "<p>Generate launch credentials for the authenticated user, intended document, tenant, and permitted operations using the provider's supported mechanism. Limit their lifetime according to the workflow and documented refresh behavior. A session for one document should not become a general storage credential. Keep provider secrets on trusted services and avoid encoding a broader permission set merely because the browser interface currently uses fewer features. Log the resulting authorization decision with a policy version or role context that makes later investigation possible without logging sensitive tokens.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "revocation-changes-the-lifecycle-not-just-the-toolbar-3",
+      "title": "Revocation changes the lifecycle, not just the toolbar",
+      "html": "<p>Discover whether the integration can terminate active sessions, refresh permissions, or only restrict subsequent opens. These behaviors differ materially. Your product requirement should specify an acceptable revocation window and explain any limitation to administrators. Also decide how in flight changes are handled when access ends: whether they are committed, rejected, or preserved for controlled recovery depends on available capabilities and policy. Do not promise instantaneous revocation from a database role change unless the complete session and save path has been verified to enforce it.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "remove-a-user-with-documents-still-open-4",
+      "title": "Remove a user with documents still open",
+      "html": "<p>Create a test user with an open document, a second tab, and a previously issued download link. Remove the user from the project and attempt an edit, a new open, a comment, an export, and a direct application download. Observe both immediate and delayed behavior. This operational example exposes stale session authorization and overlooked endpoints. Repeat after moving the document to a restricted folder, because permission inheritance may change without the user's account or global role changing at all.</p><ul><li>Document supported operations and the server endpoint that authorizes each one.</li><li>Record the measured revocation behavior for active and new sessions.</li><li>Check tenant boundaries using valid identifiers from another test tenant.</li><li>Test inherited folder permissions after a move or ownership transfer.</li><li>Review error messages so denial does not reveal confidential document names.</li></ul>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "Observe revocation in an existing session",
+        "items": [
+          {
+            "label": "Before removal",
+            "detail": "Open two tabs and obtain a test download link"
+          },
+          {
+            "label": "Membership removed",
+            "detail": "Record the policy change time and expected window"
+          },
+          {
+            "label": "Active-session checks",
+            "detail": "Attempt edit, comment, export, and new open"
+          },
+          {
+            "label": "After expiry",
+            "detail": "Repeat checks at the documented credential boundary"
+          }
+        ],
+        "alt": "An active-session test compares access immediately after removal and after credential expiry.",
+        "caption": "The measured revocation window must include independently issued storage access.",
+        "src": "/blog/images/editor-permission-lifecycle-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/editor-permission-lifecycle-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

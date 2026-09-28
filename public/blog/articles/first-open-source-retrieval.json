@@ -1,0 +1,130 @@
+{
+  "slug": "first-open-source-retrieval",
+  "title": "Why an embedded document will not open: trace source retrieval",
+  "description": "Map the first document open as a sequence of owned requests, then test the retrieval path from the system that actually fetches the file.",
+  "category": "Integration",
+  "format": "troubleshooting",
+  "tags": [
+    "Embedded editing",
+    "Document storage",
+    "Troubleshooting",
+    "API integration"
+  ],
+  "structure": "prose+sequence:diagnostic:steps+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 661,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: HTTP overview",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+    }
+  ],
+  "cover": "/blog/images/first-open-source-retrieval.png",
+  "coverAlt": "Why an embedded document will not open: trace source retrieval: Open request, Access check, Source fetch, Content check.",
+  "concepts": [
+    "Open request",
+    "Access check",
+    "Source fetch",
+    "Content check",
+    "Editor ready"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "rail-left",
+    "signature": "cover-first:rail-left",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 2
+  },
+  "contentHash": "6dae9a5adec022a7d1d26c6af9bf98319fb50950b571c2f7312abf7b768fa490",
+  "intro": "When a document opens in your browser but fails inside an embedded editor, test the source URL from the system that actually fetches the file. That may be a backend worker with different DNS, routing, and credentials. Start by identifying that requester; otherwise, a successful browser download can send the investigation in the wrong direction.",
+  "sections": [
+    {
+      "id": "who-makes-each-request-1",
+      "title": "Who makes each request?",
+      "html": "<p>Start with the user selecting a business document. Your application authenticates the user, checks the requested operation, and prepares whatever launch information the integration requires. A browser or a backend service then retrieves the source, depending on the product architecture. Record that actor explicitly. Add the storage endpoint, redirects, conversion stage if present, and eventual editor response. Do not assume that a URL working in an administrator's browser proves that a backend worker in another network can retrieve the same resource.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "The requester matters more than the visible URL",
+        "items": [
+          {
+            "label": "User application",
+            "detail": "Checks access and creates a launch operation"
+          },
+          {
+            "label": "Retrieval worker",
+            "detail": "Resolves and requests the authorized source URL"
+          },
+          {
+            "label": "Object storage",
+            "detail": "Returns the selected version or a specific failure"
+          },
+          {
+            "label": "Editor initialization",
+            "detail": "Consumes validated bytes and reports readiness"
+          }
+        ],
+        "alt": "A launch request proceeds from application authorization through source retrieval and initialization.",
+        "caption": "Run reachability checks from the retrieval worker's network, not only the user's browser.",
+        "src": "/blog/images/first-open-source-retrieval-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/first-open-source-retrieval-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "locate-the-first-failed-boundary-2",
+      "title": "Locate the first failed boundary",
+      "html": "<p>A source request can fail because DNS resolution, routing, TLS validation, authentication, or object authorization fails. Each layer needs a distinct observation. Record the destination host, response status, elapsed time, and a safe correlation identifier. Where signed links are used, inspect expiry and permitted operation without placing the full link in routine logs. Test redirects as part of the chain: a reachable application endpoint that redirects to an inaccessible storage host is still an unsuccessful source retrieval from the worker's perspective.</p><table><thead><tr><th>Observation</th><th>Next evidence to collect</th></tr></thead><tbody><tr><td>No connection reaches storage</td><td>Worker DNS result, route, and TLS error</td></tr><tr><td>Redirect followed by denial</td><td>Final destination and authorization behavior</td></tr><tr><td>HTTP 200 with HTML</td><td>Response content type and a safe identification of the login page</td></tr><tr><td>Bytes arrive; editor still fails</td><td>File integrity and initialization or conversion outcome</td></tr></tbody></table><p>Move down this table only after the previous boundary is understood. Changing editor settings cannot repair an unreachable storage endpoint. Conversely, opening firewall access will not repair a corrupt document that the worker already downloaded successfully.</p><p>For a reproducible probe, use an authorized disposable object and issue a fresh credential through the same application path. Record the requested object version and received byte count. Compare a digest where feasible, but do not dump the file or signed query string into shared logs. If a command line request succeeds while the worker fails, compare redirects, proxy configuration, certificate trust, and request headers. The probe is useful only to the extent that it matches the worker's actual behavior.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "reproduce-a-first-open-with-a-private-source-3",
+      "title": "Reproduce a first open with a private source",
+      "html": "<p>Consider a report stored in a private object bucket. The application grants a short lived read link after checking project membership. A conversion worker receives that link and fetches the report. Reproduce the request from the worker network with equivalent DNS and certificate trust, using a disposable test object and freshly issued credentials. Record whether the response contains document bytes, an HTML login page, or a storage error. A successful HTTP status alone is insufficient if the returned content is not the expected file.</p><ol><li>Open a new document with a permitted user and identify every component that fetches bytes.</li><li>Repeat with an expired link and check that the user receives a recoverable error.</li><li>Return an authentication page and confirm that content validation rejects it.</li><li>Test the largest agreed source file through the same production network route.</li><li>Correlate launch, retrieval, initialization, and failure records without exposing credentials.</li></ol>",
+      "kind": "steps",
+      "figure": {
+        "kind": "flow",
+        "title": "Evidence needed for one reproducible open",
+        "items": [
+          {
+            "label": "Operation ID",
+            "detail": "Connect the browser action to backend records"
+          },
+          {
+            "label": "Fresh source access",
+            "detail": "Use the normal authorization path for a test object"
+          },
+          {
+            "label": "Response identity",
+            "detail": "Check bytes, content type, and the requested version"
+          },
+          {
+            "label": "Initialization result",
+            "detail": "Record success or the first processing failure"
+          }
+        ],
+        "alt": "Four pieces of evidence connect a user's open action to the bytes and initialization result.",
+        "caption": "An HTTP success response is insufficient when it contains a login page.",
+        "src": "/blog/images/first-open-source-retrieval-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/first-open-source-retrieval-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "decide-what-reopening-should-retrieve-4",
+      "title": "Decide what reopening should retrieve",
+      "html": "<p>Some integrations continue to use the business source as their authority; others establish an editing representation with a separate save or export path. Verify the chosen product's documented behavior before deciding when the original object may be replaced or removed. Specify what reopening means after the first successful import, and what happens if initialization fails halfway through. A retry should either resume a known attempt or start an independent attempt whose results cannot overwrite a newer successful state without an explicit version check.</p>",
+      "kind": "note"
+    }
+  ]
+}

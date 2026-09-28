@@ -1,0 +1,126 @@
+{
+  "slug": "field-guide-rust-document-engine-evaluation",
+  "title": "Rust for document engines: safety boundaries and real benchmarks",
+  "description": "Assess safe code, native interfaces, parser limits, correctness, deployment, and maintenance without language-based performance claims.",
+  "category": "Integration",
+  "format": "decision-brief",
+  "tags": [
+    "API integration",
+    "Security",
+    "Performance",
+    "Document conversion"
+  ],
+  "structure": "prose+layers:example:prose+comparison:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 667,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeAPI: Why OfficeAPI is written in Rust",
+      "url": "https://officeapi.ai/blog/why-rust/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-rust-document-engine-evaluation.png",
+  "coverAlt": "Rust for document engines: safety boundaries and real benchmarks: Ownership model, Unsafe boundary, Parser limits, Interoperability.",
+  "concepts": [
+    "Ownership model",
+    "Unsafe boundary",
+    "Parser limits",
+    "Interoperability",
+    "Measured performance"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "reading-room",
+    "signature": "exhibit:reading-room",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 108
+  },
+  "contentHash": "da8ec8f6144039cba260369a42801029cad7b69eaf314b5ca8276a06a149a10e",
+  "intro": "Rust can reduce classes of memory safety errors in safe code, but a document engine still needs correct parsing, resource limits, tested native boundaries, and usable integration. Evaluate equivalent outputs on representative files. A language choice alone proves neither fidelity, security, nor service performance.",
+  "sections": [
+    {
+      "id": "assess-guarantees-and-remaining-parser-risks-1",
+      "title": "Assess guarantees and remaining parser risks",
+      "html": "<p>Document engines parse complex, often untrusted input and manage substantial memory during conversion and layout. Rust's ownership and borrowing rules can prevent many memory safety errors in safe code, while its type system can help express internal invariants. Those benefits should be tied to concrete implementation areas rather than used as a blanket security claim. Logic errors, excessive resource use, incorrect calculations, and faulty format interpretation remain possible. Review where unsafe code, native libraries, and foreign interfaces are used, because their obligations are not removed simply by calling them from a Rust application.</p><p>A malformed or highly compressed file can consume CPU, memory, or disk without exploiting a memory corruption bug. Set limits for archive expansion, object counts, nesting depth, image dimensions, execution time, and temporary storage as appropriate to supported formats. Make failure behavior explicit and preserve a useful diagnostic without dumping sensitive document content. Test cancellation and partial output cleanup. Use fuzzing and representative malformed samples to exercise parser boundaries, then track regressions through releases. Memory safety supports this work, but it does not define the product's accepted workloads or resource budgets.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Language guarantees stop at explicit boundaries",
+        "items": [
+          {
+            "label": "Safe Rust",
+            "detail": "Ownership and types support memory safety invariants."
+          },
+          {
+            "label": "Unsafe code",
+            "detail": "Review obligations remain explicit."
+          },
+          {
+            "label": "Native interfaces",
+            "detail": "Libraries and bindings need their own assurance."
+          },
+          {
+            "label": "Service wrapper",
+            "detail": "Limits, isolation, retries, and publication are separate."
+          }
+        ],
+        "alt": "Four implementation layers carry different safety obligations.",
+        "caption": "Memory safety does not establish semantic correctness or resource bounds.",
+        "src": "/blog/images/field-guide-rust-document-engine-evaluation-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-rust-document-engine-evaluation-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "work-through-a-conversion-worker-2",
+      "title": "Work through a conversion worker",
+      "html": "<p>Imagine a service converting customer reports to PDF through a Rust worker called from a web application. Define request serialization, document identifiers, error categories, timeouts, and process isolation. When a conversion fails, the application should distinguish an unsupported format from a resource limit or infrastructure problem. If the worker uses a native font library, inspect its packaging and update path. Restart the worker during a job and verify that the business record does not publish an incomplete file. This integration scenario evaluates the engine as part of a real service rather than as an isolated benchmark executable.</p><p>Benchmark the task, not the language name. Keep inputs, target hardware, output requirements, engine versions, and cache state explicit. Report failures alongside successful timings. A conversion that skips unsupported content cannot be compared as an equivalent successful output.</p><table><thead><tr><th>Measurement</th><th>Interpretation to preserve</th></tr></thead><tbody><tr><td>Cold startup</td><td>Process and dependency initialization under stated conditions</td></tr><tr><td>Conversion latency</td><td>Elapsed time for a validated equivalent output</td></tr><tr><td>Peak memory</td><td>Observed demand for the tested document mix</td></tr><tr><td>Throughput</td><td>Completed valid jobs at the specified concurrency</td></tr></tbody></table><p>For the web worker, include serialization, storage retrieval, result validation, and publication if the business cares about end-to-end time. Keep that result separate from the engine-only profile. Profiling may show that fonts, decompression, layout, or external storage dominate; that evidence should direct optimization.</p><p>Also assess team maintenance. Native font libraries, foreign interfaces, platform packaging, and unsafe blocks need identifiable reviewers and update paths. If the team cannot reproduce the build or diagnose a production failure, a favorable microbenchmark is insufficient. Select Rust when the implementation benefits and operating obligations fit the engineering team, with document correctness evaluated independently.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "measure-performance-and-maintainability-3",
+      "title": "Measure performance and maintainability",
+      "html": "<p>Benchmark startup, parsing, layout, conversion, memory peaks, and throughput with the actual document corpus and target hardware. Compare equivalent outputs and correctness requirements; a faster result that omits content is not an improvement. Investigate profiling evidence before attributing speed to a language choice. Review build reproducibility, dependency updates, supported platforms, debugging tools, and available team skills. Rust can integrate through several interface styles, but the chosen boundary should match the application's deployment and failure model. Include the cost of maintaining bindings and platform packages in the engineering decision.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Measure engine work and business completion separately",
+        "items": [
+          {
+            "label": "Engine profile",
+            "detail": "Parsing and layout with fixed inputs and conditions."
+          },
+          {
+            "label": "Service result",
+            "detail": "Retrieval, conversion, validation, and publication."
+          },
+          {
+            "label": "Correctness gate",
+            "detail": "Only accepted equivalent outputs count as success."
+          }
+        ],
+        "alt": "Two timing scopes depend on a shared correctness gate.",
+        "caption": "Report the workload and failures with any performance result.",
+        "src": "/blog/images/field-guide-rust-document-engine-evaluation-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-rust-document-engine-evaluation-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "engineering-decision-notes-decision-notes-4",
+      "title": "Engineering Decision notes Decision notes",
+      "html": "<ul><li>Identify implementation risks addressed by safe code and explicit invariants.</li><li>Review unsafe code, native dependencies, and foreign interfaces.</li><li>Test parser limits, malformed inputs, cancellation, and cleanup.</li><li>Benchmark equivalent correct outputs on representative documents.</li><li>Confirm build, packaging, integration, and maintenance ownership.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

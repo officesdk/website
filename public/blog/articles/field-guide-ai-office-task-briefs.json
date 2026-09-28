@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-ai-office-task-briefs",
+  "title": "AI office work: write a brief that produces reviewable files",
+  "description": "Specify business outcomes, authoritative context, correction rules, and artifact acceptance for everyday AI tasks.",
+  "category": "Office workflows",
+  "format": "playbook",
+  "tags": [
+    "AI documents",
+    "Business workflows",
+    "Document automation",
+    "Word documents"
+  ],
+  "structure": "prose+document:example:prose+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 693,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: Vibe Officing: AI for Everyday Office Work",
+      "url": "https://officedex.ai/blog/infoq-vibe-officing-final/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-ai-office-task-briefs.png",
+  "coverAlt": "AI office work: write a brief that produces reviewable files: Audience brief, Source context, Artifact constraints, Correction loop.",
+  "concepts": [
+    "Audience brief",
+    "Source context",
+    "Artifact constraints",
+    "Correction loop",
+    "Acceptance check"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "reading-room",
+    "signature": "folio:reading-room",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 102
+  },
+  "contentHash": "5ea185cbf5c16d5a2d812ea35fb63d30d936ec4c31468be7ac14b9fbbece3917",
+  "intro": "A useful AI office brief states the audience, business outcome, deliverables, authoritative sources, and acceptance checks. It should also say what must remain unresolved when evidence is missing. Review the generated files and correct factual rules across every artifact before authorizing distribution.",
+  "sections": [
+    {
+      "id": "specify-the-result-and-source-authority-1",
+      "title": "Specify the result and source authority",
+      "html": "<p>State who will use the artifact and what decision or action it supports. A request to create a report is incomplete without audience, purpose, scope, and output format. Add required sections, length, tone, and any fixed template or brand requirements. Specify which facts must come from supplied sources and which points should remain open if evidence is missing. Keep technical implementation choices out of the brief unless they affect the result. The authoring tool may choose its own process, but it should not have to guess the business outcome or the standard by which the artifact will be reviewed.</p><p>Provide the relevant materials and identify which are current, approved, historical, or tentative. If two sources disagree, name the owner who resolves the conflict or instruct the tool to flag it. Do not bury the essential source among dozens of unrelated attachments. For a numerical task, include units, period, currency, and definitions. For a policy task, distinguish existing policy from proposed changes. These labels reduce the chance that plausible but outdated information enters the output. Use approved data handling arrangements and avoid including sensitive information that the task does not require.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "document",
+        "title": "The brief should answer the reviewer's questions",
+        "items": [
+          {
+            "label": "Audience and outcome",
+            "detail": "Who reads the files and what decision they support."
+          },
+          {
+            "label": "Inputs",
+            "detail": "Current source versions and their authority."
+          },
+          {
+            "label": "Rules",
+            "detail": "Periods, units, exclusions, and unresolved questions."
+          },
+          {
+            "label": "Acceptance",
+            "detail": "Observable file checks and distribution approval."
+          }
+        ],
+        "alt": "Four brief components make generated office work reviewable.",
+        "caption": "The tool's technical process is secondary to the accepted business result.",
+        "src": "/blog/images/field-guide-ai-office-task-briefs-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-ai-office-task-briefs-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "work-through-a-monthly-team-pack-2",
+      "title": "Work through a monthly team pack",
+      "html": "<p>Imagine a team lead requesting a monthly pack from a staffing workbook and project notes. The brief asks for a one page summary, a staffing table, and four slides for the leadership meeting. It specifies the reporting month, excludes tentative hires from headcount, and requires unresolved project risks to remain visible. After the first draft, the lead notices that a delayed project is described as complete. The correction should point to the source, explain the status rule, and request checks across all three artifacts. Merely asking for better wording would leave the underlying factual problem unresolved.</p><pre><code>outcome: leadership understands staffing and project risks\ndeliverables: one-page summary, staffing table, four slides\nperiod: the nominated reporting month\nheadcount_rule: exclude tentative hires\nsource_rule: approved workbook governs numeric totals\nreview: inspect files and unresolved risks before sending</code></pre><p>This is a business brief, not a prescribed implementation stack. Add the actual source versions and the owner who can resolve disputed status. The tool can choose an appropriate drafting process while the reviewer retains a concrete standard for the result.</p><p>When the delayed project is described as complete, correct the status rule as well as the sentence. Ask for the summary, table, slide title, and chart annotation to be checked against the same source. Otherwise a local wording repair can leave contradictory artifacts in the pack.</p><p>Keep a correction log with the requirement, source evidence, affected artifacts, and verified outcome. Reuse the improved brief next month, but update period and inputs deliberately. A reusable task card should not fossilize last month's assumptions. If the intended audience changes from internal leaders to a customer, reassess confidentiality, terminology, and approval requirements before rerunning it.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "review-outputs-not-confident-narration-3",
+      "title": "Review outputs, not confident narration",
+      "html": "<p>Open every generated file and inspect the parts that matter to the task. Verify totals, source references, tables, page layout, chart labels, and slide structure. Ask whether an ordinary colleague can edit and use the result in the intended application. Record corrections by requirement so the brief improves for the next run. Keep approval and distribution separate from drafting; a tool producing a polished artifact does not establish business authorization to send it. If the tool reports completion while a file is missing or unusable, treat the observable artifact as the authority and repair the workflow.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "A factual correction must reach every artifact",
+        "items": [
+          {
+            "label": "Find error",
+            "detail": "Project marked complete contradicts approved notes."
+          },
+          {
+            "label": "Correct rule",
+            "detail": "State the source and intended status interpretation."
+          },
+          {
+            "label": "Check outputs",
+            "detail": "Inspect summary, table, slides, and repeated labels."
+          },
+          {
+            "label": "Verify",
+            "detail": "Reviewer accepts identified corrected files."
+          }
+        ],
+        "alt": "The correction changes a source rule and is verified across outputs.",
+        "caption": "Do not treat a repaired sentence as proof that the whole pack is consistent.",
+        "src": "/blog/images/field-guide-ai-office-task-briefs-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-ai-office-task-briefs-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "reusable-task-card-decision-notes-4",
+      "title": "Reusable task card Decision notes",
+      "html": "<ul><li>Describe audience, decision, deliverables, and required format.</li><li>Identify authoritative sources, periods, units, and unresolved conflicts.</li><li>State constraints and facts the tool must not invent.</li><li>Correct errors with evidence and check every affected artifact.</li><li>Inspect files and record a human approval before distribution.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

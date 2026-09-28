@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-legal-matter-document-boundaries",
+  "title": "Legal matter collaboration: drafts, issued versions, and preservation",
+  "description": "Connect matter membership, review versions, external exchange, and preservation duties in one document workflow.",
+  "category": "Office workflows",
+  "format": "field-notes",
+  "tags": [
+    "Business workflows",
+    "Version control",
+    "Access control",
+    "Audit logs"
+  ],
+  "structure": "prose+layers:example:steps+sequence:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 678,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Matter Files: How Legal Teams Run Document Collaboration",
+      "url": "https://shimodocs.com/blog/document-collaboration-legal-teams"
+    }
+  ],
+  "cover": "/blog/images/field-guide-legal-matter-document-boundaries.png",
+  "coverAlt": "Legal matter collaboration: drafts, issued versions, and preservation: Matter membership, Review version, External package, Preservation scope.",
+  "concepts": [
+    "Matter membership",
+    "Review version",
+    "External package",
+    "Preservation scope",
+    "Closing protocol"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "chapter-rail",
+    "signature": "statement:chapter-rail",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 46
+  },
+  "contentHash": "01274151556f045be7e5e2fd294b92e91b106ef90bf7e3bfe3e58dd52dcb9e77",
+  "intro": "Organize legal collaboration around matter membership and the versions exchanged with others. Separate working drafts from issued artifacts, approve external release, and preserve the scope specified by counsel. Account departure and matter closure need tested retrieval procedures so records do not depend on the original author's account.",
+  "sections": [
+    {
+      "id": "establish-matter-access-explicitly-1",
+      "title": "Establish matter access explicitly",
+      "html": "<p>Create a matter identifier and assign a responsible lawyer or matter administrator. Document how membership is approved and whether ethical walls or other internal restrictions apply. Check these requirements with the organization's legal and security owners rather than assuming general department access is appropriate. Map the policy to controls supported by the selected platform and record any gap. Matter access should cover search results, attachments, exports, and support procedures as well as opening the primary document. A restricted folder is insufficient if another interface exposes its titles or copied content.</p><h3>Separate drafts and issued versions</h3><p>Define states for working drafts, internal review, approved release, and received material. Keep external packages identifiable by version and release date. Users should know whether a link points to a changing draft or the exact file issued to another party. Review comments and change history may require different handling from the clean delivery artifact. Verify what the chosen format and editor preserve, and inspect the resulting export before transmission. Record who authorizes release because technical edit permission alone should not imply permission to send a privileged or confidential document outside the organization.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A matter boundary includes more than its main file",
+        "items": [
+          {
+            "label": "Matter membership",
+            "detail": "Approved people and applicable internal restrictions."
+          },
+          {
+            "label": "Working drafts",
+            "detail": "Editable material and review context within the matter."
+          },
+          {
+            "label": "Issued artifacts",
+            "detail": "Exact approved package sent to a named recipient."
+          },
+          {
+            "label": "Preserved records",
+            "detail": "Retained versions and related material under the applicable scope."
+          }
+        ],
+        "alt": "Membership, drafts, issued artifacts, and preserved records within a legal matter.",
+        "caption": "Different states can require different access and handling.",
+        "src": "/blog/images/field-guide-legal-matter-document-boundaries-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-legal-matter-document-boundaries-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "keep-a-negotiation-exchange-ledger-2",
+      "title": "Keep a negotiation exchange ledger",
+      "html": "<p>For each outgoing and incoming contract, record the matter identifier, artifact identifier, version, sender, recipient, exchange date, and relationship to the preceding artifact. The ledger can live in an approved business system; it does not need to be invented inside the editor. Its purpose is to establish which document the counterparty actually received and which returned copy responds to it.</p><pre><code>matter: MAT-017\noutgoing_artifact: agreement-r04\nissued_on: 2026-09-10\nreturned_artifact: counterparty-r04-markup\ncomparison_base: agreement-r04</code></pre><p>The example fields are illustrative. Use your organization's identifiers and approved storage. Compare the return against the issued revision even if internal drafting has advanced to revision six. Otherwise the reviewer may attribute an internal change to opposing counsel or overlook a counterparty deletion.</p><p>Include attachments and clean-versus-marked status in the release check where relevant. Ask the responsible lawyer which review material belongs in the package. Then inspect the actual exported artifact; a draft that appears clean on screen can still have unintended context in the delivery format. Keep custody and preservation decisions distinct from release approval. Being required to retain a version does not imply being allowed to distribute it.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "walk-through-a-contract-negotiation-3",
+      "title": "Walk through a contract negotiation",
+      "html": "<p>Two lawyers revise a supply agreement, a business owner reviews commercial terms, and opposing counsel returns a marked copy. Label each outgoing and incoming version with its relationship to the negotiation. Have a reviewer compare the returned copy with the actual issued artifact, not whichever draft happens to be current. Test whether business reviewers can access unrelated matter notes. When an external link is used, verify recipient identity, expiry, and the documented revocation behavior. Keep downloaded copies within the risk assessment, because revoking a link cannot reliably recall content already delivered.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "Compare the return with what was issued",
+        "items": [
+          {
+            "label": "Issue revision four",
+            "detail": "Capture the released file and its matter relationship."
+          },
+          {
+            "label": "Receive marked copy",
+            "detail": "Record recipient response and the referenced outgoing artifact."
+          },
+          {
+            "label": "Compare issued base",
+            "detail": "Use revision four even if the internal draft has advanced."
+          },
+          {
+            "label": "Approve next release",
+            "detail": "A responsible lawyer authorizes the resulting external package."
+          }
+        ],
+        "alt": "Issued revision, returned marked copy, comparison against issued base, and next release.",
+        "caption": "An exchange ledger prevents ambiguity about the comparison base.",
+        "src": "/blog/images/field-guide-legal-matter-document-boundaries-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-legal-matter-document-boundaries-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "plan-preservation-and-closure-4",
+      "title": "Plan preservation and closure",
+      "html": "<p>Agree which records, attachments, histories, and communications must be retained when the matter closes. Any legal hold or preservation instruction should override routine deletion according to counsel's documented scope. Distinguish disabling ordinary collaboration from deleting records. Assign an owner for later access requests and export. Test a closed matter retrieval using someone other than its original author. If metadata is stored in another matter management system, preserve a stable mapping and reconcile it during archival transfer. This prevents a future investigator from receiving an unexplained folder of similarly named files.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "matter-closure-duties-5",
+      "title": "Matter closure duties",
+      "html": "<ul><li>Approve membership and verify restricted search, attachment, and export paths.</li><li>Identify the reviewed and issued versions in every external exchange.</li><li>Inspect delivery artifacts for unintended review material.</li><li>Apply preservation instructions before running ordinary cleanup.</li><li>Test closed matter retrieval and document responsibility for future requests.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

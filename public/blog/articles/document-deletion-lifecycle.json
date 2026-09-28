@@ -1,0 +1,137 @@
+{
+  "slug": "document-deletion-lifecycle",
+  "title": "Document deletion: remove previews, search data, versions, and temporary copies",
+  "description": "Turn document deletion into a tracked lifecycle with clear user visibility, retention rules, and cleanup of derived copies.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "Security",
+    "Data privacy",
+    "Document storage",
+    "Document search",
+    "Backup and recovery"
+  ],
+  "structure": "prose:comparison+layers:steps:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 649,
+  "source": null,
+  "references": [
+    {
+      "label": "NIST: Guidelines for Media Sanitization",
+      "url": "https://csrc.nist.gov/pubs/sp/800/88/r2/final"
+    }
+  ],
+  "cover": "/blog/images/document-deletion-lifecycle.png",
+  "coverAlt": "Document deletion: remove previews, search data, versions, and temporary copies: Deletion state, Copy inventory, Cleanup queue, Index removal.",
+  "concepts": [
+    "Deletion state",
+    "Copy inventory",
+    "Cleanup queue",
+    "Index removal",
+    "Disposal evidence"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "wide",
+    "signature": "statement:wide",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 34
+  },
+  "contentHash": "64edffe63c8678baa2fd41bb30a12e5eb4cf885c47ff980c8d71c0ce81a084fe",
+  "intro": "Treat deletion as a tracked lifecycle across the source and its derived copies. Hiding a document in the application does not remove historical versions, previews, extracted text, or backup data. State when access ends, which retention exceptions apply, and how cleanup completion is verified in each system.",
+  "sections": [
+    {
+      "id": "define-access-removal-and-permanent-cleanup-separately-1",
+      "title": "Define access removal and permanent cleanup separately",
+      "html": "<p>Common business states include active, moved to trash, retained for recovery, held by policy, and scheduled for permanent removal. Choose the states your application actually supports and explain their effect on access and restoration. A soft deleted document should not remain reachable through a forgotten preview or direct download endpoint. If retention or a legal hold prevents removal, preserve the content under the authorized policy and communicate the applicable behavior to administrators. Avoid labeling an item permanently erased while recoverable copies are intentionally retained elsewhere.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "map-every-derived-copy-back-to-its-source-2",
+      "title": "Map every derived copy back to its source",
+      "html": "<p>Map source objects, historical versions, editor persistence, generated previews, thumbnails, exports, extracted text, search indexes, embeddings, caches, and temporary files. Record which system owns each copy and how it receives deletion intent. Include third party processing services according to the actual integration. A derived artifact should retain a source relationship so cleanup can find it later. Content addressed or deduplicated storage requires reference aware deletion: removing one document must not destroy bytes still legitimately referenced by another document with its own lifecycle and permissions.</p><table><thead><tr><th>Copy</th><th>Cleanup relationship needed</th></tr></thead><tbody><tr><td>Preview or thumbnail</td><td>Source document and version that produced it</td></tr><tr><td>Search chunk or embedding</td><td>Source identity plus index record identifiers</td></tr><tr><td>Temporary conversion object</td><td>Owning operation and retention deadline</td></tr><tr><td>Shared deduplicated bytes</td><td>Remaining valid references before physical removal</td></tr><tr><td>Backup copy</td><td>Retention expiry and post-restore deletion reconciliation</td></tr></tbody></table><p>Store deletion intent durably enough to survive a failed worker or a restore. Cleanup should be resumable per destination, with successes and failures recorded separately. A failed index deletion must not disappear behind a successful source-object deletion.</p><p>Protect against stale cleanup messages. If an item is restored during a recovery window, an old deletion job must not remove its newly active content without checking the current lifecycle state. Use a generation, state revision, or equivalent guard supported by the application. For deduplicated storage, distinguish revoking this document's access from removing shared bytes; another authorized document may still require the same immutable object.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "layers",
+        "title": "Deletion follows the document's derived-data relationships",
+        "items": [
+          {
+            "label": "Business visibility",
+            "detail": "Active, trash, retained, held, or removal-pending state"
+          },
+          {
+            "label": "Primary content",
+            "detail": "Source objects and historical versions"
+          },
+          {
+            "label": "Derived data",
+            "detail": "Previews, exports, text, indexes, and embeddings"
+          },
+          {
+            "label": "Recovery copies",
+            "detail": "Backups with their own expiry and reconciliation policy"
+          }
+        ],
+        "alt": "Document deletion spans visible state, primary content, derived data, and recovery copies.",
+        "caption": "Do not promise permanent erasure while required recoverable copies are intentionally retained.",
+        "src": "/blog/images/document-deletion-lifecycle-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-deletion-lifecycle-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "cleanup-needs-durable-progress-and-state-guards-3",
+      "title": "Cleanup needs durable progress and state guards",
+      "html": "<p>Represent permanent cleanup as a durable operation with per system results and retry rules. Temporary service failures should leave visible pending work rather than a misleading completed status. Authenticate deletion requests and guard against deleting a newly restored or replaced version using stale instructions. Keep an appropriate audit record of the action without retaining the content being removed. Define how failures are escalated and how operators verify completion. A single best effort loop that logs errors and discards its state is difficult to reconcile after a process restart.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "deletion-acceptance-conditions-4",
+      "title": "Deletion acceptance conditions",
+      "html": "<ul><li>State when ordinary access ends and when permanent cleanup is expected.</li><li>Document retention and hold exceptions without hiding them in implementation notes.</li><li>Track deletion across versions, previews, indexes, and temporary artifacts.</li><li>Verify deduplication references before removing shared storage objects.</li><li>Include backup expiry and post restore reconciliation in the operating procedure.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "delete-a-document-that-has-already-entered-an-ai-index-5",
+      "title": "Delete a document that has already entered an AI index",
+      "html": "<p>Use a synthetic document that has a preview, two historical versions, and extracted chunks in a test search index. Delete it through the normal interface, then attempt direct access, search retrieval, and opening an old preview link. Advance through the documented retention process and inspect cleanup status for every derived store. Restore from a permitted backup in an isolated drill and apply the required deletion reconciliation process. This example exposes how removed content can reappear through secondary systems unless deletion intent survives recovery operations.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Test whether removed content can still be retrieved",
+        "items": [
+          {
+            "label": "Prepare derived data",
+            "detail": "Create a preview, history, and indexed chunks"
+          },
+          {
+            "label": "Delete normally",
+            "detail": "Apply the documented lifecycle transition"
+          },
+          {
+            "label": "Probe alternate routes",
+            "detail": "Try old links, search results, and direct retrieval"
+          },
+          {
+            "label": "Reconcile recovery",
+            "detail": "Apply deletion policy after a controlled backup restore"
+          }
+        ],
+        "alt": "A deletion drill checks ordinary access, secondary retrieval paths, and recovery behavior.",
+        "caption": "Removing the source object alone cannot establish that all derived content is gone.",
+        "src": "/blog/images/document-deletion-lifecycle-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-deletion-lifecycle-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

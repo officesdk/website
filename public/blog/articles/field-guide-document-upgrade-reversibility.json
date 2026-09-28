@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-document-upgrade-reversibility",
+  "title": "Document platform upgrades: when rollback requires restoring data",
+  "description": "Identify schema changes, state compatibility, session handling, and validation gates before upgrading a document service.",
+  "category": "Operations",
+  "format": "troubleshooting",
+  "tags": [
+    "Operations",
+    "Self-hosting",
+    "Backup and recovery",
+    "Version control"
+  ],
+  "structure": "prose+layers:steps:diagnostic:example+sequence:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 671,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Upgrading a Document Platform Without Downtime Drama",
+      "url": "https://shimodocs.com/blog/upgrade-and-rollback-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-upgrade-reversibility.png",
+  "coverAlt": "Document platform upgrades: when rollback requires restoring data: Compatibility matrix, Schema boundary, Session drain, Rollback trigger.",
+  "concepts": [
+    "Compatibility matrix",
+    "Schema boundary",
+    "Session drain",
+    "Rollback trigger",
+    "Business validation"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "numbered",
+    "signature": "overprint:numbered",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 63
+  },
+  "contentHash": "0343f3a76e5f45f73c3b4bef2cf8a136e2b807eed452295d95b2a9a58a90eba0",
+  "intro": "Before upgrading, identify schema migrations, state-format changes, dependency compatibility, and active-session behavior. Rehearse reversal after the new release has created state. Replacing an image can be simple; recovering documents may require a coordinated restore, explicit data-loss decisions, and business validation before reopening.",
+  "sections": [
+    {
+      "id": "read-the-complete-change-scope-1",
+      "title": "Read the complete change scope",
+      "html": "<p>Review release notes, supported upgrade paths, dependency versions, configuration changes, and migration guidance for the actual product. Include database, storage, identity, integrations, and conversion workers rather than focusing only on the web interface. Determine whether mixed versions are supported and whether old software can read state created by the new release. Do not assume rolling upgrades are safe because several replicas exist. Record every state transition that requires special recovery handling. The proposed deployment procedure should match documented support boundaries and explain which prerequisites must be completed before the maintenance window begins.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Different upgrade changes have different reversibility",
+        "items": [
+          {
+            "label": "Configuration",
+            "detail": "Check whether the previous supported settings remain applicable."
+          },
+          {
+            "label": "Software version",
+            "detail": "Verify old-release compatibility with newly created state."
+          },
+          {
+            "label": "Schema and content",
+            "detail": "A coordinated restore may be required by the supported procedure."
+          },
+          {
+            "label": "New business changes",
+            "detail": "Account for work created after the chosen backup point."
+          }
+        ],
+        "alt": "Configuration, software, schema, and new user work as upgrade reversal layers.",
+        "caption": "Do not promise rollback from an image replacement test alone.",
+        "src": "/blog/images/field-guide-document-upgrade-reversibility-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-upgrade-reversibility-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "prepare-a-representative-rehearsal-2",
+      "title": "Prepare a representative rehearsal",
+      "html": "<p>Use an approved staging environment with the same topology and configuration assumptions as production. Restore sanitized representative data or an appropriate test collection, then perform the supported upgrade. Exercise source retrieval, editing, saving, export, identity, and selected version recovery. Measure migration duration and required free space. Rehearse the stated rollback or recovery procedure after new state has been created, not merely before any user activity. Keep backups and recovery credentials protected but accessible to authorized responders. A test that replaces a container successfully does not prove that business data remains recoverable.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "diagnose-the-reversal-boundary-3",
+      "title": "Diagnose the reversal boundary",
+      "html": "<p>Ask what changed before choosing a recovery action. A bad environment variable, an incompatible dependency, and a database migration do not have the same reversal path. Use current vendor guidance for the installed versions and retain evidence of the change sequence.</p><table><thead><tr><th>Changed state</th><th>Question before reversal</th></tr></thead><tbody><tr><td>Service configuration</td><td>Can the last supported configuration be reapplied independently?</td></tr><tr><td>Application binary</td><td>Can the previous release read state created by the new release?</td></tr><tr><td>Database schema</td><td>Is reversal supported, or is a coordinated backup restore required?</td></tr><tr><td>New user edits</td><td>How will changes after the backup boundary be accounted for?</td></tr></tbody></table><p>These are decision questions, not a recommendation to reverse any particular migration. If restoring a backup would discard new work, the change lead needs a business decision and a clear communication plan. Do not discover this limitation while users continue saving into the new state.</p><p>Include a latest-safe-decision time in the runbook. A slow migration can consume the maintenance window without producing an obvious failure. That limit tells the team when to stop progressing and execute the agreed recovery procedure while responders and validators remain available.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "walk-through-a-review-window-4",
+      "title": "Walk through a review window",
+      "html": "<p>A team has a shared report open just before maintenance. Define whether its sessions are drained, allowed to finish, or interrupted through a supported mechanism. Communicate the cutoff and verify that final changes reach durable storage. Upgrade the test service, reopen the report, make a prescribed edit, and inspect the saved artifact and permissions. Then simulate a failed conversion or an unexpected authorization result. Use those results to refine rollback triggers. This example forces the procedure to consider active work and downstream artifacts rather than treating a green startup check as sufficient success.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Validate an upgrade with an active review",
+        "items": [
+          {
+            "label": "Drain or finish",
+            "detail": "Handle sessions through a documented supported mechanism."
+          },
+          {
+            "label": "Confirm final save",
+            "detail": "Verify the pre-change report reached durable storage."
+          },
+          {
+            "label": "Upgrade and reopen",
+            "detail": "Repeat the prescribed edit and inspect the actual artifact."
+          },
+          {
+            "label": "Apply decision gate",
+            "detail": "Use explicit failure and time limits to continue or recover."
+          }
+        ],
+        "alt": "Session handling, final save, upgrade validation, and recovery decision gate.",
+        "caption": "Ordinary document work is the acceptance test after startup.",
+        "src": "/blog/images/field-guide-document-upgrade-reversibility-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-upgrade-reversibility-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "define-decisions-inside-the-window-5",
+      "title": "Define decisions inside the window",
+      "html": "<p>Name the change lead, business validator, and recovery authority. Set time limits and explicit conditions for proceeding, pausing, or restoring the earlier state. Include the consequences of restoring a backup after users have created new changes. Avoid promising instant rollback when schema or content compatibility requires a coordinated restore. Preserve logs and safe configuration evidence for diagnosis. After initial validation, monitor save failures, queues, and denied access against the prior baseline. Keep the change window open until agreed business checks pass, then document any accepted limitations and follow-up work.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "release-decision-6",
+      "title": "Release decision",
+      "html": "<ul><li>Verify supported version paths and state compatibility.</li><li>Rehearse upgrade and recovery with representative business data.</li><li>Define active session handling and final save confirmation.</li><li>Approve rollback triggers, time limits, and decision owners.</li><li>Validate ordinary user work and downstream artifacts after deployment.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

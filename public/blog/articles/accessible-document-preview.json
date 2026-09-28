@@ -1,0 +1,136 @@
+{
+  "slug": "accessible-document-preview",
+  "title": "Accessible document previews: keyboard, reading order, and zoom tests",
+  "description": "Evaluate keyboard use, reading order, zoom, and meaningful alternatives across the preview shell and rendered document.",
+  "category": "Office workflows",
+  "format": "field-notes",
+  "tags": [
+    "Accessibility",
+    "Document preview",
+    "PDF",
+    "Business workflows"
+  ],
+  "structure": "prose:diagnostic+layers:prose:example+flow:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 664,
+  "source": null,
+  "references": [
+    {
+      "label": "W3C: Web Content Accessibility Guidelines 2.2",
+      "url": "https://www.w3.org/TR/WCAG22/"
+    }
+  ],
+  "cover": "/blog/images/accessible-document-preview.png",
+  "coverAlt": "Accessible document previews: keyboard, reading order, and zoom tests: Reading tasks, Text structure, Keyboard focus, Screen reader.",
+  "concepts": [
+    "Reading tasks",
+    "Text structure",
+    "Keyboard focus",
+    "Screen reader",
+    "View alternatives"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "rail-right",
+    "signature": "masthead:rail-right",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 13
+  },
+  "contentHash": "d5c27ae87f232d042c032cde59f96df09491a2df94896cf0a07ec01500ced803",
+  "intro": "Test whether someone can open the preview, find a section, understand its content, and return to the application using a keyboard and relevant assistive technology. Accessibility depends on both the preview controls and the document representation. A labeled frame does not make page images or lost table structure readable.",
+  "sections": [
+    {
+      "id": "start-with-tasks-a-reader-must-finish-1",
+      "title": "Start with tasks a reader must finish",
+      "html": "<p>Start with practical tasks: open a document, identify its title and version, move between pages, search text, change zoom, download when permitted, and return to the application. Evaluate those tasks using keyboard input and assistive technology appropriate to the audience. A technical conformance checklist remains useful, but task based testing reveals whether individually labeled controls work as a coherent experience. Include loading and error states, because a preview that never announces completion can leave a screen reader user uncertain whether anything happened after opening the file.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "inspect-the-representation-not-only-the-toolbar-2",
+      "title": "Inspect the representation, not only the toolbar",
+      "html": "<p>Determine whether the view exposes semantic text, a text overlay, tagged PDF structure, or only page images. Each representation has different reading and navigation capabilities. Verify heading structure, table relationships, reading order, and alternative text where the pipeline supports them. Do not claim that an image based rendering becomes accessible simply by labeling the entire page. If source documents lack structure, document that input limitation and provide authoring guidance. If the rendering loses existing structure, treat that as a separate integration issue with a measurable impact.</p><p>Write observations as task results. “Tab reaches the next-page control and its accessible name includes the action” is more useful than “keyboard supported.” “The screen reader reads the table row without its column headings” identifies a specific loss of meaning. Capture the browser, assistive technology, source file, and preview mode with each result; behavior can vary across those combinations.</p><table><thead><tr><th>Layer</th><th>Concrete question</th></tr></thead><tbody><tr><td>Host application</td><td>Does opening the preview move focus predictably?</td></tr><tr><td>Preview controls</td><td>Can the user operate search, navigation, zoom, and close?</td></tr><tr><td>Document content</td><td>Are headings, reading order, tables, and image descriptions available?</td></tr><tr><td>Alternative route</td><td>Can an authorized user obtain a usable accessible representation?</td></tr></tbody></table><p>Keep alternative access meaningful. A download button is not automatically an accessibility remedy if the downloaded file has the same missing structure or requires unavailable software. Test the alternate route with the people and tools it is intended to support. Record limitations plainly so the product can guide users to a working path rather than an inaccessible second copy.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "layers",
+        "title": "Accessibility spans four parts of the preview",
+        "items": [
+          {
+            "label": "Host page",
+            "detail": "Title, launch behavior, focus return, and status messages"
+          },
+          {
+            "label": "Controls",
+            "detail": "Keyboard operation and clear accessible names"
+          },
+          {
+            "label": "Document",
+            "detail": "Reading order, structure, text, tables, and descriptions"
+          },
+          {
+            "label": "Alternative",
+            "detail": "An authorized route that supports the reader's actual task"
+          }
+        ],
+        "alt": "The host, controls, document content, and alternative route each require testing.",
+        "caption": "An accessible toolbar cannot compensate for document content that exposes no meaningful structure.",
+        "src": "/blog/images/accessible-document-preview-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/accessible-document-preview-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "focus-and-zoom-at-the-embedded-boundary-3",
+      "title": "Focus and zoom at the embedded boundary",
+      "html": "<p>Give the embedded frame a meaningful title and make focus movement predictable when the preview opens or closes. Check for keyboard traps, hidden controls that still receive focus, and shortcuts that conflict with the host application. A user should be able to identify where focus is and return to the surrounding workflow. Test high zoom and narrow viewports with the toolbar and document visible. Horizontal scrolling inside a page may be unavoidable for some content, but clipped controls and unreachable dialogs are application defects.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "try-the-policy-document-without-a-mouse-4",
+      "title": "Try the policy document without a mouse",
+      "html": "<p>Use a synthetic policy document with headings, a small table, a link, and an illustration with meaningful alternative text. Open it by keyboard, navigate the controls, locate a named section, and activate the link using a screen reader. Then repeat at increased zoom and with a slow loading response. Record where information becomes unavailable or focus is lost. This operational example provides evidence about the actual workflow without asserting universal accessibility across every file type, source quality, and assistive technology combination.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "flow",
+        "title": "A keyboard-only review has observable outcomes",
+        "items": [
+          {
+            "label": "Open",
+            "detail": "Identify the document and receive a loading status"
+          },
+          {
+            "label": "Navigate",
+            "detail": "Reach controls and find the named section"
+          },
+          {
+            "label": "Read",
+            "detail": "Understand text, table relationships, and image meaning"
+          },
+          {
+            "label": "Return",
+            "detail": "Leave the preview with focus in a predictable place"
+          }
+        ],
+        "alt": "A reader opens, navigates, reads, and exits a policy preview without using a mouse.",
+        "caption": "Record the first task that fails and the layer responsible for that failure.",
+        "src": "/blog/images/accessible-document-preview-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/accessible-document-preview-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "record-support-and-provide-a-usable-alternative-5",
+      "title": "Record support and provide a usable alternative",
+      "html": "<ul><li>Record the browser, assistive technology, document format, and preview mode tested.</li><li>Verify visible focus, accessible names, loading announcements, and error recovery.</li><li>Offer an authorized accessible source or alternate representation when the preview cannot meet the task.</li><li>Keep alternative downloads subject to the same document permissions.</li><li>Retest representative structured and unstructured sources after rendering changes.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

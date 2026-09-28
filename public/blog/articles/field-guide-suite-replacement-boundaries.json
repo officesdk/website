@@ -1,0 +1,132 @@
+{
+  "slug": "field-guide-suite-replacement-boundaries",
+  "title": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries",
+  "description": "Compare the exact proposed offers through file round trips, board pack workflows, integrations, and operating cost.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Integrations",
+    "Excel spreadsheets",
+    "Presentations"
+  ],
+  "structure": "prose:prose+sequence:example:prose+comparison:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 658,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Microsoft 365: Suite Against Suite",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-microsoft-365"
+    }
+  ],
+  "cover": "/blog/images/field-guide-suite-replacement-boundaries.png",
+  "coverAlt": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries: Suite boundary, File round trip, Automation dependency, Guest journey.",
+  "concepts": [
+    "Suite boundary",
+    "File round trip",
+    "Automation dependency",
+    "Guest journey",
+    "Cost assumptions"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "journal",
+    "signature": "masthead:journal",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 85
+  },
+  "contentHash": "668725b80ce301e009aedd2b70d6ac88361850632fe0dc016d6fdb802c36f8a6",
+  "intro": "Compare ShimoDocs and Microsoft 365 at the boundaries your users cross: partner file exchange, identity, automation, guest access, and final publication. Specify the exact offers and services in scope. Suite brand names alone do not define the deployment, functionality, or cost being considered.",
+  "sections": [
+    {
+      "id": "specify-the-exact-offers-1",
+      "title": "Specify the exact offers",
+      "html": "<p>Record plan names, editions, deployment models, licensing assumptions, and the services included in each proposal. A broad brand name is insufficient because capabilities and commercial terms can differ between offerings. Identify the tasks that must work online, offline, on mobile devices, and with desktop applications where relevant. Confirm these requirements from current documentation and hands on tests. Also distinguish a document collaboration decision from a wider decision about mail, meetings, identity, and storage. If some services remain with the existing provider, represent that coexistence explicitly in the architecture and cost estimate.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "test-the-file-exchange-boundary-2",
+      "title": "Test the file exchange boundary",
+      "html": "<p>Take a spreadsheet with formulas and charts, a report with structured headings, and a presentation with editable diagrams. Open, edit, export, and reopen each through the external applications used by partners. Inspect calculation results, page layout, comments, and editable object structure. A screenshot comparison alone cannot establish that a workbook's logic or a slide's chart data survived. Record repairs and classify them by business impact. Keep the original files and generated outputs so specialists can review any mismatch. Evaluate the exact file formats and features in use rather than extrapolating from a simple sample.</p><p>A round trip is more demanding than opening a file. Start with the untouched partner file, edit the required elements in the candidate environment, export it, and reopen it in the partner's actual application. Separately create a new candidate document and send it through the same recipient workflow.</p><table><thead><tr><th>Artifact</th><th>Visible check</th><th>Structural check</th></tr></thead><tbody><tr><td>Workbook</td><td>Tables and charts remain understandable</td><td>Formulas, ranges, and values remain correct</td></tr><tr><td>Report</td><td>Pagination and images remain usable</td><td>Headings, references, and review content survive</td></tr><tr><td>Deck</td><td>Text and objects render correctly</td><td>Required charts and shapes remain editable</td></tr></tbody></table><p>In the board pack, prioritize the artifacts distributed to directors. If an output needs ten minutes of repair every month, treat that as recurring work. If an unsupported feature appears only in a template that can be replaced once, treat it as transition work. Preserve the actual outputs with the scorecard so the recommendation does not depend on a remembered demonstration. Vendor documentation should inform the test, while the proposed configuration's observed behavior determines acceptance.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Round trip the partner's artifact",
+        "items": [
+          {
+            "label": "Original",
+            "detail": "Keep the unchanged file and its expected behavior."
+          },
+          {
+            "label": "Edit",
+            "detail": "Perform the real update in the candidate environment."
+          },
+          {
+            "label": "Export",
+            "detail": "Produce the required interchange format."
+          },
+          {
+            "label": "Recipient",
+            "detail": "Reopen in the partner's application and inspect it."
+          }
+        ],
+        "alt": "A partner file is edited, exported, and inspected in its recipient application.",
+        "caption": "Opening successfully is only the first step of the round trip.",
+        "src": "/blog/images/field-guide-suite-replacement-boundaries-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-suite-replacement-boundaries-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "follow-a-quarterly-board-pack-3",
+      "title": "Follow a quarterly board pack",
+      "html": "<p>A company preparing a board pack may collect department workbooks, consolidate results, write commentary, assemble slides, and circulate restricted copies to external directors. Model this chain in each candidate environment. Verify who can update the underlying numbers, how the presentation refers to them, and which version is submitted. Test external identity and access revocation after the meeting. If an existing script produces the consolidation, inspect whether it can remain, must be rewritten, or needs an additional service. This complete exercise exposes integration costs that individual editor demonstrations rarely show.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "include-operations-and-dependency-cost-4",
+      "title": "Include operations and dependency cost",
+      "html": "<p>Compare administrator workload, user support, identity integration, recovery, migration, and training alongside license prices. For self managed offerings, include infrastructure and maintenance staffing; for hosted offerings, include contract, connectivity, and supplier dependency requirements. Use the same number of employees, guests, storage volume, and service expectations. Establish how records are exported if the chosen arrangement changes later. Ask operational owners to review the scorecard, because a suite that authors prefer may still impose unacceptable support or recovery demands on a small service team. Keep every estimate's assumptions visible.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Separate the costs in the suite decision",
+        "items": [
+          {
+            "label": "One time",
+            "detail": "Migration, template replacement, and initial training."
+          },
+          {
+            "label": "Recurring",
+            "detail": "Support, repair, licenses, and operations."
+          },
+          {
+            "label": "Coexistence",
+            "detail": "Services and integrations retained outside the new suite."
+          }
+        ],
+        "alt": "Three cost categories describe the proposed suite arrangement.",
+        "caption": "Use the same user, guest, and workload assumptions in both offers.",
+        "src": "/blog/images/field-guide-suite-replacement-boundaries-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-suite-replacement-boundaries-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "pilot-exit-decision-notes-5",
+      "title": "Pilot exit Decision notes",
+      "html": "<ul><li>Identify exact offers and which surrounding services remain in use.</li><li>Round trip representative files through actual partner applications.</li><li>Run a complete board pack or equivalent business workflow.</li><li>Measure integration repairs, guest friction, and administrator effort.</li><li>Agree on pilot success criteria, rollback, and independent record export.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

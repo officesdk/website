@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-wikis-documents-and-shared-facts",
+  "title": "ShimoDocs vs Notion: shared facts, knowledge, and final records",
+  "description": "Compare the proposed content models through project handover, update ownership, synchronization, and portable exports.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Business workflows",
+    "Document storage",
+    "Version control"
+  ],
+  "structure": "prose:prose+layers:example:prose+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 662,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Notion: Documents, Wikis or Both?",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-notion"
+    }
+  ],
+  "cover": "/blog/images/field-guide-wikis-documents-and-shared-facts.png",
+  "coverAlt": "ShimoDocs vs Notion: shared facts, knowledge, and final records: Shared facts, Knowledge page, Office deliverable, Sync rule.",
+  "concepts": [
+    "Shared facts",
+    "Knowledge page",
+    "Office deliverable",
+    "Sync rule",
+    "Authority marker"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "journal",
+    "signature": "ledger:journal",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 92
+  },
+  "contentHash": "8e2b07287fb2143c686161fb5dbf19319231405d4f0d51d93da908b060aeae20",
+  "intro": "Compare ShimoDocs and Notion by locating the authority for shared facts, maintained knowledge, and approved files. Test a project handover in the proposed configurations. A convenient page model is useful only if users can tell which values are current and which records are historical.",
+  "sections": [
+    {
+      "id": "model-the-information-before-the-ui-1",
+      "title": "Model the information before the UI",
+      "html": "<p>List the entities that matter to the team: projects, people, milestones, budgets, decisions, and procedures. For each, identify authoritative fields and the person responsible for updates. Then distinguish narrative pages from deliverable files. A project deadline may belong in a structured record, while the reasons for changing it belong in a decision note. An exported customer report may need a fixed submission version. Evaluate the exact candidate configurations against these roles. Flexible page creation can be helpful, but it can also create several apparently authoritative copies of the same fact without an update rule.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "run-a-project-handover-example-2",
+      "title": "Run a project handover example",
+      "html": "<p>Imagine an implementation team handing a completed project to support. The handover needs customer contacts, deployed configuration, outstanding risks, operating instructions, and a final acceptance document. Build one representative handover in each environment. Ask a support engineer to find the current escalation contact, identify the accepted configuration, and export the final report. Change a contact afterward and inspect which artifacts should update and which should remain historical. This example distinguishes live shared facts from approved records while revealing navigation, file structure, and manual synchronization work required by the selected model.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A handover mixes current and historical information",
+        "items": [
+          {
+            "label": "Live facts",
+            "detail": "Contacts and current service ownership."
+          },
+          {
+            "label": "Maintained knowledge",
+            "detail": "Approved procedures with review dates."
+          },
+          {
+            "label": "Accepted artifact",
+            "detail": "Fixed deployment state and acceptance decision."
+          },
+          {
+            "label": "Change relationship",
+            "detail": "Later updates explain what supersedes what."
+          }
+        ],
+        "alt": "Current facts, maintained knowledge, and accepted records have different clocks.",
+        "caption": "Make those meanings visible in the proposed content model.",
+        "src": "/blog/images/field-guide-wikis-documents-and-shared-facts-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-wikis-documents-and-shared-facts-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "make-authority-visible-3",
+      "title": "Make authority visible",
+      "html": "<p>Users should recognize whether they are viewing a working note, maintained knowledge, or an approved document. Define status labels, owners, review dates, and version identifiers independently of the platform's visual style. Test search results and linked views for that clarity. If a current project page links to a historical acceptance file, retain the difference explicitly. Avoid updating the accepted record simply because today's configuration has changed. Determine whether the proposed products, extensions, and permissions can support these distinctions in practice. A content model works only when its authority rules survive normal editing and discovery.</p><p>Several dates matter in the handover and should not be collapsed into Last updated. The support contact can change today while the accepted deployment remains the version approved last month. A later operating change may create a new procedure without altering the historical acceptance record.</p><table><thead><tr><th>Information</th><th>Expected timing</th><th>Authority</th></tr></thead><tbody><tr><td>Escalation contact</td><td>Current</td><td>Accountable support owner</td></tr><tr><td>Accepted configuration</td><td>At acceptance</td><td>Identified approval record</td></tr><tr><td>Operating procedure</td><td>Current approved edition</td><td>Procedure owner and review process</td></tr><tr><td>Risk noted at handover</td><td>Historical observation plus current status</td><td>Project record and ongoing risk owner</td></tr></tbody></table><p>Build a small test where all four change at different times. Ask a new support engineer to identify the right contact and the configuration that was actually accepted. If the answer requires the project manager to explain the page, the information model needs work. Evaluate search and links as well as editing. Then export the package and check that these temporal meanings remain interpretable outside the chosen platform. A static export of today's page may be insufficient for the historical record.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "inspect-synchronization-and-portability-4",
+      "title": "Inspect synchronization and portability",
+      "html": "<p>If information appears in both a page and an office file, define whether it is copied manually, generated, or synchronized. Establish direction, timing, and conflict handling. Test a failed update and identify who notices it. For exit planning, export the handover with text, attachments, relationships, and required metadata, then inspect it outside the platform. A visually readable export may still lose the relations or structured fields needed for continued operation. Include that rebuilding effort in the decision and consider limiting unnecessary coupling between business data and proprietary presentation structures.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "A duplicated fact needs an update rule",
+        "items": [
+          {
+            "label": "Authority",
+            "detail": "Choose the source field and its owner."
+          },
+          {
+            "label": "Representation",
+            "detail": "Page, workbook, or generated file uses the value."
+          },
+          {
+            "label": "Update",
+            "detail": "Define direction, timing, and failure handling."
+          },
+          {
+            "label": "Verification",
+            "detail": "Check consistency and retain accepted snapshots."
+          }
+        ],
+        "alt": "A shared value reaches another artifact through an owned update rule.",
+        "caption": "Do not assume duplicated values stay consistent automatically.",
+        "src": "/blog/images/field-guide-wikis-documents-and-shared-facts-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-wikis-documents-and-shared-facts-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "handover-decision-notes-5",
+      "title": "Handover Decision notes",
+      "html": "<ul><li>Identify authoritative entities, fields, owners, and update rules.</li><li>Build a handover with live facts, operating guidance, and an approved artifact.</li><li>Check authority markers in pages, search, and linked views.</li><li>Test synchronization failures between duplicated representations.</li><li>Export enough structure and metadata to continue the workflow elsewhere.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "slug": "field-guide-connected-report-refresh-contract",
+  "title": "Connected reports: freshness, refresh failures, and publication",
+  "description": "Set source version, validation, stale-data behavior, and fixed publication rules for connected reports.",
+  "category": "Office workflows",
+  "format": "troubleshooting",
+  "tags": [
+    "Document automation",
+    "Integrations",
+    "Excel spreadsheets",
+    "Version control"
+  ],
+  "structure": "prose:prose+sequence:example:prose:diagnostic:example+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 716,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: Keep Reports Current with Connected Data",
+      "url": "https://officedex.ai/blog/documents-that-follow-their-data/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-connected-report-refresh-contract.png",
+  "coverAlt": "Connected reports: freshness, refresh failures, and publication: Source version, Refresh trigger, Validation gate, Freshness label.",
+  "concepts": [
+    "Source version",
+    "Refresh trigger",
+    "Validation gate",
+    "Freshness label",
+    "Published snapshot"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "reading-room",
+    "signature": "report:reading-room",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 100
+  },
+  "contentHash": "0dcf185c84426e16ddce72e5904d49e310612b8c24b5d6454d742c8f0fbb4a46",
+  "intro": "A connected report needs a freshness contract: which source period it represents, when it refreshes, what validation runs, and what happens if a feed fails. Keep live working data separate from approved publications. Refreshing a chart does not automatically update the conclusion written beside it.",
+  "sections": [
+    {
+      "id": "specify-the-freshness-promise-1",
+      "title": "Specify the freshness promise",
+      "html": "<p>Choose whether the report shows live values, the latest validated extract, or an approved period end snapshot. These are different products and should have different labels. Record the source system, relevant time zone, extraction time, covered period, and known delays. A report refreshed at noon can still contain data posted only through yesterday. Define the maximum acceptable age and what users see when that threshold is exceeded. Avoid displaying a generic Updated message that refers only to page generation while the underlying dataset remains stale. Freshness must describe the data the audience is actually reading.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "own-the-transformation-logic-2",
+      "title": "Own the transformation logic",
+      "html": "<p>Document joins, filters, calculations, rounding, and mappings between source fields and displayed values. Assign an owner who can explain and review that logic. Validate schema changes, missing categories, duplicate records, and unexpected totals before updating the report. When several artifacts reuse the same numbers, use a common validated dataset or clearly defined transformation rather than separate manual formulas. Keep data access credentials scoped to the required source and operation. A report generator should not need broad write access merely because it reads a sales database. Log refresh outcomes without unnecessarily copying sensitive records into diagnostic output.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Refresh does not equal publication",
+        "items": [
+          {
+            "label": "Extract",
+            "detail": "Read an identified source period or snapshot."
+          },
+          {
+            "label": "Validate",
+            "detail": "Check schema, completeness, totals, and transformations."
+          },
+          {
+            "label": "Review",
+            "detail": "Verify commentary still matches the figures."
+          },
+          {
+            "label": "Publish",
+            "detail": "Bind the output to the accepted data version."
+          }
+        ],
+        "alt": "Extraction, validation, narrative review, and publication are distinct.",
+        "caption": "Keep historical publications fixed unless issuing an identified correction.",
+        "src": "/blog/images/field-guide-connected-report-refresh-contract-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-connected-report-refresh-contract-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "test-a-weekly-operations-report-3",
+      "title": "Test a weekly operations report",
+      "html": "<p>Imagine a delivery team generating a weekly report with shipment counts, delays, and customer impact. On Monday, one source feed arrives late and a region changes its status code. The refresh should identify incomplete or unmapped data instead of silently dropping rows. Decide whether to hold publication, retain the last validated dataset with a warning, or publish a labeled partial report. Review both numbers and narrative commentary: a sentence claiming delays fell may become false when refreshed values show an increase. Connected charts do not automatically update the reasoning surrounding them, so commentary needs its own validation.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "separate-refresh-from-publication-4",
+      "title": "Separate refresh from publication",
+      "html": "<p>A working report can refresh repeatedly while an approved report remains fixed. At publication, bind the artifact to the validated data version and retain its generation metadata. If a correction is needed, issue a new identified edition rather than silently altering the record already distributed. Test refresh failures, overlapping jobs, and retries so an older result cannot replace a newer validated state. Where data links require the reader's access, define behavior for recipients who lack permission. The final artifact should either contain the agreed snapshot or clearly explain why live content cannot be loaded.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "choose-a-stale-data-behavior-explicitly-5",
+      "title": "Choose a stale-data behavior explicitly",
+      "html": "<p>When a source is late, choose a behavior that matches the report's purpose. Holding publication can be appropriate for a formal operating pack. Keeping the last validated dataset may be appropriate for a working dashboard if its age is obvious. A partial report needs a clear scope label and a decision about whether the audience can safely use it.</p><table><thead><tr><th>Behavior</th><th>Reader must know</th></tr></thead><tbody><tr><td>Hold</td><td>The expected publication is not ready</td></tr><tr><td>Last validated</td><td>The data period and age of the retained values</td></tr><tr><td>Partial</td><td>Which regions or categories are missing</td></tr></tbody></table>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "a-refresh-result-needs-four-timestamps-6",
+      "title": "A refresh result needs four timestamps",
+      "html": "<dl><dt>Source coverage</dt><dd>The period represented by the records.</dd><dt>Extraction</dt><dd>When the source snapshot was read.</dd><dt>Validation</dt><dd>When completeness and transformation checks passed.</dd><dt>Publication</dt><dd>When the identified report became available.</dd></dl><p>For the weekly delivery report, a Monday publication may contain a Friday extract with Sunday source coverage, depending on the system's posting behavior. Use accurate labels for the actual arrangement rather than letting one Updated time imply all four. After replacing a late region's values, recheck totals and commentary. A statement about falling delays can become false even when every chart refreshed successfully. Preserve the dataset version used for the published edition so corrections can be explained.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "decision",
+        "title": "A late source feed needs a defined response",
+        "items": [
+          {
+            "label": "Hold publication",
+            "detail": "Explain that the required complete report is not ready."
+          },
+          {
+            "label": "Keep validated data",
+            "detail": "Show its period and age clearly."
+          },
+          {
+            "label": "Publish partial",
+            "detail": "Identify missing scope and the permitted use."
+          }
+        ],
+        "alt": "Three degraded behaviors have different implications for readers.",
+        "caption": "Choose the behavior with the business owner before a failure occurs.",
+        "src": "/blog/images/field-guide-connected-report-refresh-contract-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-connected-report-refresh-contract-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "refresh-decision-notes-decision-notes-7",
+      "title": "Refresh Decision notes Decision notes",
+      "html": "<ul><li>State whether values are live, validated, or fixed at publication.</li><li>Label data period, extraction time, and acceptable age.</li><li>Validate schema, completeness, totals, and narrative consistency.</li><li>Define degraded behavior for late feeds and failed refreshes.</li><li>Bind published outputs to a retained data version.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

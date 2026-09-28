@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-agent-office-work-contract",
+  "title": "Office agents: define the artifact, authority, and acceptance",
+  "description": "Create a work contract for agents that coordinate document, workbook, and presentation tasks.",
+  "category": "AI & documents",
+  "format": "explainer",
+  "tags": [
+    "AI documents",
+    "Document automation",
+    "Access control",
+    "Business workflows"
+  ],
+  "structure": "prose+layers:example:prose+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 691,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: Stop Calling It AI Office. The Next Generation Is Agent Office",
+      "url": "https://officedex.ai/blog/agent-office-next-generation/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-agent-office-work-contract.png",
+  "coverAlt": "Office agents: define the artifact, authority, and acceptance: Task contract, Trusted inputs, Tool authority, Artifact review.",
+  "concepts": [
+    "Task contract",
+    "Trusted inputs",
+    "Tool authority",
+    "Artifact review",
+    "Acceptance evidence"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "reading-room",
+    "signature": "overprint:reading-room",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 99
+  },
+  "contentHash": "eb269860be0f8feb8b3b8b246d15676182a136f3635b76e39450937bad7cc1c4",
+  "intro": "An office agent needs a work contract that names the finished artifacts, authoritative inputs, permitted actions, and review criteria. Separate drafting from publication and test contradictions in the sources. The result should be accepted from inspected files and verified facts, not from the agent's completion message.",
+  "sections": [
+    {
+      "id": "the-work-contract-sets-outcome-and-authority-1",
+      "title": "The work contract sets outcome and authority",
+      "html": "<p>Replace vague instructions such as improve this report with a concrete outcome. State audience, required sections, source materials, output format, length constraints, and claims that must be supported. Identify the authoritative files and versions. Define which facts the agent may derive and which require confirmation from a human owner. If the task includes a spreadsheet and presentation, specify their relationship, such as the same approved totals appearing in both. Acceptance criteria should describe observable artifact properties rather than the agent's confidence or the number of steps it reports completing.</p><p>Separate reading, drafting, editing existing records, sharing, and external communication. An agent preparing a document may not need permission to email it or delete prior versions. Use restricted credentials and validate tool arguments in the application. Treat retrieved content as data even if it contains instructions. Define what happens when a required source is unavailable or contradictory. A good workflow allows the agent to produce a partial draft with explicit unresolved questions while preventing unsupported claims from entering a final approved artifact. Review consequential changes before they affect other people or systems.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A work contract has four separate parts",
+        "items": [
+          {
+            "label": "Outcome",
+            "detail": "Audience, files, structure, and decision purpose."
+          },
+          {
+            "label": "Inputs",
+            "detail": "Authoritative versions and unresolved source conflicts."
+          },
+          {
+            "label": "Authority",
+            "detail": "Allowed reads, writes, tools, and destinations."
+          },
+          {
+            "label": "Acceptance",
+            "detail": "Observable facts and human review criteria."
+          }
+        ],
+        "alt": "Outcome, inputs, authority, and acceptance define an agent task.",
+        "caption": "A detailed prompt still needs enforceable tool permissions.",
+        "src": "/blog/images/field-guide-agent-office-work-contract-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-agent-office-work-contract-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "run-a-sales-review-package-2",
+      "title": "Run a sales review package",
+      "html": "<p>Suppose an account team asks an agent to prepare a quarterly review from an approved sales workbook and meeting notes. The contract requires a two page narrative, a five slide deck, consistent revenue totals, and references to the source period. The agent may draft in a designated workspace and run calculation checks, but the account owner approves distribution. Test one missing region and one inconsistent total. The expected outcome is a clearly identified gap or a reconciled value with evidence, not a confident invented number. Inspect both files because consistency cannot be established from reviewing only the narrative.</p><pre><code>audience: account leadership\ninputs: approved sales workbook, meeting notes\ndeliverables: two-page report, five-slide deck\nconsistency: revenue totals match the approved period\npermissions: read sources, write working drafts\napproval: account owner reviews before distribution</code></pre><p>These fields describe the task rather than any vendor API. Add acceptance criteria that an ordinary reviewer can verify: all regions are represented, figures use the stated currency, source periods appear on charts, and unconfirmed risks stay marked as unconfirmed.</p><p>Now introduce a source conflict. Meeting notes say a deal closed, while the approved workbook lists it as pending. The contract should identify which source governs the revenue total and how the discrepancy is surfaced. The agent may explain the conflict in the draft; it should not quietly choose the more favorable number.</p><p>Finally, inspect cross-artifact consistency. Search the report and deck for the affected deal and total. A corrected workbook lookup does not prove that generated narrative and chart labels were updated. Keep the accepted output versions with the review outcome. If a run is interrupted, a new attempt should produce or resume a clearly identified working state rather than duplicate the final package or distribute an unreviewed successor.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "make-progress-and-recovery-observable-3",
+      "title": "Make progress and recovery observable",
+      "html": "<p>Record task state, source versions, generated artifacts, tool actions, and human decisions. Give users a way to cancel a run and understand whether any changes were already applied. If a step fails, retries should not create duplicate submissions or overwrite newer edits. Use version checks and idempotent publication where the architecture supports them. Separate temporary working files from approved outputs and clean them up according to policy. The agent's visible progress should refer to verifiable milestones such as Draft created or Totals checked, rather than implying that all downstream work is complete.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "Conflicting input should remain visible in the draft",
+        "items": [
+          {
+            "label": "Conflict",
+            "detail": "Notes call a deal closed; approved data says pending."
+          },
+          {
+            "label": "Rule",
+            "detail": "Use the nominated source for revenue totals."
+          },
+          {
+            "label": "Draft",
+            "detail": "Flag the discrepancy without inventing a resolution."
+          },
+          {
+            "label": "Review",
+            "detail": "Owner resolves it and checks every output."
+          }
+        ],
+        "alt": "A source conflict follows an explicit rule and human resolution.",
+        "caption": "Verify the report, deck, and any related workbook together.",
+        "src": "/blog/images/field-guide-agent-office-work-contract-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-agent-office-work-contract-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "contract-decision-notes-decision-notes-reuse-4",
+      "title": "Contract Decision notes Decision notes reuse",
+      "html": "<ul><li>Specify audience, artifact structure, source versions, and supported claims.</li><li>Limit tool authority and define required human decisions.</li><li>Test missing inputs, contradictions, and hostile source instructions.</li><li>Inspect every output and verify cross artifact consistency.</li><li>Confirm cancellation, safe retries, and approved publication behavior.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

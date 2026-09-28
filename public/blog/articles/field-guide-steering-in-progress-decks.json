@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-steering-in-progress-decks",
+  "title": "Steer an AI deck in progress: scope feedback and protect facts",
+  "description": "Use accepted outlines, versioned comments, bounded revisions, and final consistency checks during deck generation.",
+  "category": "AI & documents",
+  "format": "field-notes",
+  "tags": [
+    "Presentations",
+    "AI documents",
+    "Version control",
+    "Collaboration"
+  ],
+  "structure": "prose+layers:prose:example:prose:comparison+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 675,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: Steer a deck while it is still drawing",
+      "url": "https://officedex.ai/blog/steer-a-deck-while-it-draws/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-steering-in-progress-decks.png",
+  "coverAlt": "Steer an AI deck in progress: scope feedback and protect facts: Narrative plan, Provisional slide, Scoped feedback, Revision identity.",
+  "concepts": [
+    "Narrative plan",
+    "Provisional slide",
+    "Scoped feedback",
+    "Revision identity",
+    "Final consistency"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "reading-room",
+    "signature": "compact:reading-room",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 103
+  },
+  "contentHash": "e0e2b120bbe1ce7b0bd7dfe693e1dce05b1dedea59d966d843fede664dfe9744",
+  "intro": "Steer an AI deck by approving its narrative, identifying the draft version under review, and giving bounded feedback that says what to change and preserve. Recheck facts and transitions after each significant revision. Incremental slide approval does not replace review of the complete presentation.",
+  "sections": [
+    {
+      "id": "approve-a-narrative-before-detail-1",
+      "title": "Approve a narrative before detail",
+      "html": "<p>Start with audience, meeting purpose, required conclusion, and the evidence supporting it. Review a short outline before investing in detailed slides. Specify the role of each slide: introduce the problem, show data, explain options, or request a decision. Mark mandatory content and constraints such as a fixed number of slides. The outline becomes a stable reference for later feedback. If the audience or conclusion changes during drafting, acknowledge that as a plan revision rather than applying scattered cosmetic edits to slides built for a different story.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Feedback can change evidence, story, or appearance",
+        "items": [
+          {
+            "label": "Evidence",
+            "detail": "Facts, source versions, and qualifications."
+          },
+          {
+            "label": "Narrative",
+            "detail": "Slide purpose, order, and transitions."
+          },
+          {
+            "label": "Appearance",
+            "detail": "Layout, chart form, typography, and assets."
+          },
+          {
+            "label": "Approval",
+            "detail": "Accepted plan and exact reviewed draft."
+          }
+        ],
+        "alt": "Feedback should name the layer being changed.",
+        "caption": "A visual request should not silently alter accepted evidence.",
+        "src": "/blog/images/field-guide-steering-in-progress-decks-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-steering-in-progress-decks-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "label-provisional-work-clearly-2",
+      "title": "Label provisional work clearly",
+      "html": "<p>While a deck is being assembled, text, layout, assets, and data may be at different stages of completion. Show or record which parts are provisional so reviewers do not mistake a temporary placeholder for an accepted fact. Use slide identities or clear titles when giving feedback; position numbers can shift as slides are inserted. Identify the generation version to which the comment applies. Without that link, a delayed instruction can overwrite a newer change. Confirm the actual tool's revision and cancellation behavior before relying on interactive steering in a time sensitive workflow.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "steer-a-product-review-example-3",
+      "title": "Steer a product review example",
+      "html": "<p>Suppose a product team is generating six slides for an executive review. After seeing the first two, the owner decides that the audience needs operational risks before feature details. Update the outline and request moving the risk section, while preserving approved figures and customer quotations. Later, the owner asks to simplify one chart rather than regenerate the whole deck. A good revision request names the slide, the required change, and the elements to preserve. After the update, inspect whether the transition to surrounding slides still works. Local improvements can create repetition or gaps in the overall narrative.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "bound-revisions-and-verify-facts-4",
+      "title": "Bound revisions and verify facts",
+      "html": "<p>Separate factual corrections, narrative changes, and visual preferences. Factual corrections should trigger checks wherever the same value or claim appears. Narrative changes may require outline revision. Visual changes should normally preserve accepted evidence. Keep a change record for important decisions and stop generation or publication when the underlying requirement becomes unclear. Do not assume a regenerated chart still uses the same numbers, or that a shorter sentence preserves its original qualification. At the final pass, inspect all slides, notes, references, and exports together to detect inconsistencies introduced by incremental feedback.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "feedback-that-changes-the-right-layer-5",
+      "title": "Feedback that changes the right layer",
+      "html": "<table><thead><tr><th>Feedback</th><th>Layer affected</th><th>Followup</th></tr></thead><tbody><tr><td>Lead with operational risks</td><td>Narrative plan</td><td>Revise outline and transitions</td></tr><tr><td>The margin figure is wrong</td><td>Evidence and repeated claims</td><td>Correct source use throughout the deck</td></tr><tr><td>Make this chart simpler</td><td>Visual representation</td><td>Preserve values and necessary qualifications</td></tr><tr><td>Add a new decision request</td><td>Purpose and conclusion</td><td>Check whether the accepted plan still fits</td></tr></tbody></table><p>A useful instruction might be: On the slide titled Operational risks, replace the crowded chart with the three accepted categories; preserve the values, source date, and qualification in the note. That is more testable than Make it cleaner.</p><p>For the executive review, keep the revised outline with the generation version. When a late comment arrives, confirm that it refers to the current slide rather than an earlier draft with the same position number. If the tool cannot apply a bounded change reliably, pause and work from an identified copy. Then inspect adjacent slides and the conclusion. Simplifying one chart can remove the evidence needed for the next slide, while moving a risk section can leave the original introduction repetitive.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "sequence",
+        "title": "A bounded revision preserves a reviewable draft",
+        "items": [
+          {
+            "label": "Identify",
+            "detail": "Name the current version and target slide."
+          },
+          {
+            "label": "Request",
+            "detail": "State the change and elements to preserve."
+          },
+          {
+            "label": "Apply",
+            "detail": "Create an identified successor or controlled update."
+          },
+          {
+            "label": "Inspect",
+            "detail": "Check facts, adjacent slides, and final output."
+          }
+        ],
+        "alt": "The revision starts with identification and ends with complete inspection.",
+        "caption": "Late feedback needs a version relationship to avoid overwriting newer work.",
+        "src": "/blog/images/field-guide-steering-in-progress-decks-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-steering-in-progress-decks-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "complete-deck-decision-notes-6",
+      "title": "Complete-deck Decision notes",
+      "html": "<ul><li>Approve the narrative purpose and slide outline before detailed assembly.</li><li>Identify provisional content and the version under review.</li><li>Give scoped feedback with elements to change and preserve.</li><li>Recheck repeated facts and narrative transitions after revisions.</li><li>Inspect the complete deck and exported files before approval.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

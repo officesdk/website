@@ -1,0 +1,132 @@
+{
+  "slug": "editable-presentation-acceptance",
+  "title": "Presentation conversion: how to verify slides remain editable",
+  "description": "Verify text, shapes, charts, notes, and master behavior when a presentation must remain editable after import or conversion.",
+  "category": "Office workflows",
+  "format": "comparison",
+  "tags": [
+    "Presentations",
+    "Document conversion",
+    "Embedded editing",
+    "Business workflows"
+  ],
+  "structure": "prose:comparison+comparison:diagnostic:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 655,
+  "source": null,
+  "references": [
+    {
+      "label": "Microsoft Learn: Working with presentations",
+      "url": "https://learn.microsoft.com/en-us/office/open-xml/presentation/working-with-presentations"
+    }
+  ],
+  "cover": "/blog/images/editable-presentation-acceptance.png",
+  "coverAlt": "Presentation conversion: how to verify slides remain editable: Editable objects, Slide structure, Theme behavior, Revision task.",
+  "concepts": [
+    "Editable objects",
+    "Slide structure",
+    "Theme behavior",
+    "Revision task",
+    "Export readback"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "wide",
+    "signature": "folio:wide",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 30
+  },
+  "contentHash": "864ae58d45b1c51b8d43c5a58b66e6de3f7e282b6f221edf379c8ea1c7a65104",
+  "intro": "A presentation is usefully editable only when users can change the elements their workflow requires. A visually correct slide may be a flattened image. Test text, shapes, charts, tables, notes, and layout behavior through import, editing, save, reopen, and export instead of accepting screenshots as proof.",
+  "sections": [
+    {
+      "id": "define-the-edits-users-must-make-1",
+      "title": "Define the edits users must make",
+      "html": "<p>List the tasks users perform: replacing text, moving shapes, changing chart data, editing table cells, updating speaker notes, applying layouts, or modifying theme colors. Associate each task with representative slides. Avoid a blanket claim that a presentation is editable when only some elements can be selected. Products and conversion paths differ in how they represent complex objects. Record unsupported elements and acceptable fallbacks explicitly, especially when a visually preserved object becomes an image and no longer supports the editing action required by the business.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "appearance-and-object-behavior-are-separate-evidence-2",
+      "title": "Appearance and object behavior are separate evidence",
+      "html": "<p>Check whether text remains text, grouped objects retain sensible relationships, and chart or table elements expose the operations users need. Verify reading order, notes, and alternative text where those are requirements. Compare font substitution and line wrapping at common slide sizes. A screenshot can reveal clipping but cannot establish object semantics. Likewise, an object inventory cannot prove that the rendered slide looks right. Use both kinds of evidence and identify which stage introduces a change: initial import, live editing, durable save, or export.</p><table><thead><tr><th>Visual observation</th><th>Editing task that proves more</th></tr></thead><tbody><tr><td>Chart looks correct</td><td>Change a source value and inspect the resulting series</td></tr><tr><td>Table fits the slide</td><td>Edit a cell and verify wrapping and row behavior</td></tr><tr><td>Diagram appears intact</td><td>Select and move an intended shape without flattening the group</td></tr><tr><td>Theme looks consistent</td><td>Add a slide or apply a supported layout and inspect inheritance</td></tr></tbody></table><p>Record results by element class. A deck might preserve editable text and tables while rendering one unsupported diagram as an image. That is a specific limitation with a measurable user impact, not evidence that the entire deck is either perfectly compatible or completely unusable.</p><p>Test the agreed destination as well as the web editor. A user may export the file for further editing in another application, where object structure and font availability matter again. Keep the destination version and settings in the acceptance record. If the workflow only requires a stable PDF handoff, evaluate that requirement separately rather than imposing unnecessary editing criteria or promising them without evidence.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "comparison",
+        "title": "A matching slide image does not prove editability",
+        "items": [
+          {
+            "label": "Rendered appearance",
+            "detail": "Checks clipping, placement, fonts, and visible content"
+          },
+          {
+            "label": "Object behavior",
+            "detail": "Checks text, cells, chart data, shapes, and notes"
+          },
+          {
+            "label": "Round trip",
+            "detail": "Checks those results after saving and exporting"
+          }
+        ],
+        "alt": "Presentation acceptance compares appearance, object behavior, and round-trip behavior.",
+        "caption": "Document exactly which elements remain editable and where a fallback is used.",
+        "src": "/blog/images/editable-presentation-acceptance-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/editable-presentation-acceptance-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "masters-themes-and-new-slides-reveal-structural-loss-3",
+      "title": "Masters, themes, and new slides reveal structural loss",
+      "html": "<p>Presentations often rely on master layouts, placeholders, and theme settings to keep many slides consistent. A single slide may look acceptable even if those relationships were lost. Apply a supported theme or layout change and inspect repeated headings, footers, and placeholders. Add a new slide and check whether it inherits the expected structure. Verify the selected editor's documented capabilities rather than assuming desktop presentation behavior. If the workflow only promises content edits within existing slides, make that narrower scope visible in acceptance and user guidance.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "record-acceptance-by-element-and-destination-4",
+      "title": "Record acceptance by element and destination",
+      "html": "<ul><li>Map each required edit to a specific fixture and expected result.</li><li>Check appearance and object behavior separately.</li><li>Repeat edits after save and reopen, then inspect the exported file.</li><li>Document flattened or unsupported elements with their user impact.</li><li>Keep theme, font, and layout settings with the test evidence.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "revise-a-quarterly-review-deck-end-to-end-5",
+      "title": "Revise a quarterly review deck end to end",
+      "html": "<p>Create a short deck with a title slide, a chart, a table, a grouped process diagram, and speaker notes. Import it, update one chart value, change a table cell, move a diagram shape, and add a slide using an available layout. Save, reopen, and export. Inspect both the rendered result and whether the edited elements remain usable in the agreed destination application. This operational example gives a concrete definition of success without implying complete compatibility with every animation, embedded object, or presentation feature.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Edit several object types before accepting the deck",
+        "items": [
+          {
+            "label": "Import",
+            "detail": "Open a deck with chart, table, diagram, and notes"
+          },
+          {
+            "label": "Modify",
+            "detail": "Change a value, cell, shape, and supported layout"
+          },
+          {
+            "label": "Persist",
+            "detail": "Save and reopen the resulting presentation"
+          },
+          {
+            "label": "Export",
+            "detail": "Inspect appearance and editing behavior in the destination"
+          }
+        ],
+        "alt": "A synthetic review deck is edited, persisted, and checked in its destination application.",
+        "caption": "A successful first-slide preview covers only a small part of an editable workflow.",
+        "src": "/blog/images/editable-presentation-acceptance-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/editable-presentation-acceptance-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

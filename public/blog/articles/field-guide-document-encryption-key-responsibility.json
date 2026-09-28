@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-document-encryption-key-responsibility",
+  "title": "Document encryption and key custody: what customer-controlled keys protect",
+  "description": "Map encryption layers, key authority, rotation, recovery, and the components that still handle readable content.",
+  "category": "Security",
+  "format": "explainer",
+  "tags": [
+    "Security",
+    "Data privacy",
+    "Document storage",
+    "Backup and recovery"
+  ],
+  "structure": "prose+layers:comparison:prose:example+sequence:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 692,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Document Encryption and Key Custody",
+      "url": "https://shimodocs.com/blog/byo-key-encryption-documents"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-encryption-key-responsibility.png",
+  "coverAlt": "Document encryption and key custody: what customer-controlled keys protect: Encryption layers, Plaintext paths, Key authority, Rotation.",
+  "concepts": [
+    "Encryption layers",
+    "Plaintext paths",
+    "Key authority",
+    "Rotation",
+    "Recovery custody"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "numbered",
+    "signature": "ledger:numbered",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 68
+  },
+  "contentHash": "d52e34e359410a1935d4f05f71ba2bdf3103e80aaf38b1a2635ba06b0d3ba40b",
+  "intro": "Evaluate document encryption by naming the protected layer, key authorities, and remaining plaintext paths. Customer-controlled keys can improve custody without excluding every application or operator access route. Test rotation, outage, historical readback, and recovery before stating what the design protects and who can still unlock content.",
+  "sections": [
+    {
+      "id": "separate-the-protection-layers-1",
+      "title": "Separate the protection layers",
+      "html": "<p>Record encryption for browser traffic, internal service traffic, stored objects, databases, backups, and exports. Identify the actual mechanism and configuration evidence for each layer. Encryption at rest can protect stolen media while an authorized application still reads plaintext to render or transform a document. Transport encryption protects a connection but not the content after either endpoint receives it. Verify where editing, conversion, indexing, and support tools handle readable data. These distinctions help the organization state a precise assurance rather than using encrypted as an undifferentiated answer to every confidentiality question.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Encryption protects different parts of the document path",
+        "items": [
+          {
+            "label": "Transport",
+            "detail": "Protect connections while endpoints still receive their permitted data."
+          },
+          {
+            "label": "Stored content",
+            "detail": "Verify database, object, and backup encryption configuration."
+          },
+          {
+            "label": "Processing",
+            "detail": "Identify rendering, conversion, indexing, and support plaintext."
+          },
+          {
+            "label": "Delivery",
+            "detail": "Downloaded or exported content has its own protection boundary."
+          }
+        ],
+        "alt": "Transport, storage, processing, and delivery encryption boundaries.",
+        "caption": "The word encrypted is incomplete without a layer and an access model.",
+        "src": "/blog/images/field-guide-document-encryption-key-responsibility-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-encryption-key-responsibility-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "ask-what-a-stolen-credential-can-decrypt-2",
+      "title": "Ask what a stolen credential can decrypt",
+      "html": "<p>Compare the authority of a storage credential, an application service identity, a key policy administrator, and a recovery custodian. The risks are different. Storage access may reveal only ciphertext in one design and readable content in another; application authority may permit decryption even when storage and keys are operated separately. Verify the actual mechanisms.</p><table><thead><tr><th>Authority</th><th>Question for the design</th></tr></thead><tbody><tr><td>Storage reader</td><td>Can this identity obtain plaintext, or only encrypted objects?</td></tr><tr><td>Application identity</td><td>Which documents can it decrypt for rendering or conversion?</td></tr><tr><td>Key policy administrator</td><td>Can it grant new decryption rights or impersonate a workload?</td></tr><tr><td>Recovery custodian</td><td>What approval and evidence are required for an exceptional unlock?</td></tr></tbody></table><p>These questions establish the trust boundary without assuming a particular implementation. Keep the answer tied to the reviewed deployment and approved configuration.</p><p>Next, test the consequence of disabling a key using disposable content. Check new requests, already open documents, temporary conversions, and retained backups according to supported behavior. Explain caching and delivered copies explicitly. Key revocation can be valuable even when it cannot recall plaintext already obtained; the assurance should describe that limit accurately rather than promising universal erasure.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "map-key-ownership-and-use-3",
+      "title": "Map key ownership and use",
+      "html": "<p>Identify who creates keys, who can authorize decryption, where keys are stored, and which service identities use them. If customer supplied keys are proposed, obtain documentation for the exact product and storage arrangement. Determine whether the application can access those keys directly or requests decryption from another service. Include administrators capable of changing key policy or impersonating an authorized workload. Key ownership can improve control without eliminating every provider or operator access path. Keep key operations logged with safe identifiers and approval context, avoiding key material or sensitive document details in routine records.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "exercise-a-rotation-scenario-4",
+      "title": "Exercise a rotation scenario",
+      "html": "<p>A security team rotates the key protecting a test document collection. Follow the supported procedure, then open current and historical documents, restore a protected backup, and export an approved file. Verify whether earlier keys must remain available and who can retire them. Simulate a temporary key service outage and observe how the document application reports it. The scenario can reveal that a healthy storage service is unusable without key access or that old backups depend on keys scheduled for deletion. Use disposable content and a test key hierarchy to avoid disrupting business records during evaluation.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "A key rotation must preserve retained records",
+        "items": [
+          {
+            "label": "Rotate through support",
+            "detail": "Follow the documented mechanism in an approved test environment."
+          },
+          {
+            "label": "Read current content",
+            "detail": "Verify ordinary users and service identities still work."
+          },
+          {
+            "label": "Read historical content",
+            "detail": "Check prior versions and a restored protected backup."
+          },
+          {
+            "label": "Retire old authority",
+            "detail": "Remove keys only when retained records no longer require them."
+          }
+        ],
+        "alt": "Supported rotation, current readback, historical readback, and old-key retirement.",
+        "caption": "Coordinate key retirement with document and backup disposal.",
+        "src": "/blog/images/field-guide-document-encryption-key-responsibility-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-encryption-key-responsibility-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "design-revocation-and-recovery-5",
+      "title": "Design revocation and recovery",
+      "html": "<p>Define the intended effect of disabling a key and verify the actual caching and session behavior. Key revocation may stop future retrieval while leaving already decrypted sessions, temporary files, or delivered copies unaffected. Establish recovery authority and separation of duties for lost credentials or damaged key configuration. Test restoration through the approved procedure without relying on a single custodian. Retention obligations can require old keys to remain recoverable for as long as encrypted records exist. Coordinate key destruction with document and backup disposal rather than treating it as an independent maintenance action.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "custody-review-6",
+      "title": "Custody review",
+      "html": "<ul><li>Document encryption layers and all known plaintext processing paths.</li><li>Identify key creators, users, policy administrators, and recovery authorities.</li><li>Test rotation against current documents, older versions, and backups.</li><li>Measure key outage and revocation behavior in active workflows.</li><li>Coordinate key retirement with approved record and backup disposal.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

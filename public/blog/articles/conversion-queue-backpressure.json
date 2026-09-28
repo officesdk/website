@@ -1,0 +1,130 @@
+{
+  "slug": "conversion-queue-backpressure",
+  "title": "Document conversion queues: backpressure, fairness, and retry limits",
+  "description": "Use admission limits, fair scheduling, and visible queue states to preserve predictable conversion behavior under bursts.",
+  "category": "Operations",
+  "format": "architecture",
+  "tags": [
+    "Document conversion",
+    "Performance",
+    "Operations",
+    "Multi-tenancy"
+  ],
+  "structure": "prose+layers:prose:note:diagnostic+flow",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 645,
+  "source": null,
+  "references": [
+    {
+      "label": "Google SRE Book: Handling Overload",
+      "url": "https://sre.google/sre-book/handling-overload/"
+    }
+  ],
+  "cover": "/blog/images/conversion-queue-backpressure.png",
+  "coverAlt": "Document conversion queues: backpressure, fairness, and retry limits: Admission limit, Work classes, Worker capacity, Queue status.",
+  "concepts": [
+    "Admission limit",
+    "Work classes",
+    "Worker capacity",
+    "Queue status",
+    "Overload response"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "rail-right",
+    "signature": "report:rail-right",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 16
+  },
+  "contentHash": "b0c24b9a03da413c6e11e8bfab9b4adc658250380abac41b6e9c04b5f28d292a",
+  "intro": "Limit both accepted work and active conversion workers. Worker concurrency alone cannot protect an unbounded queue from expired source links, growing storage use, or hours of waiting. Use queue age, queued bytes, and per-tenant demand to decide when to accept, defer, or reject a job.",
+  "sections": [
+    {
+      "id": "admission-scheduling-and-execution-are-separate-controls-1",
+      "title": "Admission, scheduling, and execution are separate controls",
+      "html": "<p>A worker concurrency limit protects active CPU and memory, but it does not limit queued objects, expired credentials, or waiting users. Set explicit limits for accepted jobs, queued bytes, job age, and per tenant demand. Decide which requests can wait and which should be rejected with a retryable response. Admission should account for the source being available long enough to process. A queue full of jobs whose source links have already expired is not useful capacity; it is deferred failure that requires additional cleanup and retries.</p><p>There are at least three controls to tune independently. Admission decides whether a new job enters the system. Scheduling decides which accepted job runs next. Execution limits bound the resources consumed while it runs. Combining all three into one worker-count setting makes overload harder to diagnose.</p><table><thead><tr><th>Control</th><th>Useful signal</th><th>Failure it contains</th></tr></thead><tbody><tr><td>Admission</td><td>Queued bytes, age, tenant quota</td><td>Unlimited accumulation of work</td></tr><tr><td>Scheduling</td><td>Interactive versus batch demand</td><td>One large batch delaying unrelated users</td></tr><tr><td>Execution</td><td>Memory, runtime, downstream limits</td><td>One job exhausting a worker or dependency</td></tr></tbody></table><p>Retry traffic must consume the same controlled capacity. A failing document that immediately requeues itself can monopolize processing even when new submissions are limited. Apply bounded attempts and delay, and identify permanent input errors early. During an incident, report the oldest waiting job and the reason workers are unavailable. A queue length of twenty means little without knowing whether those jobs are small previews, enormous presentations, or repeated failures that cannot complete.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Three controls contain different overload problems",
+        "items": [
+          {
+            "label": "Admission",
+            "detail": "Bound accepted jobs, queued bytes, age, and tenant demand"
+          },
+          {
+            "label": "Scheduling",
+            "detail": "Choose work fairly across interactive and batch requests"
+          },
+          {
+            "label": "Execution",
+            "detail": "Limit runtime and resources while jobs are active"
+          },
+          {
+            "label": "Retry policy",
+            "detail": "Return recoverable work without creating a tight failure loop"
+          }
+        ],
+        "alt": "Admission, scheduling, execution, and retry controls protect different stages of conversion.",
+        "caption": "Scaling workers does not replace a policy for work that cannot be accepted.",
+        "src": "/blog/images/conversion-queue-backpressure-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/conversion-queue-backpressure-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "keep-bulk-work-from-starving-interactive-previews-2",
+      "title": "Keep bulk work from starving interactive previews",
+      "html": "<p>Use available signals such as format, source size, and known workbook or presentation characteristics to separate unusually expensive tasks when helpful. These estimates are imperfect, so enforce runtime limits and observe actual resource consumption. Avoid letting one large batch block every interactive preview. Fair scheduling can allocate work among tenants or priority classes, but document the policy and prevent unlimited priority escalation. Reserve enough capacity for recovery and routine interactive work so a bulk import cannot consume every worker and erase the intended service experience.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "waiting-and-cancellation-need-honest-states-3",
+      "title": "Waiting and cancellation need honest states",
+      "html": "<p>Distinguish accepted, waiting, processing, completed, failed, and canceled states when the backend can support them reliably. Show progress percentages only when there is a meaningful denominator; otherwise explain the current stage. Cancellation should stop queued work promptly and attempt to stop running work according to engine capabilities. Keep already completed outputs consistent with the cancellation result. Do not invite users to click repeatedly when processing is merely waiting, because duplicate requests amplify load and make completion ownership harder to understand.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "reproduce-a-burst-with-one-failing-document-4",
+      "title": "Reproduce a burst with one failing document",
+      "html": "<p>Queue a representative batch of test documents while several users open individual files. Observe queue age, active workers, memory, source expiry failures, and interactive completion times. Introduce one document that consistently fails and confirm that its retries are bounded and delayed. Then stop a worker and verify that claimed jobs are recovered without uncontrolled duplication. This scenario tests the scheduling policy under pressure. It should produce recorded observations for the actual environment, not a generalized throughput claim derived from an artificial best case.</p><ul><li>Alert on oldest waiting job and queued bytes, not only queue length.</li><li>Limit retries and distinguish permanent format errors from temporary infrastructure failures.</li><li>Apply per tenant admission controls to contain large batches.</li><li>Make rejection and cancellation understandable in the interface.</li><li>Scale workers only within downstream storage, database, and licensing constraints that actually apply.</li></ul>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "flow",
+        "title": "A burst test should include both users and failures",
+        "items": [
+          {
+            "label": "Bulk arrivals",
+            "detail": "Submit a representative folder of test files"
+          },
+          {
+            "label": "Interactive opens",
+            "detail": "Keep ordinary single-document requests running"
+          },
+          {
+            "label": "Controlled failure",
+            "detail": "Add one permanently failing file and interrupt a worker"
+          },
+          {
+            "label": "Observe recovery",
+            "detail": "Check age, fairness, retries, and duplicate processing"
+          }
+        ],
+        "alt": "Bulk work, interactive requests, and failures are combined in one controlled queue test.",
+        "caption": "The queue is healthy when accepted work completes predictably, not merely when it accepts more jobs.",
+        "src": "/blog/images/conversion-queue-backpressure-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/conversion-queue-backpressure-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

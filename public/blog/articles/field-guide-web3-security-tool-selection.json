@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-web3-security-tool-selection",
+  "title": "Web3 security tool selection: match resources to failure classes",
+  "description": "Select complementary testing, deployment, monitoring, and incident resources using contract risk and accountable evidence.",
+  "category": "Security",
+  "format": "playbook",
+  "tags": [
+    "Security",
+    "Open source",
+    "Operations",
+    "Audit logs"
+  ],
+  "structure": "prose+matrix:steps:example:example:note+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 701,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: 50 Web3 Security Tools & Resources for Builders",
+      "url": "https://shimodocs.com/blog/web3-security-tools-resources"
+    }
+  ],
+  "cover": "/blog/images/field-guide-web3-security-tool-selection.png",
+  "coverAlt": "Web3 security tool selection: match resources to failure classes: Asset threats, Invariant tests, Authority graph, Deployment checks.",
+  "concepts": [
+    "Asset threats",
+    "Invariant tests",
+    "Authority graph",
+    "Deployment checks",
+    "Live response"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "inset",
+    "signature": "visual-first:inset",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 57
+  },
+  "contentHash": "9dc6a82914f5c52fc736b91e9c3d9e92252ebfa596e216e4c62d3282b9968863",
+  "intro": "Choose Web3 security resources by the failure classes your application must withstand: incorrect accounting, unauthorized authority, unsafe upgrades, dependency failures, and delayed incident response. Use complementary tests and review methods. A clean scan or a long tool list cannot establish that the application's business assumptions are safe.",
+  "sections": [
+    {
+      "id": "model-assets-and-authority-1",
+      "title": "Model assets and authority",
+      "html": "<p>Identify the assets the application controls and the accounts or contracts able to change their behavior. Draw upgrade authority, administrative roles, oracle dependencies, and transaction pathways. Record assumptions about external components and chain behavior. Prioritize failure classes such as unauthorized withdrawals, incorrect accounting, unsafe upgrades, and dependency manipulation. Security resources should then be selected for those classes. A static analyzer, invariant test framework, formal method, audit, and monitoring service answer different questions. Verify current support and limitations for the language, chain, and contract patterns actually used instead of relying on broad coverage claims.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "matrix",
+        "title": "Match failure classes to complementary evidence",
+        "items": [
+          {
+            "label": "Accounting failure",
+            "detail": "Known-result tests plus action-sequence invariants."
+          },
+          {
+            "label": "Unauthorized action",
+            "detail": "Authority graph, role transitions, and adversarial callers."
+          },
+          {
+            "label": "Unsafe dependency",
+            "detail": "Review assumptions and vary oracle or external responses."
+          },
+          {
+            "label": "Release or live failure",
+            "detail": "Deployment checks, monitoring, and a rehearsed response plan."
+          }
+        ],
+        "alt": "Failure-class matrix linking accounting, authority, dependencies, and release to evidence.",
+        "caption": "Each resource should answer a different concrete risk question.",
+        "src": "/blog/images/field-guide-web3-security-tool-selection-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-web3-security-tool-selection-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "combine-complementary-test-methods-2",
+      "title": "Combine complementary test methods",
+      "html": "<p>Use deterministic tests for known cases, property or invariant testing for behavior across sequences, and targeted analysis for suspicious patterns. Human review remains useful for business assumptions that tools cannot infer. Keep compiler versions and dependencies fixed during comparison so findings are reproducible. Triage each finding with an explanation and a test or documented rationale. A clean scan is not proof of safety, especially when a tool does not understand economic incentives or an external oracle. Give unresolved findings owners and release consequences rather than burying them among irrelevant automated warnings.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "write-the-invariant-before-picking-the-tool-3",
+      "title": "Write the invariant before picking the tool",
+      "html": "<p>An invariant expresses a property that should hold across permitted action sequences. For a hypothetical vault, one useful starting point is that withdrawals cannot exceed the assets a caller is entitled to receive under the intended accounting rules. That statement still needs refinement for fees, rounding, transfers, and external dependencies.</p><pre><code>Given an approved starting state:\n  run deposits, transfers, and withdrawals\n  vary callers, amounts, and order\n  assert the specified asset and authority properties</code></pre><p>This is test-design pseudocode, not a complete financial specification or an implementation recommendation. The team responsible for the contract must define the exact property. A tool can search for counterexamples only within its supported model and test setup.</p><p>Keep an authority table alongside the accounting invariants. List who can upgrade the contract, change an oracle, modify limits, or invoke an emergency action. Test unexpected callers and permitted role transitions. An application can satisfy an arithmetic property while remaining unsafe because an administrator has broader authority than users understand. Conversely, a role check can be correct while accounting fails through a sequence of otherwise authorized actions. Selecting resources from both models gives the release review stronger evidence than repeatedly testing one happy path.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "exercise-a-vault-accounting-example-4",
+      "title": "Exercise a vault accounting example",
+      "html": "<p>Consider a hypothetical vault accepting deposits and issuing shares. Define an invariant linking tracked assets, share supply, and approved withdrawals under the intended rounding rules. Generate sequences of deposit, withdrawal, transfer, and administrative actions with small and large values. Include adversarial account behavior and changed dependency responses in a controlled test environment. Independently inspect who can upgrade the implementation or alter limits. This example demonstrates why unit tests for one happy deposit path are insufficient: the risk emerges from sequences, rounding, permissions, and external assumptions that several complementary methods must examine.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "extend-security-beyond-release-5",
+      "title": "Extend security beyond release",
+      "html": "<p>Verify deployment parameters, privileged addresses, bytecode or build provenance where applicable, and the approved change process. Document how monitoring distinguishes expected activity from harmful deviations in the chosen system. Define incident owners, communication paths, and any pause or recovery mechanism actually present in the contracts. Do not promise reversibility for transactions or controls that were never implemented. Rehearse with a test incident before launch. Keep relevant resources available to responders, including dependency contacts and a plain description of authority, because tool output is useful only when someone can interpret it and act.</p>",
+      "kind": "note",
+      "figure": {
+        "kind": "sequence",
+        "title": "Security continues after the tests pass",
+        "items": [
+          {
+            "label": "Approved build",
+            "detail": "Record dependencies, configuration, and release provenance."
+          },
+          {
+            "label": "Deployment review",
+            "detail": "Verify privileged addresses and intended parameters."
+          },
+          {
+            "label": "Live observation",
+            "detail": "Watch the application's defined harmful deviations."
+          },
+          {
+            "label": "Incident action",
+            "detail": "Use only pause or recovery controls actually implemented."
+          }
+        ],
+        "alt": "Build, deployment review, live observation, and available incident action.",
+        "caption": "Do not promise reversal for transactions or controls the system does not have.",
+        "src": "/blog/images/field-guide-web3-security-tool-selection-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-web3-security-tool-selection-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "release-evidence-6",
+      "title": "Release evidence",
+      "html": "<ul><li>Map each selected tool or service to a concrete failure class.</li><li>Retain reproducible findings and rationales for dismissed alerts.</li><li>Test invariants and administrative authority across action sequences.</li><li>Verify deployment configuration and approved upgrade procedures.</li><li>Rehearse monitoring and response using the controls the system truly has.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

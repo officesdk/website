@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-knowledge-base-versus-workspace",
+  "title": "ShimoDocs vs Slab: working documents or trusted knowledge?",
+  "description": "Evaluate a knowledge workflow through drafting, publication, discovery, ownership, and review expiry.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Document search",
+    "Business workflows",
+    "Collaboration"
+  ],
+  "structure": "prose+flow:prose:example:prose:diagnostic+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 691,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Slab: Knowledge Base or Workspace?",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-slab"
+    }
+  ],
+  "cover": "/blog/images/field-guide-knowledge-base-versus-workspace.png",
+  "coverAlt": "ShimoDocs vs Slab: working documents or trusted knowledge?: Knowledge owner, Draft state, Publication gate, Search quality.",
+  "concepts": [
+    "Knowledge owner",
+    "Draft state",
+    "Publication gate",
+    "Search quality",
+    "Review expiry"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "alternating",
+    "signature": "exhibit:alternating",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 84
+  },
+  "contentHash": "8b6caacfb358d18ce7f838cb286de4fa023ccf269efec9b9e9b25d786729dd10",
+  "intro": "For ShimoDocs and Slab, test whether the team needs collaborative production, trusted published guidance, or both. A knowledge workflow must make current approved answers discoverable and distinguish them from drafts. A working document space must also support the artifacts authors actually produce.",
+  "sections": [
+    {
+      "id": "name-the-information-states-1",
+      "title": "Name the information states",
+      "html": "<p>Separate working notes, reviewed guidance, approved procedures, and archived material. Each state has a different audience and expected reliability. A brainstorm can tolerate uncertainty; an incident response procedure must have an accountable owner and a review date. Define how an item moves between states before choosing a platform. Test whether the candidate configuration makes those transitions visible and enforceable. The goal is to prevent an unfinished draft from appearing indistinguishable from official guidance. Do not assume that a folder name alone provides a publication workflow or that a polished page has been reviewed.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "A draft becomes maintained support guidance",
+        "items": [
+          {
+            "label": "Engineering draft",
+            "detail": "Describe the actual restore procedure."
+          },
+          {
+            "label": "Review",
+            "detail": "Security checks privileged actions."
+          },
+          {
+            "label": "Publication",
+            "detail": "Support lead accepts an identified edition."
+          },
+          {
+            "label": "Maintenance",
+            "detail": "Owner revisits guidance when the service changes."
+          }
+        ],
+        "alt": "A support procedure needs review and maintenance after initial writing.",
+        "caption": "Use current candidate evidence to test these transitions.",
+        "src": "/blog/images/field-guide-knowledge-base-versus-workspace-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-knowledge-base-versus-workspace-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "follow-a-support-procedure-2",
+      "title": "Follow a support procedure",
+      "html": "<p>Imagine a support team documenting how to restore a customer's deleted file. Two engineers draft the procedure, a security reviewer checks privileged access steps, and a support lead approves publication. Agents must find the current procedure during a live call without opening outdated drafts. Run this entire sequence in both candidates, using the editions under consideration. Check how references, attachments, and required screenshots behave. Then change one recovery step and determine how the team learns that guidance changed. The test measures the lifecycle of trusted knowledge rather than the appearance of an empty page.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "measure-discovery-with-real-questions-3",
+      "title": "Measure discovery with real questions",
+      "html": "<p>Build a small collection containing similar titles, abbreviations, superseded procedures, and department specific terminology. Ask ordinary users to answer questions such as who approves an emergency restore and which recovery limits apply. Record whether they find the current answer and recognize its authority. Search speed is useful, but answer correctness and version clarity matter more. Also test access filtered search so restricted materials do not leak through snippets or suggestions. Where users need office files or detailed tables, inspect whether the workflow preserves those artifacts and their relationship to the published explanation.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "budget-for-ongoing-curation-4",
+      "title": "Budget for ongoing curation",
+      "html": "<p>A knowledge base requires editorial work regardless of the product. Assign owners, review intervals, and a method for reporting inaccurate content. Decide what happens when an owner changes roles or leaves. Link working project materials to published guidance without allowing temporary updates to silently alter official instructions. Evaluate import and export paths for both text and attachments, including internal links. If moving content requires manual repair, estimate that work before adoption. A workspace can hold an excellent knowledge collection when governed carefully, while a dedicated knowledge tool can accumulate stale pages when nobody owns maintenance.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "search-for-an-answer-not-a-page-5",
+      "title": "Search for an answer, not a page",
+      "html": "<p>Test discovery with questions whose answers have operational consequences. For example: Who can authorize an emergency restore? Which customers require an additional approval? Which procedure applies to the current product release? Include a draft, a superseded procedure, and the accepted edition in the collection.</p><p>Record the reader's selected answer, the page version, the time taken, and the clue that established its authority. A fast result is a failure if it points the reader to outdated instructions. Also test what happens when the current page is restricted: search should not reveal confidential content through snippets or an apparently harmless title.</p><dl><dt>Wrong answer found</dt><dd>Investigate naming, status, linking, and search ranking before adding more pages.</dd><dt>Correct page, unclear authority</dt><dd>Make ownership, publication state, and review date visible.</dd><dt>No answer exists</dt><dd>Assign a content owner and a concrete publishing task.</dd></dl><p>For the restore procedure, have the support lead revise one approval step and ask a second agent the same question afterward. This checks whether maintenance reaches discovery. It also reveals whether links from tickets or bookmarks continue to lead to the current guidance or to an unlabeled historical copy.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "Discovery failures require different fixes",
+        "items": [
+          {
+            "label": "Wrong answer",
+            "detail": "Check stale content, labels, and navigation."
+          },
+          {
+            "label": "Unclear authority",
+            "detail": "Expose owner, status, and review date."
+          },
+          {
+            "label": "Missing answer",
+            "detail": "Create an owned publishing task."
+          },
+          {
+            "label": "Restricted content",
+            "detail": "Test search filtering and snippets."
+          }
+        ],
+        "alt": "Different discovery problems need editorial or access remedies.",
+        "caption": "Search speed alone does not measure trustworthy knowledge.",
+        "src": "/blog/images/field-guide-knowledge-base-versus-workspace-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-knowledge-base-versus-workspace-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "knowledge-workflow-decision-notes-6",
+      "title": "Knowledge workflow Decision notes",
+      "html": "<ul><li>Define draft, reviewed, published, and archived states with responsible owners.</li><li>Run a procedure through authoring, approval, discovery, and revision.</li><li>Measure whether users find the correct current answer.</li><li>Test restricted search results, attachments, and linked working materials.</li><li>Assign curation effort and verify export with internal links.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-external-document-sharing-evidence",
+  "title": "External document sharing audit: recipients, versions, and revoked access",
+  "description": "Find external access risks by testing recipient boundaries, version scope, attachments, revocation, and ownership.",
+  "category": "Security",
+  "format": "field-notes",
+  "tags": [
+    "Security",
+    "Access control",
+    "Audit logs",
+    "Data privacy"
+  ],
+  "structure": "steps+document:diagnostic:example:example+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 704,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: External Document Sharing: Where Audits Find Problems",
+      "url": "https://shimodocs.com/blog/external-sharing-risks-documents"
+    }
+  ],
+  "cover": "/blog/images/field-guide-external-document-sharing-evidence.png",
+  "coverAlt": "External document sharing audit: recipients, versions, and revoked access: Recipient scope, Artifact inspection, Version boundary, Access expiry.",
+  "concepts": [
+    "Recipient scope",
+    "Artifact inspection",
+    "Version boundary",
+    "Access expiry",
+    "Owner review"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "numbered",
+    "signature": "visual-first:numbered",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 69
+  },
+  "contentHash": "f70d68297c99f53b0c774745624470fd443bbb30cfb50ba4639aeacf3106a2e1",
+  "intro": "Audit the complete external information package: recipient identity, link mode, issued version, attachments, comments, export contents, expiry, and owner. Test project closure across new requests and open sessions. Distinguish ending platform access from recalling copies already delivered, which ordinary link revocation cannot reliably accomplish.",
+  "sections": [
+    {
+      "id": "inventory-external-access-paths-1",
+      "title": "Inventory external access paths",
+      "html": "<p>List authenticated invitations, possession based links, email attachments, downloads, exports, and partner integrations. Use supported administrative records to identify owners, recipients, expiry, and last activity where available. Distinguish current platform access from copies already delivered. Assign a business purpose and review date to each continuing external relationship. Unowned links are difficult to justify even when no incident is known. Include inherited access and documents moved between folders because the permission model may retain external grants after the original project context disappears. Verify the actual product behavior rather than assuming a move resets sharing.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "document",
+        "title": "Minimum context for an external sharing review",
+        "items": [
+          {
+            "label": "Owner and purpose",
+            "detail": "Named person can explain why the relationship is needed."
+          },
+          {
+            "label": "Recipient boundary",
+            "detail": "Named identity or possession-based link is explicit."
+          },
+          {
+            "label": "Version scope",
+            "detail": "Issued artifact or changing draft is clearly identified."
+          },
+          {
+            "label": "End condition",
+            "detail": "Expiry or business event determines when access is reviewed."
+          }
+        ],
+        "alt": "Owner, recipient, version, and end-condition fields in a sharing review.",
+        "caption": "An access grant needs enough context for someone to approve or end it.",
+        "src": "/blog/images/field-guide-external-document-sharing-evidence-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-external-document-sharing-evidence-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "inspect-more-than-the-main-page-2",
+      "title": "Inspect more than the main page",
+      "html": "<p>Review comments, earlier versions, hidden spreadsheet content, embedded objects, attachments, and metadata relevant to the delivery format. A clean visible page may still contain unintended information in an exported artifact. Decide whether the recipient should receive a changing draft or a fixed issued version, then verify the shared entry point honors that decision. Use a release inspection procedure suitable for the document type. Do not assume a preview and a downloadable file expose identical material. The document owner should approve the actual package crossing the boundary, not just the appearance of its first screen.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "a-sharing-register-should-answer-why-3",
+      "title": "A sharing register should answer why",
+      "html": "<p>Record the business purpose beside the access grant. A list of email addresses and expiry dates tells an auditor who may have access but not whether the relationship is still justified. Include the owner, project or matter, recipient boundary, information class, issued-or-live status, and next review event.</p><pre><code>purpose: supplier specification review\nowner: procurement project lead\nrecipient_scope: named supplier reviewers\ncontent_state: issued revision 3\nreview_event: review complete or project closure</code></pre><p>These are illustrative governance fields rather than product configuration keys. Store them through a supported application or approved review process. If the platform cannot expose a field, the operating procedure needs to account for it.</p><p>When a project changes owners, transfer the review responsibility before relying on automated reminders. Otherwise the expiry question goes to an account nobody checks. When a recipient changes employers or role, verify the new identity instead of extending the old invitation casually. Review inherited or retained external grants after moving documents into another collection. The intended business purpose may have ended even when the underlying technical permission is still valid. This is why recurring owner review remains useful alongside automated expiry.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "test-a-partner-project-closure-4",
+      "title": "Test a partner project closure",
+      "html": "<p>A contractor reviews a project plan for two months and then leaves. Create test identities and a harmless project package, share it through the approved mode, and record the resulting access. At closure, remove the contractor and try the original link, a forwarded invitation, an open session, and any previously issued download path. Inspect what the audit history can explain afterward. Record the measured revocation window and the limits for delivered copies. This scenario turns project closure into an observable access transition instead of assuming that removing a name from a membership screen ends every form of exposure.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "Project closure tests several access paths",
+        "items": [
+          {
+            "label": "Original link",
+            "detail": "Retry after the recipient is removed."
+          },
+          {
+            "label": "Forwarded invitation",
+            "detail": "Try an independent test identity."
+          },
+          {
+            "label": "Open session",
+            "detail": "Observe the measured revocation behavior."
+          },
+          {
+            "label": "Delivered copy",
+            "detail": "Record that prior downloads are outside ordinary recall."
+          }
+        ],
+        "alt": "Original link, forwarded invite, open session, and delivered copy at closure.",
+        "caption": "Keep the revocation result and its limits in the audit record.",
+        "src": "/blog/images/field-guide-external-document-sharing-evidence-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-external-document-sharing-evidence-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "make-recurring-review-practical-5",
+      "title": "Make recurring review practical",
+      "html": "<p>Provide owners with a concise list of continuing external relationships, purpose, information class, and expiry. Ask for renewal or closure with enough context to make the decision meaningful. Automate expiry and reminders only where supported and appropriate to the workflow. Track failed review delivery when an owner departs and transfer responsibility through an approved process. Investigate repeated requests for long lived anonymous access before normalizing them. The organization may need a better partner identity path. Keep audit exports protected because they can reveal confidential project names and external relationships even without document content.</p><h3>Sharing closeout</h3><ul><li>Assign an owner, purpose, recipient boundary, and review date.</li><li>Inspect the actual artifact and its surrounding review information.</li><li>Test expiry and revocation across links, sessions, and download paths.</li><li>Remove or approve continuing access when projects and ownership change.</li><li>State the limits on recalling content already delivered.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

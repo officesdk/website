@@ -1,0 +1,128 @@
+{
+  "slug": "field-guide-file-estate-or-document-workspace",
+  "title": "ShimoDocs or Nextcloud: compare the work, not the folder screen",
+  "description": "Compare platform fit through file lifecycle, collaborative tasks, integration ownership, and operating effort.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Product selection",
+    "Document storage",
+    "Business workflows",
+    "Integrations"
+  ],
+  "structure": "prose+comparison:comparison:example:prose+layers:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 685,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Nextcloud: File Platform or Document Suite?",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-nextcloud"
+    }
+  ],
+  "cover": "/blog/images/field-guide-file-estate-or-document-workspace.png",
+  "coverAlt": "ShimoDocs or Nextcloud: compare the work, not the folder screen: File lifecycle, Workspace tasks, Integration burden, Authoritative copy.",
+  "concepts": [
+    "File lifecycle",
+    "Workspace tasks",
+    "Integration burden",
+    "Authoritative copy",
+    "User pathways"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "chapter-rail",
+    "signature": "ledger:chapter-rail",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 44
+  },
+  "contentHash": "d94c5d00d30c83cecf7b6290274c81159ca9de585ce0157c15cc4da9c404502e",
+  "intro": "Choose between these candidates by testing the responsibility you need to own: a broad file estate, a collaborative document workflow, or both. Include non-office files, approved versions, external delivery, and the extra components required by the offered configuration. An appealing folder view does not answer those questions.",
+  "sections": [
+    {
+      "id": "describe-the-estate-and-the-work-1",
+      "title": "Describe the estate and the work",
+      "html": "<p>Inventory file types, storage locations, access methods, and the tasks users perform most frequently. An engineering team may manage drawings, exports, photographs, and office files together. A planning department may spend most of its time reviewing shared reports and spreadsheets. Write acceptance cases for the dominant work, including search, sharing, editing, and final delivery. Verify candidate behavior in the exact offered configuration; product categories are useful starting hypotheses but cannot establish format support, synchronization behavior, collaboration controls, or retention capabilities on their own.</p><h3>Define the authoritative copy</h3><p>Identify where a document becomes current and how other representations relate to it. Desktop copies, downloaded attachments, converted views, and live editing states can all appear legitimate to users. Specify whether each is authoritative, disposable, or historical. Evaluate how candidates expose this distinction and what happens when users work offline or replace a whole file. If additional editors or services are part of a proposal, map the save boundary and version ownership. A platform decision is incomplete while administrators cannot explain which bytes are recovered after a disputed update.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Two acceptance briefs for two kinds of work",
+        "items": [
+          {
+            "label": "File estate",
+            "detail": "Find, exchange, protect, and recover a varied project package."
+          },
+          {
+            "label": "Document workspace",
+            "detail": "Edit, review, approve, and deliver office artifacts."
+          }
+        ],
+        "alt": "File estate tasks compared with collaborative document workspace tasks.",
+        "caption": "Test both briefs if both are central to the organization.",
+        "src": "/blog/images/field-guide-file-estate-or-document-workspace-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-file-estate-or-document-workspace-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 720
+      }
+    },
+    {
+      "id": "write-two-separate-acceptance-briefs-2",
+      "title": "Write two separate acceptance briefs",
+      "html": "<p>A file-estate brief asks how different objects are organized, located, exchanged, and recovered. A document-workflow brief asks how a team creates, reviews, approves, and delivers its work. Keep both if both matter; do not assume a passing result in one establishes the other.</p><dl><dt>File-estate acceptance</dt><dd>Include a drawing, photographs, a specialist binary, and office files. Test search, ownership transfer, permission changes, and a complete handover.</dd><dt>Document-workflow acceptance</dt><dd>Include a collaborative report, a calculation model, and an approved presentation. Test the actual edit, review, save, and delivery path.</dd></dl><p>For each candidate, list the components and manual steps used to pass. The list may include an integrated editor, an archive, a desktop application, or a support procedure. Verify availability and rights for those dependencies in the offered configuration. Ask ordinary users to carry out the tests and capture where they switch interfaces or become uncertain about the current copy.</p><p>Make the final choice against the tasks you cannot compromise. A weaker result on a secondary convenience can be acceptable when its cost is explicit; missing a required file handover or approval record cannot be hidden by a higher total feature count.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "try-a-project-handover-3",
+      "title": "Try a project handover",
+      "html": "<p>Create a project package containing a spreadsheet, a report, several photos, and a specialist binary file. Ask the project lead to share it with a replacement colleague, revoke an external contractor, and locate the approved report from last month. Have users perform required edits and export a final package for an archive. This example tests broad file handling alongside document collaboration without assuming either candidate provides every step. Record extra applications, manual exports, and administrative interventions. Those dependencies belong in the comparison because they affect training, support, and the consistency of the handover.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "price-the-complete-operating-shape-4",
+      "title": "Price the complete operating shape",
+      "html": "<p>Estimate administrator time, storage, backups, upgrades, and support for the full proposed stack. Include identity mapping and the maintenance of any bridges to existing business systems. Consider the cost of inconsistent user pathways: separate tools may require users to understand multiple permission and version models. A consolidated workspace may still need external systems for specialized files or records obligations. Gather evidence through a limited pilot and record both technical effort and user completion time. Use measured operating tasks rather than interface impressions to decide whether the proposed structure is sustainable.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Count the full operating arrangement",
+        "items": [
+          {
+            "label": "Core platform",
+            "detail": "Installed version and edition used in the pilot."
+          },
+          {
+            "label": "Required integrations",
+            "detail": "Editors, business systems, archive, and identity dependencies."
+          },
+          {
+            "label": "Manual work",
+            "detail": "Exports, repairs, permission requests, and user support."
+          },
+          {
+            "label": "Recovery",
+            "detail": "Owners and procedures for the complete information chain."
+          }
+        ],
+        "alt": "Platform, integrations, manual procedures, and recovery responsibilities.",
+        "caption": "The unit of cost is the complete supported workflow.",
+        "src": "/blog/images/field-guide-file-estate-or-document-workspace-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-file-estate-or-document-workspace-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "platform-fit-summary-5",
+      "title": "Platform fit summary",
+      "html": "<ul><li>List the dominant file types and the five most frequent business tasks.</li><li>Document authoritative storage and version ownership for every editing path.</li><li>Test a complete project handover using ordinary accounts.</li><li>Count required external components and recurring manual procedures.</li><li>Assign support and recovery ownership to the complete proposed deployment.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

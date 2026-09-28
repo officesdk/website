@@ -1,0 +1,132 @@
+{
+  "slug": "embedded-editor-content-security-policy",
+  "title": "Content Security Policy for embedded editors: frames, connections, and origins",
+  "description": "Use a narrow, tested content security policy for the host page and understand which controls belong to the embedded origin.",
+  "category": "Security",
+  "format": "walkthrough",
+  "tags": [
+    "Security",
+    "Embedded editing",
+    "Integrations",
+    "Troubleshooting"
+  ],
+  "structure": "diagnostic+comparison:steps:steps:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 649,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: Content Security Policy",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP"
+    }
+  ],
+  "cover": "/blog/images/embedded-editor-content-security-policy.png",
+  "coverAlt": "Content Security Policy for embedded editors: frames, connections, and origins: Host policy, Frame boundary, Resource origins, Policy reports.",
+  "concepts": [
+    "Host policy",
+    "Frame boundary",
+    "Resource origins",
+    "Policy reports",
+    "Enforced rules"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "rail-right",
+    "signature": "statement:rail-right",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 22
+  },
+  "contentHash": "9014f4b39005a8dcd1950e54b405fc92002e0ba50ee36a0bf01874a3f8587ca2",
+  "intro": "Build the host page's Content Security Policy from the resources that the host loads, and inspect the embedded editor's policy separately. A host's frame allowlist does not configure every script or connection inside the frame. Identify the context making the blocked request before changing a directive.",
+  "sections": [
+    {
+      "id": "determine-which-page-owns-the-blocked-request-1",
+      "title": "Determine which page owns the blocked request",
+      "html": "<p>The host page's policy governs resources and frames loaded by that page. The embedded document's own origin and headers govern its internal context according to browser rules. Allowing an editor in frame sources does not automatically configure every resource inside that editor. Likewise, the editor service must permit embedding by the intended host through its supported policy. Map these directions explicitly. This helps distinguish a frame blocked by the host from an editor response that refuses its ancestor, two failures that can look similar to users.</p><table><thead><tr><th>Observed failure</th><th>Policy boundary to inspect</th></tr></thead><tbody><tr><td>Host cannot create the frame</td><td>The host's frame-loading policy</td></tr><tr><td>Editor refuses the host as an ancestor</td><td>The editor response's embedding policy</td></tr><tr><td>Connection fails inside the editor</td><td>The requesting frame's connection policy</td></tr><tr><td>Host integration script is blocked</td><td>The host's script policy and loading mechanism</td></tr></tbody></table><p>Read the browser violation message for the effective directive, blocked resource, and frame context. Do not assume a hostname appearing in the console belongs in every directive. A conversion download, a websocket connection, and an embedded frame can need different policy treatment even when they share an origin.</p><p>Start with documented required origins and observe complete workflows in a controlled environment. Report-only collection can help discover omissions, but review extension noise and redact sensitive URL details before storing reports. After enforcement, repeat export, reconnect, and failure recovery: a policy that permits the initial shell may still block a resource requested only after the user edits. Keep the exact reviewed header with the deployment configuration so policy drift is diagnosable.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "comparison",
+        "title": "Embedding and embedded resources have different owners",
+        "items": [
+          {
+            "label": "Host policy",
+            "detail": "Controls resources and frames requested by the host page"
+          },
+          {
+            "label": "Editor response",
+            "detail": "Controls its own context and allowed embedding ancestors"
+          },
+          {
+            "label": "Browser evidence",
+            "detail": "Identifies the requesting context and effective directive"
+          }
+        ],
+        "alt": "Host policy, editor policy, and browser evidence are compared by responsibility.",
+        "caption": "An ancestor-policy failure needs a different fix from a blocked connection inside the frame.",
+        "src": "/blog/images/embedded-editor-content-security-policy-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/embedded-editor-content-security-policy-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "inventory-the-complete-resource-path-2",
+      "title": "Inventory the complete resource path",
+      "html": "<p>Capture a representative successful workflow in a controlled environment and identify scripts, frame destinations, network connections, workers, fonts, images, and media. Include save, reconnect, export, and error recovery paths, not just initial loading. Compare the inventory with the vendor's deployment documentation. Use exact trusted origins where practical and understand any required schemes such as data or blob before allowing them. Avoid copying a policy from an unrelated deployment whose hostnames, authentication routes, and resource packaging may differ from the system being integrated.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "move-from-observed-reports-to-enforcement-3",
+      "title": "Move from observed reports to enforcement",
+      "html": "<p>A report only policy can reveal violations before enforcement, where the browser and deployment support that approach. Review reports for real application needs, extension noise, and sensitive URL data before broadening the policy. Configure collection and retention deliberately. Then enforce the reviewed policy in a test environment and validate normal and failure flows. A violation should lead to a specific explanation and minimal change, not an automatic wildcard. Keep policy changes versioned alongside application releases so a newly blocked resource can be traced to a concrete deployment decision.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "keep-the-policy-reviewable-4",
+      "title": "Keep the policy reviewable",
+      "html": "<ul><li>List trusted origins by resource purpose and ownership.</li><li>Verify both the host's embedding permission and the editor's ancestor policy.</li><li>Test connection, worker, font, export, and reconnect paths.</li><li>Review violation reports before adding new sources.</li><li>Keep a tested rollback policy for deployment mistakes.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "example-the-frame-opens-but-saving-fails-5",
+      "title": "Example: the frame opens but saving fails",
+      "html": "<p>Use a test editor deployment whose initial assets load while a required connection destination is intentionally absent from the relevant policy. Open a synthetic document and attempt the operation that uses that connection. Inspect browser security messages and the policy of the context making the request. Restore only the documented destination and retest. This example demonstrates why successful initial rendering does not prove complete policy coverage, and why changing the host's frame allowlist may not fix a connection initiated inside the embedded page.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "A successful initial load does not cover later operations",
+        "items": [
+          {
+            "label": "Initial frame",
+            "detail": "Required shell and assets load"
+          },
+          {
+            "label": "User action",
+            "detail": "Save or export requests a different resource"
+          },
+          {
+            "label": "Policy violation",
+            "detail": "Browser identifies the context and blocked directive"
+          },
+          {
+            "label": "Narrow correction",
+            "detail": "Allow the documented dependency and rerun the workflow"
+          }
+        ],
+        "alt": "A later operation can reveal a policy omission that initial loading did not exercise.",
+        "caption": "Avoid expanding every source list when one context-specific dependency is missing.",
+        "src": "/blog/images/embedded-editor-content-security-policy-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/embedded-editor-content-security-policy-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

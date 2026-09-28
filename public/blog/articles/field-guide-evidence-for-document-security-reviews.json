@@ -1,0 +1,138 @@
+{
+  "slug": "field-guide-evidence-for-document-security-reviews",
+  "title": "Security review for a self-hosted document platform: evidence to provide",
+  "description": "Turn review questions into scoped claims backed by architecture, configuration, operational evidence, and named owners.",
+  "category": "Security",
+  "format": "playbook",
+  "tags": [
+    "Security",
+    "Self-hosting",
+    "Audit logs",
+    "Data privacy"
+  ],
+  "structure": "prose+layers:example:steps:diagnostic+flow:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 678,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Answering a Security Review of a Self-Hosted Platform",
+      "url": "https://shimodocs.com/blog/passing-a-document-platform-security-review"
+    }
+  ],
+  "cover": "/blog/images/field-guide-evidence-for-document-security-reviews.png",
+  "coverAlt": "Security review for a self-hosted document platform: evidence to provide: Claim scope, Data flow, Evidence owner, Control testing.",
+  "concepts": [
+    "Claim scope",
+    "Data flow",
+    "Evidence owner",
+    "Control testing",
+    "Exception register"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "inset",
+    "signature": "report:inset",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 52
+  },
+  "contentHash": "ebf182f50a9c0935447d8465184ee84926bf4ca494fcc44b7589100a3c5e3fd2",
+  "intro": "Answer a document security review with scoped claims and dated evidence from the actual deployment. Separate documented capability, configured controls, and operating procedures. Cover content flows, privileged access, keys, backups, and outside dependencies, and label unresolved items with an accountable owner rather than an unsupported yes.",
+  "sections": [
+    {
+      "id": "scope-the-reviewed-deployment-1",
+      "title": "Scope the reviewed deployment",
+      "html": "<p>Record product version, deployment boundary, environment, integrations, and the information classes in scope. Draw data flows for opening, editing, saving, exporting, and administrative support. Mark trust boundaries and destinations, including telemetry, storage, identity, and any AI endpoint. A statement about self hosting should identify which components are actually local and which contact outside services. Ask the reviewer what assurance is required for each question. Some items call for design documentation; others require configuration evidence, an operational procedure, or results from a controlled test of the deployed system.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Three different kinds of security evidence",
+        "items": [
+          {
+            "label": "Documented capability",
+            "detail": "Current product guidance explains the supported mechanism."
+          },
+          {
+            "label": "Deployment configuration",
+            "detail": "Redacted settings show what is enabled in the reviewed environment."
+          },
+          {
+            "label": "Operating evidence",
+            "detail": "Tests and procedures show what ordinary users and responders do."
+          }
+        ],
+        "alt": "Documentation, deployed configuration, and operating evidence layers.",
+        "caption": "A product feature does not prove that the local control is configured and operated.",
+        "src": "/blog/images/field-guide-evidence-for-document-security-reviews-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-evidence-for-document-security-reviews-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "use-an-evidence-row-reviewers-can-follow-2",
+      "title": "Use an evidence row reviewers can follow",
+      "html": "<p>A useful response row contains more than a link to a certificate or product manual. It should tell the reviewer what the evidence proves for this deployment and what remains outside that claim.</p><table><thead><tr><th>Field</th><th>Example content</th></tr></thead><tbody><tr><td>Claim</td><td>Restricted documents deny download to the tested ordinary role</td></tr><tr><td>Scope</td><td>Named environment, version, operation, and role mapping</td></tr><tr><td>Evidence</td><td>Dated test result and redacted configuration reference</td></tr><tr><td>Owner</td><td>Person responsible for keeping the control accurate</td></tr><tr><td>Limit</td><td>Privileged infrastructure access assessed in a separate row</td></tr></tbody></table><p>The example is a claim structure, not an assurance about the software. Use observations from your environment. It prevents a narrow test from becoming a universal statement such as nobody can download confidential content.</p><p>Keep the pack organized by control question rather than the order in which documents arrived from different teams. If an auditor asks about restore capability, a dated restore result should be easy to find beside the approved recovery target and backup procedure. Mark an expired or changed configuration as needing review. Evidence that was once valid can become misleading after a new endpoint, identity mapping, or administrator role is introduced.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "pair-every-claim-with-evidence-3",
+      "title": "Pair every claim with evidence",
+      "html": "<p>Create a table containing the question, scoped answer, evidence location, owner, and last verification date. For access control, provide the role model and results for allowed and denied operations. For backups, provide the policy and a restore record rather than a successful upload log alone. For encryption, describe content, transport, backups, and key custody separately. Redact secrets and sensitive data from screenshots and configuration extracts. Keep evidence sufficiently detailed to support the claim without handing reviewers reusable credentials or unrelated production information. Track uncertain items as unresolved instead of converting assumptions into yes answers.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "work-through-an-administrator-question-4",
+      "title": "Work through an administrator question",
+      "html": "<p>A reviewer asks whether administrators can read all documents. Identify every privileged role and its actual access pathways, including application impersonation, database access, storage credentials, support exports, and key management. Test a disposable restricted document using an appropriately scoped administrator account. Record the observations and any procedure limiting privileged access. If infrastructure administrators can obtain plaintext through another route, an interface restriction alone cannot justify a universal denial. The resulting answer should explain the boundary, the operational safeguards, and which people retain exceptional access under the current design.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "flow",
+        "title": "Evaluate an administrator plaintext-access question",
+        "items": [
+          {
+            "label": "List privileged roles",
+            "detail": "Include application, infrastructure, storage, and key authorities."
+          },
+          {
+            "label": "Trace access paths",
+            "detail": "Look beyond UI restrictions to impersonation and direct retrieval."
+          },
+          {
+            "label": "Test safe content",
+            "detail": "Use a disposable restricted document and approved role."
+          },
+          {
+            "label": "State the boundary",
+            "detail": "Describe observed access and the safeguards around exceptions."
+          }
+        ],
+        "alt": "Roles, access paths, safe test, and scoped answer for privileged access.",
+        "caption": "Interface restrictions alone do not establish an absolute plaintext boundary.",
+        "src": "/blog/images/field-guide-evidence-for-document-security-reviews-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-evidence-for-document-security-reviews-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "close-gaps-with-accountable-actions-5",
+      "title": "Close gaps with accountable actions",
+      "html": "<p>Classify missing evidence separately from missing controls. A control may exist but lack a documented owner or verification record; another may require an architectural change. Give each gap a business impact, proposed treatment, responsible person, and deadline. Where a limitation is accepted, record the approving authority and the applicable deployment scope. Revisit answers after upgrades or changes to storage, identity, or outside endpoints. An evidence pack should be maintained as part of service operation, since a questionnaire completed once can become inaccurate as the deployment evolves.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "security-submission-6",
+      "title": "Security submission",
+      "html": "<ul><li>Identify the exact deployment and its information boundaries.</li><li>Link claims to dated configuration, documentation, or test evidence.</li><li>Explain privileged access and key custody without overgeneralizing.</li><li>Remove credentials and unrelated confidential content from supporting material.</li><li>Assign owners and approval records to unresolved limitations.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

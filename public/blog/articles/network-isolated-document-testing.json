@@ -1,0 +1,137 @@
+{
+  "slug": "network-isolated-document-testing",
+  "title": "Testing a self-hosted document system with outbound internet blocked",
+  "description": "Inventory network dependencies and test complete document workflows under the actual allowed routes of an isolated environment.",
+  "category": "Self-hosting",
+  "format": "playbook",
+  "tags": [
+    "Self-hosting",
+    "Data residency",
+    "Operations",
+    "Document storage",
+    "Integrations"
+  ],
+  "structure": "prose:steps+matrix:diagnostic:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 638,
+  "source": null,
+  "references": [
+    {
+      "label": "NIST: Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final"
+    }
+  ],
+  "cover": "/blog/images/network-isolated-document-testing.png",
+  "coverAlt": "Testing a self-hosted document system with outbound internet blocked: Dependency map, Network zones, Local resources, Cold start.",
+  "concepts": [
+    "Dependency map",
+    "Network zones",
+    "Local resources",
+    "Cold start",
+    "Isolation proof"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "rail-right",
+    "signature": "exhibit:rail-right",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 24
+  },
+  "contentHash": "8b4a9dff1e1eeb0d2e149214323cc1628fb2cb3c4be0306fead384d4aec63e10",
+  "intro": "Enable the intended network restrictions and test the whole workflow from clean browsers and fresh workers. A local application can still fetch fonts, authentication metadata, or other runtime resources externally. Build the dependency inventory by requester and direction, including callbacks and storage retrieval.",
+  "sections": [
+    {
+      "id": "list-dependencies-by-phase-and-requester-1",
+      "title": "List dependencies by phase and requester",
+      "html": "<p>Separate build time downloads, installation prerequisites, runtime requests, maintenance operations, and optional telemetry. Record the owner, destination, protocol, and purpose of each dependency. Include DNS, time synchronization, certificate validation, licensing mechanisms if applicable, identity services, and object storage. Verify product specific requirements from authoritative deployment documentation rather than inferring them from a local installation package. This inventory helps distinguish a dependency that can be packaged in advance from a service that must remain reachable whenever users open or save documents.</p><table><thead><tr><th>Requester</th><th>Dependency to verify from that location</th></tr></thead><tbody><tr><td>Browser</td><td>Host assets, editor origin, authentication, fonts, and downloads</td></tr><tr><td>Application service</td><td>Identity validation, session setup, database, and storage access</td></tr><tr><td>Processing worker</td><td>Source retrieval, required runtime assets, and result storage</td></tr><tr><td>External integration</td><td>The documented callback route into the application</td></tr></tbody></table><p>For each route, record the hostname, port, protocol, trust requirements, and operational owner. Avoid replacing this inventory with an unrestricted bidirectional rule. A source URL can resolve differently across zones, and a certificate trusted by a browser may be missing from the worker's trust store.</p><p>Keep installation and runtime dependencies separate. Preloading packages can solve a build-time requirement but says nothing about authentication renewal a week later. Include certificate rotation, supported license renewal where applicable, upgrades, and restore procedures in the operating plan. If any required service remains external, state that dependency explicitly and test its failure behavior instead of describing the deployment as fully disconnected.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "verify-every-participating-network-zone-2",
+      "title": "Verify every participating network zone",
+      "html": "<p>The browser, application backend, editor service, conversion workers, and storage may use different routes and trust stores. Validate connectivity from each actual requester. A browser reaching the storage URL does not prove a worker can resolve the same host or trust its certificate. Include reverse callbacks and asynchronous result retrieval. Use the environment's normal DNS names and certificates, because temporary host overrides or bypassed TLS checks can conceal deployment defects. Record the expected direction of every request so firewall rules reflect real ownership rather than a broad bidirectional exception.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "matrix",
+        "title": "The same URL can behave differently in each network zone",
+        "items": [
+          {
+            "label": "Browser zone",
+            "detail": "User routing, browser trust, and host resources"
+          },
+          {
+            "label": "Application zone",
+            "detail": "Backend identity, metadata, and storage dependencies"
+          },
+          {
+            "label": "Worker zone",
+            "detail": "Source fetch, conversion assets, and result writes"
+          },
+          {
+            "label": "Callback route",
+            "detail": "Reverse connectivity to the authorized receiving service"
+          }
+        ],
+        "alt": "Four network perspectives expose directional dependencies in document workflows.",
+        "caption": "Probe from the actual requester with its normal DNS and certificate trust.",
+        "src": "/blog/images/network-isolated-document-testing-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/network-isolated-document-testing-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "caches-can-hide-accidental-external-requests-3",
+      "title": "Caches can hide accidental external requests",
+      "html": "<p>Inspect runtime requests during representative workflows and identify external assets or endpoints that are not part of the approved design. Replace or configure them only through supported deployment mechanisms. Cache warmup can hide a dependency, so include clean browser profiles and freshly started workers in acceptance. Also test expired credentials and cold certificate or metadata caches where relevant. If a required external dependency cannot be removed, document the route and availability requirement honestly instead of describing the deployment as fully isolated because its main application server is local.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "maintain-the-accepted-route-inventory-4",
+      "title": "Maintain the accepted route inventory",
+      "html": "<ul><li>Maintain a directional dependency inventory for runtime and maintenance.</li><li>Test with cold caches and the actual outbound restrictions enabled.</li><li>Verify callbacks, storage retrieval, and authentication renewal from their real services.</li><li>Document the offline update and certificate rotation process.</li><li>Retain evidence of denied unexpected connections and their resolution.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "run-the-cold-start-workflow-under-the-real-policy-5",
+      "title": "Run the cold-start workflow under the real policy",
+      "html": "<p>In a controlled test environment, enforce the intended outbound network policy, start fresh workers, and use a clean browser to import, preview, edit, save, and export a synthetic file. Restart one service and repeat the recovery path. Inspect denied connections alongside application traces. A font request or authentication metadata refresh may appear only during this cold path. Record each failure and its owning component, then rerun the same sequence after configuration changes. Preserve the approved network policy throughout final acceptance rather than temporarily opening all outbound access.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Cold-start acceptance exposes hidden dependencies",
+        "items": [
+          {
+            "label": "Restrict outbound routes",
+            "detail": "Apply the intended policy before testing"
+          },
+          {
+            "label": "Start fresh",
+            "detail": "Use clean browser state and newly started workers"
+          },
+          {
+            "label": "Exercise the lifecycle",
+            "detail": "Import, preview, edit, save, export, and reconnect"
+          },
+          {
+            "label": "Review denied traffic",
+            "detail": "Identify unexpected destinations and their owners"
+          }
+        ],
+        "alt": "A cold-start drill runs the document lifecycle with outbound restrictions already active.",
+        "caption": "Temporarily opening all outbound access during final acceptance defeats the test.",
+        "src": "/blog/images/network-isolated-document-testing-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/network-isolated-document-testing-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

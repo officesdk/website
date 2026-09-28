@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-soc2-collaboration-evidence",
+  "title": "SOC 2 evidence for document collaboration: scope and samples",
+  "description": "How to assemble complete access and change populations, defensible samples, and honest exception records.",
+  "category": "Security",
+  "format": "playbook",
+  "tags": [
+    "Security",
+    "Audit logs",
+    "Operations",
+    "Collaboration"
+  ],
+  "structure": "prose+sequence:example:prose+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 692,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: SOC 2 Controls for Document Collaboration",
+      "url": "https://shimodocs.com/blog/soc2-document-collaboration-controls"
+    }
+  ],
+  "cover": "/blog/images/field-guide-soc2-collaboration-evidence.png",
+  "coverAlt": "SOC 2 evidence for document collaboration: scope and samples: Service commitment, Control population, Review sample, Change approval.",
+  "concepts": [
+    "Service commitment",
+    "Control population",
+    "Review sample",
+    "Change approval",
+    "Exception tracking"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "alternating",
+    "signature": "overprint:alternating",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 75
+  },
+  "contentHash": "e46e012572eb866f05f4405c42deb63343df363ee4fc306487711ecaf538fed5",
+  "intro": "SOC 2 evidence for a document service starts with the assessed system, relevant commitments, and a complete population of control activity. Reviewers need records that connect approvals to execution during the assessment period, including the cases where a control was missed or failed.",
+  "sections": [
+    {
+      "id": "scope-and-population-come-first-1",
+      "title": "Scope and population come first",
+      "html": "<p>Write down what the organization promises about its document service and which systems support those promises. Establish the assessment boundary with the auditor, including relevant trust services categories and dependencies. An editing component, object store, identity provider, and support console may all affect the same collaboration workflow. Document the shared responsibilities between your organization and suppliers. Read the actual scope, period, and qualifications of any supplier report before relying on it. A report covering one hosted service does not automatically describe a separately deployed instance or the surrounding customer application.</p><p>Evidence sampling requires a trustworthy population. For access reviews, list all identities and privileges that can reach the service, including administrators, service accounts, support roles, and external guests. For changes, identify the complete set of production deployments and privileged configuration modifications during the period. Reconcile these inventories against the systems that execute them. A spreadsheet containing only changes remembered by one engineer leaves an obvious coverage gap. Record how the population was generated, its date range, and any excluded records so reviewers can reproduce the selection and understand its limitations.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Follow one production change across its records",
+        "items": [
+          {
+            "label": "Request",
+            "detail": "Change C42 states purpose, risk, and approver."
+          },
+          {
+            "label": "Test",
+            "detail": "Staging result names the release being checked."
+          },
+          {
+            "label": "Deploy",
+            "detail": "Pipeline run links that release to production."
+          },
+          {
+            "label": "Review",
+            "detail": "Owner verifies outcome and handles exceptions."
+          }
+        ],
+        "alt": "A change identifier connects request, test, deployment, and review.",
+        "caption": "The records should refer to the same change and release.",
+        "src": "/blog/images/field-guide-soc2-collaboration-evidence-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-soc2-collaboration-evidence-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "follow-one-real-customer-workspace-2",
+      "title": "Follow one real customer workspace",
+      "html": "<p>Imagine a service provider provisioning a workspace for a consulting firm. The initial administrator assignment should trace to an approved request. Later access changes should link to authorized actors and an operating review process. A configuration release that changes guest sharing needs a tested change record and deployment evidence. If a customer reports missing files, retain the incident timeline, impact assessment, and restoration verification. Together these records demonstrate how a workspace is governed throughout its life. None requires exporting the customer's confidential files into the audit evidence folder merely to prove that the workflow occurred.</p><p>Before giving an auditor a sample, reconcile it against the authoritative system. For a deployment, that might mean matching the change request to the pipeline run, release identifier, production environment, and any emergency approval process. For an access review, compare the exported identities with the live permission sources at the relevant review time. Current membership is not a reconstruction of last quarter's population.</p><dl><dt>Population date</dt><dd>The period or point in time from which the full set was collected.</dd><dt>Control date</dt><dd>When the review or approval actually occurred.</dd><dt>Execution date</dt><dd>When the access change or deployment reached the service.</dd><dt>Closure date</dt><dd>When the owner verified any required followup.</dd></dl><p>Suppose a review approved removal on 6 May but the account was disabled on 9 May. Preserve both dates. They answer different questions and may reveal an execution delay worth addressing. If a request is missing, record that gap and the remediation; recreating an approval afterward does not make it contemporaneous. Export evidence through a repeatable process, with a manifest describing the time range and record source. This is particularly useful when controls span the editor, cloud account, and support console, each of which may use different identifiers and clocks.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "make-operating-failures-visible-3",
+      "title": "Make operating failures visible",
+      "html": "<p>A missed review or unapproved production change should enter an exception process with an owner and remediation date. Do not backdate an approval to make the evidence look complete. Distinguish a control that was designed incorrectly from one that was correctly designed but not performed. The remedies differ: the former may require a new control, while the latter may need better scheduling or escalation. For an assessment covering operation over time, a last minute screenshot cannot establish the behavior of previous months. Preserve records continuously, with protected access and a retention period aligned to the assessment.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "matrix",
+        "title": "A useful sample has coverage and execution evidence",
+        "items": [
+          {
+            "label": "Coverage",
+            "detail": "Complete population with dates and source system."
+          },
+          {
+            "label": "Decision",
+            "detail": "Who approved, reviewed, or rejected the action."
+          },
+          {
+            "label": "Execution",
+            "detail": "What actually happened and when."
+          },
+          {
+            "label": "Exception",
+            "detail": "Missing steps remain visible with remediation."
+          }
+        ],
+        "alt": "Four evidence dimensions help reviewers interpret a sample.",
+        "caption": "A large export does not compensate for a missing population.",
+        "src": "/blog/images/field-guide-soc2-collaboration-evidence-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-soc2-collaboration-evidence-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "evidence-decision-notes-4",
+      "title": "Evidence Decision notes",
+      "html": "<ul><li>Confirm service boundaries, commitments, assessment period, and supplier responsibilities.</li><li>Reconcile access and change populations with authoritative systems.</li><li>Attach approvals, execution records, and followup decisions to each sample.</li><li>Keep customer content and reusable credentials out of evidence exports.</li><li>Track missed controls openly and verify remediation.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

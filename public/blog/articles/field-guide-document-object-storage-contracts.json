@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-document-object-storage-contracts",
+  "title": "Object storage for documents: compatibility, versions, and recovery",
+  "description": "Evaluate storage semantics, temporary access, version growth, recovery, and operational responsibility with real document paths.",
+  "category": "Operations",
+  "format": "architecture",
+  "tags": [
+    "Document storage",
+    "Operations",
+    "Version control",
+    "Backup and recovery"
+  ],
+  "structure": "prose+sequence:example:diagnostic:example:note+layers:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 688,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Choosing Object Storage for a Document Platform",
+      "url": "https://shimodocs.com/blog/object-storage-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-object-storage-contracts.png",
+  "coverAlt": "Object storage for documents: compatibility, versions, and recovery: Object semantics, Worker retrieval, Version growth, Recovery pairing.",
+  "concepts": [
+    "Object semantics",
+    "Worker retrieval",
+    "Version growth",
+    "Recovery pairing",
+    "Lifecycle rules"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "inset",
+    "signature": "statement:inset",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 58
+  },
+  "contentHash": "3420122a32a092c1bf660f63c9f30c7d0d538fcf9aa5ec1394bf7d200124a0eb",
+  "intro": "Choose document object storage by the application's actual operations and recovery needs, not capacity price alone. Verify retrieval from every real consumer, API semantics, version growth, object-to-metadata consistency, and lifecycle rules. Storage compatibility is a tested integration contract rather than a shared protocol label.",
+  "sections": [
+    {
+      "id": "specify-the-object-contract-1",
+      "title": "Specify the object contract",
+      "html": "<p>List operations the platform needs: upload, read, metadata inspection, listing, deletion, multipart transfer, and any conditional writes. Verify compatibility using the application's supported storage interface and the candidate's documented semantics. Similar API names do not guarantee identical error responses, limits, or consistency behavior. Choose immutable version keys where the application architecture supports them and keep the current version relationship in an authoritative record. Clarify how failed uploads and abandoned multipart operations are cleaned up. The storage owner and application owner should agree who investigates missing objects and which system determines whether a save is complete.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "An immutable version still needs guarded publication",
+        "items": [
+          {
+            "label": "Upload candidate",
+            "detail": "Store the version-specific bytes using the supported operation."
+          },
+          {
+            "label": "Validate content",
+            "detail": "Confirm the candidate is the expected document result."
+          },
+          {
+            "label": "Publish reference",
+            "detail": "Authoritative metadata points to the accepted version."
+          },
+          {
+            "label": "Reconcile leftovers",
+            "detail": "Incomplete or stale candidates follow a documented cleanup path."
+          }
+        ],
+        "alt": "Candidate upload, validation, publication, and leftover reconciliation.",
+        "caption": "Successful object storage is one milestone, not the whole save contract.",
+        "src": "/blog/images/field-guide-document-object-storage-contracts-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-object-storage-contracts-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "an-object-inventory-should-record-its-role-2",
+      "title": "An object inventory should record its role",
+      "html": "<p>Distinguish current content, historical versions, generated previews, temporary conversions, and abandoned uploads. A lifecycle rule should act on an identified role and approved retention decision rather than assuming that every old object is obsolete.</p><table><thead><tr><th>Object role</th><th>Before deletion, verify</th></tr></thead><tbody><tr><td>Current version</td><td>No live document reference requires the bytes</td></tr><tr><td>Historical version</td><td>Version retention and preservation obligations permit disposal</td></tr><tr><td>Preview</td><td>It can be rebuilt or is no longer referenced</td></tr><tr><td>Temporary upload</td><td>The associated operation is abandoned under the cleanup policy</td></tr></tbody></table><p>Use the application's supported state model to establish these facts. Object age by itself is weak evidence: a years-old object can still be the current approved record, while yesterday's failed upload can be disposable after reconciliation.</p><p>During a restore rehearsal, sample every role that matters to users. Confirm that metadata resolves to the intended bytes and that previews reflect the restored version rather than a newer cached rendering. Keep storage and application administrators involved in the same test. They need a shared answer to whether a missing object is a storage failure, an incomplete publication, or a cleanup decision made from stale metadata.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "test-access-from-real-consumers-3",
+      "title": "Test access from real consumers",
+      "html": "<p>Document whether browsers, application servers, conversion workers, or editing services retrieve bytes. Test DNS, certificates, redirects, authorization, and transfer size from those exact network positions. When temporary links are used, verify expiry and retry behavior against storage documentation. Do not expose full signed URLs in routine logs. Include appropriate headers and cross origin configuration only where the actual client path requires them. A file opening in an administrator's browser proves little about a worker on a restricted subnet. Keep disposable objects for these checks so credentials and traces can be reviewed safely.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "model-a-revised-report-4",
+      "title": "Model a revised report",
+      "html": "<p>A team saves ten revisions of a 12 megabyte report each working day. If the platform persists complete copies, the retained byte growth differs significantly from a system storing only changed content. Measure the selected implementation rather than assuming either pattern. Save a test report, replace it, restore an older revision, and export the current one. Verify which objects remain referenced and which become eligible for cleanup. Include previews, thumbnails, and temporary conversions in the inventory. This example connects retention policy to actual object growth and prevents a misleading estimate based only on current visible file size.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "pair-recovery-and-lifecycle-policy-5",
+      "title": "Pair recovery and lifecycle policy",
+      "html": "<p>Restore tests must preserve the relationship between storage objects and application metadata. Restoring one without the other can produce missing or incorrect document versions. Verify available storage protection features and their compatibility with deletion and preservation obligations. Apply lifecycle rules only after identifying object roles and retention requirements. An age based rule can delete a still current object if age is confused with business obsolescence. Test cleanup in a limited collection and retain evidence of eligibility decisions. Include network transfer, requests, replicated copies, and recovery operations when estimating cost for the complete deployment.</p>",
+      "kind": "note",
+      "figure": {
+        "kind": "layers",
+        "title": "Restore content and relationships together",
+        "items": [
+          {
+            "label": "Stored objects",
+            "detail": "Current, retained historical, and required derived bytes."
+          },
+          {
+            "label": "Version metadata",
+            "detail": "References identify which object belongs to each business state."
+          },
+          {
+            "label": "Access and keys",
+            "detail": "Authorized users and services can retrieve the restored content."
+          },
+          {
+            "label": "Lifecycle policy",
+            "detail": "Cleanup respects live references and preservation requirements."
+          }
+        ],
+        "alt": "Objects, version metadata, access and keys, and lifecycle policy in recovery.",
+        "caption": "Independently restored components can describe incompatible document states.",
+        "src": "/blog/images/field-guide-document-object-storage-contracts-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-object-storage-contracts-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "storage-acceptance-6",
+      "title": "Storage acceptance",
+      "html": "<ul><li>Verify required operations and error semantics through the supported integration.</li><li>Test retrieval from every real consumer network.</li><li>Measure version, preview, and temporary object growth.</li><li>Restore content together with its authoritative metadata.</li><li>Validate lifecycle rules against current references and preservation requirements.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

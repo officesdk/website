@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-gdpr-document-lifecycle",
+  "title": "GDPR for collaborative documents: copies, retention, and rights",
+  "description": "Locate personal data in drafts, comments, exports, indexes, and backups before implementing retention or rights decisions.",
+  "category": "Security",
+  "format": "walkthrough",
+  "tags": [
+    "Data privacy",
+    "Security",
+    "Document storage",
+    "Access control"
+  ],
+  "structure": "prose+layers:prose:example:prose:steps+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 713,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: GDPR-Compliant Document Collaboration",
+      "url": "https://shimodocs.com/blog/gdpr-compliant-document-collaboration"
+    }
+  ],
+  "cover": "/blog/images/field-guide-gdpr-document-lifecycle.png",
+  "coverAlt": "GDPR for collaborative documents: copies, retention, and rights: Processing purpose, Data minimization, Processor chain, Retention rule.",
+  "concepts": [
+    "Processing purpose",
+    "Data minimization",
+    "Processor chain",
+    "Retention rule",
+    "Rights request"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "alternating",
+    "signature": "centered:alternating",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 77
+  },
+  "contentHash": "51bd0bcd05da4c753b8b0a9bc70913782b8d96d866eef457fa2ebd62ceb16cc4",
+  "intro": "GDPR decisions for collaborative documents must cover personal data in content, comments, history, exports, and service records. Identify the processing purpose and responsible parties first. Then implement assessed retention and rights decisions across the copies that the real workflow creates.",
+  "sections": [
+    {
+      "id": "identify-purpose-and-responsibility-1",
+      "title": "Identify purpose and responsibility",
+      "html": "<p>Record why the organization processes personal data in the document workflow and the applicable lawful basis, with the privacy team's guidance. Identify controllers, processors, and any joint arrangements according to their actual roles. For a customer onboarding workspace, the document application, editing provider, and hosting operator may have different responsibilities. Contracts and processing records should reflect the deployed arrangement rather than a generic architecture slide. Also identify the people responsible for answering rights requests and reviewing new integrations. A team cannot reliably act on a request if document ownership exists only in an employee's memory.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Personal data lives beyond the visible page",
+        "items": [
+          {
+            "label": "Content",
+            "detail": "Candidate details in narrative and scoring tables."
+          },
+          {
+            "label": "Collaboration",
+            "detail": "Comments and revisions can retain prior details."
+          },
+          {
+            "label": "Derived copies",
+            "detail": "Exports, previews, and search indexes."
+          },
+          {
+            "label": "Recovery",
+            "detail": "Backup handling follows the assessed policy."
+          }
+        ],
+        "alt": "Personal data can exist in content, collaboration, derived, and backup layers.",
+        "caption": "Use the layers to guide the search rather than promising universal deletion.",
+        "src": "/blog/images/field-guide-gdpr-document-lifecycle-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-gdpr-document-lifecycle-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "reduce-unnecessary-exposure-2",
+      "title": "Reduce unnecessary exposure",
+      "html": "<p>Suppose a recruitment team collaborates on interview summaries. Evaluators need candidate information, but a broadly shared hiring plan may only need aggregate counts. Keep individual assessments in a restricted workspace and use anonymized or appropriately aggregated data where the purpose permits. Remember that removing names does not necessarily anonymize a record if other details identify the person. Review comments, tracked changes, embedded objects, and exported versions before wider circulation. A cleaned visible page can still contain personal information in a hidden worksheet or a retained revision accessible to other users.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "map-suppliers-and-transfers-3",
+      "title": "Map suppliers and transfers",
+      "html": "<p>Document where processing occurs and which organizations can access the data, including remote support and subprocessors. Storage region alone does not describe all processing or international transfer questions. Review applicable transfer mechanisms and legal requirements with the responsible privacy specialists. Keep the supplier inventory connected to actual network routes, operational access, and backup locations. When a new AI summarization integration is proposed, evaluate its processing purpose, contractual role, retention behavior, and data destinations before activation. An optional plugin can materially change a previously reviewed document workflow even when the main editor remains in the same region.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "make-retention-operational-4",
+      "title": "Make retention operational",
+      "html": "<p>Define retention according to purpose and applicable obligations. For unsuccessful applicants, the agreed policy may specify a period, exceptions, and deletion triggers. Implement those rules across drafts, exports, search indexes, and caches, then document how backup expiry works. Handle erasure requests with the applicable exceptions and competing legal requirements assessed by the privacy owner. Avoid promising immediate physical removal from every backup if the architecture cannot provide it. A practical procedure records the request, locates affected information, determines required action, and verifies completion while preventing deleted data from silently returning during restoration.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "run-a-rights-request-with-a-location-map-5",
+      "title": "Run a rights request with a location map",
+      "html": "<p>Start a rights request by identifying the person and scope through the approved verification process. The privacy owner determines the applicable response and any lawful exceptions; the technical team locates the data and carries out that decision. Keep these responsibilities distinguishable in the ticket.</p><ol><li>Search authoritative business records and document ownership indexes for the relevant identifiers.</li><li>Inspect linked comments, revisions, attachments, and exported packages where the request applies.</li><li>Record the assessed action for each location: provide, correct, restrict, erase, retain under an exception, or investigate further.</li><li>Execute the actions with owners of the affected services and collect confirmation.</li><li>Check that search results and restoration procedures do not reintroduce data that should remain removed from active systems.</li></ol><p>For the recruitment example, a candidate name may appear in a summary document and a separate interview scoring sheet. Removing only the visible summary is not a complete search of that workflow. Equally, a backup policy may require a documented expiry and restricted use process rather than immediate selective editing. Explain the implementation accurately in the record. Keep the request log proportionate: it should track scope, decisions, locations, and completion, without becoming a permanent duplicate archive of all the personal data the team found.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "A rights decision reaches the service owners",
+        "items": [
+          {
+            "label": "Privacy decision",
+            "detail": "Determine action, scope, and lawful exceptions."
+          },
+          {
+            "label": "Location map",
+            "detail": "Identify active and derived copies."
+          },
+          {
+            "label": "Execution",
+            "detail": "Responsible owners apply the agreed action."
+          },
+          {
+            "label": "Verification",
+            "detail": "Record completion and restoration safeguards."
+          }
+        ],
+        "alt": "The privacy decision is implemented and verified across identified locations.",
+        "caption": "Engineers implement the assessed decision; the log preserves that boundary.",
+        "src": "/blog/images/field-guide-gdpr-document-lifecycle-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-gdpr-document-lifecycle-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "questions-decision-notes-closing-a-request-6",
+      "title": "Questions Decision notes closing a request",
+      "html": "<ul><li>Identify the processing purpose, responsible owner, and applicable legal basis.</li><li>Locate personal data in content, comments, history, exports, and indexes.</li><li>Confirm supplier roles, access locations, and relevant transfer arrangements.</li><li>Apply the assessed retention or rights decision across active copies.</li><li>Verify backup handling and document any lawful exception to the request.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

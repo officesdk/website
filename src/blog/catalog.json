@@ -1,0 +1,4661 @@
+[
+  {
+    "slug": "document-identifiers-and-ownership",
+    "title": "Document IDs, storage keys, and version IDs: what each should own",
+    "description": "Separate business identity, stored objects, and editor sessions so renames, copies, and migrations remain predictable.",
+    "category": "Integration",
+    "format": "architecture",
+    "tags": [
+      "Office SDK",
+      "Document storage",
+      "Version control",
+      "Multi-tenancy"
+    ],
+    "structure": "prose+layers:example:example+comparison:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 656,
+    "source": null,
+    "references": [
+      {
+        "label": "RFC 9562: Universally Unique Identifiers",
+        "url": "https://www.rfc-editor.org/rfc/rfc9562.html"
+      }
+    ],
+    "cover": "/blog/images/document-identifiers-and-ownership.png",
+    "coverAlt": "Document IDs, storage keys, and version IDs: what each should own: Business ID, Storage key, Version ID, Session ID.",
+    "concepts": [
+      "Business ID",
+      "Storage key",
+      "Version ID",
+      "Session ID",
+      "Copy ownership"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "rail-left",
+      "signature": "masthead:rail-left",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 1
+    },
+    "contentHash": "110534c5286336589e601c0eabcc814d91d3f6a3d96cc50b17689e8b60876118"
+  },
+  {
+    "slug": "first-open-source-retrieval",
+    "title": "Why an embedded document will not open: trace source retrieval",
+    "description": "Map the first document open as a sequence of owned requests, then test the retrieval path from the system that actually fetches the file.",
+    "category": "Integration",
+    "format": "troubleshooting",
+    "tags": [
+      "Embedded editing",
+      "Document storage",
+      "Troubleshooting",
+      "API integration"
+    ],
+    "structure": "prose+sequence:diagnostic:steps+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 661,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: HTTP overview",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+      }
+    ],
+    "cover": "/blog/images/first-open-source-retrieval.png",
+    "coverAlt": "Why an embedded document will not open: trace source retrieval: Open request, Access check, Source fetch, Content check.",
+    "concepts": [
+      "Open request",
+      "Access check",
+      "Source fetch",
+      "Content check",
+      "Editor ready"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "rail-left",
+      "signature": "cover-first:rail-left",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 2
+    },
+    "contentHash": "6dae9a5adec022a7d1d26c6af9bf98319fb50950b571c2f7312abf7b768fa490"
+  },
+  {
+    "slug": "preview-versus-readonly-editor",
+    "title": "Document preview vs read only editor: which view does your workflow need?",
+    "description": "Compare viewing workflows by data path, collaboration context, and permission requirements rather than the appearance of the toolbar.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Document preview",
+      "Embedded editing",
+      "Access control",
+      "Business workflows"
+    ],
+    "structure": "comparison+comparison:prose:example+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 649,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/preview-versus-readonly-editor.png",
+    "coverAlt": "Document preview vs read only editor: which view does your workflow need?: Version promise, Preview render, Live view, Server rights.",
+    "concepts": [
+      "Version promise",
+      "Preview render",
+      "Live view",
+      "Server rights",
+      "Approval snapshot"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "rail-left",
+      "signature": "overprint:rail-left",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 3
+    },
+    "contentHash": "3cdc2b466c620744b89cbb01196fc1c13479acdcd0d7e762346d589b04f5a2bc"
+  },
+  {
+    "slug": "document-save-and-version-contract",
+    "title": "What does “saved” mean in an embedded document editor?",
+    "description": "Distinguish session updates, durable application versions, and exported files to build a save contract users can trust.",
+    "category": "Integration",
+    "format": "explainer",
+    "tags": [
+      "Embedded editing",
+      "Version control",
+      "Document storage",
+      "Collaboration"
+    ],
+    "structure": "prose+layers:prose:steps:example+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 641,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: HTTP conditional requests",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Conditional_requests"
+      }
+    ],
+    "cover": "/blog/images/document-save-and-version-contract.png",
+    "coverAlt": "What does “saved” mean in an embedded document editor?: Save event, Stored candidate, Content check, Version publish.",
+    "concepts": [
+      "Save event",
+      "Stored candidate",
+      "Content check",
+      "Version publish",
+      "Recovery state"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "rail-left",
+      "signature": "report:rail-left",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 4
+    },
+    "contentHash": "5618403e469ab56cb420cc4b28acd02271ca4d347d858413dbad37c666332ebe"
+  },
+  {
+    "slug": "callback-retries-and-idempotency",
+    "title": "Webhook idempotency for document saves: keys, retries, and recovery",
+    "description": "Design callback handling around authenticated events, durable acknowledgement, and idempotent effects.",
+    "category": "Integration",
+    "format": "walkthrough",
+    "tags": [
+      "Webhooks",
+      "Version control",
+      "API integration",
+      "Document storage"
+    ],
+    "structure": "steps+sequence:prose:example+decision:diagnostic",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 667,
+    "source": null,
+    "references": [
+      {
+        "label": "AWS Builders Library: Making retries safe with idempotent APIs",
+        "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+      }
+    ],
+    "cover": "/blog/images/callback-retries-and-idempotency.png",
+    "coverAlt": "Webhook idempotency for document saves: keys, retries, and recovery: Event receipt, Operation key, Durable decision, Duplicate check.",
+    "concepts": [
+      "Event receipt",
+      "Operation key",
+      "Durable decision",
+      "Duplicate check",
+      "Retry recovery"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "rail-left",
+      "signature": "centered:rail-left",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 5
+    },
+    "contentHash": "4a189445c56c55057247cdab390bcc22b5eb7d1f9df8a5f4471bd454401b78a8"
+  },
+  {
+    "slug": "editor-permission-lifecycle",
+    "title": "Embedded editor permissions: editing, downloads, and active-session revocation",
+    "description": "Plan authorization checks for session creation, active editing, exports, and revocation across an embedded document workflow.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "Access control",
+      "Embedded editing",
+      "Security",
+      "Multi-tenancy"
+    ],
+    "structure": "comparison+matrix:prose:prose:diagnostic+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 637,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/editor-permission-lifecycle.png",
+    "coverAlt": "Embedded editor permissions: editing, downloads, and active-session revocation: Role matrix, Session scope, Active rights, Access removal.",
+    "concepts": [
+      "Role matrix",
+      "Session scope",
+      "Active rights",
+      "Access removal",
+      "Denial evidence"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "rail-left",
+      "signature": "folio:rail-left",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 6
+    },
+    "contentHash": "00d6a6b15c7131dec3f5f966026e97bea0c3e4563843b8f3d5df86a356418bf9"
+  },
+  {
+    "slug": "signed-document-url-lifetimes",
+    "title": "How long should a signed document URL remain valid?",
+    "description": "Choose link expiry from queueing, download, and retry behavior while limiting the exposure of temporary document access.",
+    "category": "Security",
+    "format": "decision-brief",
+    "tags": [
+      "Document storage",
+      "Security",
+      "Document conversion",
+      "Performance"
+    ],
+    "structure": "prose+comparison:note:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 639,
+    "source": null,
+    "references": [
+      {
+        "label": "Amazon S3: Sharing objects with presigned URLs",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html"
+      }
+    ],
+    "cover": "/blog/images/signed-document-url-lifetimes.png",
+    "coverAlt": "How long should a signed document URL remain valid?: Link issuance, Queue delay, Source transfer, Expiry boundary.",
+    "concepts": [
+      "Link issuance",
+      "Queue delay",
+      "Source transfer",
+      "Expiry boundary",
+      "Fresh access"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "rail-left",
+      "signature": "compact:rail-left",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 7
+    },
+    "contentHash": "54b025ce3e320a29d8abb4639a88c5e66aa078cbc843af0b4b316d9c7879dab7"
+  },
+  {
+    "slug": "duplicate-and-out-of-order-saves",
+    "title": "Out-of-order document saves: stop older results overwriting newer versions",
+    "description": "Use explicit version ordering and guarded publication to handle duplicates and delayed save delivery without moving content backward.",
+    "category": "Integration",
+    "format": "architecture",
+    "tags": [
+      "Webhooks",
+      "Version control",
+      "Document storage",
+      "Operations"
+    ],
+    "structure": "prose:example+sequence:note:diagnostic+comparison:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 680,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: If-Match header",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match"
+      }
+    ],
+    "cover": "/blog/images/duplicate-and-out-of-order-saves.png",
+    "coverAlt": "Out-of-order document saves: stop older results overwriting newer versions: Source revision, Candidate object, Duplicate guard, Publish guard.",
+    "concepts": [
+      "Source revision",
+      "Candidate object",
+      "Duplicate guard",
+      "Publish guard",
+      "Current version"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "rail-left",
+      "signature": "ledger:rail-left",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 8
+    },
+    "contentHash": "455940779832afb79bfe414bac03664e0d5eff478eeb099bf6cc833991feeff4"
+  },
+  {
+    "slug": "collaboration-versus-file-conflicts",
+    "title": "Why collaborative editing does not resolve uploaded file conflicts",
+    "description": "Understand why a collaborative editor still needs application rules for uploads, restores, and external replacements.",
+    "category": "Office workflows",
+    "format": "explainer",
+    "tags": [
+      "Collaboration",
+      "Version control",
+      "Document storage",
+      "Business workflows"
+    ],
+    "structure": "prose+layers:comparison:steps:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 664,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: HTTP conditional requests",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Conditional_requests"
+      }
+    ],
+    "cover": "/blog/images/collaboration-versus-file-conflicts.png",
+    "coverAlt": "Why collaborative editing does not resolve uploaded file conflicts: Live edits, File replacement, Base version, Conflict policy.",
+    "concepts": [
+      "Live edits",
+      "File replacement",
+      "Base version",
+      "Conflict policy",
+      "Guarded update"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "rail-left",
+      "signature": "visual-first:rail-left",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 9
+    },
+    "contentHash": "49dfdf1ebce9f22d27b3aefa3da9113892da8a3589ddb33bbd7d953c8f205eb6"
+  },
+  {
+    "slug": "document-upload-quarantine",
+    "title": "Document upload quarantine: release the bytes you actually scanned",
+    "description": "Structure uploads so validation, scanning, and release happen before untrusted files reach shared document workflows.",
+    "category": "Security",
+    "format": "walkthrough",
+    "tags": [
+      "Security",
+      "Document storage",
+      "Document conversion",
+      "Access control"
+    ],
+    "structure": "steps+flow:diagnostic:example+decision:example:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 636,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: File Upload Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/document-upload-quarantine.png",
+    "coverAlt": "Document upload quarantine: release the bytes you actually scanned: Upload receipt, Quarantine, Content scan, Validated bytes.",
+    "concepts": [
+      "Upload receipt",
+      "Quarantine",
+      "Content scan",
+      "Validated bytes",
+      "Release decision"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "rail-left",
+      "signature": "statement:rail-left",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 10
+    },
+    "contentHash": "7fa339b4cd93b9a8c11af4fed2e11c3cd2cc57b23d6c35c0f484eb58d247dea8"
+  },
+  {
+    "slug": "pdf-fidelity-acceptance",
+    "title": "How to test Word, Excel, and presentation conversion to PDF",
+    "description": "Compare structure, critical values, and rendered pages with an agreed corpus instead of relying on a successful conversion response.",
+    "category": "Office workflows",
+    "format": "playbook",
+    "tags": [
+      "PDF",
+      "Document conversion",
+      "Word documents",
+      "Excel spreadsheets",
+      "Presentations"
+    ],
+    "structure": "prose:comparison+matrix:steps:example+document:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 641,
+    "source": null,
+    "references": [
+      {
+        "label": "PDF Association: PDF technical resources",
+        "url": "https://pdfa.org/resource/"
+      }
+    ],
+    "cover": "/blog/images/pdf-fidelity-acceptance.png",
+    "coverAlt": "How to test Word, Excel, and presentation conversion to PDF: Reference file, Text accuracy, Page layout, Table boundaries.",
+    "concepts": [
+      "Reference file",
+      "Text accuracy",
+      "Page layout",
+      "Table boundaries",
+      "Release criteria"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "rail-left",
+      "signature": "field-notes:rail-left",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 11
+    },
+    "contentHash": "09fbc63f5bbfb05804557e570ebb2e8ad49b09f96eafa9d46c5c760bde5f5187"
+  },
+  {
+    "slug": "spreadsheet-locale-and-date-safety",
+    "title": "Spreadsheet locale bugs: dates, decimal separators, and leading zeros",
+    "description": "Test stored values, display formats, and text imports separately when spreadsheets move between users and systems.",
+    "category": "Office workflows",
+    "format": "troubleshooting",
+    "tags": [
+      "Excel spreadsheets",
+      "Document conversion",
+      "Integrations",
+      "Business workflows"
+    ],
+    "structure": "diagnostic+comparison:note:steps+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 634,
+    "source": null,
+    "references": [
+      {
+        "label": "Microsoft Support: Date systems in Excel",
+        "url": "https://support.microsoft.com/en-us/office/date-systems-in-excel-e7fe7167-48a9-4b96-bb53-5612a800b487"
+      }
+    ],
+    "cover": "/blog/images/spreadsheet-locale-and-date-safety.png",
+    "coverAlt": "Spreadsheet locale bugs: dates, decimal separators, and leading zeros: Stored values, Display locale, Ambiguous text, Date semantics.",
+    "concepts": [
+      "Stored values",
+      "Display locale",
+      "Ambiguous text",
+      "Date semantics",
+      "Roundtrip checks"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "rail-left",
+      "signature": "exhibit:rail-left",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 12
+    },
+    "contentHash": "db12125880c4e25f418ca89f17d521da0fb28b8a82583bfd9df4ac204a79b845"
+  },
+  {
+    "slug": "accessible-document-preview",
+    "title": "Accessible document previews: keyboard, reading order, and zoom tests",
+    "description": "Evaluate keyboard use, reading order, zoom, and meaningful alternatives across the preview shell and rendered document.",
+    "category": "Office workflows",
+    "format": "field-notes",
+    "tags": [
+      "Accessibility",
+      "Document preview",
+      "PDF",
+      "Business workflows"
+    ],
+    "structure": "prose:diagnostic+layers:prose:example+flow:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 664,
+    "source": null,
+    "references": [
+      {
+        "label": "W3C: Web Content Accessibility Guidelines 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/"
+      }
+    ],
+    "cover": "/blog/images/accessible-document-preview.png",
+    "coverAlt": "Accessible document previews: keyboard, reading order, and zoom tests: Reading tasks, Text structure, Keyboard focus, Screen reader.",
+    "concepts": [
+      "Reading tasks",
+      "Text structure",
+      "Keyboard focus",
+      "Screen reader",
+      "View alternatives"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "rail-right",
+      "signature": "masthead:rail-right",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 13
+    },
+    "contentHash": "d5c27ae87f232d042c032cde59f96df09491a2df94896cf0a07ec01500ced803"
+  },
+  {
+    "slug": "font-deployment-as-a-dependency",
+    "title": "Missing fonts in document conversion: deployment and diagnosis",
+    "description": "Inventory, license, install, and verify fonts across editing and conversion environments to reduce unexplained layout changes.",
+    "category": "Self-hosting",
+    "format": "playbook",
+    "tags": [
+      "Self-hosting",
+      "Document conversion",
+      "Word documents",
+      "Presentations",
+      "Troubleshooting"
+    ],
+    "structure": "diagnostic+matrix:note:steps+flow:example",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 660,
+    "source": null,
+    "references": [
+      {
+        "label": "Microsoft Typography: Fonts and products",
+        "url": "https://learn.microsoft.com/en-us/typography/fonts/"
+      }
+    ],
+    "cover": "/blog/images/font-deployment-as-a-dependency.png",
+    "coverAlt": "Missing fonts in document conversion: deployment and diagnosis: Font inventory, Usage rights, Font install, Layout fixture.",
+    "concepts": [
+      "Font inventory",
+      "Usage rights",
+      "Font install",
+      "Layout fixture",
+      "Release checks"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "rail-right",
+      "signature": "cover-first:rail-right",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 14
+    },
+    "contentHash": "afd0e543dcfdb8ec6af00164f8f5dca250a96fb88d6f83b2bfd0f05040b24fca"
+  },
+  {
+    "slug": "large-workbook-acceptance",
+    "title": "Large Excel workbook testing: formulas matter more than megabytes",
+    "description": "Build a workbook acceptance matrix that covers formulas, formatting, charts, and user tasks alongside byte size.",
+    "category": "Operations",
+    "format": "field-notes",
+    "tags": [
+      "Excel spreadsheets",
+      "Performance",
+      "Operations",
+      "Document conversion"
+    ],
+    "structure": "prose+matrix:steps:note:example+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 648,
+    "source": null,
+    "references": [
+      {
+        "label": "Microsoft Learn: Excel performance and calculation",
+        "url": "https://learn.microsoft.com/en-us/office/vba/excel/concepts/excel-performance/excel-improving-calculation-performance"
+      }
+    ],
+    "cover": "/blog/images/large-workbook-acceptance.png",
+    "coverAlt": "Large Excel workbook testing: formulas matter more than megabytes: Formula graph, Workbook shape, Open latency, Edit response.",
+    "concepts": [
+      "Formula graph",
+      "Workbook shape",
+      "Open latency",
+      "Edit response",
+      "Task limits"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "rail-right",
+      "signature": "overprint:rail-right",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 15
+    },
+    "contentHash": "f4f0be83ee3131b3e16e35ec0ff068c1e7fb29adb2833cc1d6b281ea8d0b8c61"
+  },
+  {
+    "slug": "conversion-queue-backpressure",
+    "title": "Document conversion queues: backpressure, fairness, and retry limits",
+    "description": "Use admission limits, fair scheduling, and visible queue states to preserve predictable conversion behavior under bursts.",
+    "category": "Operations",
+    "format": "architecture",
+    "tags": [
+      "Document conversion",
+      "Performance",
+      "Operations",
+      "Multi-tenancy"
+    ],
+    "structure": "prose+layers:prose:note:diagnostic+flow",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 645,
+    "source": null,
+    "references": [
+      {
+        "label": "Google SRE Book: Handling Overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      }
+    ],
+    "cover": "/blog/images/conversion-queue-backpressure.png",
+    "coverAlt": "Document conversion queues: backpressure, fairness, and retry limits: Admission limit, Work classes, Worker capacity, Queue status.",
+    "concepts": [
+      "Admission limit",
+      "Work classes",
+      "Worker capacity",
+      "Queue status",
+      "Overload response"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "rail-right",
+      "signature": "report:rail-right",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 16
+    },
+    "contentHash": "b0c24b9a03da413c6e11e8bfab9b4adc658250380abac41b6e9c04b5f28d292a"
+  },
+  {
+    "slug": "stale-preview-invalidation",
+    "title": "Stale document previews: versioned cache keys and safe publication",
+    "description": "Design preview cache keys and publication rules so a fast cached response does not show silently outdated content.",
+    "category": "Integration",
+    "format": "troubleshooting",
+    "tags": [
+      "Document preview",
+      "Version control",
+      "Document conversion",
+      "Document storage"
+    ],
+    "structure": "example+layers:steps:prose:diagnostic+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 665,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: HTTP caching",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
+      }
+    ],
+    "cover": "/blog/images/stale-preview-invalidation.png",
+    "coverAlt": "Stale document previews: versioned cache keys and safe publication: Source version, Render inputs, Cache key, Matching publish.",
+    "concepts": [
+      "Source version",
+      "Render inputs",
+      "Cache key",
+      "Matching publish",
+      "View freshness"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "rail-right",
+      "signature": "centered:rail-right",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 17
+    },
+    "contentHash": "ea95c28f7f2bd456405c6271d59a6644755202c1b88591ca048ba761ef4f84f3"
+  },
+  {
+    "slug": "document-import-progress-and-recovery",
+    "title": "Document import progress: safe retries after upload and conversion failures",
+    "description": "Give users honest progress, safe retries, and clear recovery when upload, validation, conversion, or registration fails.",
+    "category": "Office workflows",
+    "format": "walkthrough",
+    "tags": [
+      "Document conversion",
+      "Document storage",
+      "Business workflows",
+      "Accessibility"
+    ],
+    "structure": "steps+flow:prose:note:example+matrix",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 659,
+    "source": null,
+    "references": [
+      {
+        "label": "W3C WAI: Understanding status messages",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
+      }
+    ],
+    "cover": "/blog/images/document-import-progress-and-recovery.png",
+    "coverAlt": "Document import progress: safe retries after upload and conversion failures: Import stages, Durable state, Stage retry, Cancellation.",
+    "concepts": [
+      "Import stages",
+      "Durable state",
+      "Stage retry",
+      "Cancellation",
+      "Completion proof"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "rail-right",
+      "signature": "folio:rail-right",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 18
+    },
+    "contentHash": "6df797016ba8145f47fb34ab3c6ddc8f53fb985adb19f975c0d35abb5476b837"
+  },
+  {
+    "slug": "document-trace-id-design",
+    "title": "Trace IDs for document opening, conversion, and save failures",
+    "description": "Connect launch, retrieval, conversion, and save evidence without placing document content or credentials in telemetry.",
+    "category": "Operations",
+    "format": "architecture",
+    "tags": [
+      "Operations",
+      "Troubleshooting",
+      "API integration",
+      "Audit logs"
+    ],
+    "structure": "comparison+layers:prose:example:note:checklist:diagnostic+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 662,
+    "source": null,
+    "references": [
+      {
+        "label": "W3C: Trace Context",
+        "url": "https://www.w3.org/TR/trace-context/"
+      }
+    ],
+    "cover": "/blog/images/document-trace-id-design.png",
+    "coverAlt": "Trace IDs for document opening, conversion, and save failures: Operation ID, Request trace, Queue context, Callback link.",
+    "concepts": [
+      "Operation ID",
+      "Request trace",
+      "Queue context",
+      "Callback link",
+      "Support lookup"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "rail-right",
+      "signature": "compact:rail-right",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 19
+    },
+    "contentHash": "c3872b505c8e31ac38ce35217d9fba563a1359d84153e261fd49dd9185b42e2f"
+  },
+  {
+    "slug": "document-incident-reproduction-kit",
+    "title": "How to reproduce document rendering and editing bugs for support",
+    "description": "Collect the environment, operation sequence, and smallest useful fixture so document failures can be reproduced safely and precisely.",
+    "category": "Operations",
+    "format": "playbook",
+    "tags": [
+      "Troubleshooting",
+      "Operations",
+      "Data privacy",
+      "Document conversion"
+    ],
+    "structure": "diagnostic+flow:steps:example:example+document",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 646,
+    "source": null,
+    "references": [
+      {
+        "label": "Google SRE Book: Effective Troubleshooting",
+        "url": "https://sre.google/sre-book/effective-troubleshooting/"
+      }
+    ],
+    "cover": "/blog/images/document-incident-reproduction-kit.png",
+    "coverAlt": "How to reproduce document rendering and editing bugs for support: Observed symptom, Trigger sequence, Minimal fixture, Safe evidence.",
+    "concepts": [
+      "Observed symptom",
+      "Trigger sequence",
+      "Minimal fixture",
+      "Safe evidence",
+      "Support handoff"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "rail-right",
+      "signature": "ledger:rail-right",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 20
+    },
+    "contentHash": "5a83289e4b0ea676eecf83888b0029049baf73c7bed8da2448702546b6487300"
+  },
+  {
+    "slug": "sso-and-editor-session-logout",
+    "title": "SSO logout with an embedded editor: which sessions actually end?",
+    "description": "Identify separate session lifetimes and verify what logout, account switching, and access revocation actually terminate.",
+    "category": "Security",
+    "format": "decision-brief",
+    "tags": [
+      "Security",
+      "Access control",
+      "Embedded editing",
+      "Integrations"
+    ],
+    "structure": "comparison+layers:note:diagnostic:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 653,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: Session Management Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/sso-and-editor-session-logout.png",
+    "coverAlt": "SSO logout with an embedded editor: which sessions actually end?: Session inventory, Logout contract, Editor session, Account switch.",
+    "concepts": [
+      "Session inventory",
+      "Logout contract",
+      "Editor session",
+      "Account switch",
+      "Expiry checks"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "rail-right",
+      "signature": "visual-first:rail-right",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 21
+    },
+    "contentHash": "ce026ca6aa4ddc952b417cae9216c8dcfe349eb1c22c579be15b869687a22ebc"
+  },
+  {
+    "slug": "embedded-editor-content-security-policy",
+    "title": "Content Security Policy for embedded editors: frames, connections, and origins",
+    "description": "Use a narrow, tested content security policy for the host page and understand which controls belong to the embedded origin.",
+    "category": "Security",
+    "format": "walkthrough",
+    "tags": [
+      "Security",
+      "Embedded editing",
+      "Integrations",
+      "Troubleshooting"
+    ],
+    "structure": "diagnostic+comparison:steps:steps:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 649,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: Content Security Policy",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP"
+      }
+    ],
+    "cover": "/blog/images/embedded-editor-content-security-policy.png",
+    "coverAlt": "Content Security Policy for embedded editors: frames, connections, and origins: Host policy, Frame boundary, Resource origins, Policy reports.",
+    "concepts": [
+      "Host policy",
+      "Frame boundary",
+      "Resource origins",
+      "Policy reports",
+      "Enforced rules"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "rail-right",
+      "signature": "statement:rail-right",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 22
+    },
+    "contentHash": "9014f4b39005a8dcd1950e54b405fc92002e0ba50ee36a0bf01874a3f8587ca2"
+  },
+  {
+    "slug": "browser-loading-policy-for-editors",
+    "title": "Embedded editor not loading in one browser: a diagnostic sequence",
+    "description": "Distinguish cookies, mixed content, cross origin requests, extensions, and engine compatibility when an embedded editor fails to load.",
+    "category": "Operations",
+    "format": "troubleshooting",
+    "tags": [
+      "Troubleshooting",
+      "Embedded editing",
+      "Security",
+      "Operations"
+    ],
+    "structure": "diagnostic+decision:steps:prose:checklist:note+comparison",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 659,
+    "source": null,
+    "references": [
+      {
+        "label": "MDN: Third-party cookies",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Third-party_cookies"
+      }
+    ],
+    "cover": "/blog/images/browser-loading-policy-for-editors.png",
+    "coverAlt": "Embedded editor not loading in one browser: a diagnostic sequence: Failed request, Browser profile, Policy boundary, Engine version.",
+    "concepts": [
+      "Failed request",
+      "Browser profile",
+      "Policy boundary",
+      "Engine version",
+      "Controlled retry"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "rail-right",
+      "signature": "field-notes:rail-right",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 23
+    },
+    "contentHash": "55dead64a6bbe389142155357b722eb4f75e7ebf3720159af76ddd4d660cc61d"
+  },
+  {
+    "slug": "network-isolated-document-testing",
+    "title": "Testing a self-hosted document system with outbound internet blocked",
+    "description": "Inventory network dependencies and test complete document workflows under the actual allowed routes of an isolated environment.",
+    "category": "Self-hosting",
+    "format": "playbook",
+    "tags": [
+      "Self-hosting",
+      "Data residency",
+      "Operations",
+      "Document storage",
+      "Integrations"
+    ],
+    "structure": "prose:steps+matrix:diagnostic:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 638,
+    "source": null,
+    "references": [
+      {
+        "label": "NIST: Zero Trust Architecture",
+        "url": "https://csrc.nist.gov/pubs/sp/800/207/final"
+      }
+    ],
+    "cover": "/blog/images/network-isolated-document-testing.png",
+    "coverAlt": "Testing a self-hosted document system with outbound internet blocked: Dependency map, Network zones, Local resources, Cold start.",
+    "concepts": [
+      "Dependency map",
+      "Network zones",
+      "Local resources",
+      "Cold start",
+      "Isolation proof"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "rail-right",
+      "signature": "exhibit:rail-right",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 24
+    },
+    "contentHash": "8b4a9dff1e1eeb0d2e149214323cc1628fb2cb3c4be0306fead384d4aec63e10"
+  },
+  {
+    "slug": "document-poc-corpus-and-criteria",
+    "title": "Office SDK proof of concept: choose files and pass criteria before the demo",
+    "description": "Choose realistic files, user tasks, and acceptance criteria before a pilot so results support an actual deployment decision.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Office SDK",
+      "Product selection",
+      "Document conversion",
+      "Business workflows"
+    ],
+    "structure": "steps+matrix:comparison:note:example+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 639,
+    "source": null,
+    "references": [
+      {
+        "label": "Office SDK integration topics",
+        "url": "https://officeapi.ai/blog/"
+      }
+    ],
+    "cover": "/blog/images/document-poc-corpus-and-criteria.png",
+    "coverAlt": "Office SDK proof of concept: choose files and pass criteria before the demo: Test corpus, Business tasks, Expected output, Pilot evidence.",
+    "concepts": [
+      "Test corpus",
+      "Business tasks",
+      "Expected output",
+      "Pilot evidence",
+      "Decision record"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "wide",
+      "signature": "masthead:wide",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 25
+    },
+    "contentHash": "d6486ca97cfd072c0837dcd78086b97f29751c78100ff707b01503982411a004"
+  },
+  {
+    "slug": "phased-document-rollout",
+    "title": "Rolling out an embedded editor safely: cohorts, release gates, and rollback",
+    "description": "Release to defined cohorts, observe content and save behavior, and prepare a rollback that respects documents already changed.",
+    "category": "Operations",
+    "format": "playbook",
+    "tags": [
+      "Operations",
+      "Embedded editing",
+      "Version control",
+      "Migration"
+    ],
+    "structure": "prose+flow:steps:comparison+layers:example",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 644,
+    "source": null,
+    "references": [
+      {
+        "label": "Google SRE Workbook: Canarying Releases",
+        "url": "https://sre.google/workbook/canarying-releases/"
+      }
+    ],
+    "cover": "/blog/images/phased-document-rollout.png",
+    "coverAlt": "Rolling out an embedded editor safely: cohorts, release gates, and rollback: Pilot cohort, Business gates, Data rollback, Support readiness.",
+    "concepts": [
+      "Pilot cohort",
+      "Business gates",
+      "Data rollback",
+      "Support readiness",
+      "Phase decision"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "wide",
+      "signature": "cover-first:wide",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 26
+    },
+    "contentHash": "97ebbab2defae4364419d3aa01a78f84730fda82597b99087df01b7c96daf2ca"
+  },
+  {
+    "slug": "document-content-extraction-boundaries",
+    "title": "Document text extraction: hidden content, formulas, and source locations",
+    "description": "Set explicit extraction rules for visible text, comments, hidden sheets, formulas, images, and embedded objects.",
+    "category": "AI & documents",
+    "format": "explainer",
+    "tags": [
+      "AI documents",
+      "Document search",
+      "RAG",
+      "Data privacy",
+      "Excel spreadsheets"
+    ],
+    "structure": "comparison+matrix:prose:note:checklist:example+document",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 659,
+    "source": null,
+    "references": [
+      {
+        "label": "Apache Tika: Document content analysis",
+        "url": "https://tika.apache.org/"
+      }
+    ],
+    "cover": "/blog/images/document-content-extraction-boundaries.png",
+    "coverAlt": "Document text extraction: hidden content, formulas, and source locations: Content scope, Source locations, Formula handling, Image treatment.",
+    "concepts": [
+      "Content scope",
+      "Source locations",
+      "Formula handling",
+      "Image treatment",
+      "Extraction checks"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "wide",
+      "signature": "overprint:wide",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 27
+    },
+    "contentHash": "7fb09103102257e6d0d2484dfb066128834562a673a34c32fa57dbac3870c7f6"
+  },
+  {
+    "slug": "ai-document-data-minimization",
+    "title": "AI document data minimization: select the context before calling the model",
+    "description": "Reduce unnecessary document exposure with task scoped selection, permission checks, and explicit handling of derived content.",
+    "category": "AI & documents",
+    "format": "architecture",
+    "tags": [
+      "AI documents",
+      "Data privacy",
+      "RAG",
+      "Access control"
+    ],
+    "structure": "example+flow:prose:note:diagnostic+comparison",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 672,
+    "source": null,
+    "references": [
+      {
+        "label": "NIST: AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+      }
+    ],
+    "cover": "/blog/images/ai-document-data-minimization.png",
+    "coverAlt": "AI document data minimization: select the context before calling the model: Task scope, Access filter, Selected context, Provider retention.",
+    "concepts": [
+      "Task scope",
+      "Access filter",
+      "Selected context",
+      "Provider retention",
+      "Output review"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "wide",
+      "signature": "report:wide",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 28
+    },
+    "contentHash": "5336ac71441ca27548d120ca583dad2007700768735bbf62dd7a38d98cc522b9"
+  },
+  {
+    "slug": "ai-document-answer-provenance",
+    "title": "AI document citations: link answers to the exact source version",
+    "description": "Attach useful provenance to generated answers so readers can inspect evidence, detect stale sources, and review uncertainty.",
+    "category": "AI & documents",
+    "format": "walkthrough",
+    "tags": [
+      "AI documents",
+      "RAG",
+      "Document search",
+      "Version control",
+      "Access control"
+    ],
+    "structure": "example+layers:steps:note:prose:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 769,
+    "source": null,
+    "references": [
+      {
+        "label": "NIST: Generative AI Profile",
+        "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      }
+    ],
+    "cover": "/blog/images/ai-document-answer-provenance.png",
+    "coverAlt": "AI document citations: link answers to the exact source version: Source version, Retrieved passage, Answer citation, Access boundary.",
+    "concepts": [
+      "Source version",
+      "Retrieved passage",
+      "Answer citation",
+      "Access boundary",
+      "Evidence review"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "wide",
+      "signature": "centered:wide",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 29
+    },
+    "contentHash": "e3a93040e5dfcf8a473a972f2dc470912aa481529e22bedb83cd5c6a64e97ce4"
+  },
+  {
+    "slug": "editable-presentation-acceptance",
+    "title": "Presentation conversion: how to verify slides remain editable",
+    "description": "Verify text, shapes, charts, notes, and master behavior when a presentation must remain editable after import or conversion.",
+    "category": "Office workflows",
+    "format": "comparison",
+    "tags": [
+      "Presentations",
+      "Document conversion",
+      "Embedded editing",
+      "Business workflows"
+    ],
+    "structure": "prose:comparison+comparison:diagnostic:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 655,
+    "source": null,
+    "references": [
+      {
+        "label": "Microsoft Learn: Working with presentations",
+        "url": "https://learn.microsoft.com/en-us/office/open-xml/presentation/working-with-presentations"
+      }
+    ],
+    "cover": "/blog/images/editable-presentation-acceptance.png",
+    "coverAlt": "Presentation conversion: how to verify slides remain editable: Editable objects, Slide structure, Theme behavior, Revision task.",
+    "concepts": [
+      "Editable objects",
+      "Slide structure",
+      "Theme behavior",
+      "Revision task",
+      "Export readback"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "wide",
+      "signature": "folio:wide",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 30
+    },
+    "contentHash": "864ae58d45b1c51b8d43c5a58b66e6de3f7e282b6f221edf379c8ea1c7a65104"
+  },
+  {
+    "slug": "document-template-governance",
+    "title": "Document template versioning: approvals, placeholders, and retirement",
+    "description": "Separate approved template versions from created documents, with clear ownership, change review, and retirement behavior.",
+    "category": "Office workflows",
+    "format": "playbook",
+    "tags": [
+      "Document automation",
+      "Version control",
+      "Business workflows",
+      "Access control"
+    ],
+    "structure": "prose+sequence:steps:example:checklist:example+comparison",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 3,
+    "wordCount": 630,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/document-template-governance.png",
+    "coverAlt": "Document template versioning: approvals, placeholders, and retirement: Template version, Created document, Content owner, Dynamic fields.",
+    "concepts": [
+      "Template version",
+      "Created document",
+      "Content owner",
+      "Dynamic fields",
+      "Release review"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "wide",
+      "signature": "compact:wide",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 31
+    },
+    "contentHash": "02dece8c7600a61e4393cc2ccf49464f6b1fb2968ba011ce88ff0455f21fe56b"
+  },
+  {
+    "slug": "distributed-document-backup-drill",
+    "title": "Document backup and restore: metadata, files, permissions, and pending jobs",
+    "description": "Test recovery of metadata, stored bytes, versions, permissions, and integration mappings as one coherent document state.",
+    "category": "Self-hosting",
+    "format": "playbook",
+    "tags": [
+      "Backup and recovery",
+      "Document storage",
+      "Self-hosting",
+      "Operations",
+      "Version control"
+    ],
+    "structure": "prose:prose:comparison+layers:note:example+sequence:checklist:prose",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 759,
+    "source": null,
+    "references": [
+      {
+        "label": "NIST: Contingency Planning Guide for Federal Information Systems",
+        "url": "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final"
+      }
+    ],
+    "cover": "/blog/images/distributed-document-backup-drill.png",
+    "coverAlt": "Document backup and restore: metadata, files, permissions, and pending jobs: State inventory, Consistent backup, Isolated restore, Version readback.",
+    "concepts": [
+      "State inventory",
+      "Consistent backup",
+      "Isolated restore",
+      "Version readback",
+      "Recovery evidence"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "wide",
+      "signature": "ledger:wide",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 32
+    },
+    "contentHash": "2a78f153aaddb769627f5785ab800ee7c736b5790ec6a7ae559b6a8211331530"
+  },
+  {
+    "slug": "document-migration-reconciliation",
+    "title": "Document migration validation: reconcile every file, version, and permission",
+    "description": "Track every source document through transfer, transformation, permission mapping, and final acceptance with an auditable manifest.",
+    "category": "Migration",
+    "format": "walkthrough",
+    "tags": [
+      "Migration",
+      "Document storage",
+      "Version control",
+      "Access control"
+    ],
+    "structure": "steps:example+flow:comparison:prose:checklist:example+matrix",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 666,
+    "source": null,
+    "references": [
+      {
+        "label": "Microsoft Learn: Migration assessment guidance",
+        "url": "https://learn.microsoft.com/en-us/sharepointmigration/overview-of-the-sharepoint-migration-assessment-tool"
+      }
+    ],
+    "cover": "/blog/images/document-migration-reconciliation.png",
+    "coverAlt": "Document migration validation: reconcile every file, version, and permission: Source manifest, Content transfer, Format transform, Access mapping.",
+    "concepts": [
+      "Source manifest",
+      "Content transfer",
+      "Format transform",
+      "Access mapping",
+      "Cutover evidence"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "wide",
+      "signature": "visual-first:wide",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 33
+    },
+    "contentHash": "cd5dcf060f235790da606f3236eefdc2a4fe0d9dd6a3df026d42ba6e0479c62e"
+  },
+  {
+    "slug": "document-deletion-lifecycle",
+    "title": "Document deletion: remove previews, search data, versions, and temporary copies",
+    "description": "Turn document deletion into a tracked lifecycle with clear user visibility, retention rules, and cleanup of derived copies.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "Security",
+      "Data privacy",
+      "Document storage",
+      "Document search",
+      "Backup and recovery"
+    ],
+    "structure": "prose:comparison+layers:steps:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 649,
+    "source": null,
+    "references": [
+      {
+        "label": "NIST: Guidelines for Media Sanitization",
+        "url": "https://csrc.nist.gov/pubs/sp/800/88/r2/final"
+      }
+    ],
+    "cover": "/blog/images/document-deletion-lifecycle.png",
+    "coverAlt": "Document deletion: remove previews, search data, versions, and temporary copies: Deletion state, Copy inventory, Cleanup queue, Index removal.",
+    "concepts": [
+      "Deletion state",
+      "Copy inventory",
+      "Cleanup queue",
+      "Index removal",
+      "Disposal evidence"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "wide",
+      "signature": "statement:wide",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 34
+    },
+    "contentHash": "64edffe63c8678baa2fd41bb30a12e5eb4cf885c47ff980c8d71c0ce81a084fe"
+  },
+  {
+    "slug": "document-capacity-measurement",
+    "title": "Office document capacity planning: sessions, conversions, and save traffic",
+    "description": "Distinguish open sessions, requests, conversions, and save traffic so capacity estimates reflect the real document workload.",
+    "category": "Operations",
+    "format": "field-notes",
+    "tags": [
+      "Performance",
+      "Operations",
+      "Document conversion",
+      "Collaboration"
+    ],
+    "structure": "comparison+matrix:prose:steps:example+comparison:checklist:diagnostic",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 746,
+    "source": null,
+    "references": [
+      {
+        "label": "Google SRE Book: Monitoring Distributed Systems",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      }
+    ],
+    "cover": "/blog/images/document-capacity-measurement.png",
+    "coverAlt": "Office document capacity planning: sessions, conversions, and save traffic: Workload units, User latency, Resource use, Peak scenarios.",
+    "concepts": [
+      "Workload units",
+      "User latency",
+      "Resource use",
+      "Peak scenarios",
+      "Capacity decision"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "wide",
+      "signature": "field-notes:wide",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 35
+    },
+    "contentHash": "ee36b2fbdff8d0f781ba5322f392ddf04149857e300f93c3e5bac86d6cdfcf61"
+  },
+  {
+    "slug": "document-format-routing",
+    "title": "Document format routing: choose preview, editing, conversion, or download",
+    "description": "Choose preview, editing, conversion, or download paths using validated content type and task requirements, with clear fallback behavior.",
+    "category": "Integration",
+    "format": "decision-brief",
+    "tags": [
+      "Document preview",
+      "Document conversion",
+      "API integration",
+      "Security"
+    ],
+    "structure": "prose:comparison+decision:diagnostic:checklist:example+matrix",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 638,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: File Upload Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/document-format-routing.png",
+    "coverAlt": "Document format routing: choose preview, editing, conversion, or download: Format detection, Capability check, Routing policy, Protected inputs.",
+    "concepts": [
+      "Format detection",
+      "Capability check",
+      "Routing policy",
+      "Protected inputs",
+      "Route acceptance"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "wide",
+      "signature": "exhibit:wide",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 36
+    },
+    "contentHash": "4f78ff0215ca28238d3371a3a9b4bef33178e24c17e8a0028ef73d364cbe57a6"
+  },
+  {
+    "slug": "document-audit-events-that-explain-actions",
+    "title": "Document audit logs: record actors, versions, and completed business actions",
+    "description": "Record business actions, version relationships, and authorization context without confusing audit history with raw application logs.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "Audit logs",
+      "Security",
+      "Version control",
+      "Operations",
+      "Access control"
+    ],
+    "structure": "prose:example+layers:note:checklist:example+sequence",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 657,
+    "source": null,
+    "references": [
+      {
+        "label": "OWASP: Logging Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
+      }
+    ],
+    "cover": "/blog/images/document-audit-events-that-explain-actions.png",
+    "coverAlt": "Document audit logs: record actors, versions, and completed business actions: Business event, Actor identity, State change, Record integrity.",
+    "concepts": [
+      "Business event",
+      "Actor identity",
+      "State change",
+      "Record integrity",
+      "Incident replay"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "chapter-rail",
+      "signature": "masthead:chapter-rail",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 37
+    },
+    "contentHash": "f1b64f20c0cde662b562dcfc58cb9461c56336b603a8d3533ceacbc28fe6b342"
+  },
+  {
+    "slug": "field-guide-retiring-a-server-document-estate",
+    "title": "SharePoint Server retirement: what to migrate beyond the files",
+    "description": "Build a replacement inventory around records, permissions, workflows, and recovery obligations.",
+    "category": "Office workflows",
+    "format": "playbook",
+    "tags": [
+      "Migration",
+      "Business workflows",
+      "Version control",
+      "Access control"
+    ],
+    "structure": "prose+layers:prose:example:steps+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 672,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: SharePoint Server Is Out of Support. What You Replace.",
+        "url": "https://shimodocs.com/blog/sharepoint-server-after-support-ends"
+      }
+    ],
+    "cover": "/blog/images/field-guide-retiring-a-server-document-estate.png",
+    "coverAlt": "SharePoint Server retirement: what to migrate beyond the files: Estate inventory, Workflow owners, Link mapping, Cutover gates.",
+    "concepts": [
+      "Estate inventory",
+      "Workflow owners",
+      "Link mapping",
+      "Cutover gates",
+      "Readback evidence"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "chapter-rail",
+      "signature": "cover-first:chapter-rail",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 38
+    },
+    "contentHash": "1af16a6067caf2875170a1cba6e77aa8ab8563d39c3d494c201f516ea5f7b5f6"
+  },
+  {
+    "slug": "field-guide-confidential-editing-and-suite-requirements",
+    "title": "Zero-knowledge document editors: workflow and recovery trade-offs",
+    "description": "Separate cryptographic assurances from the search, recovery, sharing, and administration work a team needs.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Security",
+      "Data privacy",
+      "Product selection",
+      "Collaboration"
+    ],
+    "structure": "prose+layers:comparison:example:prose+decision:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 692,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: A Zero-Knowledge Editor Is Not a Document Suite",
+        "url": "https://shimodocs.com/blog/zero-knowledge-editor-vs-document-suite"
+      }
+    ],
+    "cover": "/blog/images/field-guide-confidential-editing-and-suite-requirements.png",
+    "coverAlt": "Zero-knowledge document editors: workflow and recovery trade-offs: Threat model, Client keys, Workflow coverage, Recovery authority.",
+    "concepts": [
+      "Threat model",
+      "Client keys",
+      "Workflow coverage",
+      "Recovery authority",
+      "Search exposure"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "chapter-rail",
+      "signature": "overprint:chapter-rail",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 39
+    },
+    "contentHash": "4fb927bc9dec7ad89ba7b64013d2274f9aaf04239f651fe3bd6390e41e9b3216"
+  },
+  {
+    "slug": "field-guide-choosing-wiki-or-office-workspaces",
+    "title": "Wiki or office suite? Choose by the information your team produces",
+    "description": "Compare evolving knowledge pages and structured office files using actual authoring and publishing tasks.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Business workflows",
+      "Collaboration",
+      "Document search"
+    ],
+    "structure": "prose+comparison:comparison:example+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 684,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
+        "url": "https://shimodocs.com/blog/self-hosted-office-suite-vs-wiki"
+      }
+    ],
+    "cover": "/blog/images/field-guide-choosing-wiki-or-office-workspaces.png",
+    "coverAlt": "Wiki or office suite? Choose by the information your team produces: Information shape, Calculation needs, Page relationships, Publishing boundary.",
+    "concepts": [
+      "Information shape",
+      "Calculation needs",
+      "Page relationships",
+      "Publishing boundary",
+      "System authority"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "chapter-rail",
+      "signature": "report:chapter-rail",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 40
+    },
+    "contentHash": "17dd67d574dc899fffae0cd724b03545ff358e74b5f4afe388d217acc59021fb"
+  },
+  {
+    "slug": "field-guide-export-led-knowledge-migrations",
+    "title": "How to migrate Confluence without a dedicated connector",
+    "description": "Prepare a manual knowledge migration with explicit handling for attachments, links, permissions, and unsupported content.",
+    "category": "Migration",
+    "format": "walkthrough",
+    "tags": [
+      "Migration",
+      "Document conversion",
+      "Access control",
+      "Document search"
+    ],
+    "structure": "steps+document:prose:diagnostic:example:steps+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 681,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Migrating from Confluence Without a Connector",
+        "url": "https://shimodocs.com/blog/migrating-without-confluence-connector"
+      }
+    ],
+    "cover": "/blog/images/field-guide-export-led-knowledge-migrations.png",
+    "coverAlt": "How to migrate Confluence without a dedicated connector: Export manifest, Attachment pairing, Link rewriting, Macro exceptions.",
+    "concepts": [
+      "Export manifest",
+      "Attachment pairing",
+      "Link rewriting",
+      "Macro exceptions",
+      "Access mapping"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "chapter-rail",
+      "signature": "centered:chapter-rail",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 41
+    },
+    "contentHash": "27d621cf642811ebc15e2310c36e17963c847e25d145f7a6be808e28b0d1568d"
+  },
+  {
+    "slug": "field-guide-file-platform-editor-boundaries",
+    "title": "Nextcloud with Collabora: who owns files, edits, and saves?",
+    "description": "Compare an integrated file platform and editor with a document workspace through owned operations and failure paths.",
+    "category": "Comparisons",
+    "format": "architecture",
+    "tags": [
+      "Integrations",
+      "Collaboration",
+      "Document storage",
+      "Self-hosting",
+      "Product selection"
+    ],
+    "structure": "prose+sequence:diagnostic:prose:example+matrix:comparison",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 674,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Collabora in Nextcloud vs a Document Suite",
+        "url": "https://shimodocs.com/blog/collabora-nextcloud-vs-document-suite"
+      }
+    ],
+    "cover": "/blog/images/field-guide-file-platform-editor-boundaries.png",
+    "coverAlt": "Nextcloud with Collabora: who owns files, edits, and saves?: File authority, Editor sessions, Save handoff, Support boundary.",
+    "concepts": [
+      "File authority",
+      "Editor sessions",
+      "Save handoff",
+      "Support boundary",
+      "Failure isolation"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "chapter-rail",
+      "signature": "folio:chapter-rail",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 42
+    },
+    "contentHash": "5ed2b4128fb593ca1ccb29d80e743676cb48bf9a3a68ebd340115e9f1645e663"
+  },
+  {
+    "slug": "field-guide-evidence-based-office-editor-comparisons",
+    "title": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test",
+    "description": "Evaluate ShimoDocs and ONLYOFFICE candidates without substituting brand claims for demonstrated behavior.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Word documents",
+      "Excel spreadsheets",
+      "Presentations",
+      "Open source"
+    ],
+    "structure": "steps:prose+sequence:comparison:example:note+layers:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 656,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs ONLYOFFICE: Fidelity, Open Core, Controls",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-onlyoffice"
+      }
+    ],
+    "cover": "/blog/images/field-guide-evidence-based-office-editor-comparisons.png",
+    "coverAlt": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test: Document corpus, Roundtrip fidelity, Control tests, Edition scope.",
+    "concepts": [
+      "Document corpus",
+      "Roundtrip fidelity",
+      "Control tests",
+      "Edition scope",
+      "License evidence"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "chapter-rail",
+      "signature": "compact:chapter-rail",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 43
+    },
+    "contentHash": "a4e77341eb1828f54855ae2c742b34470e67a1266d0060ccfc890a2d0c548314"
+  },
+  {
+    "slug": "field-guide-file-estate-or-document-workspace",
+    "title": "ShimoDocs or Nextcloud: compare the work, not the folder screen",
+    "description": "Compare platform fit through file lifecycle, collaborative tasks, integration ownership, and operating effort.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Product selection",
+      "Document storage",
+      "Business workflows",
+      "Integrations"
+    ],
+    "structure": "prose+comparison:comparison:example:prose+layers:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 685,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Nextcloud: File Platform or Document Suite?",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-nextcloud"
+      }
+    ],
+    "cover": "/blog/images/field-guide-file-estate-or-document-workspace.png",
+    "coverAlt": "ShimoDocs or Nextcloud: compare the work, not the folder screen: File lifecycle, Workspace tasks, Integration burden, Authoritative copy.",
+    "concepts": [
+      "File lifecycle",
+      "Workspace tasks",
+      "Integration burden",
+      "Authoritative copy",
+      "User pathways"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "chapter-rail",
+      "signature": "ledger:chapter-rail",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 44
+    },
+    "contentHash": "d94c5d00d30c83cecf7b6290274c81159ca9de585ce0157c15cc4da9c404502e"
+  },
+  {
+    "slug": "field-guide-bank-collaboration-rollout-controls",
+    "title": "Bank document collaboration rollout: controls for the first pilot",
+    "description": "Use bounded pilots, access evidence, and operational ownership to introduce collaborative document workflows in banking.",
+    "category": "Office workflows",
+    "format": "playbook",
+    "tags": [
+      "Business workflows",
+      "Collaboration",
+      "Access control",
+      "Audit logs",
+      "Backup and recovery"
+    ],
+    "structure": "prose+decision:steps:example:prose+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 660,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Rolling Out Document Collaboration Across a Bank",
+        "url": "https://shimodocs.com/blog/document-collaboration-financial-services-rollout"
+      }
+    ],
+    "cover": "/blog/images/field-guide-bank-collaboration-rollout-controls.png",
+    "coverAlt": "Bank document collaboration rollout: controls for the first pilot: Risk tiers, Pilot cohort, Approval records, Branch access.",
+    "concepts": [
+      "Risk tiers",
+      "Pilot cohort",
+      "Approval records",
+      "Branch access",
+      "Expansion gates"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "chapter-rail",
+      "signature": "visual-first:chapter-rail",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 45
+    },
+    "contentHash": "2fdc19d5a58a3efdef1bc0ed4e2b33291e6428e442f862925b4250773b2064e3"
+  },
+  {
+    "slug": "field-guide-legal-matter-document-boundaries",
+    "title": "Legal matter collaboration: drafts, issued versions, and preservation",
+    "description": "Connect matter membership, review versions, external exchange, and preservation duties in one document workflow.",
+    "category": "Office workflows",
+    "format": "field-notes",
+    "tags": [
+      "Business workflows",
+      "Version control",
+      "Access control",
+      "Audit logs"
+    ],
+    "structure": "prose+layers:example:steps+sequence:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 678,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Matter Files: How Legal Teams Run Document Collaboration",
+        "url": "https://shimodocs.com/blog/document-collaboration-legal-teams"
+      }
+    ],
+    "cover": "/blog/images/field-guide-legal-matter-document-boundaries.png",
+    "coverAlt": "Legal matter collaboration: drafts, issued versions, and preservation: Matter membership, Review version, External package, Preservation scope.",
+    "concepts": [
+      "Matter membership",
+      "Review version",
+      "External package",
+      "Preservation scope",
+      "Closing protocol"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "chapter-rail",
+      "signature": "statement:chapter-rail",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 46
+    },
+    "contentHash": "01274151556f045be7e5e2fd294b92e91b106ef90bf7e3bfe3e58dd52dcb9e77"
+  },
+  {
+    "slug": "field-guide-public-sector-document-accountability",
+    "title": "Public sector document collaboration: records and publication boundaries",
+    "description": "Define working drafts, official records, access decisions, and accessible publication in public sector workflows.",
+    "category": "Office workflows",
+    "format": "explainer",
+    "tags": [
+      "Business workflows",
+      "Accessibility",
+      "Audit logs",
+      "Access control",
+      "Document conversion"
+    ],
+    "structure": "prose+document:comparison:example:prose+flow:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 664,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Document Collaboration in the Public Sector",
+        "url": "https://shimodocs.com/blog/document-collaboration-public-sector"
+      }
+    ],
+    "cover": "/blog/images/field-guide-public-sector-document-accountability.png",
+    "coverAlt": "Public sector document collaboration: records and publication boundaries: Record status, Publication approval, Accessibility checks, Disclosure review.",
+    "concepts": [
+      "Record status",
+      "Publication approval",
+      "Accessibility checks",
+      "Disclosure review",
+      "Service continuity"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "chapter-rail",
+      "signature": "field-notes:chapter-rail",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 47
+    },
+    "contentHash": "ae9170612daa63b35f7a97a0f032363e3a1bb58ef48216a4b26367148cb82afe"
+  },
+  {
+    "slug": "field-guide-month-one-document-platform-adoption",
+    "title": "A 30-day document platform rollout with measurable gates",
+    "description": "Organize a thirty day rollout around a bounded pilot, working evidence, support readiness, and expansion criteria.",
+    "category": "Migration",
+    "format": "walkthrough",
+    "tags": [
+      "Migration",
+      "Business workflows",
+      "Operations",
+      "Collaboration"
+    ],
+    "structure": "steps+flow:steps:example:diagnostic+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 702,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: A 30-Day Plan for Rolling Out a Document Platform",
+        "url": "https://shimodocs.com/blog/document-platform-adoption-plan"
+      }
+    ],
+    "cover": "/blog/images/field-guide-month-one-document-platform-adoption.png",
+    "coverAlt": "A 30-day document platform rollout with measurable gates: Pilot boundary, Task evidence, Support readiness, Usage signals.",
+    "concepts": [
+      "Pilot boundary",
+      "Task evidence",
+      "Support readiness",
+      "Usage signals",
+      "Expansion decision"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "chapter-rail",
+      "signature": "exhibit:chapter-rail",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 48
+    },
+    "contentHash": "0ad135e67d6a3cf23fe39ae330044222b188822ed595f04abc8c423f9ec66797"
+  },
+  {
+    "slug": "field-guide-document-platform-exit-rehearsals",
+    "title": "Document platform exit planning: test the exported collection",
+    "description": "Test export, metadata recovery, permission translation, and downstream usability as an ongoing portability obligation.",
+    "category": "Migration",
+    "format": "playbook",
+    "tags": [
+      "Migration",
+      "Document conversion",
+      "Version control",
+      "Document storage"
+    ],
+    "structure": "prose+layers:diagnostic:comparison:example+sequence:steps:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 675,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Leaving a Document Platform: Lock-In and the Exit Path",
+        "url": "https://shimodocs.com/blog/document-platform-lock-in-and-exit-planning"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-platform-exit-rehearsals.png",
+    "coverAlt": "Document platform exit planning: test the exported collection: Export rights, Metadata portability, Format readback, Permission translation.",
+    "concepts": [
+      "Export rights",
+      "Metadata portability",
+      "Format readback",
+      "Permission translation",
+      "Exit timing"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "inset",
+      "signature": "masthead:inset",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 49
+    },
+    "contentHash": "bb335a448815647790234ba59807566215c39c609aa17cc9fbe7116b9d7f5f07"
+  },
+  {
+    "slug": "field-guide-document-platform-operating-budget",
+    "title": "Self-hosted document platform costs: build the recurring operating budget",
+    "description": "Estimate infrastructure and staff costs using workload, recovery obligations, support duties, and change frequency.",
+    "category": "Operations",
+    "format": "explainer",
+    "tags": [
+      "Self-hosting",
+      "Operations",
+      "Performance",
+      "Backup and recovery"
+    ],
+    "structure": "prose+layers:prose:example:comparison+comparison:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 687,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: What a Self-Hosted Document Platform Costs to Run",
+        "url": "https://shimodocs.com/blog/document-platform-operations-cost"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-platform-operating-budget.png",
+    "coverAlt": "Self-hosted document platform costs: build the recurring operating budget: Workload baseline, Staff effort, Recovery budget, Change costs.",
+    "concepts": [
+      "Workload baseline",
+      "Staff effort",
+      "Recovery budget",
+      "Change costs",
+      "Growth assumptions"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "inset",
+      "signature": "cover-first:inset",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 50
+    },
+    "contentHash": "6ebb938f02e62c4afc614858b225b77653a3301c1c5ba998aafc708c66d937f1"
+  },
+  {
+    "slug": "field-guide-permission-preserving-drive-migrations",
+    "title": "Shared drive migration: preserve effective permissions, not just folders",
+    "description": "Inventory effective permissions, resolve group mappings, and verify access after a staged drive migration.",
+    "category": "Migration",
+    "format": "walkthrough",
+    "tags": [
+      "Migration",
+      "Access control",
+      "Document storage",
+      "Multi-tenancy"
+    ],
+    "structure": "steps:comparison+flow:example:diagnostic+matrix:steps",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 669,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Migrating a Shared Drive Without Losing Permissions",
+        "url": "https://shimodocs.com/blog/migrating-shared-drives-to-a-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-permission-preserving-drive-migrations.png",
+    "coverAlt": "Shared drive migration: preserve effective permissions, not just folders: Effective access, Group mapping, Inheritance breaks, Exception review.",
+    "concepts": [
+      "Effective access",
+      "Group mapping",
+      "Inheritance breaks",
+      "Exception review",
+      "User verification"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "inset",
+      "signature": "overprint:inset",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 51
+    },
+    "contentHash": "c3ecf01bef1e1808f79afcf624e35e0f317b95785dadcfe491e2b07ec6de0225"
+  },
+  {
+    "slug": "field-guide-evidence-for-document-security-reviews",
+    "title": "Security review for a self-hosted document platform: evidence to provide",
+    "description": "Turn review questions into scoped claims backed by architecture, configuration, operational evidence, and named owners.",
+    "category": "Security",
+    "format": "playbook",
+    "tags": [
+      "Security",
+      "Self-hosting",
+      "Audit logs",
+      "Data privacy"
+    ],
+    "structure": "prose+layers:example:steps:diagnostic+flow:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 678,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Answering a Security Review of a Self-Hosted Platform",
+        "url": "https://shimodocs.com/blog/passing-a-document-platform-security-review"
+      }
+    ],
+    "cover": "/blog/images/field-guide-evidence-for-document-security-reviews.png",
+    "coverAlt": "Security review for a self-hosted document platform: evidence to provide: Claim scope, Data flow, Evidence owner, Control testing.",
+    "concepts": [
+      "Claim scope",
+      "Data flow",
+      "Evidence owner",
+      "Control testing",
+      "Exception register"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "inset",
+      "signature": "report:inset",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 52
+    },
+    "contentHash": "ebf182f50a9c0935447d8465184ee84926bf4ca494fcc44b7589100a3c5e3fd2"
+  },
+  {
+    "slug": "field-guide-private-document-ai-routing",
+    "title": "Private document AI endpoint: payload, permissions, and failure handling",
+    "description": "Define content selection, authentication, model compatibility, logging, and failure behavior before enabling a private AI endpoint.",
+    "category": "AI & documents",
+    "format": "architecture",
+    "tags": [
+      "AI documents",
+      "API integration",
+      "Data privacy",
+      "Access control",
+      "Integrations"
+    ],
+    "structure": "prose+sequence:prose:diagnostic:example+layers:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 662,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Wiring Document AI to Your Own Model Endpoint",
+        "url": "https://shimodocs.com/blog/private-model-endpoint-for-document-ai"
+      }
+    ],
+    "cover": "/blog/images/field-guide-private-document-ai-routing.png",
+    "coverAlt": "Private document AI endpoint: payload, permissions, and failure handling: Content selection, Endpoint contract, Prompt retention, Permission checks.",
+    "concepts": [
+      "Content selection",
+      "Endpoint contract",
+      "Prompt retention",
+      "Permission checks",
+      "Failure policy"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "inset",
+      "signature": "centered:inset",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 53
+    },
+    "contentHash": "f38895932be923a05bc107d17743c6d6594018e1218fa6600a5dc18814f54b3a"
+  },
+  {
+    "slug": "field-guide-reading-self-hosted-license-quotes",
+    "title": "Self-hosted document licensing: questions to resolve before purchase",
+    "description": "Normalize pricing units, deployment rights, optional modules, support coverage, and renewal assumptions before comparing proposals.",
+    "category": "Self-hosting",
+    "format": "decision-brief",
+    "tags": [
+      "Self-hosting",
+      "Product selection",
+      "Integrations",
+      "Operations"
+    ],
+    "structure": "prose+comparison:comparison:note:example+matrix:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 674,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: How Self-Hosted Document Software Is Priced",
+        "url": "https://shimodocs.com/blog/self-hosted-document-platform-pricing"
+      }
+    ],
+    "cover": "/blog/images/field-guide-reading-self-hosted-license-quotes.png",
+    "coverAlt": "Self-hosted document licensing: questions to resolve before purchase: Pricing unit, Deployment rights, Module scope, Support term.",
+    "concepts": [
+      "Pricing unit",
+      "Deployment rights",
+      "Module scope",
+      "Support term",
+      "Renewal basis"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "inset",
+      "signature": "folio:inset",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 54
+    },
+    "contentHash": "95557928d2d839552f87c40caf88772d39e7176e5b68c4ffcc1358fb92df283f"
+  },
+  {
+    "slug": "field-guide-secure-cloud-document-workflows",
+    "title": "Secure cloud document collaboration without uncontrolled copies",
+    "description": "Connect information classification, recipient identity, practical access rules, and observable revocation in cloud collaboration.",
+    "category": "Security",
+    "format": "field-notes",
+    "tags": [
+      "Security",
+      "Collaboration",
+      "Access control",
+      "Data privacy"
+    ],
+    "structure": "prose:steps+decision:diagnostic:example:note+flow:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 690,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Secure Cloud Collaboration: Balancing Security and Productivity",
+        "url": "https://shimodocs.com/blog/secure-cloud-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-secure-cloud-document-workflows.png",
+    "coverAlt": "Secure cloud document collaboration without uncontrolled copies: Information tiers, Recipient identity, Approved pathways, Revocation window.",
+    "concepts": [
+      "Information tiers",
+      "Recipient identity",
+      "Approved pathways",
+      "Revocation window",
+      "Sharing telemetry"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "inset",
+      "signature": "compact:inset",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 55
+    },
+    "contentHash": "04f78a243b0b29919659e2b62c873e612c698343b6e984bae95a2c7a8bd69233"
+  },
+  {
+    "slug": "field-guide-document-content-ai-use-consent",
+    "title": "Can document AI reuse your content? Review purposes and consent",
+    "description": "Review inference, training, evaluation, logging, and consent as distinct uses of document information.",
+    "category": "AI & documents",
+    "format": "explainer",
+    "tags": [
+      "AI documents",
+      "Data privacy",
+      "Security"
+    ],
+    "structure": "prose+layers:comparison:example+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 697,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Your Content Is Training AI. Did You Actually Agree to That?",
+        "url": "https://shimodocs.com/blog/ai-training-content-control"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-content-ai-use-consent.png",
+    "coverAlt": "Can document AI reuse your content? Review purposes and consent: Purpose inventory, Training terms, Admin defaults, Retention evidence.",
+    "concepts": [
+      "Purpose inventory",
+      "Training terms",
+      "Admin defaults",
+      "Retention evidence",
+      "Consent authority"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "inset",
+      "signature": "ledger:inset",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 56
+    },
+    "contentHash": "fa1d371608e6c66e0bab95e0acd63afa6f4cb773b3b744436c5f999442d12ca6"
+  },
+  {
+    "slug": "field-guide-web3-security-tool-selection",
+    "title": "Web3 security tool selection: match resources to failure classes",
+    "description": "Select complementary testing, deployment, monitoring, and incident resources using contract risk and accountable evidence.",
+    "category": "Security",
+    "format": "playbook",
+    "tags": [
+      "Security",
+      "Open source",
+      "Operations",
+      "Audit logs"
+    ],
+    "structure": "prose+matrix:steps:example:example:note+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 701,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: 50 Web3 Security Tools & Resources for Builders",
+        "url": "https://shimodocs.com/blog/web3-security-tools-resources"
+      }
+    ],
+    "cover": "/blog/images/field-guide-web3-security-tool-selection.png",
+    "coverAlt": "Web3 security tool selection: match resources to failure classes: Asset threats, Invariant tests, Authority graph, Deployment checks.",
+    "concepts": [
+      "Asset threats",
+      "Invariant tests",
+      "Authority graph",
+      "Deployment checks",
+      "Live response"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "inset",
+      "signature": "visual-first:inset",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 57
+    },
+    "contentHash": "9dc6a82914f5c52fc736b91e9c3d9e92252ebfa596e216e4c62d3282b9968863"
+  },
+  {
+    "slug": "field-guide-document-object-storage-contracts",
+    "title": "Object storage for documents: compatibility, versions, and recovery",
+    "description": "Evaluate storage semantics, temporary access, version growth, recovery, and operational responsibility with real document paths.",
+    "category": "Operations",
+    "format": "architecture",
+    "tags": [
+      "Document storage",
+      "Operations",
+      "Version control",
+      "Backup and recovery"
+    ],
+    "structure": "prose+sequence:example:diagnostic:example:note+layers:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 688,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Choosing Object Storage for a Document Platform",
+        "url": "https://shimodocs.com/blog/object-storage-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-object-storage-contracts.png",
+    "coverAlt": "Object storage for documents: compatibility, versions, and recovery: Object semantics, Worker retrieval, Version growth, Recovery pairing.",
+    "concepts": [
+      "Object semantics",
+      "Worker retrieval",
+      "Version growth",
+      "Recovery pairing",
+      "Lifecycle rules"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "inset",
+      "signature": "statement:inset",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 58
+    },
+    "contentHash": "3420122a32a092c1bf660f63c9f30c7d0d538fcf9aa5ec1394bf7d200124a0eb"
+  },
+  {
+    "slug": "field-guide-measuring-concurrent-document-load",
+    "title": "Concurrent editor capacity: build a realistic load test",
+    "description": "Plan capacity from active sessions, document behavior, opening bursts, conversion jobs, and degraded operation.",
+    "category": "Operations",
+    "format": "walkthrough",
+    "tags": [
+      "Performance",
+      "Collaboration",
+      "Operations",
+      "Self-hosting"
+    ],
+    "structure": "prose+comparison:steps:example:example:diagnostic+flow:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 695,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Capacity Planning Around Concurrent Editors",
+        "url": "https://shimodocs.com/blog/capacity-planning-concurrent-editors"
+      }
+    ],
+    "cover": "/blog/images/field-guide-measuring-concurrent-document-load.png",
+    "coverAlt": "Concurrent editor capacity: build a realistic load test: Active sessions, Edit intensity, Opening bursts, Queue limits.",
+    "concepts": [
+      "Active sessions",
+      "Edit intensity",
+      "Opening bursts",
+      "Queue limits",
+      "Degraded capacity"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "inset",
+      "signature": "field-notes:inset",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 59
+    },
+    "contentHash": "f527e37bb1e3cd1d85c1413d4b2a1e272597aaeb16ac1e98d49d4f265156a589"
+  },
+  {
+    "slug": "field-guide-document-disaster-recovery-order",
+    "title": "Document platform disaster recovery: restore a consistent business state",
+    "description": "Build a disaster recovery procedure around content consistency, identity, dependencies, user readback, and controlled reopening.",
+    "category": "Operations",
+    "format": "playbook",
+    "tags": [
+      "Backup and recovery",
+      "Operations",
+      "Document storage",
+      "Version control"
+    ],
+    "structure": "prose+layers:diagnostic:steps:example+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 696,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Disaster Recovery for a Document Platform",
+        "url": "https://shimodocs.com/blog/disaster-recovery-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-disaster-recovery-order.png",
+    "coverAlt": "Document platform disaster recovery: restore a consistent business state: Recovery targets, Dependency order, Consistent state, Readback checks.",
+    "concepts": [
+      "Recovery targets",
+      "Dependency order",
+      "Consistent state",
+      "Readback checks",
+      "Reopening authority"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "inset",
+      "signature": "exhibit:inset",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 60
+    },
+    "contentHash": "599df4e4178fe9c4e3d7fdca6fec53f19a2682ce514b0e16f37685c0ea11015d"
+  },
+  {
+    "slug": "field-guide-offline-document-service-dependencies",
+    "title": "Air-gapped document collaboration: prepare the full offline lifecycle",
+    "description": "Prepare installation, identity, fonts, updates, support, and recovery for a genuinely disconnected document environment.",
+    "category": "Self-hosting",
+    "format": "architecture",
+    "tags": [
+      "Self-hosting",
+      "Security",
+      "Operations",
+      "Backup and recovery"
+    ],
+    "structure": "prose:steps+document:example:diagnostic:note+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 689,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Document Collaboration on an Air-Gapped Network",
+        "url": "https://shimodocs.com/blog/air-gapped-document-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-offline-document-service-dependencies.png",
+    "coverAlt": "Air-gapped document collaboration: prepare the full offline lifecycle: Dependency inventory, Transfer procedure, Local identity, Offline updates.",
+    "concepts": [
+      "Dependency inventory",
+      "Transfer procedure",
+      "Local identity",
+      "Offline updates",
+      "Isolation tests"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "numbered",
+      "signature": "masthead:numbered",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 61
+    },
+    "contentHash": "c4017e5abb3c70c5d79536ef5cbe14c4748cb1da638fe89ed555827e18053add"
+  },
+  {
+    "slug": "field-guide-document-identity-lifecycle",
+    "title": "Document SSO integration: provisioning, group changes, and logout",
+    "description": "Connect login, provisioning, group mapping, deactivation, and recovery instead of stopping at a successful redirect.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "Access control",
+      "Integrations",
+      "Security",
+      "Collaboration"
+    ],
+    "structure": "prose+sequence:diagnostic:example+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 683,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Identity and SSO for a Self-Hosted Document Platform",
+        "url": "https://shimodocs.com/blog/sso-self-hosted-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-identity-lifecycle.png",
+    "coverAlt": "Document SSO integration: provisioning, group changes, and logout: Stable identity, Group mapping, Session policy, Deactivation.",
+    "concepts": [
+      "Stable identity",
+      "Group mapping",
+      "Session policy",
+      "Deactivation",
+      "Recovery access"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "numbered",
+      "signature": "cover-first:numbered",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 62
+    },
+    "contentHash": "bf6d9aeaa7848035ff433e09d749d5703a4ab32005f79bfeb1ba03521b9b3c80"
+  },
+  {
+    "slug": "field-guide-document-upgrade-reversibility",
+    "title": "Document platform upgrades: when rollback requires restoring data",
+    "description": "Identify schema changes, state compatibility, session handling, and validation gates before upgrading a document service.",
+    "category": "Operations",
+    "format": "troubleshooting",
+    "tags": [
+      "Operations",
+      "Self-hosting",
+      "Backup and recovery",
+      "Version control"
+    ],
+    "structure": "prose+layers:steps:diagnostic:example+sequence:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 671,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Upgrading a Document Platform Without Downtime Drama",
+        "url": "https://shimodocs.com/blog/upgrade-and-rollback-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-upgrade-reversibility.png",
+    "coverAlt": "Document platform upgrades: when rollback requires restoring data: Compatibility matrix, Schema boundary, Session drain, Rollback trigger.",
+    "concepts": [
+      "Compatibility matrix",
+      "Schema boundary",
+      "Session drain",
+      "Rollback trigger",
+      "Business validation"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "numbered",
+      "signature": "overprint:numbered",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 63
+    },
+    "contentHash": "0343f3a76e5f45f73c3b4bef2cf8a136e2b807eed452295d95b2a9a58a90eba0"
+  },
+  {
+    "slug": "field-guide-monitoring-document-task-completion",
+    "title": "Document platform monitoring: detect failed opens and incomplete saves",
+    "description": "Build document service monitoring from user journeys, queue behavior, persistence evidence, and actionable alerts.",
+    "category": "Operations",
+    "format": "troubleshooting",
+    "tags": [
+      "Operations",
+      "Troubleshooting",
+      "Performance",
+      "Webhooks",
+      "Version control"
+    ],
+    "structure": "prose:diagnostic+comparison:example:diagnostic+sequence:steps:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 710,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Monitoring a Self-Hosted Document Platform",
+        "url": "https://shimodocs.com/blog/monitoring-self-hosted-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-monitoring-document-task-completion.png",
+    "coverAlt": "Document platform monitoring: detect failed opens and incomplete saves: Journey probes, Save convergence, Queue age, Safe correlation.",
+    "concepts": [
+      "Journey probes",
+      "Save convergence",
+      "Queue age",
+      "Safe correlation",
+      "Alert ownership"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "numbered",
+      "signature": "report:numbered",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 64
+    },
+    "contentHash": "14ec2f242bf3d5a34aa3283ae6970e469fa143a9cd1cc5d2e927862efc7b5d5f"
+  },
+  {
+    "slug": "field-guide-consistent-document-backup-readback",
+    "title": "Document backup testing: restore content, versions, and access",
+    "description": "Coordinate content, metadata, configuration, and keys, then verify ordinary user readback from an isolated restore.",
+    "category": "Operations",
+    "format": "walkthrough",
+    "tags": [
+      "Backup and recovery",
+      "Document storage",
+      "Version control",
+      "Operations"
+    ],
+    "structure": "prose+layers:example:note:steps+sequence:prose:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 697,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Backup and Restore for a Document Platform",
+        "url": "https://shimodocs.com/blog/backup-and-restore-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-consistent-document-backup-readback.png",
+    "coverAlt": "Document backup testing: restore content, versions, and access: Consistency boundary, Object mapping, Protected keys, Isolated restore.",
+    "concepts": [
+      "Consistency boundary",
+      "Object mapping",
+      "Protected keys",
+      "Isolated restore",
+      "User readback"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "numbered",
+      "signature": "centered:numbered",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 65
+    },
+    "contentHash": "902b6d56e9a32fd82ba7a0a9c4d1368ccb2458ab37afa2d7e6b9a92665b87087"
+  },
+  {
+    "slug": "field-guide-document-database-performance-evidence",
+    "title": "Slow document database operations: diagnose waits before tuning",
+    "description": "Connect slow document operations to database evidence before changing indexes, pools, memory, or maintenance settings.",
+    "category": "Operations",
+    "format": "troubleshooting",
+    "tags": [
+      "Troubleshooting",
+      "Performance",
+      "Operations",
+      "Version control"
+    ],
+    "structure": "diagnostic+flow:comparison:example:steps+sequence:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 685,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Tuning the Database Behind a Document Platform",
+        "url": "https://shimodocs.com/blog/database-tuning-document-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-database-performance-evidence.png",
+    "coverAlt": "Slow document database operations: diagnose waits before tuning: Operation latency, Query plans, Lock waits, Pool pressure.",
+    "concepts": [
+      "Operation latency",
+      "Query plans",
+      "Lock waits",
+      "Pool pressure",
+      "Measured changes"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "numbered",
+      "signature": "folio:numbered",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 66
+    },
+    "contentHash": "0b0a642251f07e1371e646d47030cc62f2e0b5a59e77f24589e43c9693abdd48"
+  },
+  {
+    "slug": "field-guide-document-hardware-sizing-baselines",
+    "title": "Hardware sizing for a document platform: what to measure first",
+    "description": "Translate representative editing, conversion, storage, and failure scenarios into defensible hardware requirements.",
+    "category": "Operations",
+    "format": "decision-brief",
+    "tags": [
+      "Performance",
+      "Self-hosting",
+      "Operations",
+      "Document conversion"
+    ],
+    "structure": "prose+matrix:comparison:example+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 699,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Sizing Hardware for a Self-Hosted Document Platform",
+        "url": "https://shimodocs.com/blog/hardware-sizing-self-hosted-document-platform"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-hardware-sizing-baselines.png",
+    "coverAlt": "Hardware sizing for a document platform: what to measure first: Supported topology, Workload envelope, Resource limits, Failure reserve.",
+    "concepts": [
+      "Supported topology",
+      "Workload envelope",
+      "Resource limits",
+      "Failure reserve",
+      "Procurement evidence"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "numbered",
+      "signature": "compact:numbered",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 67
+    },
+    "contentHash": "0268028f9ba343a8084e26c526ea8ebaf34a63756d8837404a237a93b117d855"
+  },
+  {
+    "slug": "field-guide-document-encryption-key-responsibility",
+    "title": "Document encryption and key custody: what customer-controlled keys protect",
+    "description": "Map encryption layers, key authority, rotation, recovery, and the components that still handle readable content.",
+    "category": "Security",
+    "format": "explainer",
+    "tags": [
+      "Security",
+      "Data privacy",
+      "Document storage",
+      "Backup and recovery"
+    ],
+    "structure": "prose+layers:comparison:prose:example+sequence:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 692,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Document Encryption and Key Custody",
+        "url": "https://shimodocs.com/blog/byo-key-encryption-documents"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-encryption-key-responsibility.png",
+    "coverAlt": "Document encryption and key custody: what customer-controlled keys protect: Encryption layers, Plaintext paths, Key authority, Rotation.",
+    "concepts": [
+      "Encryption layers",
+      "Plaintext paths",
+      "Key authority",
+      "Rotation",
+      "Recovery custody"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "numbered",
+      "signature": "ledger:numbered",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 68
+    },
+    "contentHash": "d52e34e359410a1935d4f05f71ba2bdf3103e80aaf38b1a2635ba06b0d3ba40b"
+  },
+  {
+    "slug": "field-guide-external-document-sharing-evidence",
+    "title": "External document sharing audit: recipients, versions, and revoked access",
+    "description": "Find external access risks by testing recipient boundaries, version scope, attachments, revocation, and ownership.",
+    "category": "Security",
+    "format": "field-notes",
+    "tags": [
+      "Security",
+      "Access control",
+      "Audit logs",
+      "Data privacy"
+    ],
+    "structure": "steps+document:diagnostic:example:example+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 704,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: External Document Sharing: Where Audits Find Problems",
+        "url": "https://shimodocs.com/blog/external-sharing-risks-documents"
+      }
+    ],
+    "cover": "/blog/images/field-guide-external-document-sharing-evidence.png",
+    "coverAlt": "External document sharing audit: recipients, versions, and revoked access: Recipient scope, Artifact inspection, Version boundary, Access expiry.",
+    "concepts": [
+      "Recipient scope",
+      "Artifact inspection",
+      "Version boundary",
+      "Access expiry",
+      "Owner review"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "numbered",
+      "signature": "visual-first:numbered",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 69
+    },
+    "contentHash": "f70d68297c99f53b0c774745624470fd443bbb30cfb50ba4639aeacf3106a2e1"
+  },
+  {
+    "slug": "field-guide-document-authorization-operation-matrix",
+    "title": "Document access control: define operations, inheritance, and revocation",
+    "description": "Model allowed actions, inheritance, tenant scope, policy changes, and direct endpoint enforcement with testable decisions.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "Access control",
+      "Multi-tenancy",
+      "Security",
+      "API integration"
+    ],
+    "structure": "prose+matrix:comparison:prose:example+sequence:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 682,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Access Control for Document Platforms",
+        "url": "https://shimodocs.com/blog/access-control-best-practices-documents"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-authorization-operation-matrix.png",
+    "coverAlt": "Document access control: define operations, inheritance, and revocation: Operation matrix, Tenant scope, Inheritance, Policy transitions.",
+    "concepts": [
+      "Operation matrix",
+      "Tenant scope",
+      "Inheritance",
+      "Policy transitions",
+      "Denial evidence"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "numbered",
+      "signature": "statement:numbered",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 70
+    },
+    "contentHash": "cd0360a3726e2946fe443b35a3d81d43d7bad0ddcff99b04b36c80b24ee154d3"
+  },
+  {
+    "slug": "field-guide-document-legal-hold-preservation-workflow",
+    "title": "Legal hold for documents: preserve scope, versions, and custodians",
+    "description": "Connect counsel's scope, technical preservation, custodians, verification, and controlled release of a document hold.",
+    "category": "Security",
+    "format": "playbook",
+    "tags": [
+      "Security",
+      "Audit logs",
+      "Version control",
+      "Business workflows"
+    ],
+    "structure": "prose+flow:example:steps:diagnostic+matrix:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 697,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Legal Hold in Document Platforms",
+        "url": "https://shimodocs.com/blog/legal-hold-document-management"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-legal-hold-preservation-workflow.png",
+    "coverAlt": "Legal hold for documents: preserve scope, versions, and custodians: Counsel scope, Custodian mapping, Preservation controls, Verification.",
+    "concepts": [
+      "Counsel scope",
+      "Custodian mapping",
+      "Preservation controls",
+      "Verification",
+      "Hold release"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "numbered",
+      "signature": "field-notes:numbered",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 71
+    },
+    "contentHash": "0c55d5f73cf00fdddbcb6158a08efd50d23aa8c867906079c7bceb28a3caa2bb"
+  },
+  {
+    "slug": "field-guide-event-based-document-retention",
+    "title": "Document retention policy: triggers, holds, and defensible disposal",
+    "description": "Define record classes, retention triggers, exceptions, technical mapping, and evidence of approved deletion.",
+    "category": "Security",
+    "format": "decision-brief",
+    "tags": [
+      "Business workflows",
+      "Audit logs",
+      "Document storage",
+      "Security"
+    ],
+    "structure": "prose+flow:comparison:example+comparison:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 690,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Building a Document Retention Policy That Holds",
+        "url": "https://shimodocs.com/blog/document-retention-policy-guide"
+      }
+    ],
+    "cover": "/blog/images/field-guide-event-based-document-retention.png",
+    "coverAlt": "Document retention policy: triggers, holds, and defensible disposal: Record classes, Trigger events, Hold exceptions, Disposal approval.",
+    "concepts": [
+      "Record classes",
+      "Trigger events",
+      "Hold exceptions",
+      "Disposal approval",
+      "Deletion evidence"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "numbered",
+      "signature": "exhibit:numbered",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 72
+    },
+    "contentHash": "1e461873ca5a4e3607c2cc1d4b655aeacfc25e12ab14abeaf8aecf84b54e439d"
+  },
+  {
+    "slug": "field-guide-document-residency-data-paths",
+    "title": "Data residency for document platforms: verify storage and processing paths",
+    "description": "Map storage, processing, backups, support access, telemetry, and AI destinations against the actual residency requirement.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "Data residency",
+      "Data privacy",
+      "Self-hosting",
+      "AI documents",
+      "Backup and recovery"
+    ],
+    "structure": "prose+comparison:comparison:prose:example+sequence:note:checklist",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 678,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: A Practical Guide to Data Residency Requirements",
+        "url": "https://shimodocs.com/blog/data-residency-requirements-guide"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-residency-data-paths.png",
+    "coverAlt": "Data residency for document platforms: verify storage and processing paths: Requirement scope, Data locations, Processing routes, Support access.",
+    "concepts": [
+      "Requirement scope",
+      "Data locations",
+      "Processing routes",
+      "Support access",
+      "Evidence updates"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "alternating",
+      "signature": "masthead:alternating",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 73
+    },
+    "contentHash": "0ae9cd942414f73e590d66e88c0168f949120dd2c81ec76f46b93ab89e98d2a3"
+  },
+  {
+    "slug": "field-guide-iso27001-document-evidence",
+    "title": "ISO 27001 document controls: what evidence should you keep?",
+    "description": "A practical evidence map for access reviews, sharing exceptions, recovery tests, and corrective actions.",
+    "category": "Security",
+    "format": "explainer",
+    "tags": [
+      "Security",
+      "Audit logs",
+      "Access control",
+      "Operations"
+    ],
+    "structure": "prose+layers:prose:example:prose:comparison+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 686,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ISO 27001 and Document Management",
+        "url": "https://shimodocs.com/blog/iso27001-document-management"
+      }
+    ],
+    "cover": "/blog/images/field-guide-iso27001-document-evidence.png",
+    "coverAlt": "ISO 27001 document controls: what evidence should you keep?: Risk register, Control owner, Access review, Operating evidence.",
+    "concepts": [
+      "Risk register",
+      "Control owner",
+      "Access review",
+      "Operating evidence",
+      "Corrective action"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "alternating",
+      "signature": "cover-first:alternating",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 74
+    },
+    "contentHash": "a6a1e330546170ebb1103575854ea446afa83348b44ccf0f6be1780157ac7862"
+  },
+  {
+    "slug": "field-guide-soc2-collaboration-evidence",
+    "title": "SOC 2 evidence for document collaboration: scope and samples",
+    "description": "How to assemble complete access and change populations, defensible samples, and honest exception records.",
+    "category": "Security",
+    "format": "playbook",
+    "tags": [
+      "Security",
+      "Audit logs",
+      "Operations",
+      "Collaboration"
+    ],
+    "structure": "prose+sequence:example:prose+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 692,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: SOC 2 Controls for Document Collaboration",
+        "url": "https://shimodocs.com/blog/soc2-document-collaboration-controls"
+      }
+    ],
+    "cover": "/blog/images/field-guide-soc2-collaboration-evidence.png",
+    "coverAlt": "SOC 2 evidence for document collaboration: scope and samples: Service commitment, Control population, Review sample, Change approval.",
+    "concepts": [
+      "Service commitment",
+      "Control population",
+      "Review sample",
+      "Change approval",
+      "Exception tracking"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "alternating",
+      "signature": "overprint:alternating",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 75
+    },
+    "contentHash": "e46e012572eb866f05f4405c42deb63343df363ee4fc306487711ecaf538fed5"
+  },
+  {
+    "slug": "field-guide-health-record-collaboration-boundaries",
+    "title": "HIPAA document collaboration: PHI paths and access decisions",
+    "description": "A workflow assessment for PHI, business associate arrangements, secondary copies, and clinical continuity.",
+    "category": "Security",
+    "format": "decision-brief",
+    "tags": [
+      "Security",
+      "Data privacy",
+      "Access control",
+      "Business workflows"
+    ],
+    "structure": "prose:prose+flow:example:prose:note:comparison+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 723,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: HIPAA-Compliant Document Collaboration",
+        "url": "https://shimodocs.com/blog/hipaa-compliant-document-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-health-record-collaboration-boundaries.png",
+    "coverAlt": "HIPAA document collaboration: PHI paths and access decisions: PHI inventory, Business associate, Minimum necessary, Access termination.",
+    "concepts": [
+      "PHI inventory",
+      "Business associate",
+      "Minimum necessary",
+      "Access termination",
+      "Recovery evidence"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "alternating",
+      "signature": "report:alternating",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 76
+    },
+    "contentHash": "e73cd64f76f0a2ede91959b90685ddf9f74c4e8fb19309a95925a6fd5bef728e"
+  },
+  {
+    "slug": "field-guide-gdpr-document-lifecycle",
+    "title": "GDPR for collaborative documents: copies, retention, and rights",
+    "description": "Locate personal data in drafts, comments, exports, indexes, and backups before implementing retention or rights decisions.",
+    "category": "Security",
+    "format": "walkthrough",
+    "tags": [
+      "Data privacy",
+      "Security",
+      "Document storage",
+      "Access control"
+    ],
+    "structure": "prose+layers:prose:example:prose:steps+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 713,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: GDPR-Compliant Document Collaboration",
+        "url": "https://shimodocs.com/blog/gdpr-compliant-document-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-gdpr-document-lifecycle.png",
+    "coverAlt": "GDPR for collaborative documents: copies, retention, and rights: Processing purpose, Data minimization, Processor chain, Retention rule.",
+    "concepts": [
+      "Processing purpose",
+      "Data minimization",
+      "Processor chain",
+      "Retention rule",
+      "Rights request"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "alternating",
+      "signature": "centered:alternating",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 77
+    },
+    "contentHash": "51bd0bcd05da4c753b8b0a9bc70913782b8d96d866eef457fa2ebd62ceb16cc4"
+  },
+  {
+    "slug": "field-guide-enterprise-workspace-replacement",
+    "title": "Google Workspace alternatives: an enterprise evaluation plan",
+    "description": "Test complete work and dependencies before selecting a replacement for enterprise workspace services.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Migration",
+      "Integrations",
+      "Business workflows"
+    ],
+    "structure": "prose:prose+layers:example:prose+comparison:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 670,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Google Workspace Alternatives for Enterprise Teams",
+        "url": "https://shimodocs.com/blog/google-workspace-alternatives-for-enterprise"
+      }
+    ],
+    "cover": "/blog/images/field-guide-enterprise-workspace-replacement.png",
+    "coverAlt": "Google Workspace alternatives: an enterprise evaluation plan: Workflow inventory, Dependency map, Acceptance corpus, Operating cost.",
+    "concepts": [
+      "Workflow inventory",
+      "Dependency map",
+      "Acceptance corpus",
+      "Operating cost",
+      "Exit readiness"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "alternating",
+      "signature": "folio:alternating",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 78
+    },
+    "contentHash": "14dad0f1e28ecacc34bcb720a2eb49b3cdead3f6c641e70afd38ba1bd6c45db3"
+  },
+  {
+    "slug": "field-guide-open-source-collaboration-ownership",
+    "title": "Open source document collaboration: maintenance before adoption",
+    "description": "Inspect licensing, support, upgrade paths, and fork obligations for the exact collaboration distribution.",
+    "category": "Comparisons",
+    "format": "field-notes",
+    "tags": [
+      "Open source",
+      "Product selection",
+      "Self-hosting",
+      "Operations"
+    ],
+    "structure": "prose+decision:prose:example:prose:diagnostic+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 691,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Open Source Document Collaboration: An Honest Assessment",
+        "url": "https://shimodocs.com/blog/open-source-document-collaboration-options"
+      }
+    ],
+    "cover": "/blog/images/field-guide-open-source-collaboration-ownership.png",
+    "coverAlt": "Open source document collaboration: maintenance before adoption: License boundary, Maintenance path, Integration owner, Patch rehearsal.",
+    "concepts": [
+      "License boundary",
+      "Maintenance path",
+      "Integration owner",
+      "Patch rehearsal",
+      "Fork cost"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "alternating",
+      "signature": "compact:alternating",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 79
+    },
+    "contentHash": "2c2d8a90644cab38b20232cb74a9c737b5bff2fa9032d614eae8de2cc3b5f53c"
+  },
+  {
+    "slug": "field-guide-self-hosted-tool-evaluation",
+    "title": "Self hosted collaboration tools: tests that decide the shortlist",
+    "description": "Evaluate deployment dependencies, real concurrent work, permission changes, and recoverable data.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Self-hosting",
+      "Product selection",
+      "Collaboration",
+      "Backup and recovery"
+    ],
+    "structure": "prose+matrix:example:prose+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 660,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Self-Hosted Document Collaboration: What to Look For",
+        "url": "https://shimodocs.com/blog/best-self-hosted-document-collaboration-tools"
+      }
+    ],
+    "cover": "/blog/images/field-guide-self-hosted-tool-evaluation.png",
+    "coverAlt": "Self hosted collaboration tools: tests that decide the shortlist: Deployment contract, Session workload, Identity boundary, Recovery drill.",
+    "concepts": [
+      "Deployment contract",
+      "Session workload",
+      "Identity boundary",
+      "Recovery drill",
+      "Upgrade window"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "alternating",
+      "signature": "ledger:alternating",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 80
+    },
+    "contentHash": "97b4d56a79c217ad3132f31f0d02fdb1bd275798cba85b0f66c879cd2baa6188"
+  },
+  {
+    "slug": "field-guide-google-docs-alternative-by-task",
+    "title": "Google Docs alternatives: choose by the document you deliver",
+    "description": "Compare alternatives using real drafting, review, accessibility, and file delivery tasks.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Word documents",
+      "Collaboration",
+      "Accessibility"
+    ],
+    "structure": "prose+comparison:prose:example:prose:comparison+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 664,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: The Best Google Docs Alternatives, by What You Need",
+        "url": "https://shimodocs.com/blog/best-google-docs-alternatives"
+      }
+    ],
+    "cover": "/blog/images/field-guide-google-docs-alternative-by-task.png",
+    "coverAlt": "Google Docs alternatives: choose by the document you deliver: Drafting task, Review contract, Delivery format, Accessibility check.",
+    "concepts": [
+      "Drafting task",
+      "Review contract",
+      "Delivery format",
+      "Accessibility check",
+      "Switching effort"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "alternating",
+      "signature": "visual-first:alternating",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 81
+    },
+    "contentHash": "e9c31503a0cb831821649aa1f307ba6a8062336b5f9b21c356cb7f6c092b0dd0"
+  },
+  {
+    "slug": "field-guide-office-suite-comparison-lab",
+    "title": "Self hosted office suite comparisons: build a reproducible lab",
+    "description": "Normalize workload and preserve document outputs so office suite results can be reproduced and interpreted.",
+    "category": "Comparisons",
+    "format": "walkthrough",
+    "tags": [
+      "Product selection",
+      "Self-hosting",
+      "Performance",
+      "Operations"
+    ],
+    "structure": "prose:prose+document:example:prose:example:diagnostic+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 719,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Comparing Self-Hosted Office Suites: What Actually Matters",
+        "url": "https://shimodocs.com/blog/self-hosted-office-suite-comparison"
+      }
+    ],
+    "cover": "/blog/images/field-guide-office-suite-comparison-lab.png",
+    "coverAlt": "Self hosted office suite comparisons: build a reproducible lab: Test conditions, Document corpus, Concurrent sessions, Failure injection.",
+    "concepts": [
+      "Test conditions",
+      "Document corpus",
+      "Concurrent sessions",
+      "Failure injection",
+      "Operating score"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "alternating",
+      "signature": "statement:alternating",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 82
+    },
+    "contentHash": "7c6842c0b0026b2db01f1df242f1e1e6341ecede39dd42698780f87624f89f73"
+  },
+  {
+    "slug": "field-guide-documents-versus-table-apps",
+    "title": "ShimoDocs vs Coda: documents, tables, and workflow authority",
+    "description": "A practical evaluation of narrative records, structured facts, automation, and portable outputs.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Product selection",
+      "Business workflows",
+      "Document automation",
+      "Integrations"
+    ],
+    "structure": "prose+layers:example:prose+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 641,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Coda: Docs, Tables and Where They Diverge",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-coda"
+      }
+    ],
+    "cover": "/blog/images/field-guide-documents-versus-table-apps.png",
+    "coverAlt": "ShimoDocs vs Coda: documents, tables, and workflow authority: Narrative record, Structured facts, Workflow state, Permission granularity.",
+    "concepts": [
+      "Narrative record",
+      "Structured facts",
+      "Workflow state",
+      "Permission granularity",
+      "Export boundary"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "alternating",
+      "signature": "field-notes:alternating",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 83
+    },
+    "contentHash": "5f0317f0d00a0afd9311be80d643f06ae775a88782b5dea5086ff766b03e1aba"
+  },
+  {
+    "slug": "field-guide-knowledge-base-versus-workspace",
+    "title": "ShimoDocs vs Slab: working documents or trusted knowledge?",
+    "description": "Evaluate a knowledge workflow through drafting, publication, discovery, ownership, and review expiry.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Document search",
+      "Business workflows",
+      "Collaboration"
+    ],
+    "structure": "prose+flow:prose:example:prose:diagnostic+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 691,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Slab: Knowledge Base or Workspace?",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-slab"
+      }
+    ],
+    "cover": "/blog/images/field-guide-knowledge-base-versus-workspace.png",
+    "coverAlt": "ShimoDocs vs Slab: working documents or trusted knowledge?: Knowledge owner, Draft state, Publication gate, Search quality.",
+    "concepts": [
+      "Knowledge owner",
+      "Draft state",
+      "Publication gate",
+      "Search quality",
+      "Review expiry"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "alternating",
+      "signature": "exhibit:alternating",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 84
+    },
+    "contentHash": "8b6caacfb358d18ce7f838cb286de4fa023ccf269efec9b9e9b25d786729dd10"
+  },
+  {
+    "slug": "field-guide-suite-replacement-boundaries",
+    "title": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries",
+    "description": "Compare the exact proposed offers through file round trips, board pack workflows, integrations, and operating cost.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Integrations",
+      "Excel spreadsheets",
+      "Presentations"
+    ],
+    "structure": "prose:prose+sequence:example:prose+comparison:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 658,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Microsoft 365: Suite Against Suite",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-microsoft-365"
+      }
+    ],
+    "cover": "/blog/images/field-guide-suite-replacement-boundaries.png",
+    "coverAlt": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries: Suite boundary, File round trip, Automation dependency, Guest journey.",
+    "concepts": [
+      "Suite boundary",
+      "File round trip",
+      "Automation dependency",
+      "Guest journey",
+      "Cost assumptions"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "journal",
+      "signature": "masthead:journal",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 85
+    },
+    "contentHash": "668725b80ce301e009aedd2b70d6ac88361850632fe0dc016d6fdb802c36f8a6"
+  },
+  {
+    "slug": "field-guide-document-management-system-of-record",
+    "title": "ShimoDocs vs SharePoint: where the authoritative document lives",
+    "description": "Evaluate editing and document management through metadata, approval versions, lifecycle handoffs, and recovery.",
+    "category": "Comparisons",
+    "format": "architecture",
+    "tags": [
+      "Product selection",
+      "Document storage",
+      "Version control",
+      "Business workflows"
+    ],
+    "structure": "prose:prose+layers:example:prose:diagnostic:example+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 696,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs SharePoint for Document Management",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-sharepoint"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-management-system-of-record.png",
+    "coverAlt": "ShimoDocs vs SharePoint: where the authoritative document lives: Record identity, Metadata policy, Approval version, Retention owner.",
+    "concepts": [
+      "Record identity",
+      "Metadata policy",
+      "Approval version",
+      "Retention owner",
+      "Search boundary"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "journal",
+      "signature": "cover-first:journal",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 86
+    },
+    "contentHash": "5b99b9043b3a99d56a071e81f1f2cfa0456630486f5e60b95f22b31a05d3648b"
+  },
+  {
+    "slug": "field-guide-wiki-versus-office-records",
+    "title": "ShimoDocs vs Confluence: linked knowledge or office deliverables?",
+    "description": "Compare navigation, publishing, file output, and migration relationships using a real release workflow.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Product selection",
+      "Document search",
+      "Migration",
+      "Business workflows"
+    ],
+    "structure": "prose+comparison:example:prose+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 685,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Confluence: Wiki or Document Suite?",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-confluence"
+      }
+    ],
+    "cover": "/blog/images/field-guide-wiki-versus-office-records.png",
+    "coverAlt": "ShimoDocs vs Confluence: linked knowledge or office deliverables?: Linked knowledge, Office artifact, Publication state, Link migration.",
+    "concepts": [
+      "Linked knowledge",
+      "Office artifact",
+      "Publication state",
+      "Link migration",
+      "Content owner"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "journal",
+      "signature": "overprint:journal",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 87
+    },
+    "contentHash": "88f2943f132bb3b2b34ae7b47f6b69d3d28dd361a59daca791704ad0883d2ef8"
+  },
+  {
+    "slug": "field-guide-financial-document-control-points",
+    "title": "Secure financial document collaboration: approval and evidence",
+    "description": "Protect financial document workflows with version-bound decisions, controlled external access, and recoverable evidence.",
+    "category": "Security",
+    "format": "playbook",
+    "tags": [
+      "Security",
+      "Access control",
+      "Version control",
+      "Audit logs"
+    ],
+    "structure": "prose+sequence:prose:example:prose:example+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 678,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Secure Document Collaboration for Financial Services",
+        "url": "https://shimodocs.com/blog/secure-document-collaboration-financial-services"
+      }
+    ],
+    "cover": "/blog/images/field-guide-financial-document-control-points.png",
+    "coverAlt": "Secure financial document collaboration: approval and evidence: Preparation role, Approval boundary, Version binding, External distribution.",
+    "concepts": [
+      "Preparation role",
+      "Approval boundary",
+      "Version binding",
+      "External distribution",
+      "Evidence recovery"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "journal",
+      "signature": "report:journal",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 88
+    },
+    "contentHash": "91f1814c40d1b29b511a9a80bf657c66fe5080499afccc2306a4234f0bfa53a7"
+  },
+  {
+    "slug": "field-guide-kubernetes-document-service-rollout",
+    "title": "Kubernetes document collaboration: sessions, probes, and upgrades",
+    "description": "Operate long-lived editing connections and conversion workers with supported topology, graceful drain, and meaningful checks.",
+    "category": "Self-hosting",
+    "format": "architecture",
+    "tags": [
+      "Kubernetes",
+      "Self-hosting",
+      "Operations",
+      "Collaboration",
+      "Performance"
+    ],
+    "structure": "prose:prose+layers:example:prose:example:diagnostic+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 688,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Deploying Self-Hosted Collaboration on Kubernetes",
+        "url": "https://shimodocs.com/blog/self-hosted-collaboration-kubernetes-deployment"
+      }
+    ],
+    "cover": "/blog/images/field-guide-kubernetes-document-service-rollout.png",
+    "coverAlt": "Kubernetes document collaboration: sessions, probes, and upgrades: Session routing, Durable state, Probe design, Graceful drain.",
+    "concepts": [
+      "Session routing",
+      "Durable state",
+      "Probe design",
+      "Graceful drain",
+      "Recovery drill"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "journal",
+      "signature": "centered:journal",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 89
+    },
+    "contentHash": "ea8a5639bb30bf3c24b93911f4f43a4397744e397523c38f8fd06960c7ab7c45"
+  },
+  {
+    "slug": "field-guide-document-agent-authority",
+    "title": "Document AI agents: permissions, prompt injection, and publication",
+    "description": "Limit agent reads and tools, test hostile document content, and guard consequential publication.",
+    "category": "Security",
+    "format": "architecture",
+    "tags": [
+      "AI documents",
+      "Security",
+      "Access control",
+      "Document automation"
+    ],
+    "structure": "prose+layers:example:prose+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 696,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: AI Agents Inside Your Documents: What to Secure",
+        "url": "https://shimodocs.com/blog/ai-agents-in-documents-security"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-agent-authority.png",
+    "coverAlt": "Document AI agents: permissions, prompt injection, and publication: Task authority, Untrusted content, Tool boundary, Approval gate.",
+    "concepts": [
+      "Task authority",
+      "Untrusted content",
+      "Tool boundary",
+      "Approval gate",
+      "Run evidence"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "journal",
+      "signature": "folio:journal",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 90
+    },
+    "contentHash": "03b8ccc3bd455f5362c1f1031bcd13ed887ae2fb75b551fb0131eca2c5a23e11"
+  },
+  {
+    "slug": "field-guide-google-workspace-cutover",
+    "title": "Migrate from Google Workspace: active work, deltas, and cutover",
+    "description": "Move documents without losing unfinished work or the context of links, permissions, and submitted versions.",
+    "category": "Migration",
+    "format": "walkthrough",
+    "tags": [
+      "Migration",
+      "Version control",
+      "Access control",
+      "Integrations"
+    ],
+    "structure": "prose+sequence:prose:example:prose:steps+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 680,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: How to Migrate from Google Workspace Without Losing Work",
+        "url": "https://shimodocs.com/blog/how-to-migrate-from-google-workspace"
+      }
+    ],
+    "cover": "/blog/images/field-guide-google-workspace-cutover.png",
+    "coverAlt": "Migrate from Google Workspace: active work, deltas, and cutover: Inventory state, Pilot corpus, Delta capture, Cutover authority.",
+    "concepts": [
+      "Inventory state",
+      "Pilot corpus",
+      "Delta capture",
+      "Cutover authority",
+      "Rollback window"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "journal",
+      "signature": "compact:journal",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 91
+    },
+    "contentHash": "1f83349a8cba5169eaf171f17f63cfb26e341d34229ade9e386bbbbe8730728d"
+  },
+  {
+    "slug": "field-guide-wikis-documents-and-shared-facts",
+    "title": "ShimoDocs vs Notion: shared facts, knowledge, and final records",
+    "description": "Compare the proposed content models through project handover, update ownership, synchronization, and portable exports.",
+    "category": "Comparisons",
+    "format": "comparison",
+    "tags": [
+      "Product selection",
+      "Business workflows",
+      "Document storage",
+      "Version control"
+    ],
+    "structure": "prose:prose+layers:example:prose+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 662,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Notion: Documents, Wikis or Both?",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-notion"
+      }
+    ],
+    "cover": "/blog/images/field-guide-wikis-documents-and-shared-facts.png",
+    "coverAlt": "ShimoDocs vs Notion: shared facts, knowledge, and final records: Shared facts, Knowledge page, Office deliverable, Sync rule.",
+    "concepts": [
+      "Shared facts",
+      "Knowledge page",
+      "Office deliverable",
+      "Sync rule",
+      "Authority marker"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "journal",
+      "signature": "ledger:journal",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 92
+    },
+    "contentHash": "8e2b07287fb2143c686161fb5dbf19319231405d4f0d51d93da908b060aeae20"
+  },
+  {
+    "slug": "field-guide-browser-document-comparison",
+    "title": "ShimoDocs vs Google Docs: a practical browser editor test",
+    "description": "Run identical review, interruption, submitted-version, and export tasks before selecting a browser editor.",
+    "category": "Comparisons",
+    "format": "field-notes",
+    "tags": [
+      "Product selection",
+      "Collaboration",
+      "Word documents",
+      "Accessibility"
+    ],
+    "structure": "prose+sequence:prose:example:prose:example+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 669,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: ShimoDocs vs Google Docs: A Working Comparison",
+        "url": "https://shimodocs.com/blog/shimodocs-vs-google-docs"
+      }
+    ],
+    "cover": "/blog/images/field-guide-browser-document-comparison.png",
+    "coverAlt": "ShimoDocs vs Google Docs: a practical browser editor test: Work sample, Review roles, Revision recovery, Export inspection.",
+    "concepts": [
+      "Work sample",
+      "Review roles",
+      "Revision recovery",
+      "Export inspection",
+      "User effort"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "journal",
+      "signature": "visual-first:journal",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 93
+    },
+    "contentHash": "f7b4a1cd2c796b29ac58eaa14df5d332617fb06cd782190cc2ad58072a7f4ede"
+  },
+  {
+    "slug": "field-guide-private-cloud-editor-alternative",
+    "title": "Private cloud Google Docs alternatives: network and data tests",
+    "description": "Translate private deployment requirements into separate editing, network, dependency, and maintenance checks.",
+    "category": "Comparisons",
+    "format": "decision-brief",
+    "tags": [
+      "Self-hosting",
+      "Product selection",
+      "Data residency",
+      "Operations"
+    ],
+    "structure": "prose+layers:example:prose+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 654,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Self-Hosted Google Docs Alternative for Private Deployment",
+        "url": "https://shimodocs.com/blog/google-docs-alternative-private-cloud"
+      }
+    ],
+    "cover": "/blog/images/field-guide-private-cloud-editor-alternative.png",
+    "coverAlt": "Private cloud Google Docs alternatives: network and data tests: Network boundary, Data path, Identity source, Outbound dependency.",
+    "concepts": [
+      "Network boundary",
+      "Data path",
+      "Identity source",
+      "Outbound dependency",
+      "Maintenance owner"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "journal",
+      "signature": "statement:journal",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 94
+    },
+    "contentHash": "9aafccc110267336f9a61fbc4445b89f463af2fc17c456e1d6faaba8af2a4e37"
+  },
+  {
+    "slug": "field-guide-document-data-sovereignty-map",
+    "title": "Document data sovereignty: map processing, access, and law",
+    "description": "Separate storage residency, processing locations, legal access, and operational control in a document workflow.",
+    "category": "Security",
+    "format": "explainer",
+    "tags": [
+      "Data residency",
+      "Data privacy",
+      "Security",
+      "Operations"
+    ],
+    "structure": "prose+layers:prose:example:prose:comparison+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 686,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Data Sovereignty in Document Collaboration",
+        "url": "https://shimodocs.com/blog/data-sovereignty-document-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-document-data-sovereignty-map.png",
+    "coverAlt": "Document data sovereignty: map processing, access, and law: Storage location, Processing location, Legal access, Administrative authority.",
+    "concepts": [
+      "Storage location",
+      "Processing location",
+      "Legal access",
+      "Administrative authority",
+      "Transfer path"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "journal",
+      "signature": "field-notes:journal",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 95
+    },
+    "contentHash": "0ed43c45f54c81ec31955262ea18b6999abcb99e8e073273c7e48331961bfed7"
+  },
+  {
+    "slug": "field-guide-self-hosted-service-first-month",
+    "title": "Self hosted collaboration: an operating plan for the first month",
+    "description": "Establish service ownership, document acceptance, pilot support, restoration, and rollout evidence.",
+    "category": "Self-hosting",
+    "format": "playbook",
+    "tags": [
+      "Self-hosting",
+      "Operations",
+      "Collaboration",
+      "Backup and recovery"
+    ],
+    "structure": "prose:prose+sequence:example:prose+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 704,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: A Practical Guide to Self-Hosted Collaboration",
+        "url": "https://shimodocs.com/blog/self-hosted-collaboration-guide"
+      }
+    ],
+    "cover": "/blog/images/field-guide-self-hosted-service-first-month.png",
+    "coverAlt": "Self hosted collaboration: an operating plan for the first month: Service owner, Acceptance gate, Pilot cohort, Incident runbook.",
+    "concepts": [
+      "Service owner",
+      "Acceptance gate",
+      "Pilot cohort",
+      "Incident runbook",
+      "Recovery target"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "journal",
+      "signature": "exhibit:journal",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 96
+    },
+    "contentHash": "73b20f6261a0cd501b0db6c9435a90cbbc97cf9c2ed0ee58164f66ad69c3cca9"
+  },
+  {
+    "slug": "field-guide-private-cloud-responsibility-model",
+    "title": "Private cloud collaboration: who operates and owns each part?",
+    "description": "Write a responsibility model for infrastructure, document state, privileged access, maintenance, and recovery.",
+    "category": "Self-hosting",
+    "format": "architecture",
+    "tags": [
+      "Self-hosting",
+      "Operations",
+      "Document storage",
+      "Access control"
+    ],
+    "structure": "prose:prose+layers:example:prose:comparison:diagnostic+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 706,
+    "source": null,
+    "references": [
+      {
+        "label": "ShimoDocs: Private Cloud Document Collaboration: Self-Hosted Guide",
+        "url": "https://shimodocs.com/blog/what-is-private-cloud-document-collaboration"
+      }
+    ],
+    "cover": "/blog/images/field-guide-private-cloud-responsibility-model.png",
+    "coverAlt": "Private cloud collaboration: who operates and owns each part?: Operating arrangement, Data authority, Privileged access, Shared responsibility.",
+    "concepts": [
+      "Operating arrangement",
+      "Data authority",
+      "Privileged access",
+      "Shared responsibility",
+      "Change control"
+    ],
+    "recipe": {
+      "hero": "masthead",
+      "body": "reading-room",
+      "signature": "masthead:reading-room",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 97
+    },
+    "contentHash": "18dd148402a587d20c8ae56f434895f78b95c035218eab48f842b3e2b9214458"
+  },
+  {
+    "slug": "field-guide-presentation-history-as-evidence",
+    "title": "Presentation version history: recover the deck actually sent",
+    "description": "Keep milestones, source provenance, comparisons, and distribution records so deck history answers real questions.",
+    "category": "AI & documents",
+    "format": "walkthrough",
+    "tags": [
+      "Presentations",
+      "Version control",
+      "AI documents",
+      "Audit logs"
+    ],
+    "structure": "prose+sequence:prose:example:prose:example+document:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 699,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: Every deck has a history. OfficeDex lets you walk back into it",
+        "url": "https://officedex.ai/blog/a-timeline-for-every-deck/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-presentation-history-as-evidence.png",
+    "coverAlt": "Presentation version history: recover the deck actually sent: Deck milestone, Slide identity, Source provenance, Change comparison.",
+    "concepts": [
+      "Deck milestone",
+      "Slide identity",
+      "Source provenance",
+      "Change comparison",
+      "Submission record"
+    ],
+    "recipe": {
+      "hero": "cover-first",
+      "body": "reading-room",
+      "signature": "cover-first:reading-room",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 98
+    },
+    "contentHash": "1b620cc3ce0225032b47d7069a1d91e52fb55415eef84f4d164fd6bcb438a86b"
+  },
+  {
+    "slug": "field-guide-agent-office-work-contract",
+    "title": "Office agents: define the artifact, authority, and acceptance",
+    "description": "Create a work contract for agents that coordinate document, workbook, and presentation tasks.",
+    "category": "AI & documents",
+    "format": "explainer",
+    "tags": [
+      "AI documents",
+      "Document automation",
+      "Access control",
+      "Business workflows"
+    ],
+    "structure": "prose+layers:example:prose+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 691,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: Stop Calling It AI Office. The Next Generation Is Agent Office",
+        "url": "https://officedex.ai/blog/agent-office-next-generation/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-agent-office-work-contract.png",
+    "coverAlt": "Office agents: define the artifact, authority, and acceptance: Task contract, Trusted inputs, Tool authority, Artifact review.",
+    "concepts": [
+      "Task contract",
+      "Trusted inputs",
+      "Tool authority",
+      "Artifact review",
+      "Acceptance evidence"
+    ],
+    "recipe": {
+      "hero": "overprint",
+      "body": "reading-room",
+      "signature": "overprint:reading-room",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 99
+    },
+    "contentHash": "eb269860be0f8feb8b3b8b246d15676182a136f3635b76e39450937bad7cc1c4"
+  },
+  {
+    "slug": "field-guide-connected-report-refresh-contract",
+    "title": "Connected reports: freshness, refresh failures, and publication",
+    "description": "Set source version, validation, stale-data behavior, and fixed publication rules for connected reports.",
+    "category": "Office workflows",
+    "format": "troubleshooting",
+    "tags": [
+      "Document automation",
+      "Integrations",
+      "Excel spreadsheets",
+      "Version control"
+    ],
+    "structure": "prose:prose+sequence:example:prose:diagnostic:example+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 716,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: Keep Reports Current with Connected Data",
+        "url": "https://officedex.ai/blog/documents-that-follow-their-data/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-connected-report-refresh-contract.png",
+    "coverAlt": "Connected reports: freshness, refresh failures, and publication: Source version, Refresh trigger, Validation gate, Freshness label.",
+    "concepts": [
+      "Source version",
+      "Refresh trigger",
+      "Validation gate",
+      "Freshness label",
+      "Published snapshot"
+    ],
+    "recipe": {
+      "hero": "report",
+      "body": "reading-room",
+      "signature": "report:reading-room",
+      "accent": "#247355",
+      "soft": "#e7f2ec",
+      "number": 100
+    },
+    "contentHash": "0dcf185c84426e16ddce72e5904d49e310612b8c24b5d6454d742c8f0fbb4a46"
+  },
+  {
+    "slug": "field-guide-editable-ai-presentation-acceptance",
+    "title": "Editable AI PowerPoint: inspect objects before accepting the deck",
+    "description": "Verify editable charts, text, diagrams, themes, and the next real revision in the recipient application.",
+    "category": "Office workflows",
+    "format": "walkthrough",
+    "tags": [
+      "Presentations",
+      "AI documents",
+      "Accessibility",
+      "Document conversion"
+    ],
+    "structure": "prose+document:prose:example:prose:comparison+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 672,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: An editable AI PowerPoint checklist for everyday work",
+        "url": "https://officedex.ai/blog/editable-powerpoint-checklist/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-editable-ai-presentation-acceptance.png",
+    "coverAlt": "Editable AI PowerPoint: inspect objects before accepting the deck: Text objects, Chart data, Layout hierarchy, Asset ownership.",
+    "concepts": [
+      "Text objects",
+      "Chart data",
+      "Layout hierarchy",
+      "Asset ownership",
+      "Revision task"
+    ],
+    "recipe": {
+      "hero": "centered",
+      "body": "reading-room",
+      "signature": "centered:reading-room",
+      "accent": "#315f9b",
+      "soft": "#eaf1f9",
+      "number": 101
+    },
+    "contentHash": "8ca88cc91637661eeab742080a388f97820fe25b415c6e1ce9af337a806dc116"
+  },
+  {
+    "slug": "field-guide-ai-office-task-briefs",
+    "title": "AI office work: write a brief that produces reviewable files",
+    "description": "Specify business outcomes, authoritative context, correction rules, and artifact acceptance for everyday AI tasks.",
+    "category": "Office workflows",
+    "format": "playbook",
+    "tags": [
+      "AI documents",
+      "Business workflows",
+      "Document automation",
+      "Word documents"
+    ],
+    "structure": "prose+document:example:prose+flow:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 693,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: Vibe Officing: AI for Everyday Office Work",
+        "url": "https://officedex.ai/blog/infoq-vibe-officing-final/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-ai-office-task-briefs.png",
+    "coverAlt": "AI office work: write a brief that produces reviewable files: Audience brief, Source context, Artifact constraints, Correction loop.",
+    "concepts": [
+      "Audience brief",
+      "Source context",
+      "Artifact constraints",
+      "Correction loop",
+      "Acceptance check"
+    ],
+    "recipe": {
+      "hero": "folio",
+      "body": "reading-room",
+      "signature": "folio:reading-room",
+      "accent": "#ae463d",
+      "soft": "#f8eeeb",
+      "number": 102
+    },
+    "contentHash": "5ea185cbf5c16d5a2d812ea35fb63d30d936ec4c31468be7ac14b9fbbece3917"
+  },
+  {
+    "slug": "field-guide-steering-in-progress-decks",
+    "title": "Steer an AI deck in progress: scope feedback and protect facts",
+    "description": "Use accepted outlines, versioned comments, bounded revisions, and final consistency checks during deck generation.",
+    "category": "AI & documents",
+    "format": "field-notes",
+    "tags": [
+      "Presentations",
+      "AI documents",
+      "Version control",
+      "Collaboration"
+    ],
+    "structure": "prose+layers:prose:example:prose:comparison+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 675,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: Steer a deck while it is still drawing",
+        "url": "https://officedex.ai/blog/steer-a-deck-while-it-draws/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-steering-in-progress-decks.png",
+    "coverAlt": "Steer an AI deck in progress: scope feedback and protect facts: Narrative plan, Provisional slide, Scoped feedback, Revision identity.",
+    "concepts": [
+      "Narrative plan",
+      "Provisional slide",
+      "Scoped feedback",
+      "Revision identity",
+      "Final consistency"
+    ],
+    "recipe": {
+      "hero": "compact",
+      "body": "reading-room",
+      "signature": "compact:reading-room",
+      "accent": "#696030",
+      "soft": "#f1f3df",
+      "number": 103
+    },
+    "contentHash": "e0e2b120bbe1ce7b0bd7dfe693e1dce05b1dedea59d966d843fede664dfe9744"
+  },
+  {
+    "slug": "field-guide-ai-word-final-review",
+    "title": "AI Word formatting: a pre-send review of the actual file",
+    "description": "Inspect styles, rendered pages, hidden content, accepted claims, and Word-to-PDF consistency before delivery.",
+    "category": "AI & documents",
+    "format": "walkthrough",
+    "tags": [
+      "Word documents",
+      "AI documents",
+      "Accessibility",
+      "PDF"
+    ],
+    "structure": "prose:prose+layers:example:prose:diagnostic:note+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 733,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeDex: AI Word document formatting: A pre-send checklist",
+        "url": "https://officedex.ai/blog/word-formatting-checklist/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-ai-word-final-review.png",
+    "coverAlt": "AI Word formatting: a pre-send review of the actual file: Semantic styles, Page layout, Hidden content, Reference check.",
+    "concepts": [
+      "Semantic styles",
+      "Page layout",
+      "Hidden content",
+      "Reference check",
+      "Recipient rendering"
+    ],
+    "recipe": {
+      "hero": "ledger",
+      "body": "reading-room",
+      "signature": "ledger:reading-room",
+      "accent": "#087b83",
+      "soft": "#e4f3f3",
+      "number": 104
+    },
+    "contentHash": "b65a3392087f145cd068eedcf11b0bf56baf9bbca3aec8493cb3832e7df2336b"
+  },
+  {
+    "slug": "field-guide-offline-conversion-boundaries",
+    "title": "Offline document conversion: dependencies, sandboxing, and cleanup",
+    "description": "Prove the offline boundary and validate local outputs under ordinary operation, failure, and maintenance.",
+    "category": "Self-hosting",
+    "format": "architecture",
+    "tags": [
+      "Document conversion",
+      "Self-hosting",
+      "Security",
+      "Operations"
+    ],
+    "structure": "prose:prose+layers:example:prose+decision:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 685,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeAPI: Keeping document conversion offline, on device and in your cloud",
+        "url": "https://officeapi.ai/blog/offline-document-processing/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-offline-conversion-boundaries.png",
+    "coverAlt": "Offline document conversion: dependencies, sandboxing, and cleanup: Processing boundary, Local dependencies, Parser sandbox, Temporary data.",
+    "concepts": [
+      "Processing boundary",
+      "Local dependencies",
+      "Parser sandbox",
+      "Temporary data",
+      "Output validation"
+    ],
+    "recipe": {
+      "hero": "visual-first",
+      "body": "reading-room",
+      "signature": "visual-first:reading-room",
+      "accent": "#883b62",
+      "soft": "#f6eaf0",
+      "number": 105
+    },
+    "contentHash": "00ef9ec53ef974c07c69fcef8b8e9ba01ba049c3c0b2f7d641de48ec43549d52"
+  },
+  {
+    "slug": "field-guide-on-device-ai-document-pipeline",
+    "title": "On-device document AI: extraction, citations, and local output",
+    "description": "Preserve document meaning and evidence through local parsing, context selection, inference, and rendering.",
+    "category": "AI & documents",
+    "format": "explainer",
+    "tags": [
+      "AI documents",
+      "RAG",
+      "Data privacy",
+      "Document conversion"
+    ],
+    "structure": "prose+flow:prose:example:prose:diagnostic+matrix:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 707,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeAPI: On-device AI needs an on-device document engine",
+        "url": "https://officeapi.ai/blog/on-device-ai-documents/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-on-device-ai-document-pipeline.png",
+    "coverAlt": "On-device document AI: extraction, citations, and local output: Local extraction, Layout semantics, Source anchors, Context selection.",
+    "concepts": [
+      "Local extraction",
+      "Layout semantics",
+      "Source anchors",
+      "Context selection",
+      "Output rendering"
+    ],
+    "recipe": {
+      "hero": "statement",
+      "body": "reading-room",
+      "signature": "statement:reading-room",
+      "accent": "#515c68",
+      "soft": "#edf0f3",
+      "number": 106
+    },
+    "contentHash": "6f2cc1dc456f48722ecc6a864b7ccf6931bf93787e582097002e83a7cac93861"
+  },
+  {
+    "slug": "field-guide-shared-preview-conversion-core",
+    "title": "Preview and conversion consistency: source versions and layout inputs",
+    "description": "Keep preview and converted output aligned through common models, explicit layout inputs, cache versioning, and approval guards.",
+    "category": "Integration",
+    "format": "architecture",
+    "tags": [
+      "Document preview",
+      "Document conversion",
+      "Version control",
+      "API integration"
+    ],
+    "structure": "prose:prose+layers:example:prose:example:comparison+sequence:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 695,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeAPI: One engine, two surfaces — conversion and preview from the same core",
+        "url": "https://officeapi.ai/blog/one-engine-two-surfaces/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-shared-preview-conversion-core.png",
+    "coverAlt": "Preview and conversion consistency: source versions and layout inputs: Shared document model, Layout inputs, Engine version, Surface contract.",
+    "concepts": [
+      "Shared document model",
+      "Layout inputs",
+      "Engine version",
+      "Surface contract",
+      "Parity corpus"
+    ],
+    "recipe": {
+      "hero": "field-notes",
+      "body": "reading-room",
+      "signature": "field-notes:reading-room",
+      "accent": "#725494",
+      "soft": "#f0ebf7",
+      "number": 107
+    },
+    "contentHash": "3406c97556b0e0361eb6f589e5c209a93ab349c29ad83caee562543a1598cfba"
+  },
+  {
+    "slug": "field-guide-rust-document-engine-evaluation",
+    "title": "Rust for document engines: safety boundaries and real benchmarks",
+    "description": "Assess safe code, native interfaces, parser limits, correctness, deployment, and maintenance without language-based performance claims.",
+    "category": "Integration",
+    "format": "decision-brief",
+    "tags": [
+      "API integration",
+      "Security",
+      "Performance",
+      "Document conversion"
+    ],
+    "structure": "prose+layers:example:prose+comparison:note",
+    "author": "Office SDK Editorial",
+    "publishedAt": "2026-09-28",
+    "readMinutes": 4,
+    "wordCount": 667,
+    "source": null,
+    "references": [
+      {
+        "label": "OfficeAPI: Why OfficeAPI is written in Rust",
+        "url": "https://officeapi.ai/blog/why-rust/"
+      }
+    ],
+    "cover": "/blog/images/field-guide-rust-document-engine-evaluation.png",
+    "coverAlt": "Rust for document engines: safety boundaries and real benchmarks: Ownership model, Unsafe boundary, Parser limits, Interoperability.",
+    "concepts": [
+      "Ownership model",
+      "Unsafe boundary",
+      "Parser limits",
+      "Interoperability",
+      "Measured performance"
+    ],
+    "recipe": {
+      "hero": "exhibit",
+      "body": "reading-room",
+      "signature": "exhibit:reading-room",
+      "accent": "#8c592d",
+      "soft": "#f6eee5",
+      "number": 108
+    },
+    "contentHash": "da8ec8f6144039cba260369a42801029cad7b69eaf314b5ca8276a06a149a10e"
+  }
+]

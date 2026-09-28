@@ -1,0 +1,120 @@
+{
+  "slug": "signed-document-url-lifetimes",
+  "title": "How long should a signed document URL remain valid?",
+  "description": "Choose link expiry from queueing, download, and retry behavior while limiting the exposure of temporary document access.",
+  "category": "Security",
+  "format": "decision-brief",
+  "tags": [
+    "Document storage",
+    "Security",
+    "Document conversion",
+    "Performance"
+  ],
+  "structure": "prose+comparison:note:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 639,
+  "source": null,
+  "references": [
+    {
+      "label": "Amazon S3: Sharing objects with presigned URLs",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html"
+    }
+  ],
+  "cover": "/blog/images/signed-document-url-lifetimes.png",
+  "coverAlt": "How long should a signed document URL remain valid?: Link issuance, Queue delay, Source transfer, Expiry boundary.",
+  "concepts": [
+    "Link issuance",
+    "Queue delay",
+    "Source transfer",
+    "Expiry boundary",
+    "Fresh access"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "rail-left",
+    "signature": "compact:rail-left",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 7
+  },
+  "contentHash": "54b025ce3e320a29d8abb4639a88c5e66aa078cbc843af0b4b316d9c7879dab7",
+  "intro": "A signed source URL needs to cover the time until the intended service can successfully retrieve the file, including realistic queueing and retry delays. Issue it as close to retrieval as the supported workflow allows. Conversion time after a complete download may not need to be included at all.",
+  "sections": [
+    {
+      "id": "where-the-validity-window-is-spent-1",
+      "title": "Where the validity window is spent",
+      "html": "<p>Determine whether the link is issued when a user clicks Open, when a job enters a queue, or immediately before a worker fetches the source. A link created too early can spend most of its life waiting. Also verify the storage provider's exact expiry behavior, including whether validation occurs at request start and what happens when an interrupted download is retried. Do not assume that every storage system interprets expiry or resumable requests identically. Record clock synchronization requirements for the services that issue and validate credentials.</p><p>Collect queue wait, connection setup, source transfer, and retry delays under representative load. Use the agreed upper operating range rather than treating a single successful measurement as a guarantee. Separate source retrieval from conversion time when conversion no longer needs the link after downloading. If the worker must fetch again later, account for that explicitly. The resulting policy should explain which delays are covered, which failures request a fresh link, and which conditions terminate the job with a clear recoverable error.</p><p>A useful planning expression is <code>issue-to-fetch delay + connection allowance + supported retry window</code>. This is a way to reason about the budget, not a universal expiry formula. Check whether the storage provider evaluates expiry at request start, permits an ongoing transfer to finish, and requires renewed authorization for range requests or retries. Those semantics determine which parts of a long transfer consume the usable window.</p><p>There are two common choices. Issuing at job submission is simpler when the integration only accepts a ready URL, but the link spends time in the queue. Issuing immediately before retrieval reduces that waste, but requires an authorized worker-side lookup or refresh mechanism. The latter must not become an unauthenticated endpoint that generates new links for arbitrary document IDs.</p><p>Measure the queue's slow periods, not just its empty state. Then test the expiry boundary deliberately with a disposable object. Record which component requests fresh access, whether it repeats the current permission check, and what the user sees if access has been revoked since the original job was submitted.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Issuing earlier and issuing later have different costs",
+        "items": [
+          {
+            "label": "At job submission",
+            "detail": "Simple handoff, but queue wait consumes validity"
+          },
+          {
+            "label": "Before retrieval",
+            "detail": "Less wasted time, but requires authorized issuance or refresh"
+          },
+          {
+            "label": "On retry",
+            "detail": "Needs a current permission check and bounded retry policy"
+          }
+        ],
+        "alt": "Three issuance moments are compared by queue exposure and authorization requirements.",
+        "caption": "Expiry must follow the actual provider's request and retry semantics.",
+        "src": "/blog/images/signed-document-url-lifetimes-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/signed-document-url-lifetimes-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "what-possession-of-the-url-permits-2",
+      "title": "What possession of the URL permits",
+      "html": "<p>Treat a signed URL as a credential while it is valid. Scope it to the required object and operation using the storage system's supported controls. Avoid putting it in analytics events, support screenshots, referrer producing pages, or routine access logs. A short lifetime reduces exposure but does not replace transport security or authorization before issuance. If revocation is required, verify how the storage implementation can invalidate existing links; deleting an application session does not necessarily revoke an independently issued storage credential.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "run-the-delayed-presentation-job-3",
+      "title": "Run the delayed presentation job",
+      "html": "<p>Suppose presentation previews are queued during a busy morning. Issue a source link, hold the job until close to expiry, and then start retrieval from the real worker network. Repeat with one failed connection and a retry after expiry. The system should obtain fresh authorized access through a documented mechanism or report an expired retrieval attempt. It should not repeatedly retry the same unusable URL until a generic timeout hides the cause. Use a disposable presentation so operational logs can be examined safely.</p><ul><li>Record the issuing moment and the actual consuming service.</li><li>Measure queue delay separately from source transfer duration.</li><li>Verify fresh link issuance without bypassing the current document permission check.</li><li>Redact query strings and tokens from routine logs and traces.</li><li>Test clock skew and the provider's documented expiry boundary behavior.</li></ul>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Test expiry around a queued source fetch",
+        "items": [
+          {
+            "label": "Submit job",
+            "detail": "Record issuance time and the source version"
+          },
+          {
+            "label": "Hold the queue",
+            "detail": "Consume most of the permitted validity window"
+          },
+          {
+            "label": "Attempt retrieval",
+            "detail": "Observe connection, response, and retry behavior"
+          },
+          {
+            "label": "Recover or fail",
+            "detail": "Renew access through policy or show an actionable error"
+          }
+        ],
+        "alt": "A queued job is delayed, fetched near expiry, and then recovered or failed explicitly.",
+        "caption": "Repeatedly retrying the same expired URL cannot restore access.",
+        "src": "/blog/images/signed-document-url-lifetimes-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/signed-document-url-lifetimes-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

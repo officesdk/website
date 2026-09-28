@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-presentation-history-as-evidence",
+  "title": "Presentation version history: recover the deck actually sent",
+  "description": "Keep milestones, source provenance, comparisons, and distribution records so deck history answers real questions.",
+  "category": "AI & documents",
+  "format": "walkthrough",
+  "tags": [
+    "Presentations",
+    "Version control",
+    "AI documents",
+    "Audit logs"
+  ],
+  "structure": "prose+sequence:prose:example:prose:example+document:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 699,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: Every deck has a history. OfficeDex lets you walk back into it",
+      "url": "https://officedex.ai/blog/a-timeline-for-every-deck/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-presentation-history-as-evidence.png",
+  "coverAlt": "Presentation version history: recover the deck actually sent: Deck milestone, Slide identity, Source provenance, Change comparison.",
+  "concepts": [
+    "Deck milestone",
+    "Slide identity",
+    "Source provenance",
+    "Change comparison",
+    "Submission record"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "reading-room",
+    "signature": "cover-first:reading-room",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 98
+  },
+  "contentHash": "1b620cc3ce0225032b47d7069a1d91e52fb55415eef84f4d164fd6bcb438a86b",
+  "intro": "Useful presentation history identifies the deck that was reviewed, sent, or presented, together with the source data behind important claims. Autosave timestamps alone are not enough. Preserve meaningful milestones and compare data changes separately from layout so historical figures and decisions remain explainable.",
+  "sections": [
+    {
+      "id": "distinguish-checkpoints-from-milestones-1",
+      "title": "Distinguish checkpoints from milestones",
+      "html": "<p>Frequent editing checkpoints protect work, while named milestones capture business meaning such as Reviewed by finance or Sent to the customer. Keep both where the chosen tooling permits, but do not make users infer a submission from the newest timestamp. Tie a milestone to the exact deck content and relevant attachments. Assign stable slide identities if the implementation needs comparisons across reordering or duplication. A slide's position is a weak identifier because inserting an agenda changes every subsequent number. Define retention and deletion policies for history, particularly when previous decks contain sensitive figures or superseded statements.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Identify which deck mattered at each milestone",
+        "items": [
+          {
+            "label": "Review",
+            "detail": "Named reviewers accept an exact version."
+          },
+          {
+            "label": "Send",
+            "detail": "Record the file actually distributed."
+          },
+          {
+            "label": "Present",
+            "detail": "Identify any different displayed copy."
+          },
+          {
+            "label": "Successor",
+            "detail": "Continue work without changing the historical record."
+          }
+        ],
+        "alt": "Review, distribution, presentation, and later work are distinct milestones.",
+        "caption": "Use these distinctions where they matter to the business task.",
+        "src": "/blog/images/field-guide-presentation-history-as-evidence-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-presentation-history-as-evidence-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "capture-enough-provenance-2",
+      "title": "Capture enough provenance",
+      "html": "<p>Record which datasets, documents, prompts, or manual inputs contributed to important slides. For generated content, preserve the task specification and review outcome at a level appropriate to confidentiality and reproducibility. Do not assume that saving a prompt makes later generation identical; models and surrounding tools can change. For numerical claims, preserve the source version or extraction date and any transformation logic. A chart whose data has moved on may still be correct for a historical meeting. Provenance helps reviewers distinguish an outdated deck from an accurate record of what was known at the time.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "reconstruct-an-investor-meeting-3",
+      "title": "Reconstruct an investor meeting",
+      "html": "<p>Imagine a team revising an investor presentation the night before a meeting. Finance changes a revenue chart, legal adjusts a disclaimer, and the presenter simplifies the narrative. Mark the final reviewed deck and separately record the version actually distributed. A week later, a director asks why the growth figure differs from the current dashboard. Retrieve the sent deck, its source data date, and the chart calculation. This scenario requires content and provenance together. Restoring the newest editable deck alone may not reproduce the material the audience saw or the evidence behind its claims.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "compare-changes-meaningfully-4",
+      "title": "Compare changes meaningfully",
+      "html": "<p>Useful comparisons distinguish text edits, layout changes, chart data changes, and slide additions or removals. Inspect the chosen product's actual history and comparison features before designing around them. If comparisons are built externally, preserve both semantic structure and rendered previews where practical. Rendering can show visual differences, while structured data explains changed values or references. Avoid presenting a layout only change as equivalent to a changed financial claim. When restoring a prior version, create a clear new working state and protect later submissions from accidental replacement. Record who initiated restoration and what happened to subsequent edits.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "the-sent-deck-is-a-separate-record-5",
+      "title": "The sent deck is a separate record",
+      "html": "<p>In the investor meeting scenario, the final reviewed deck and the distributed deck may be identical, but verify that rather than assuming it. A presenter can make a last-minute change after review or attach the wrong file. Record distribution against the actual artifact using a version identifier and, where useful, an integrity digest.</p><dl><dt>Reviewed milestone</dt><dd>The version accepted by the named reviewers.</dd><dt>Sent milestone</dt><dd>The exact artifact delivered to the audience.</dd><dt>Presented milestone</dt><dd>The version displayed, if different from the distributed copy.</dd><dt>Working successor</dt><dd>The current editable deck prepared for later use.</dd></dl><p>These are proposed record distinctions; assess what the chosen tools can capture. If the platform cannot record distribution, the surrounding business process may need to do it.</p><p>For a questioned growth chart, retrieve its source period and transformation before comparing it with today's dashboard. The historical deck may be accurate for the data available then. If the chart was wrong, create an identified correction and preserve the earlier record according to policy. Overwriting it can make it impossible to explain what the audience saw. A history reconstruction should produce both the visual artifact and enough provenance to interpret it.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "document",
+        "title": "A historical chart needs more than its image",
+        "items": [
+          {
+            "label": "Figure",
+            "detail": "The visible value and labels in the sent deck."
+          },
+          {
+            "label": "Source period",
+            "detail": "Dataset version, extract date, and covered period."
+          },
+          {
+            "label": "Transformation",
+            "detail": "Filters, calculation, and rounding used."
+          },
+          {
+            "label": "Decision",
+            "detail": "Review outcome or later correction record."
+          }
+        ],
+        "alt": "A chart record combines the figure, source period, transformation, and decision.",
+        "caption": "The current dashboard is not a substitute for the historical evidence.",
+        "src": "/blog/images/field-guide-presentation-history-as-evidence-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-presentation-history-as-evidence-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "historical-reconstruction-test-6",
+      "title": "Historical reconstruction test",
+      "html": "<ul><li>Name the milestones that matter and bind them to exact content.</li><li>Preserve source versions and dates for consequential claims.</li><li>Identify the deck actually sent or presented.</li><li>Compare content and data changes separately from appearance.</li><li>Test restoration without erasing later approved records.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

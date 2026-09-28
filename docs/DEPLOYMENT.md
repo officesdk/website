@@ -1,10 +1,10 @@
 # Office SDK deployment
 
-This repository deploys the static Vite build to the Ubuntu/Nginx origin at `43.172.115.22` through GitHub Actions.
+This repository deploys the static Astro build to the Ubuntu/Nginx origin at `43.172.115.22` through GitHub Actions. Astro generates the complete route tree under `dist/`; React islands are hydrated only for browser interactions and do not require a server runtime after deployment.
 
 ## Production path
 
-1. A push to `main` runs `npm ci` and `npm run build` on GitHub Actions.
+1. A push to `main` runs `npm ci` and the Astro `npm run build` command on GitHub Actions.
 2. The workflow uploads the release archive and `deploy/nginx/officesdk.conf` over SSH.
 3. The release is extracted into `/var/www/officesdk/releases/<release-id>`.
 4. `/var/www/officesdk/current` is switched atomically to the new release.
@@ -45,8 +45,12 @@ Do not commit a private key, sudo password, or the `.workbuddy/` directory.
 
 ```bash
 npm ci
-npm run build
+npm run dev       # Astro development server on port 4173
+npm run build     # static Astro output in dist/
+npm run preview   # serve the built dist/ directory locally
 ```
+
+The release archive contains the static route output, such as `dist/index.html`, `dist/product/index.html`, `dist/blog/index.html`, and one `dist/blog/<slug>/index.html` for each article. Nginx serves these files directly; no Astro or React process is started on the origin.
 
 Once a release has been deployed, verify the IP before DNS is changed:
 

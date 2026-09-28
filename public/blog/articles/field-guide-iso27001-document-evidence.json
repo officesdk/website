@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-iso27001-document-evidence",
+  "title": "ISO 27001 document controls: what evidence should you keep?",
+  "description": "A practical evidence map for access reviews, sharing exceptions, recovery tests, and corrective actions.",
+  "category": "Security",
+  "format": "explainer",
+  "tags": [
+    "Security",
+    "Audit logs",
+    "Access control",
+    "Operations"
+  ],
+  "structure": "prose+layers:prose:example:prose:comparison+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 686,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ISO 27001 and Document Management",
+      "url": "https://shimodocs.com/blog/iso27001-document-management"
+    }
+  ],
+  "cover": "/blog/images/field-guide-iso27001-document-evidence.png",
+  "coverAlt": "ISO 27001 document controls: what evidence should you keep?: Risk register, Control owner, Access review, Operating evidence.",
+  "concepts": [
+    "Risk register",
+    "Control owner",
+    "Access review",
+    "Operating evidence",
+    "Corrective action"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "alternating",
+    "signature": "cover-first:alternating",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 74
+  },
+  "contentHash": "a6a1e330546170ebb1103575854ea446afa83348b44ccf0f6be1780157ac7862",
+  "intro": "For ISO 27001, document control evidence should connect an assessed risk to an owned control and a dated record of its operation. Keep review decisions, exceptions, recovery results, and followup actions; a screenshot of a security setting cannot show that the process worked over time.",
+  "sections": [
+    {
+      "id": "define-the-assessment-boundary-1",
+      "title": "Define the assessment boundary",
+      "html": "<p>Start by identifying the document services included in the information security management system. Include storage, identity, editing services, backups, administrative access, and external sharing where they affect the assessed scope. Map the information handled by each service and the business impact of disclosure, loss, or unauthorized change. Certification is not a shortcut for declaring every document workflow secure. A certified organization can still introduce an unassessed sharing integration. Keep the scope statement close to the service inventory so an auditor can trace a workflow to its responsible organization and supporting systems.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Separate policy, procedure, and operating evidence",
+        "items": [
+          {
+            "label": "Risk assessment",
+            "detail": "Supplier access can outlive the engagement."
+          },
+          {
+            "label": "Control design",
+            "detail": "Project owner reviews guests every month."
+          },
+          {
+            "label": "Operating record",
+            "detail": "Review population, decisions, and removals have dates."
+          },
+          {
+            "label": "Followup",
+            "detail": "Failed removal stays assigned until verified."
+          }
+        ],
+        "alt": "Four layers connect a sharing risk to a verified removal.",
+        "caption": "An audit pack should show the connection between the layers.",
+        "src": "/blog/images/field-guide-iso27001-document-evidence-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-iso27001-document-evidence-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "tie-controls-to-actual-risks-2",
+      "title": "Tie controls to actual risks",
+      "html": "<p>Consider an engineering company that shares design packs with subcontractors. Its main risks include stale guest accounts, accidental public links, and unavailable drawings during production. The team might choose time limited guest access, review of public sharing, and tested recovery procedures. Each decision should identify a control owner, review frequency, and expected evidence. Select measures through the organization's risk assessment and treatment process rather than copying a long checklist. Record accepted residual risks and the person authorized to accept them, especially when a business deadline requires a temporary exception.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "collect-evidence-during-normal-work-3",
+      "title": "Collect evidence during normal work",
+      "html": "<p>Evidence should show execution, not merely intention. A written access review procedure explains the design; a dated review with removals and approvals demonstrates operation. Preserve document service configuration changes, completed access reviews, restoration results, and incident followups according to an agreed evidence retention policy. Use stable identifiers and exportable records so evidence remains understandable after an employee leaves. Avoid storing unnecessary document contents in audit packages. For sensitive materials, describe the sampled record and decision without duplicating the confidential information into an additional, less controlled evidence repository.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "handle-exceptions-and-improvements-4",
+      "title": "Handle exceptions and improvements",
+      "html": "<p>Suppose a supplier needs extended access beyond the normal thirty day limit. Log the business reason, data classification, approving owner, compensating controls, and end date. The exception must return to a review queue rather than disappear into email. When a quarterly sample finds an expired account still active, determine whether the cause is an identity synchronization failure, unclear ownership, or an ignored review. Correct the specific cause and retain evidence of the followup. A management system depends on this feedback loop; collecting screenshots without resolving recurring failures provides little operational assurance.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-small-evidence-register-5",
+      "title": "A small evidence register",
+      "html": "<p>Use a register small enough that control owners will maintain it. The evidence location should identify the authoritative record, not an email attachment copied repeatedly between folders. A review record should explain the decision taken, including a finding of no change, rather than simply say Done.</p><table><thead><tr><th>Control activity</th><th>Evidence worth retaining</th><th>Weak substitute</th></tr></thead><tbody><tr><td>Guest access review</td><td>Dated population, reviewer, decisions, completed removals</td><td>Undated member list</td></tr><tr><td>Sharing exception</td><td>Reason, approving owner, expiry, compensating measures</td><td>Informal permission in chat</td></tr><tr><td>Restore exercise</td><td>Selected versions, restored environment, verification results</td><td>Backup job success alone</td></tr></tbody></table><p>For example, a subcontractor review may cover twenty accounts and remove three. Retain the population used for that review, the reason each account was retained or removed, and confirmation that the three removals reached the identity and document systems. If a removal failed, keep it open as a finding with an owner; do not let a signed review conceal unfinished work. Decide the evidence retention period with the management system owner, and restrict the register if identifiers disclose confidential projects. This gives the next reviewer a way to test both coverage and execution without seeing the design files themselves.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "flow",
+        "title": "An expired guest account becomes a corrective action",
+        "items": [
+          {
+            "label": "Review sample",
+            "detail": "Guest G17 remains active after its end date."
+          },
+          {
+            "label": "Cause",
+            "detail": "Identity sync failed; the review caught the discrepancy."
+          },
+          {
+            "label": "Correction",
+            "detail": "Remove access and repair the synchronization path."
+          },
+          {
+            "label": "Verification",
+            "detail": "Retest expiry with a disposable guest account."
+          }
+        ],
+        "alt": "A review finding leads to cause analysis, correction, and retesting.",
+        "caption": "Correct the cause as well as the individual account.",
+        "src": "/blog/images/field-guide-iso27001-document-evidence-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-iso27001-document-evidence-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "decision-notes-the-internal-decision-notes-6",
+      "title": "Decision notes the internal Decision notes",
+      "html": "<ul><li>Link each sampled workflow to the service inventory and assessed scope.</li><li>Identify the risk, selected control, accountable owner, and review interval.</li><li>Retain dated evidence of execution and the decisions that followed.</li><li>Track exceptions with explicit approval and expiry.</li><li>Check that corrective actions address causes and have been verified.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

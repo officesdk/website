@@ -1,0 +1,148 @@
+{
+  "slug": "field-guide-private-cloud-responsibility-model",
+  "title": "Private cloud collaboration: who operates and owns each part?",
+  "description": "Write a responsibility model for infrastructure, document state, privileged access, maintenance, and recovery.",
+  "category": "Self-hosting",
+  "format": "architecture",
+  "tags": [
+    "Self-hosting",
+    "Operations",
+    "Document storage",
+    "Access control"
+  ],
+  "structure": "prose:prose+layers:example:prose:comparison:diagnostic+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 706,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Private Cloud Document Collaboration: Self-Hosted Guide",
+      "url": "https://shimodocs.com/blog/what-is-private-cloud-document-collaboration"
+    }
+  ],
+  "cover": "/blog/images/field-guide-private-cloud-responsibility-model.png",
+  "coverAlt": "Private cloud collaboration: who operates and owns each part?: Operating arrangement, Data authority, Privileged access, Shared responsibility.",
+  "concepts": [
+    "Operating arrangement",
+    "Data authority",
+    "Privileged access",
+    "Shared responsibility",
+    "Change control"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "reading-room",
+    "signature": "masthead:reading-room",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 97
+  },
+  "contentHash": "18dd148402a587d20c8ae56f434895f78b95c035218eab48f842b3e2b9214458",
+  "intro": "Private cloud collaboration needs a responsibility model that identifies infrastructure ownership, service operators, data authority, and privileged access. Specify who patches, monitors, backs up, restores, and verifies the service. A dedicated environment does not eliminate shared responsibilities or guarantee that somebody owns every operating task.",
+  "sections": [
+    {
+      "id": "describe-the-actual-arrangement-1",
+      "title": "Describe the actual arrangement",
+      "html": "<p>State where infrastructure runs, who owns the account or hardware, who deploys software, and who can administer the service. Identify whether resources are dedicated or logically separated and what isolation evidence is required. List external dependencies such as licensing, update repositories, support access, and optional processing services. Confirm the exact product offer supports the intended architecture. A private network address does not prove that every document operation stays inside the network. Trace data paths and administrative paths separately, because the ability to change configuration or retrieve a backup can matter as much as routine application access.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "assign-document-authority-2",
+      "title": "Assign document authority",
+      "html": "<p>Identify the system that owns each stage of the lifecycle: original files, active editing state, published business versions, and retained records. If several services are involved, document identifiers and handoff rules. Specify who authorizes creation, export, sharing, and deletion. A private cloud deployment can still have ambiguous ownership when an editor's durable state and the business application's downloadable file differ. Define the visible saved milestone and the authoritative version returned to users. Include reconciliation procedures for interrupted exports or callbacks so the system can recover without silently presenting stale content as current.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A private deployment has separate authority layers",
+        "items": [
+          {
+            "label": "Infrastructure",
+            "detail": "Account, network, storage, and hardware ownership."
+          },
+          {
+            "label": "Service operation",
+            "detail": "Deployment, monitoring, updates, and incidents."
+          },
+          {
+            "label": "Document authority",
+            "detail": "Business IDs, saved states, and published versions."
+          },
+          {
+            "label": "Privileged access",
+            "detail": "Approved support and administration routes."
+          }
+        ],
+        "alt": "Four authority layers identify the parties involved in a deployment.",
+        "caption": "Private hosting describes the arrangement; these layers describe responsibility.",
+        "src": "/blog/images/field-guide-private-cloud-responsibility-model-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-private-cloud-responsibility-model-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "test-a-managed-deployment-example-3",
+      "title": "Test a managed deployment example",
+      "html": "<p>Suppose an organization uses its own cloud account while a supplier operates the collaboration service. The organization manages identity and data classification; the supplier manages releases and infrastructure incidents. Write a responsibility table for backups, certificate rotation, support access, security updates, capacity, and recovery verification. Then stage a storage outage and observe which party detects it, communicates impact, restores access, and confirms document integrity. The exercise often reveals tasks assigned vaguely to both parties or to neither. Convert those gaps into named ownership and response expectations before production approval.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "control-privileged-and-change-access-4",
+      "title": "Control privileged and change access",
+      "html": "<p>Use attributable administrator identities and an approved process for exceptional access to document content. Define how supplier access is granted, limited, logged, and revoked. Protect service credentials and encryption keys according to the agreed responsibility model. For releases, require supported versions, change records, staging results, and understood rollback limits. Test restoration with the party that will perform it during an incident, including required metadata and permissions. Review the operating arrangement when staff, suppliers, or account ownership changes. A responsibility model that is never updated can become less accurate than the undocumented practice it was meant to replace.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "separate-execution-from-accountability-5",
+      "title": "Separate execution from accountability",
+      "html": "<p>A task can be executed by a supplier while the organization remains accountable for its requirement. Keep both roles visible. For restoration, the supplier might run the procedure, the infrastructure team might supply the isolated target environment, and the business owner might verify that the restored version is the right one.</p><table><thead><tr><th>Task</th><th>Executor to name</th><th>Decision owner to name</th></tr></thead><tbody><tr><td>Backup job</td><td>Operator of the relevant durable store</td><td>Owner of recovery policy</td></tr><tr><td>Release update</td><td>Maintainer of the deployment</td><td>Owner approving business impact</td></tr><tr><td>Support access</td><td>Authorized investigator</td><td>Owner approving scope and conditions</td></tr></tbody></table>",
+      "kind": "comparison"
+    },
+    {
+      "id": "test-the-responsibility-gaps-6",
+      "title": "Test the responsibility gaps",
+      "html": "<p>Stage a failure that crosses the organizational boundary. For example, storage rejects exports while editing sessions remain available. Ask who notices the delayed business versions, who opens the incident, who investigates credentials, and who tells users which saved state is safe.</p><p>Record any task answered with We assumed they handled it. Convert that assumption into an assigned role, an escalation route, and a verification step. Also test the opposite problem: both parties independently restart or reconfigure the same service. Shared involvement needs coordination, especially when a retry can publish a new version. The exercise should leave an operating agreement that matches how the parties will actually respond under pressure.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "A storage failure tests the shared operating model",
+        "items": [
+          {
+            "label": "Detection",
+            "detail": "Identify the stalled export or unavailable object."
+          },
+          {
+            "label": "Triage",
+            "detail": "Assigned owner correlates the service and storage paths."
+          },
+          {
+            "label": "Recovery",
+            "detail": "Authorized executor applies the agreed procedure."
+          },
+          {
+            "label": "Verification",
+            "detail": "Business owner checks version, content, and permissions."
+          }
+        ],
+        "alt": "A failure needs detection, triage, recovery, and business verification.",
+        "caption": "Assign an owner at each handoff before the service goes live.",
+        "src": "/blog/images/field-guide-private-cloud-responsibility-model-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-private-cloud-responsibility-model-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "responsibility-model-decision-notes-7",
+      "title": "Responsibility model Decision notes",
+      "html": "<ul><li>Identify infrastructure ownership, operators, isolation, and external dependencies.</li><li>Assign authority for content states and lifecycle transitions.</li><li>Name owners for backup, updates, monitoring, certificates, and incidents.</li><li>Test a failure across organizational boundaries.</li><li>Verify privileged access records and periodic responsibility reviews.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

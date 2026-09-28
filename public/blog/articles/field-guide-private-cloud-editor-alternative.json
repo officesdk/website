@@ -1,0 +1,126 @@
+{
+  "slug": "field-guide-private-cloud-editor-alternative",
+  "title": "Private cloud Google Docs alternatives: network and data tests",
+  "description": "Translate private deployment requirements into separate editing, network, dependency, and maintenance checks.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Self-hosting",
+    "Product selection",
+    "Data residency",
+    "Operations"
+  ],
+  "structure": "prose+layers:example:prose+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 654,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Self-Hosted Google Docs Alternative for Private Deployment",
+      "url": "https://shimodocs.com/blog/google-docs-alternative-private-cloud"
+    }
+  ],
+  "cover": "/blog/images/field-guide-private-cloud-editor-alternative.png",
+  "coverAlt": "Private cloud Google Docs alternatives: network and data tests: Network boundary, Data path, Identity source, Outbound dependency.",
+  "concepts": [
+    "Network boundary",
+    "Data path",
+    "Identity source",
+    "Outbound dependency",
+    "Maintenance owner"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "journal",
+    "signature": "statement:journal",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 94
+  },
+  "contentHash": "9aafccc110267336f9a61fbc4445b89f463af2fc17c456e1d6faaba8af2a4e37",
+  "intro": "A private cloud Google Docs alternative must pass both the writing task and the deployment boundary. Specify permitted processing, administration, and outbound dependencies, then trace source retrieval, saved state, and export. Installation location alone does not establish independence or acceptable data handling.",
+  "sections": [
+    {
+      "id": "state-the-boundary-and-test-both-halves-1",
+      "title": "State the boundary and test both halves",
+      "html": "<p>Define the hosting environment, permitted networks, administration model, and any restrictions on external communication. A private cloud might mean an isolated virtual network, dedicated infrastructure, or an internally operated service; those arrangements have different implications. Identify whether licensing, telemetry, updates, or support require outbound connectivity. Confirm the exact edition's documented requirements and inspect network behavior in a controlled test. Record where document bytes, editing state, logs, and backups reside. The requirement should describe permitted processing and access, not merely the location of the web application container.</p><p>Use one test set for authoring, collaboration, comments, versions, and required exports, and another for identity, network access, recovery, and maintenance. This prevents an excellent editing demonstration from masking an unsupported deployment requirement. It also prevents a successful installation from being mistaken for satisfactory document fidelity. Test the actual file structures and simultaneous use expected by the organization. For the private deployment set, verify certificate trust, source retrieval, callbacks, and storage access from the components that perform those requests. A link reachable in an administrator's browser may be unreachable to a conversion worker.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Private deployment includes data and administration paths",
+        "items": [
+          {
+            "label": "User access",
+            "detail": "Internal identity and approved browser routes."
+          },
+          {
+            "label": "Processing",
+            "detail": "Editing, conversion, and source retrieval."
+          },
+          {
+            "label": "Persistence",
+            "detail": "Objects, state, logs, and recovery data."
+          },
+          {
+            "label": "Administration",
+            "detail": "Updates, licensing, support, and privileged access."
+          }
+        ],
+        "alt": "Four paths must fit the intended private deployment boundary.",
+        "caption": "A local container verifies only a small part of this arrangement.",
+        "src": "/blog/images/field-guide-private-cloud-editor-alternative-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-private-cloud-editor-alternative-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "work-through-an-isolated-research-team-2",
+      "title": "Work through an isolated research team",
+      "html": "<p>Suppose a research institute needs collaborative drafting inside a restricted network. Staff use the internal identity system, documents originate in a protected repository, and approved reports are exported for publication. Deploy a candidate in a representative environment and trace the first open, collaborative changes, saved state, and export. Then block unauthorized outbound destinations and inspect failures. Determine whether the supported architecture still operates and which update or support processes require an approved transfer route. Use synthetic documents for these tests so network troubleshooting does not expose unpublished research to an unintended destination.</p><p>Test the boundary under failure, not only when everything works. A source retrieval error might trigger support diagnostics; a parser crash might create an attachment containing document bytes; a failed license check might require an external recovery step. Inspect the supported behavior and approved routes for these cases.</p><table><thead><tr><th>Stage</th><th>Boundary question</th><th>Evidence</th></tr></thead><tbody><tr><td>First open</td><td>Which component retrieves the source?</td><td>Safe request trace from that component</td></tr><tr><td>Processing</td><td>Where do conversion and editing state run?</td><td>Deployment and observed network path</td></tr><tr><td>Failure</td><td>Where do diagnostics and temporary files go?</td><td>Controlled failure inspection</td></tr><tr><td>Maintenance</td><td>How do updates and support enter the boundary?</td><td>Rehearsed approved procedure</td></tr></tbody></table><p>For the research institute, disable unauthorized destinations and run a representative task plus a staged failure. Record which functions remain available and which need a supported alternative. An undocumented workaround is a risk to assign and resolve. If the organization accepts an external dependency, state its purpose and conditions precisely rather than keeping an overly broad claim that the entire service is isolated.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "assign-continuing-operational-work-3",
+      "title": "Assign continuing operational work",
+      "html": "<p>Private deployment transfers or changes responsibilities for patching, backups, monitoring, certificates, capacity, and incident response. Name an owner for each and compare the workload with available staffing. Rehearse a release upgrade, a failed storage request, and restoration of both content and permission metadata. Establish a supported escalation arrangement and clarify whether supplier diagnostics require document access. Include infrastructure and maintenance effort in cost estimates. The operating plan should also explain how files and relevant metadata can be exported if the deployment is retired, preventing an internal service from becoming an undocumented permanent dependency.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "Evaluate writing and deployment as separate gates",
+        "items": [
+          {
+            "label": "Writing gate",
+            "detail": "Real documents, review, and export pass."
+          },
+          {
+            "label": "Boundary gate",
+            "detail": "Processing, access, and dependencies fit policy."
+          },
+          {
+            "label": "Operations gate",
+            "detail": "Assigned staff can update and recover the service."
+          }
+        ],
+        "alt": "Three gates assess functional, boundary, and operating suitability.",
+        "caption": "A pass in one gate does not compensate for an unresolved mandatory gate.",
+        "src": "/blog/images/field-guide-private-cloud-editor-alternative-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-private-cloud-editor-alternative-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "private-deployment-decision-notess-4",
+      "title": "Private deployment Decision notess",
+      "html": "<ul><li>Define hosting, network, processing, and administrative boundaries.</li><li>Verify outbound dependencies for the exact supported offer.</li><li>Run separate editing and deployment acceptance suites.</li><li>Trace source retrieval, saved state, export, and recovery.</li><li>Assign maintenance owners and confirm escalation and exit arrangements.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "slug": "pdf-fidelity-acceptance",
+  "title": "How to test Word, Excel, and presentation conversion to PDF",
+  "description": "Compare structure, critical values, and rendered pages with an agreed corpus instead of relying on a successful conversion response.",
+  "category": "Office workflows",
+  "format": "playbook",
+  "tags": [
+    "PDF",
+    "Document conversion",
+    "Word documents",
+    "Excel spreadsheets",
+    "Presentations"
+  ],
+  "structure": "prose:comparison+matrix:steps:example+document:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 641,
+  "source": null,
+  "references": [
+    {
+      "label": "PDF Association: PDF technical resources",
+      "url": "https://pdfa.org/resource/"
+    }
+  ],
+  "cover": "/blog/images/pdf-fidelity-acceptance.png",
+  "coverAlt": "How to test Word, Excel, and presentation conversion to PDF: Reference file, Text accuracy, Page layout, Table boundaries.",
+  "concepts": [
+    "Reference file",
+    "Text accuracy",
+    "Page layout",
+    "Table boundaries",
+    "Release criteria"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "rail-left",
+    "signature": "field-notes:rail-left",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 11
+  },
+  "contentHash": "09fbc63f5bbfb05804557e570ebb2e8ad49b09f96eafa9d46c5c760bde5f5187",
+  "intro": "A successful conversion response only establishes that an output was produced. To accept a PDF, compare critical content and rendered pages against an agreed reference: text and values first, then pagination, clipping, charts, and fonts. The reference application and export settings must be recorded or the comparison is ambiguous.",
+  "sections": [
+    {
+      "id": "choose-a-reference-before-comparing-output-1",
+      "title": "Choose a reference before comparing output",
+      "html": "<p>Decide which application, version, fonts, and print settings define the reference output for each document family. Different layout engines can produce different pagination, so an unspecified reference invites subjective disputes. For an issued contract, signatures and page references may matter most. For a spreadsheet report, totals and selected print areas may dominate. Record these priorities alongside the reference PDF. Keep the editable source and reference together, with version identifiers, so future comparisons do not accidentally use changed source content or an unrelated export.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "check-content-separately-from-appearance-2",
+      "title": "Check content separately from appearance",
+      "html": "<p>Verify that expected text, tables, page count, links, and critical numeric values are present. Inspect hidden sheets, tracked changes, comments, and print areas according to the export policy rather than assuming they should all appear. Check whether text remains searchable when that is a requirement. A visual comparison can miss a lost link destination or a number rendered in the wrong reading order. Conversely, a text comparison can miss clipping. Structural and visual checks answer different questions and should support one another.</p><table><thead><tr><th>Finding</th><th>Typical acceptance treatment</th></tr></thead><tbody><tr><td>Missing paragraph or changed total</td><td>Content defect requiring resolution</td></tr><tr><td>Clipped signature or table row</td><td>Layout defect with a direct business impact</td></tr><tr><td>Different antialiasing</td><td>Review as rendering noise rather than lost content</td></tr><tr><td>Different page break</td><td>Assess against page references and the document's intended use</td></tr></tbody></table><p>Use this classification before setting a visual-difference threshold. Otherwise, a tool can pass a page with one missing critical digit while failing a harmless font smoothing change across thousands of pixels. Automated differences locate candidates for review; business requirements determine severity.</p><p>For spreadsheet exports, identify the selected sheets, print area, scaling, and whether formulas were recalculated. For presentations, record slide dimensions and whether notes belong in the output. For Word documents, check tracked changes and comment inclusion according to policy. These settings can legitimately change the resulting PDF. Preserve them with the fixture so an upgrade comparison measures renderer behavior rather than a changed export request.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "matrix",
+        "title": "PDF acceptance requires different kinds of evidence",
+        "items": [
+          {
+            "label": "Text and values",
+            "detail": "Check named paragraphs, totals, and required symbols"
+          },
+          {
+            "label": "Structure",
+            "detail": "Inspect pages, links, searchability, and selected content"
+          },
+          {
+            "label": "Layout",
+            "detail": "Review clipping, table boundaries, charts, and pagination"
+          },
+          {
+            "label": "Export settings",
+            "detail": "Preserve source version, fonts, and reference settings"
+          }
+        ],
+        "alt": "Content, structure, layout, and export settings contribute separate acceptance evidence.",
+        "caption": "A visual match alone cannot verify link targets or spreadsheet values.",
+        "src": "/blog/images/pdf-fidelity-acceptance-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/pdf-fidelity-acceptance-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "render-comparable-pages-and-review-the-differences-3",
+      "title": "Render comparable pages and review the differences",
+      "html": "<p>Render reference and candidate pages at the same dimensions and resolution, then compare them with consistent alignment. Pixel differences are useful for locating changes, but antialiasing and font rendering can create noise. Review meaningful regions such as headers, table edges, charts, and page breaks. Define acceptable tolerances for the workflow rather than treating every changed pixel as a defect. For large corpora, use contact sheets to find anomalies and inspect affected pages at full size before classifying an issue or approving an exception.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "a-table-crossing-several-pages-4",
+      "title": "A table crossing several pages",
+      "html": "<p>Create a synthetic purchase report with a repeating table header, mixed length descriptions, a total row, and a footer containing page numbers. Include enough rows to cross several pages. Convert it and inspect the first, middle, and final page boundaries. Confirm that no row disappears, totals remain visible, and text does not overlap the footer. Repeat after removing a required font from the test environment. This example reveals layout dependency and pagination behavior without relying on confidential production documents or invented performance claims.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "document",
+        "title": "Page boundaries reveal table conversion defects",
+        "items": [
+          {
+            "label": "Header repeat",
+            "detail": "Column meanings remain visible on later pages"
+          },
+          {
+            "label": "Body rows",
+            "detail": "No row is dropped, overlaid, or clipped"
+          },
+          {
+            "label": "Final total",
+            "detail": "The complete total row stays legible"
+          },
+          {
+            "label": "Footer",
+            "detail": "Page numbering does not collide with document content"
+          }
+        ],
+        "alt": "A multipage table is inspected at repeated headers, body rows, the total, and footer.",
+        "caption": "Use synthetic content long enough to exercise first, middle, and final page boundaries.",
+        "src": "/blog/images/pdf-fidelity-acceptance-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/pdf-fidelity-acceptance-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "evidence-to-retain-with-the-release-5",
+      "title": "Evidence to retain with the release",
+      "html": "<ul><li>List critical content that must survive conversion without alteration.</li><li>Record approved fonts, print settings, and the reference application version.</li><li>Inspect every page for small critical documents and use justified sampling for larger collections.</li><li>Classify clipping, missing content, and changed values separately from cosmetic shifts.</li><li>Retain failing sources and comparison images in a restricted regression corpus.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

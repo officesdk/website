@@ -1,0 +1,138 @@
+{
+  "slug": "document-capacity-measurement",
+  "title": "Office document capacity planning: sessions, conversions, and save traffic",
+  "description": "Distinguish open sessions, requests, conversions, and save traffic so capacity estimates reflect the real document workload.",
+  "category": "Operations",
+  "format": "field-notes",
+  "tags": [
+    "Performance",
+    "Operations",
+    "Document conversion",
+    "Collaboration"
+  ],
+  "structure": "comparison+matrix:prose:steps:example+comparison:checklist:diagnostic",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 746,
+  "source": null,
+  "references": [
+    {
+      "label": "Google SRE Book: Monitoring Distributed Systems",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+    }
+  ],
+  "cover": "/blog/images/document-capacity-measurement.png",
+  "coverAlt": "Office document capacity planning: sessions, conversions, and save traffic: Workload units, User latency, Resource use, Peak scenarios.",
+  "concepts": [
+    "Workload units",
+    "User latency",
+    "Resource use",
+    "Peak scenarios",
+    "Capacity decision"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "wide",
+    "signature": "field-notes:wide",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 35
+  },
+  "contentHash": "ee36b2fbdff8d0f781ba5322f392ddf04149857e300f93c3e5bac86d6cdfcf61",
+  "intro": "Model capacity with the work the platform performs, not only the number of users. Idle sessions, first-time conversions, large workbook edits, and save bursts stress different components. Measure latency and correctness alongside queue age and resource use under a stated document mix and concurrency profile.",
+  "sections": [
+    {
+      "id": "choose-workload-units-with-clear-definitions-1",
+      "title": "Choose workload units with clear definitions",
+      "html": "<p>Track active editing sessions, open and close rates, source retrieval bytes, conversion arrivals, queued work, save events, and export requests where relevant. Keep concurrency distinct from requests per second and from licensed limits that may use their own definitions. A tenant with many idle sessions can behave differently from a smaller tenant importing a large folder. Record document format and complexity distributions alongside volume. These dimensions make the workload reproducible and prevent a single user count from concealing the operations that actually constrain the system.</p><table><thead><tr><th>Workload unit</th><th>What it describes</th><th>Outcome to watch</th></tr></thead><tbody><tr><td>Active sessions</td><td>Simultaneous supported collaboration contexts</td><td>Interaction and reconnect behavior</td></tr><tr><td>New opens per interval</td><td>Initialization and source-retrieval demand</td><td>Time to useful display</td></tr><tr><td>Conversion arrivals</td><td>Fresh preview or export processing</td><td>Queue age and completion time</td></tr><tr><td>Save events</td><td>Persistence and publication demand</td><td>Durable version convergence</td></tr></tbody></table><p>Keep these operational units separate from contractual licensing terms. A license may count something called a session or request differently from your dashboard. Use the documented commercial definition for entitlement and the measured system definition for engineering, and explain the relationship instead of substituting one for the other.</p><p>When reporting results, include the file mix, cold or warm cache state, client profile, infrastructure, concurrency, and observation window. A number without those conditions cannot be reproduced. Report failures and rejected work as well as completed operations; admission control may protect latency precisely by declining excess demand.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "matrix",
+        "title": "Different user activity creates different system work",
+        "items": [
+          {
+            "label": "Open sessions",
+            "detail": "Supported concurrent contexts, including quiet sessions"
+          },
+          {
+            "label": "Fresh opens",
+            "detail": "Retrieval and initialization for new document views"
+          },
+          {
+            "label": "Conversions",
+            "detail": "CPU, memory, queue, and storage demand from processing"
+          },
+          {
+            "label": "Save publications",
+            "detail": "Versioned writes and convergence after accepted edits"
+          }
+        ],
+        "alt": "Four operational units describe activity more precisely than total user count.",
+        "caption": "Record workload definitions so licensing terminology does not obscure engineering measurements.",
+        "src": "/blog/images/document-capacity-measurement-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-capacity-measurement-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "measure-user-outcomes-alongside-infrastructure-2",
+      "title": "Measure user outcomes alongside infrastructure",
+      "html": "<p>Observe latency, failure rate, and queue age together with CPU, memory, storage throughput, network traffic, and database behavior. High utilization is not automatically a problem if outcomes remain within requirements, while low average utilization can hide a saturated single worker or a long tail of slow documents. Break down opening into retrieval, initialization, and useful display where possible. Report percentile or distribution information with sample size and conditions rather than only an average. Include failed operations so the fastest successful subset does not define the reported result.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "build-a-representative-load-profile-3",
+      "title": "Build a representative load profile",
+      "html": "<p>Model normal activity, expected peaks, batch imports, and recovery after a temporary outage. Use representative synthetic or authorized documents with the complexity seen in production. Separate cold and warm cache behavior. Increase demand gradually while watching downstream dependencies, and stop according to agreed safety limits in the test environment. Do not extrapolate linearly across a bottleneck without evidence. More workers may shift pressure to object storage, databases, network links, or a shared conversion dependency instead of increasing useful throughput in the same proportion.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "compare-cached-reading-with-new-workbook-processing-4",
+      "title": "Compare cached reading with new workbook processing",
+      "html": "<p>Run one scenario with many users reading already prepared previews and another with fewer users opening new complex workbooks while a batch import runs. Keep the environment fixed and record open latency, queue age, save completion, and resource use. The purpose is to identify different limiting stages, not to produce a universal benchmark. If the second scenario overloads conversion, test admission limits or scheduling before assuming every component needs more replicas. Document the resulting operating envelope with the exact workload mix that produced it.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "comparison",
+        "title": "Equal user counts can produce unequal workloads",
+        "items": [
+          {
+            "label": "Prepared previews",
+            "detail": "Mostly reading already generated results"
+          },
+          {
+            "label": "New complex workbooks",
+            "detail": "Retrieval, initialization, recalculation, and saving"
+          },
+          {
+            "label": "Batch plus interaction",
+            "detail": "Bulk conversion competes with ordinary user actions"
+          }
+        ],
+        "alt": "Prepared viewing, new workbook editing, and mixed batch work create distinct demand profiles.",
+        "caption": "Publish the tested workload mix with the result instead of a universal user-capacity claim.",
+        "src": "/blog/images/document-capacity-measurement-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-capacity-measurement-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "acceptance-and-reporting-conditions-5",
+      "title": "Acceptance and reporting conditions",
+      "html": "<ul><li>Define target outcomes for opening, editing, saving, and exporting.</li><li>Track workload units separately from licensing terminology.</li><li>Identify the first saturated dependency under each representative peak.</li><li>Reserve capacity for retries, failover, and maintenance where required.</li><li>Repeat affected scenarios after changing document limits or infrastructure.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "let-the-bottleneck-determine-the-next-experiment-6",
+      "title": "Let the bottleneck determine the next experiment",
+      "html": "<p>Use the bottleneck to choose the next experiment. If queue age rises while converters remain busy, test scheduling, admitted load, or converter capacity within downstream limits. If workers wait for object storage, adding more workers may only multiply waiting connections. If browsers run out of memory on one workbook pattern, a backend replica change may not address the user-visible problem.</p><p>Reserve a scenario for recovery: restart a worker or briefly interrupt a dependency, then watch retry demand and backlog drain. Normal steady-state headroom is not the same as recovery capacity. Record how long the service takes to return to its agreed operating range and whether current users remain able to save during that period.</p>",
+      "kind": "diagnostic"
+    }
+  ]
+}

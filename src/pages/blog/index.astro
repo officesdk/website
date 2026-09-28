@@ -1,0 +1,20 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import BlogIndex from '../../blog/BlogIndex'
+
+const title = 'Office SDK Journal | Documents, systems, and the work between'
+const description = 'Practical articles on embedded Office workflows, document collaboration, AI, deployment, security, and operations.'
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Office SDK Journal',
+  description,
+  url: 'https://officesdk.com/blog',
+  inLanguage: 'en',
+  publisher: { '@id': 'https://officesdk.com/#organization' },
+}
+---
+
+<SiteLayout {title} {description} canonical="/blog" schemas={[blogSchema]}>
+  <BlogIndex client:load />
+</SiteLayout>

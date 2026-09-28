@@ -4,13 +4,20 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
+    "dev": "astro dev",
+    "build": "tsc --noEmit && astro build",
+    "preview": "astro preview",
+    "test": "node --test scripts/blog/blog.test.mjs",
+    "blog:inventory": "node scripts/blog/import.mjs --inventory",
+    "blog:originals": "node scripts/blog/import.mjs",
+    "blog:illustrate": "node scripts/blog/illustrations.mjs",
+    "blog:verify": "node scripts/blog/verify.mjs",
+    "blog:verify:originals": "node scripts/blog/verify.mjs --originals",
     "deploy:pages": "npm run build && npx wrangler pages deploy dist --project-name=officesdk --branch=main --commit-dirty=true"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
+    "@astrojs/react": "^7.0.0",
+    "astro": "^7.3.5",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest"
@@ -18,7 +25,9 @@
   "devDependencies": {
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "typescript": "latest",
-    "vite": "latest"
+    "cheerio": "^1.2.0",
+    "sanitize-html": "^2.17.7",
+    "sharp": "^0.35.5",
+    "typescript": "latest"
   }
 }

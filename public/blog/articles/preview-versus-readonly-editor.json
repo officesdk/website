@@ -1,0 +1,126 @@
+{
+  "slug": "preview-versus-readonly-editor",
+  "title": "Document preview vs read only editor: which view does your workflow need?",
+  "description": "Compare viewing workflows by data path, collaboration context, and permission requirements rather than the appearance of the toolbar.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Document preview",
+    "Embedded editing",
+    "Access control",
+    "Business workflows"
+  ],
+  "structure": "comparison+comparison:prose:example+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 649,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: Authorization Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/preview-versus-readonly-editor.png",
+  "coverAlt": "Document preview vs read only editor: which view does your workflow need?: Version promise, Preview render, Live view, Server rights.",
+  "concepts": [
+    "Version promise",
+    "Preview render",
+    "Live view",
+    "Server rights",
+    "Approval snapshot"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "rail-left",
+    "signature": "overprint:rail-left",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 3
+  },
+  "contentHash": "3cdc2b466c620744b89cbb01196fc1c13479acdcd0d7e762346d589b04f5a2bc",
+  "intro": "Choose a preview when users need a particular rendered version; choose a read only editor when they need the supported viewing features of an editing session. Neither label alone establishes freshness, comment access, or download permission. Decide which version the viewer must see before comparing the interfaces.",
+  "sections": [
+    {
+      "id": "compare-the-viewing-contracts-1",
+      "title": "Compare the viewing contracts",
+      "html": "<p>Ask whether the user needs an approved snapshot, the latest saved version, or ongoing changes from collaborators. These are different promises. An invoice archive may require a stable representation that matches an issued record. A project review may require the current shared document and its comments. Write that promise into the product requirement before choosing an integration mode. A toolbar without editing controls does not tell you whether the underlying content is a static conversion, a cached result, or a live collaboration view.</p><table><thead><tr><th>Question</th><th>Snapshot preview</th><th>Read only session</th></tr></thead><tbody><tr><td>What content is reviewed?</td><td>A specified rendered source version</td><td>The session's documented document state</td></tr><tr><td>What must be operated?</td><td>Conversion and cache lifecycle</td><td>Session authorization and refresh behavior</td></tr><tr><td>What proves approval?</td><td>A decision bound to the rendered version</td><td>An explicit version binding beyond simply opening the session</td></tr></tbody></table><p>This comparison describes workflow patterns, not a feature guarantee for every product. Some previews expose searchable text and annotations; others are page images. Some read only sessions show ongoing changes; others reload only when requested. Check the deployed implementation before putting these distinctions in user guidance.</p><p>Use a fixed version requirement as a strong decision signal. If an approver must attest to exactly the wording submitted at noon, save that version relationship with the approval. If reviewers instead need to follow an author's current draft, show the current state and make its changing nature clear. Offering both views is reasonable when their labels and links make the difference obvious.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "comparison",
+        "title": "The version promise determines the viewing mode",
+        "items": [
+          {
+            "label": "Submitted snapshot",
+            "detail": "Review the identified version even after drafting continues"
+          },
+          {
+            "label": "Current document",
+            "detail": "Follow the current state supported by the session"
+          },
+          {
+            "label": "Historical version",
+            "detail": "Retrieve an explicitly selected earlier state"
+          }
+        ],
+        "alt": "Three viewing promises distinguish submitted, current, and historical content.",
+        "caption": "Name the version promise in the interface; the toolbar alone cannot communicate it.",
+        "src": "/blog/images/preview-versus-readonly-editor-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/preview-versus-readonly-editor-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "operational-cost-and-accessibility-differ-2",
+      "title": "Operational cost and accessibility differ",
+      "html": "<p>A generated preview introduces conversion and cache invalidation work. A live viewing session introduces session authorization and potentially collaboration infrastructure. Neither pattern is universally lighter or safer; measure the actual deployment. Compare startup latency, source retrieval, update freshness, comment visibility, and behavior when the editing service is unavailable. Also establish which accessibility features and document structures survive the selected view. A fixed page image might satisfy visual review while failing a requirement to navigate headings or copy meaningful text with assistive technology.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-submitted-contract-must-stay-identifiable-3",
+      "title": "A submitted contract must stay identifiable",
+      "html": "<p>Imagine a contract submitted for approval while its author continues drafting a later revision. The approver should review the submitted version, with a visible version label and a decision bound to that version. A live view that silently advances could make the approval ambiguous. During drafting, however, reviewers may need a read only collaboration session to discuss current changes. Preserve both use cases with explicit entry points such as Submitted version and Current draft, and avoid using the same unlabeled link for both behaviors.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Bind approval to the version that was reviewed",
+        "items": [
+          {
+            "label": "Submission",
+            "detail": "Capture the document and submitted version IDs"
+          },
+          {
+            "label": "Review",
+            "detail": "Open that version with its visible label"
+          },
+          {
+            "label": "Decision",
+            "detail": "Store approval or rejection against the same version"
+          },
+          {
+            "label": "Later draft",
+            "detail": "Keep subsequent edits outside that prior decision"
+          }
+        ],
+        "alt": "An approval decision remains attached to the submitted version while later drafts continue.",
+        "caption": "A live view needs an explicit version binding before it can serve as approval evidence.",
+        "src": "/blog/images/preview-versus-readonly-editor-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/preview-versus-readonly-editor-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "permission-checks-and-acceptance-tasks-4",
+      "title": "Permission checks and acceptance tasks",
+      "html": "<p>Hiding buttons is a user interface decision, not an access control boundary. The server must independently authorize edits, comments, downloads, and any export operation exposed by the integration. A read only role may still be allowed to comment, or it may prohibit every mutation; choose and document the intended rule. Verify the capabilities of the selected product rather than assuming every operation can be disabled separately. Include direct requests and previously issued session credentials in the test, because users can bypass visible controls.</p><ul><li>Define the exact version or freshness promise shown to the viewer.</li><li>List edit, comment, download, print, and export permissions separately.</li><li>Test the view after the source changes and after access is revoked.</li><li>Check keyboard navigation, text selection, and assistive technology against the actual rendering mode.</li><li>Provide a clear error when the requested version is unavailable instead of substituting another version silently.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

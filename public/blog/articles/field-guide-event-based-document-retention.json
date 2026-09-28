@@ -1,0 +1,126 @@
+{
+  "slug": "field-guide-event-based-document-retention",
+  "title": "Document retention policy: triggers, holds, and defensible disposal",
+  "description": "Define record classes, retention triggers, exceptions, technical mapping, and evidence of approved deletion.",
+  "category": "Security",
+  "format": "decision-brief",
+  "tags": [
+    "Business workflows",
+    "Audit logs",
+    "Document storage",
+    "Security"
+  ],
+  "structure": "prose+flow:comparison:example+comparison:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 690,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Building a Document Retention Policy That Holds",
+      "url": "https://shimodocs.com/blog/document-retention-policy-guide"
+    }
+  ],
+  "cover": "/blog/images/field-guide-event-based-document-retention.png",
+  "coverAlt": "Document retention policy: triggers, holds, and defensible disposal: Record classes, Trigger events, Hold exceptions, Disposal approval.",
+  "concepts": [
+    "Record classes",
+    "Trigger events",
+    "Hold exceptions",
+    "Disposal approval",
+    "Deletion evidence"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "numbered",
+    "signature": "exhibit:numbered",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 72
+  },
+  "contentHash": "1e461873ca5a4e3607c2cc1d4b655aeacfc25e12ab14abeaf8aecf84b54e439d",
+  "intro": "Build document retention from approved record classes and observable business events, such as contract expiry or project closure. Map those triggers to supported controls, exclude overlapping holds, and retain disposal evidence. File age or a software default should not silently define the organization's preservation and deletion obligations.",
+  "sections": [
+    {
+      "id": "classify-records-by-purpose-1",
+      "title": "Classify records by purpose",
+      "html": "<p>Identify the organization's record classes and the obligations that apply to each. A working draft, signed agreement, issued invoice, and completed project report may require different schedules. Have the appropriate records and legal owners approve periods and authoritative sources rather than deriving them from a software default. Define how users or business systems assign a class and what happens when classification is missing. Keep the rules understandable with concrete examples. If several copies exist, identify the official record and specify how convenience copies are handled without accidentally deleting the only usable evidence.</p><h3>Choose an observable trigger</h3><p>Retention may begin at approval, contract expiry, employee departure, project closure, or another approved event. Record the trigger and its source because file creation time often measures the wrong thing. When a trigger date changes, define who can revise it and how the change is audited. Verify the platform's supported retention behavior and whether external business events require integration or manual entry. Avoid using last modified time as a substitute unless the approved schedule explicitly calls for it. Routine formatting or migration can alter timestamps without changing the business obligation that determines disposal.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "Eligibility follows an approved business event",
+        "items": [
+          {
+            "label": "Record class",
+            "detail": "Approved schedule identifies the applicable obligation."
+          },
+          {
+            "label": "Trigger event",
+            "detail": "Authoritative approval, expiry, or closure starts the clock."
+          },
+          {
+            "label": "Exception check",
+            "detail": "Missing classification and overlapping holds block disposal."
+          },
+          {
+            "label": "Disposal decision",
+            "detail": "Approved action and execution result are retained as evidence."
+          }
+        ],
+        "alt": "Record class, trigger, exception check, and disposal decision.",
+        "caption": "Creation time is only correct when the approved schedule actually uses it.",
+        "src": "/blog/images/field-guide-event-based-document-retention-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-event-based-document-retention-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "retained-until-when-and-why-2",
+      "title": "Retained until when, and why?",
+      "html": "<p>A useful schedule row names the record class, trigger event, approved period, source of authority, hold override, and disposal owner. It should be possible to reconstruct the eligibility decision from those fields rather than trusting a date copied into a filename.</p><table><thead><tr><th>Possible trigger</th><th>What must be recorded</th></tr></thead><tbody><tr><td>Contract expiry</td><td>Authoritative expiry event and later amendments</td></tr><tr><td>Project closure</td><td>Approved closure date and which record classes use it</td></tr><tr><td>Final approval</td><td>Exact approved artifact and decision date</td></tr></tbody></table><p>These are trigger examples, not recommended periods. Records and legal owners must define the applicable schedule. A later contract amendment can change the event while a file's modification time remains misleading. Conversely, a migration or formatting fix can update a timestamp without starting a new retention obligation.</p><p>Decide what happens when a trigger is missing. Quarantine the disposal decision for review rather than substituting an arbitrary date. Report those exceptions to an owner who can obtain the business event. Also identify which copies are official and which are convenience artifacts. Retention cannot be evaluated coherently if an exported file is the only approved record but cleanup treats it as a disposable duplicate.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "work-through-a-closed-project-3",
+      "title": "Work through a closed project",
+      "html": "<p>A project closes on a recorded date, but its contract remains active for another year and several records fall under a preservation instruction. Classify the report, agreement, working drafts, and held documents separately in a harmless test collection. Apply their approved triggers and inspect disposal eligibility. Move a record, revise metadata, and lift only one preservation instruction. Verify that overlapping obligations remain effective. This example demonstrates why a single delete everything after project closure rule can be incorrect even when the collection appears to belong to one completed business activity.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "comparison",
+        "title": "One project can contain different retention clocks",
+        "items": [
+          {
+            "label": "Closed-project report",
+            "detail": "Use the approved closure-related rule for its record class."
+          },
+          {
+            "label": "Active agreement",
+            "detail": "Its applicable trigger may occur later than project closure."
+          },
+          {
+            "label": "Held records",
+            "detail": "Preservation instruction overrides routine disposal while applicable."
+          }
+        ],
+        "alt": "Project report, active agreement, and held record retention cases.",
+        "caption": "A single folder does not imply a single retention obligation.",
+        "src": "/blog/images/field-guide-event-based-document-retention-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-event-based-document-retention-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "make-disposal-controlled-and-visible-4",
+      "title": "Make disposal controlled and visible",
+      "html": "<p>Define review, approval, execution, and evidence for disposal appropriate to the information risk. Verify behavior across stored bytes, versions, previews, caches, exports, and backups, recognizing that deletion schedules can differ by location. Document those differences accurately instead of promising immediate universal erasure. Keep holds and unresolved classification out of automated deletion until reviewed. Test lifecycle rules on a limited collection and retain a record of what was eligible, what was excluded, and why. Assign an owner for failed deletion or orphaned objects so cleanup remains an accountable process rather than an occasional administrator script.</p><h3>Retention review</h3><ul><li>Approve record classes, periods, and authoritative schedule sources.</li><li>Record observable trigger events and their accountable owners.</li><li>Test missing classification, changed dates, and overlapping holds.</li><li>Verify disposal across content, metadata, derived artifacts, and backups.</li><li>Retain approval and execution evidence for completed disposal.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

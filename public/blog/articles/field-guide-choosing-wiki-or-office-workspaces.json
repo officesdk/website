@@ -1,0 +1,118 @@
+{
+  "slug": "field-guide-choosing-wiki-or-office-workspaces",
+  "title": "Wiki or office suite? Choose by the information your team produces",
+  "description": "Compare evolving knowledge pages and structured office files using actual authoring and publishing tasks.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Business workflows",
+    "Collaboration",
+    "Document search"
+  ],
+  "structure": "prose+comparison:comparison:example+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 684,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
+      "url": "https://shimodocs.com/blog/self-hosted-office-suite-vs-wiki"
+    }
+  ],
+  "cover": "/blog/images/field-guide-choosing-wiki-or-office-workspaces.png",
+  "coverAlt": "Wiki or office suite? Choose by the information your team produces: Information shape, Calculation needs, Page relationships, Publishing boundary.",
+  "concepts": [
+    "Information shape",
+    "Calculation needs",
+    "Page relationships",
+    "Publishing boundary",
+    "System authority"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "chapter-rail",
+    "signature": "report:chapter-rail",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 40
+  },
+  "contentHash": "17dd67d574dc899fffae0cd724b03545ff358e74b5f4afe388d217acc59021fb",
+  "intro": "Choose a wiki for work whose usefulness depends on connected explanations, and evaluate an office workspace for files whose usefulness depends on calculations, layout, or external delivery. Test those needs in actual candidates. Many teams need both, with an explicit authoritative location for each information class.",
+  "sections": [
+    {
+      "id": "identify-the-primary-output-1",
+      "title": "Identify the primary output",
+      "html": "<p>Collect ten recent pieces of work and ask what makes each one useful. An onboarding explanation depends on navigable sections, links, and discoverability. A financial model depends on formulas, cell relationships, and repeatable results. A client presentation depends on layout and delivery in an agreed format. These needs should become acceptance tasks for candidate systems. Verify actual behavior rather than treating a product category as a capability guarantee. Record how often users must exchange files with outsiders and whether the recipient expects an editable artifact or a stable published view.</p><h3>Follow the revision lifecycle</h3><p>Some information improves through frequent small edits by many contributors. Other information passes through drafting, review, approval, and archival states. Determine whether the team needs a current answer, a dated deliverable, or both. A policy page might explain the latest procedure while an approved document preserves the legally relevant version. Establish how readers distinguish these states. Consider who can publish, how mistakes are corrected, and where comments belong. A workspace that makes drafting convenient still needs an explicit method for identifying material that has been approved for use.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Compare information shapes rather than brand categories",
+        "items": [
+          {
+            "label": "Connected explanation",
+            "detail": "Find an answer, navigate related pages, and improve shared guidance."
+          },
+          {
+            "label": "Structured artifact",
+            "detail": "Preserve formulas, page layout, or an editable external deliverable."
+          }
+        ],
+        "alt": "Connected explanations compared with structured office artifacts.",
+        "caption": "Use the dominant output to choose the first acceptance task.",
+        "src": "/blog/images/field-guide-choosing-wiki-or-office-workspaces-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-choosing-wiki-or-office-workspaces-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 720
+      }
+    },
+    {
+      "id": "three-outputs-three-tests-2",
+      "title": "Three outputs, three tests",
+      "html": "<table><thead><tr><th>Output</th><th>Question to test</th><th>Evidence to retain</th></tr></thead><tbody><tr><td>Service handbook</td><td>Can a new colleague find and follow the procedure?</td><td>Search terms, route taken, missing links</td></tr><tr><td>Staffing model</td><td>Do known inputs produce the expected result?</td><td>Input fixture, formulas, calculated values</td></tr><tr><td>Quarterly deck</td><td>Can the recipient open and revise the delivered artifact?</td><td>Exported file and downstream readback</td></tr></tbody></table><p>This comparison avoids a common category mistake: judging every workspace by how pleasant it is to type a paragraph. A linked page may be excellent for explanation and unsuitable for a calculation that must be recalculated. A spreadsheet may hold the correct numbers while being an awkward place to explain the policy behind them.</p><p>If the test favors complementary tools, specify the handoff. For example, the handbook explains staffing rules and links to the current model; the model owns the calculation; an approved deck records the quarterly decision. Assign someone to update the link when the model is replaced. Check permissions at every handoff, because a well maintained knowledge page can still lead a reader to an inaccessible file. Count that maintenance in the operating plan instead of assuming the tools remain coordinated on their own.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "test-a-service-planning-team-3",
+      "title": "Test a service planning team",
+      "html": "<p>Imagine a service team maintaining troubleshooting instructions, a staffing spreadsheet, and a quarterly review deck. Put the instructions through search and cross linking exercises. Put the spreadsheet through a calculation check using known inputs. Export the review deck and inspect it in the recipient's viewing environment. Have the same staff perform all three tasks, noting duplicate entry and lost context. This scenario may justify complementary systems, but it should also reveal who owns links between them. A hyperlink alone does not guarantee that readers have permission to access the linked material.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "flow",
+        "title": "A service planning information chain",
+        "items": [
+          {
+            "label": "Handbook",
+            "detail": "Explains staffing rules and links to the authoritative model."
+          },
+          {
+            "label": "Staffing model",
+            "detail": "Owns inputs, formulas, and expected calculated results."
+          },
+          {
+            "label": "Review deck",
+            "detail": "Presents the approved quarterly decision to its audience."
+          }
+        ],
+        "alt": "Handbook links to the staffing model, which supports the review deck.",
+        "caption": "Each object has a different job; duplicated numbers need an update owner.",
+        "src": "/blog/images/field-guide-choosing-wiki-or-office-workspaces-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-choosing-wiki-or-office-workspaces-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "prevent-competing-sources-of-truth-4",
+      "title": "Prevent competing sources of truth",
+      "html": "<p>When both types of workspace are needed, assign authority by information class. The approved staffing model can own numerical assumptions, while the knowledge page explains how to use the model. Avoid copying key figures into several independently editable places without a refresh owner. Define stable references and a review schedule for summaries. If one system is unavailable, specify which tasks can continue and which must wait. Self hosting introduces an operating responsibility for each application, including upgrades, backups, identity integration, and support, so include that duplication in the decision.</p><h3>Workspace responsibilities</h3><ul><li>Test representative explanations, calculations, and external deliverables.</li><li>Identify the authoritative location for each information class.</li><li>Check links using users with different group memberships.</li><li>Verify approved version retrieval and the process for publishing corrections.</li><li>Estimate the support and recovery work for the complete chosen setup.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

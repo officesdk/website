@@ -1,0 +1,136 @@
+{
+  "slug": "document-poc-corpus-and-criteria",
+  "title": "Office SDK proof of concept: choose files and pass criteria before the demo",
+  "description": "Choose realistic files, user tasks, and acceptance criteria before a pilot so results support an actual deployment decision.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Office SDK",
+    "Product selection",
+    "Document conversion",
+    "Business workflows"
+  ],
+  "structure": "steps+matrix:comparison:note:example+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 639,
+  "source": null,
+  "references": [
+    {
+      "label": "Office SDK integration topics",
+      "url": "https://officeapi.ai/blog/"
+    }
+  ],
+  "cover": "/blog/images/document-poc-corpus-and-criteria.png",
+  "coverAlt": "Office SDK proof of concept: choose files and pass criteria before the demo: Test corpus, Business tasks, Expected output, Pilot evidence.",
+  "concepts": [
+    "Test corpus",
+    "Business tasks",
+    "Expected output",
+    "Pilot evidence",
+    "Decision record"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "wide",
+    "signature": "masthead:wide",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 25
+  },
+  "contentHash": "d6486ca97cfd072c0837dcd78086b97f29751c78100ff707b01503982411a004",
+  "intro": "A useful Office SDK proof of concept answers whether the proposed workflow works for your documents, users, and environment. Select a representative corpus and define pass criteria before the demonstration. Include correctness, permissions, recovery, and operating conditions alongside visible editing features.",
+  "sections": [
+    {
+      "id": "choose-a-corpus-that-represents-work-and-risk-1",
+      "title": "Choose a corpus that represents work and risk",
+      "html": "<p>Include common documents, high value documents, and known difficult examples. Cover the formats and features that users actually depend on: long tables, formulas, charts, presentations, multilingual text, and large or unusual files where relevant. Record why each fixture is included. Sanitize confidential content while retaining structure and rendering characteristics. Avoid selecting only the easiest files supplied for a demonstration, or only pathological edge cases that do not represent normal work. A balanced corpus supports both everyday usability decisions and explicit handling of important exceptions.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "matrix",
+        "title": "A representative corpus balances three purposes",
+        "items": [
+          {
+            "label": "Common work",
+            "detail": "Everyday files and frequent user tasks"
+          },
+          {
+            "label": "Business-critical work",
+            "detail": "Documents where an incorrect result has high impact"
+          },
+          {
+            "label": "Known difficult inputs",
+            "detail": "Realistic features, sizes, or patterns that need scrutiny"
+          },
+          {
+            "label": "Recovery fixtures",
+            "detail": "Inputs and faults that exercise supported failure paths"
+          }
+        ],
+        "alt": "The test corpus covers common, critical, difficult, and recovery workflows.",
+        "caption": "Neither only simple demos nor only pathological files gives a balanced deployment picture.",
+        "src": "/blog/images/document-poc-corpus-and-criteria-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-poc-corpus-and-criteria-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "write-pass-criteria-with-named-evidence-2",
+      "title": "Write pass criteria with named evidence",
+      "html": "<p>For each fixture, specify actions such as first open, preview, edit, save, reopen, export, and permission revocation. State what a pass means in observable terms. Examples include a named total remaining correct, an approval snapshot retaining its version, or a revoked user being unable to create a new session. Set performance expectations with the intended environment and concurrency rather than using unexplained universal thresholds. Where a requirement is negotiable, define the acceptable workaround before testing so decisions do not shift simply to match the observed result.</p><table><thead><tr><th>Requirement</th><th>Evidence to retain</th><th>Decision category</th></tr></thead><tbody><tr><td>Critical formula survives editing</td><td>Fixture, expected value, reopened result</td><td>Pass or content defect</td></tr><tr><td>Restricted reviewer cannot edit</td><td>Role setup and direct-operation results</td><td>Pass or authorization gap</td></tr><tr><td>Source fetch recovers after failure</td><td>Operation trace and successful retry</td><td>Pass or implementation work</td></tr><tr><td>Required feature is unavailable</td><td>Documented capability boundary</td><td>Scope change, workaround, or rejection</td></tr></tbody></table><p>Agree which requirements are mandatory and who can accept a limitation. Otherwise, a good-looking demonstration can gradually redefine success while the original business need disappears. Conversely, a missing configuration should not be reported as a permanent product limitation before the supported setup is checked.</p><p>For comparisons, use equivalent source files and tasks while allowing each product's documented workflow. Record configuration differences instead of forcing every product through an invented common API. Keep findings tied to the tested version and deployment. A pilot result supports that decision context; it should not become an unqualified statement about every format, every document, or every later release.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "separate-product-limits-from-unfinished-integration-3",
+      "title": "Separate product limits from unfinished integration",
+      "html": "<p>A feature may be supported by a product but not yet configured in the pilot. Another may be unavailable regardless of integration effort. Mark these cases differently. Link each result to documentation, observed behavior, or a remaining question, and avoid presenting a planned workaround as an existing capability. Record product versions, deployment options, and enabled settings. This separation makes comparisons fair and helps the implementation team estimate remaining work without mistaking an attractive demonstration screen for a completed business workflow.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "run-procurement-work-across-several-document-types-4",
+      "title": "Run procurement work across several document types",
+      "html": "<p>Use a synthetic purchase request, its budget workbook, and a review presentation. Have a requester create the files, a reviewer inspect a fixed version, and an administrator revoke access after the exercise. Export the agreed artifacts and verify their content against the reference. Introduce one failed source retrieval and confirm that support can locate the operation. This scenario tests a connected outcome rather than isolated feature buttons. Keep the script repeatable so competing configurations or later versions can be evaluated under equivalent conditions.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "A procurement pilot should reach a business outcome",
+        "items": [
+          {
+            "label": "Requester",
+            "detail": "Creates the request, workbook, and review deck"
+          },
+          {
+            "label": "Reviewer",
+            "detail": "Inspects the specified version and records the decision"
+          },
+          {
+            "label": "Administrator",
+            "detail": "Changes access and verifies the resulting behavior"
+          },
+          {
+            "label": "Operator",
+            "detail": "Locates a controlled failure and completes recovery"
+          }
+        ],
+        "alt": "A pilot follows creation, review, access changes, and operational recovery.",
+        "caption": "Keep the same source versions and action script when comparing configurations.",
+        "src": "/blog/images/document-poc-corpus-and-criteria-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-poc-corpus-and-criteria-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "make-the-deployment-decision-from-the-findings-5",
+      "title": "Make the deployment decision from the findings",
+      "html": "<ul><li>List passed, failed, blocked, and untested requirements separately.</li><li>Attach source versions, environment details, and evidence for critical findings.</li><li>Assign an owner and acceptance condition to every required remediation.</li><li>Document supported workarounds and their user impact.</li><li>State the deployment decision and the conditions that could change it.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

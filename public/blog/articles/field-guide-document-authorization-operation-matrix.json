@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-document-authorization-operation-matrix",
+  "title": "Document access control: define operations, inheritance, and revocation",
+  "description": "Model allowed actions, inheritance, tenant scope, policy changes, and direct endpoint enforcement with testable decisions.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "Access control",
+    "Multi-tenancy",
+    "Security",
+    "API integration"
+  ],
+  "structure": "prose+matrix:comparison:prose:example+sequence:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 682,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Access Control for Document Platforms",
+      "url": "https://shimodocs.com/blog/access-control-best-practices-documents"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-authorization-operation-matrix.png",
+  "coverAlt": "Document access control: define operations, inheritance, and revocation: Operation matrix, Tenant scope, Inheritance, Policy transitions.",
+  "concepts": [
+    "Operation matrix",
+    "Tenant scope",
+    "Inheritance",
+    "Policy transitions",
+    "Denial evidence"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "numbered",
+    "signature": "statement:numbered",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 70
+  },
+  "contentHash": "cd0360a3726e2946fe443b35a3d81d43d7bad0ddcff99b04b36c80b24ee154d3",
+  "intro": "Express document authorization as a matrix of business roles and operations, then map each decision to an enforcing service. Include tenant scope, folder moves, search, exports, active sessions, and support access. Test denied actions directly; hiding a control in the editor does not establish the server boundary.",
+  "sections": [
+    {
+      "id": "define-operations-and-authorities-1",
+      "title": "Define operations and authorities",
+      "html": "<p>List the actions your application and editor expose, including administrative and background operations. Assign allowed actions to business roles and map those roles to the controls the selected platform actually supports. Note any unsupported distinction instead of assuming a hidden button creates a security boundary. Identify the endpoint or service that authorizes each operation. Document ownership and delegation rules, including who can add collaborators or transfer a document. A permission matrix should describe business intent first, then its implemented enforcement, so reviewers can see where the architecture relies on procedure rather than a technical control.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "matrix",
+        "title": "Authorize operations rather than trusting a role name",
+        "items": [
+          {
+            "label": "View and comment",
+            "detail": "Map each action to the business role and actual control."
+          },
+          {
+            "label": "Edit and restore",
+            "detail": "Separate routine mutation from a version recovery decision."
+          },
+          {
+            "label": "Export and share",
+            "detail": "Check delivery and delegation boundaries independently."
+          },
+          {
+            "label": "Support operations",
+            "detail": "Account for privileged background and incident workflows."
+          }
+        ],
+        "alt": "Operation groups for viewing, editing, exporting, and support access.",
+        "caption": "A role label is shorthand for decisions that must be verified.",
+        "src": "/blog/images/field-guide-document-authorization-operation-matrix-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-authorization-operation-matrix-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "make-unsupported-distinctions-visible-2",
+      "title": "Make unsupported distinctions visible",
+      "html": "<p>A business requirement might allow viewing but prohibit export, or allow comments without editing. Determine whether the proposed platform and integration can express that distinction. If not, the decision is a workflow limitation requiring treatment, not an invitation to describe the role more optimistically.</p><table><thead><tr><th>Operation</th><th>Policy intent</th><th>Enforcement question</th></tr></thead><tbody><tr><td>View</td><td>Read approved planning material</td><td>Which endpoint and document state are authorized?</td></tr><tr><td>Export</td><td>Only designated delivery owners</td><td>Are editor and business download paths both checked?</td></tr><tr><td>Manage sharing</td><td>Only accountable workspace owners</td><td>Can direct grants or inherited roles bypass that rule?</td></tr><tr><td>Restore version</td><td>Approved recovery operators</td><td>Is restoring content recorded and separately authorized?</td></tr></tbody></table><p>The roles are examples. Use the organization's actual intent and the candidate's verified controls. Record an unsupported rule explicitly and consider a separate approved artifact, a different interaction mode, or another supported arrangement.</p><p>Keep exceptional procedures in the same matrix. A support export or background conversion may use a powerful service account; identify how the initiating user's rights constrain that operation. Otherwise the normal user path can be correct while an auxiliary service creates a broader access route.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "resolve-scope-and-inheritance-3",
+      "title": "Resolve scope and inheritance",
+      "html": "<p>Determine how tenant, collection, folder, document, and direct grants combine. Specify what happens when a document moves, when a parent becomes restricted, and when an explicit grant conflicts with inherited access. Use supported behavior from the actual product configuration and avoid inventing precedence rules. Resolve document identifiers inside the authenticated scope before checking the requested action. An unguessable identifier does not replace authorization. Search, previews, exports, and background retrieval need the same intended boundary, since protecting the main editor entry point leaves other information paths available if they are overlooked.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "test-a-restricted-planning-model-4",
+      "title": "Test a restricted planning model",
+      "html": "<p>A finance group owns a planning spreadsheet. Analysts edit, executives view approved versions, and support staff manage service incidents without ordinary business access. Create harmless test content and execute each permitted and denied operation using those identities. Attempt direct downloads and exports through documented application paths. Move the spreadsheet into a restricted collection, remove an analyst, and retry from an existing session. This example exposes differences between initial session authorization and continuing access, as well as privileges that a broad support role may unintentionally inherit. Record each observation against the operation matrix.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Test a restricted planning model through a policy change",
+        "items": [
+          {
+            "label": "Initial role tests",
+            "detail": "Run permitted and denied actions under ordinary identities."
+          },
+          {
+            "label": "Folder move",
+            "detail": "Observe supported inheritance and explicit-grant behavior."
+          },
+          {
+            "label": "Membership removal",
+            "detail": "Retry new requests and active sessions."
+          },
+          {
+            "label": "Audit readback",
+            "detail": "Reconstruct the changed rights using safe decision records."
+          }
+        ],
+        "alt": "Role tests, folder move, membership removal, and audit readback.",
+        "caption": "Access is a lifecycle contract across several interfaces.",
+        "src": "/blog/images/field-guide-document-authorization-operation-matrix-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-authorization-operation-matrix-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "make-policy-changes-observable-5",
+      "title": "Make policy changes observable",
+      "html": "<p>Log meaningful authorization decisions and membership changes with safe identifiers, policy context, and time. Avoid collecting content or credentials merely to prove a denial. Define the acceptable delay for permission updates and verify the product's session refresh or termination behavior. Give administrators a supported way to investigate unexpected denials without casually granting broad access. Review orphaned ownership and exceptional grants on a schedule suited to the information risk. When upgrading or changing identity integration, repeat the focused operation tests because a previously correct role mapping may no longer apply to every path.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "access-contract-6",
+      "title": "Access contract",
+      "html": "<ul><li>List each business operation and its enforcing service.</li><li>Document tenant scope, inheritance, moves, and explicit grant behavior.</li><li>Test both allowed and denied actions with ordinary identities.</li><li>Measure active session behavior after membership or policy changes.</li><li>Review exceptional grants and rerun focused tests after relevant changes.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

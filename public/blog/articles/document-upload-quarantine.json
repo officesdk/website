@@ -1,0 +1,132 @@
+{
+  "slug": "document-upload-quarantine",
+  "title": "Document upload quarantine: release the bytes you actually scanned",
+  "description": "Structure uploads so validation, scanning, and release happen before untrusted files reach shared document workflows.",
+  "category": "Security",
+  "format": "walkthrough",
+  "tags": [
+    "Security",
+    "Document storage",
+    "Document conversion",
+    "Access control"
+  ],
+  "structure": "steps+flow:diagnostic:example+decision:example:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 636,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: File Upload Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/document-upload-quarantine.png",
+  "coverAlt": "Document upload quarantine: release the bytes you actually scanned: Upload receipt, Quarantine, Content scan, Validated bytes.",
+  "concepts": [
+    "Upload receipt",
+    "Quarantine",
+    "Content scan",
+    "Validated bytes",
+    "Release decision"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "rail-left",
+    "signature": "statement:rail-left",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 10
+  },
+  "contentHash": "7fa339b4cd93b9a8c11af4fed2e11c3cd2cc57b23d6c35c0f484eb58d247dea8",
+  "intro": "Keep new uploads outside normal preview, download, and editing routes until validation releases them. Bind the release decision to an immutable object or verified digest. Otherwise, a scanner can approve one file while downstream workers process different bytes under the same storage key.",
+  "sections": [
+    {
+      "id": "receipt-is-not-release-1",
+      "title": "Receipt is not release",
+      "html": "<p>Store newly received bytes in a location that ordinary preview, editing, and download paths cannot access. Give the upload a business state such as awaiting validation, with ownership and a traceable identifier. The application can acknowledge receipt without claiming that the file is ready to open. Avoid publishing the final document record first and relying on a later scanner to remove unsafe content. That design leaves a period during which another worker or user can retrieve the unreviewed object through a normal application route.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "flow",
+        "title": "A file becomes available through a release decision",
+        "items": [
+          {
+            "label": "Quarantine",
+            "detail": "Receive untrusted bytes outside normal access routes"
+          },
+          {
+            "label": "Validation",
+            "detail": "Inspect type, size, structure, and configured scan results"
+          },
+          {
+            "label": "Release",
+            "detail": "Bind approval to the verified immutable object"
+          },
+          {
+            "label": "Processing",
+            "detail": "Allow preview, editing, or download under normal permissions"
+          }
+        ],
+        "alt": "Uploads pass through quarantine and validation before normal document processing.",
+        "caption": "Acknowledging receipt must not publish an unvalidated document.",
+        "src": "/blog/images/document-upload-quarantine-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-upload-quarantine-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "validation-has-more-than-one-possible-result-2",
+      "title": "Validation has more than one possible result",
+      "html": "<p>Apply an allowlist appropriate to the business workflow, check size limits, and inspect file signatures or structure with maintained tooling. A filename extension and browser supplied content type are both useful hints, but neither proves the content type. Decide how encrypted documents, nested archives, macros, and embedded objects are handled by policy and by the actual scanning tools. State limitations explicitly. A successful malware scan is one control, not a guarantee that a complex parser can safely process every possible document structure.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "bind-approval-to-immutable-bytes-3",
+      "title": "Bind approval to immutable bytes",
+      "html": "<p>Compute an integrity digest for the object that is validated and associate the release decision with those exact bytes. If the object can change under the same storage key after scanning, the decision may no longer apply. Use immutable objects or guarded updates, and only promote the validated version into the normal workflow. Keep scanner version, policy version, result, and processing timestamps for diagnosis according to retention rules. Avoid exposing detailed detection internals to ordinary users when a simpler rejected or review required status is sufficient.</p><p>The release record should answer four questions: which object was examined, which policy was applied, what result was returned, and which component authorized promotion. An illustrative record might contain <code>object_version</code>, <code>sha256</code>, <code>policy_revision</code>, <code>scanner_revision</code>, and <code>release_state</code>. Do not use an editable filename as the only link between the scan and the document.</p><table><thead><tr><th>Result</th><th>Normal next action</th></tr></thead><tbody><tr><td>Validation passed</td><td>Release the verified object through a guarded transition</td></tr><tr><td>Unsupported or encrypted input</td><td>Apply the documented review or rejection policy</td></tr><tr><td>Scanner unavailable</td><td>Keep pending and retry within a bounded policy</td></tr><tr><td>Object changed during processing</td><td>Reject the stale result and validate the new bytes</td></tr></tbody></table><p>Keep quarantine credentials narrower than general storage administration. The upload path should be able to create an untrusted object without granting users the ability to mark it released. Likewise, a preview worker should consume released references rather than reading arbitrary quarantine keys. Test both boundaries directly; a disabled Open button does not protect an alternate download route.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "decision",
+        "title": "Scan outcomes determine the next state",
+        "items": [
+          {
+            "label": "Passed",
+            "detail": "Promote only the exact object that was validated"
+          },
+          {
+            "label": "Needs review",
+            "detail": "Keep protected input pending under the documented policy"
+          },
+          {
+            "label": "Unavailable or changed",
+            "detail": "Retry safely without treating the result as clean"
+          }
+        ],
+        "alt": "A scan can lead to release, review, or a safe pending state.",
+        "caption": "A timeout is a processing failure, not evidence that a file is safe.",
+        "src": "/blog/images/document-upload-quarantine-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-upload-quarantine-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "when-the-scanner-is-unavailable-4",
+      "title": "When the scanner is unavailable",
+      "html": "<p>Imagine a supplier uploads a presentation while the scanning service is unavailable. The file should remain pending or enter a clearly documented review path; it should not become available because a timeout is interpreted as clean. Test that preview workers, direct download endpoints, and editor launch requests all respect the quarantine state. Then restore the scanner and confirm that the same upload can complete without duplicate documents. Use approved harmless test fixtures and operational fault injection rather than introducing real malicious material into the environment.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "operate-the-pending-queue-5",
+      "title": "Operate the pending queue",
+      "html": "<ul><li>Show upload owners whether validation is pending, failed, or rejected.</li><li>Alert on the age of pending objects and scanner health.</li><li>Restrict manual release to an audited administrative process.</li><li>Remove abandoned or rejected objects according to a defined retention policy.</li><li>Verify that every processing path consumes only released immutable versions.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "slug": "field-guide-evidence-based-office-editor-comparisons",
+  "title": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test",
+  "description": "Evaluate ShimoDocs and ONLYOFFICE candidates without substituting brand claims for demonstrated behavior.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Word documents",
+    "Excel spreadsheets",
+    "Presentations",
+    "Open source"
+  ],
+  "structure": "steps:prose+sequence:comparison:example:note+layers:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 656,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs ONLYOFFICE: Fidelity, Open Core, Controls",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-onlyoffice"
+    }
+  ],
+  "cover": "/blog/images/field-guide-evidence-based-office-editor-comparisons.png",
+  "coverAlt": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test: Document corpus, Roundtrip fidelity, Control tests, Edition scope.",
+  "concepts": [
+    "Document corpus",
+    "Roundtrip fidelity",
+    "Control tests",
+    "Edition scope",
+    "License evidence"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "chapter-rail",
+    "signature": "compact:chapter-rail",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 43
+  },
+  "contentHash": "a4e77341eb1828f54855ae2c742b34470e67a1266d0060ccfc890a2d0c548314",
+  "intro": "Compare ShimoDocs and ONLYOFFICE using the same sanitized file corpus, prescribed edits, exported artifacts, permission tests, and written commercial scope. Record exact editions and versions. This produces a decision your team can repeat without treating a vendor's sample files or general feature claims as proof of fit.",
+  "sections": [
+    {
+      "id": "assemble-a-representative-corpus-1",
+      "title": "Assemble a representative corpus",
+      "html": "<p>Select documents from real work with sensitive details removed. Include long reports with headers and footnotes, spreadsheets with known formulas and charts, and presentations using the organization's fonts. Record the originating application, expected values, and visual reference for each file. Separate must preserve elements from cosmetic preferences. A vendor supplied sample can be helpful during onboarding, but it does not establish compatibility with your estate. Freeze the corpus and its acceptance rules before testing so a later disagreement can be resolved against a common baseline rather than recollection of a demonstration.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "measure-editing-and-roundtrip-results-2",
+      "title": "Measure editing and roundtrip results",
+      "html": "<p>Open each file, make a prescribed change, save it, and inspect the result in the downstream environment that recipients actually use. Compare pagination, formulas, charts, tracked review information, and any relevant accessibility structure. Record discrepancies with screenshots and the exact file version. Distinguish an unsupported feature from a rendering difference and from content loss. Repeat the same task in each candidate configuration. If a workaround is proposed, measure its user effort and repeatability instead of treating it as equivalent to direct support without further evaluation.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "The same roundtrip for every candidate",
+        "items": [
+          {
+            "label": "Frozen source",
+            "detail": "Sanitized file with known layout and expected values."
+          },
+          {
+            "label": "Prescribed edit",
+            "detail": "Reviewer performs the same change in each candidate."
+          },
+          {
+            "label": "Saved export",
+            "detail": "Capture the actual artifact and exact software configuration."
+          },
+          {
+            "label": "Recipient readback",
+            "detail": "Inspect in the downstream environment used for delivery."
+          }
+        ],
+        "alt": "Frozen source, prescribed edit, saved export, and recipient readback.",
+        "caption": "Compare artifacts after work, not only screenshots at first open.",
+        "src": "/blog/images/field-guide-evidence-based-office-editor-comparisons-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-evidence-based-office-editor-comparisons-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "score-defects-by-business-consequence-3",
+      "title": "Score defects by business consequence",
+      "html": "<p>Use an acceptance matrix rather than one overall fidelity score. A misplaced decorative shape and an incorrect total should not cancel each other out in an average. Define severity before the test and assign the decision owner for exceptions.</p><table><thead><tr><th>Finding</th><th>Business question</th><th>Disposition</th></tr></thead><tbody><tr><td>Formula result differs</td><td>Does the agreed input produce the correct value?</td><td>Block this workflow until resolved</td></tr><tr><td>Report pagination changes</td><td>Does it alter required presentation or references?</td><td>Owner review against delivery requirements</td></tr><tr><td>Required edit needs a workaround</td><td>Can ordinary staff repeat it reliably?</td><td>Measure effort and document the limitation</td></tr></tbody></table><p>These dispositions are example test rules, not observations about either product. Use your own business thresholds. Keep each defect tied to the original file, prescribed edit, and exported result. If a configuration adjustment resolves it, rerun the affected test and record the adjustment. When procurement selects an edition, confirm that it includes the configuration and rights used in the passing pilot. A comparison loses value if the tested package and the purchased package differ.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "exercise-a-contract-review-scenario-4",
+      "title": "Exercise a contract review scenario",
+      "html": "<p>A legal reviewer opens a contract containing section numbering, comments, and an approval table. The reviewer changes one clause, another user checks the revision, and the final artifact is exported for a counterparty. Verify the specific review functions required by the team in each candidate. Then repeat as a restricted viewer and attempt relevant exports through documented paths. Bind observations to product version, edition, browser, and configuration. This scenario connects fidelity to operational controls: a document that looks correct but exposes an unauthorized operation still fails its acceptance requirement.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "read-the-licensing-boundaries-5",
+      "title": "Read the licensing boundaries",
+      "html": "<p>Request current terms covering deployment count, users or concurrency, embedding, support, upgrades, and any redistribution. If source availability or an open core model matters, identify which components and editions the statement applies to and obtain the actual license text. Do not infer rights from a repository being publicly visible. Review required controls against the offered edition, because a feature described online may belong to another package. Keep technical results and commercial conditions linked in the comparison so procurement cannot accidentally price a configuration different from the one that passed testing.</p>",
+      "kind": "note",
+      "figure": {
+        "kind": "layers",
+        "title": "Commercial scope must match the passing test",
+        "items": [
+          {
+            "label": "Tested edition",
+            "detail": "Record version, enabled modules, browser, and configuration."
+          },
+          {
+            "label": "Usage rights",
+            "detail": "Verify embedding, users, environments, and redistribution terms."
+          },
+          {
+            "label": "Support scope",
+            "detail": "Identify escalation, upgrades, and responsibility for defects."
+          }
+        ],
+        "alt": "Tested configuration, usage rights, and support scope in an editor purchase.",
+        "caption": "Source availability alone does not establish every deployment right.",
+        "src": "/blog/images/field-guide-evidence-based-office-editor-comparisons-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-evidence-based-office-editor-comparisons-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "comparison-evidence-6",
+      "title": "Comparison evidence",
+      "html": "<ul><li>Retain the sanitized corpus and expected results for every critical document.</li><li>Attach observed defects to exact versions, editions, and configuration details.</li><li>Verify required permissions and downstream export behavior.</li><li>Obtain written licensing scope and support responsibilities.</li><li>Recheck unresolved issues using the proposed production configuration before purchase.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

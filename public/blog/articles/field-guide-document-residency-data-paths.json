@@ -1,0 +1,139 @@
+{
+  "slug": "field-guide-document-residency-data-paths",
+  "title": "Data residency for document platforms: verify storage and processing paths",
+  "description": "Map storage, processing, backups, support access, telemetry, and AI destinations against the actual residency requirement.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "Data residency",
+    "Data privacy",
+    "Self-hosting",
+    "AI documents",
+    "Backup and recovery"
+  ],
+  "structure": "prose+comparison:comparison:prose:example+sequence:note:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 678,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: A Practical Guide to Data Residency Requirements",
+      "url": "https://shimodocs.com/blog/data-residency-requirements-guide"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-residency-data-paths.png",
+  "coverAlt": "Data residency for document platforms: verify storage and processing paths: Requirement scope, Data locations, Processing routes, Support access.",
+  "concepts": [
+    "Requirement scope",
+    "Data locations",
+    "Processing routes",
+    "Support access",
+    "Evidence updates"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "alternating",
+    "signature": "masthead:alternating",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 73
+  },
+  "contentHash": "0ae9cd942414f73e590d66e88c0168f949120dd2c81ec76f46b93ab89e98d2a3",
+  "intro": "Clarify whether your residency requirement covers storage, processing, transfer, access, or all four. Then map documents, metadata, conversions, search, AI, logs, backups, and support against that boundary. A primary region selection or self-hosted label cannot establish the behavior of the complete service.",
+  "sections": [
+    {
+      "id": "clarify-the-required-boundary-1",
+      "title": "Clarify the required boundary",
+      "html": "<p>Obtain the applicable contractual, organizational, or legal requirement through its responsible authority. Identify whether it concerns storage location, processing location, transfer, access, or a combination. Determine which information classes and metadata are included, and whether exceptions or approved transfer arrangements exist. Residency and jurisdiction are related but distinct questions, so avoid treating a hosting address as a complete legal answer. Record the interpretation and approving owner. A precise boundary allows technical teams to test the relevant paths rather than collecting a regional hosting statement that leaves the most important requirement unresolved.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Residency requirements can describe different boundaries",
+        "items": [
+          {
+            "label": "Storage location",
+            "detail": "Where documents, metadata, and recovery copies reside."
+          },
+          {
+            "label": "Processing location",
+            "detail": "Where rendering, conversion, search, and inference occur."
+          },
+          {
+            "label": "Transfer and access",
+            "detail": "Which routes and authorities need review under the exact requirement."
+          }
+        ],
+        "alt": "Storage, processing, and transfer or access boundaries in residency review.",
+        "caption": "Obtain the applicable interpretation from the responsible authority.",
+        "src": "/blog/images/field-guide-document-residency-data-paths-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-residency-data-paths-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "make-the-boundary-a-reviewable-table-2",
+      "title": "Make the boundary a reviewable table",
+      "html": "<p>For each data category, record where it is stored, where it is processed, who operates the component, which support roles can access it, and the applicable retention. Include normal, recovery, and diagnostic paths. A separate copy created only during an incident can still matter to the requirement.</p><table><thead><tr><th>Data category</th><th>Location question</th></tr></thead><tbody><tr><td>Original and editing content</td><td>Where are bytes stored and rendered or transformed?</td></tr><tr><td>Search and previews</td><td>Where are indexes and generated representations processed?</td></tr><tr><td>AI prompts and responses</td><td>Which configured model, logs, and histories receive context?</td></tr><tr><td>Backups and diagnostics</td><td>Where do recovery copies and support bundles go?</td></tr></tbody></table><p>The table defines evidence to gather rather than asserting that any product uses a particular location. Use configuration, current provider commitments, and approved observations from harmless tests. Ask the requirement owner to interpret unresolved access or jurisdiction questions.</p><p>Attach review triggers to the inventory. Enabling an AI action, changing a backup destination, adding an integration, or revising support procedures can introduce a new route without changing the primary storage region. Name the approver and keep the last verification date so operators know which arrangement was actually reviewed.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "map-every-copy-and-processor-3",
+      "title": "Map every copy and processor",
+      "html": "<p>Trace original documents, editing representations, conversions, previews, versions, search indexes, logs, backups, and exports. Include identity data and prompts if AI is enabled. For each location, record the operator, region or site, purpose, retention, and onward dependencies. Verify the actual deployment configuration and current provider documentation. Some traffic may remain internal while another service retrieves files through an outside endpoint. Self hosting reduces some external dependencies but does not automatically eliminate them. The map should include ordinary operations and failure paths, since disaster recovery or support collection can move information differently from normal editing.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "test-a-regional-report-workflow-4",
+      "title": "Test a regional report workflow",
+      "html": "<p>An organization requires an approved report class to remain within a defined region for storage and processing. Use harmless test content to open, edit, convert, search, export, and back up a report through the proposed deployment. Review configured destinations and approved network observations. Ask the support team how it would investigate a failed conversion and whether a diagnostic bundle contains content. Trigger the documented recovery path in a test environment. This scenario can reveal a remote backup destination or model endpoint that a primary region selection never addressed.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Verify more than the primary-region setting",
+        "items": [
+          {
+            "label": "Normal report work",
+            "detail": "Open, edit, convert, search, and export harmless content."
+          },
+          {
+            "label": "Recovery route",
+            "detail": "Check the restored environment and backup destination."
+          },
+          {
+            "label": "Support incident",
+            "detail": "Inspect diagnostic collection and permitted access."
+          },
+          {
+            "label": "Evidence decision",
+            "detail": "Record approved paths, unresolved locations, and change triggers."
+          }
+        ],
+        "alt": "Normal workflow, recovery, support, and evidence decision in a residency test.",
+        "caption": "Exceptional paths can differ from everyday document traffic.",
+        "src": "/blog/images/field-guide-document-residency-data-paths-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-residency-data-paths-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "review-access-and-change-control-5",
+      "title": "Review access and change control",
+      "html": "<p>Identify administrators and support personnel able to access content, their locations where relevant to the requirement, and the approved access procedure. Obtain contractual commitments and evidence for third party processors within the required scope. Do not infer compliance from a regional billing label or a generic architecture diagram. Assign review triggers for new features, changed backup sites, external integrations, and provider terms. Keep approved exceptions documented with their authority and expiry. When a location or data use is uncertain, record the unresolved item and its impact rather than converting an incomplete inventory into a blanket assurance.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "residency-evidence-6",
+      "title": "Residency evidence",
+      "html": "<ul><li>Retain the interpreted requirement and approving authority.</li><li>Map content, metadata, processing, backups, and support routes.</li><li>Verify deployed endpoints and recovery destinations with safe test data.</li><li>Document processor commitments and approved access arrangements.</li><li>Reassess material changes and track unresolved locations or exceptions.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "slug": "field-guide-google-docs-alternative-by-task",
+  "title": "Google Docs alternatives: choose by the document you deliver",
+  "description": "Compare alternatives using real drafting, review, accessibility, and file delivery tasks.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Word documents",
+    "Collaboration",
+    "Accessibility"
+  ],
+  "structure": "prose+comparison:prose:example:prose:comparison+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 664,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: The Best Google Docs Alternatives, by What You Need",
+      "url": "https://shimodocs.com/blog/best-google-docs-alternatives"
+    }
+  ],
+  "cover": "/blog/images/field-guide-google-docs-alternative-by-task.png",
+  "coverAlt": "Google Docs alternatives: choose by the document you deliver: Drafting task, Review contract, Delivery format, Accessibility check.",
+  "concepts": [
+    "Drafting task",
+    "Review contract",
+    "Delivery format",
+    "Accessibility check",
+    "Switching effort"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "alternating",
+    "signature": "visual-first:alternating",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 81
+  },
+  "contentHash": "e9c31503a0cb831821649aa1f307ba6a8062336b5f9b21c356cb7f6c092b0dd0",
+  "intro": "The right Google Docs alternative depends on the document you need to deliver. A meeting note, a controlled policy, and a formally numbered report have different acceptance criteria. Test authoring, review, and the recipient's final format together before deciding from a feature list.",
+  "sections": [
+    {
+      "id": "classify-the-document-task-1",
+      "title": "Classify the document task",
+      "html": "<p>Separate quick drafting, structured reports, template driven correspondence, collaborative review, and final publication. Identify which tasks occur frequently and which failures would be expensive. A weekly meeting note might prioritize fast sharing and search. A regulatory submission might require stable numbering, tables, page layout, and an accepted export format. Establish the format of the authoritative record for each task. Some teams keep a living online document; others treat an approved PDF or signed file as the record. That decision influences how much weight to give editing convenience versus export fidelity and version binding.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Different tasks imply different acceptance tests",
+        "items": [
+          {
+            "label": "Shared note",
+            "detail": "Find an action, its owner, and its current status."
+          },
+          {
+            "label": "Controlled policy",
+            "detail": "Recognize the approved edition and accessible structure."
+          },
+          {
+            "label": "Formal report",
+            "detail": "Preserve required layout and editable delivery format."
+          }
+        ],
+        "alt": "Three document tasks require different measures of suitability.",
+        "caption": "Choose tests from the team's actual document mix.",
+        "src": "/blog/images/field-guide-google-docs-alternative-by-task-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-google-docs-alternative-by-task-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "run-a-representative-writing-exercise-2",
+      "title": "Run a representative writing exercise",
+      "html": "<p>Choose a sanitized sample that contains the structures users actually need: headings, lists, footnotes, images, tables, and references where appropriate. Ask a typical author to modify it, invite a reviewer, resolve comments, and produce the required output. Record elapsed time and every manual repair. Use the same sample and instructions on each candidate, with current editions and configurations identified. A demonstration prepared by a vendor may illustrate a feature, but the team's exercise reveals whether the complete task can be finished without specialist help or undocumented workarounds.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "compare-a-concrete-policy-review-3",
+      "title": "Compare a concrete policy review",
+      "html": "<p>Imagine a human resources team revising an employee policy. Authors need to distinguish the active draft from the approved edition, collect reviewer comments, and publish an accessible copy to all employees. Test whether the chosen workflow makes that distinction clear, regardless of the editor's terminology. Have one reviewer use only the keyboard and another review the exported file outside the platform. Check that headings, link labels, and table reading order remain meaningful. These tests matter more than whether two interfaces use the same icon for a familiar function.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "measure-the-switching-burden-4",
+      "title": "Measure the switching burden",
+      "html": "<p>Inventory templates, bookmarks, integrations, and review habits attached to the current editor. Estimate how many documents can be imported directly and how many need repair or conversion. Confirm that guest reviewers can participate under the organization's identity and sharing requirements. Compare total effort across initial migration, ongoing training, and repeated output repair. Also test exporting a new document back to an independent format. Selecting a replacement without a usable exit route can exchange one dependency for another while leaving the original business problem unresolved.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "three-different-editor-requirements-5",
+      "title": "Three different editor requirements",
+      "html": "<table><thead><tr><th>Task</th><th>What matters most</th><th>Useful test</th></tr></thead><tbody><tr><td>Meeting notes</td><td>Fast capture, shared access, and later discovery</td><td>Another employee finds an action and its owner</td></tr><tr><td>Employee policy</td><td>Review, authority, accessibility, and controlled publication</td><td>Reader identifies the current approved edition</td></tr><tr><td>Formal report</td><td>Structure, numbering, references, and export fidelity</td><td>Recipient opens and edits the delivered file</td></tr></tbody></table><p>These tasks can produce different winners in a comparison. That is useful information rather than a scoring problem. If ninety percent of the team's work is quick drafting, an occasional specialized report may justify a separate workflow. If formal delivery is the everyday job, recurring layout repair deserves substantial weight.</p><p>In the policy example, ask a reviewer to locate one unresolved comment, resolve it, and publish an accepted version. Then give a reader the link without explaining the interface. Can the reader tell that the policy is current, find the review date, and navigate headings with a keyboard? Repeat with the exported copy. Record both the completed task and any administrator assistance. This makes the recommendation understandable to employees who care about finishing work rather than matching familiar controls.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "sequence",
+        "title": "A policy must survive review and publication",
+        "items": [
+          {
+            "label": "Draft",
+            "detail": "Author changes the supplied policy sample."
+          },
+          {
+            "label": "Review",
+            "detail": "Reviewer finds feedback and verifies the correction."
+          },
+          {
+            "label": "Publish",
+            "detail": "Approval points to an identified edition."
+          },
+          {
+            "label": "Read",
+            "detail": "Employee navigates the current approved output."
+          }
+        ],
+        "alt": "A policy passes through drafting, review, publication, and reading.",
+        "caption": "The end user task matters as much as the authoring experience.",
+        "src": "/blog/images/field-guide-google-docs-alternative-by-task-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-google-docs-alternative-by-task-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "task-decision-notes-6",
+      "title": "Task Decision notes",
+      "html": "<ul><li>Specify the recurring tasks, authoritative records, and final delivery formats.</li><li>Test representative structures through authoring, review, and export.</li><li>Record manual repairs and time spent by ordinary users.</li><li>Check guest participation, accessibility, and approved version identification.</li><li>Estimate template migration and verify an independent export route.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

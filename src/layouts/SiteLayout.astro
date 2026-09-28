@@ -1,0 +1,75 @@
+---
+import { Header, Footer } from '../components/SiteSections'
+import '../styles.css'
+import '../blog/blog.css'
+
+interface Props {
+  title: string
+  description: string
+  canonical: string
+  image?: string
+  schemas?: Record<string, unknown>[]
+  articleSchema?: boolean
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  schemas = [],
+  articleSchema = false,
+} = Astro.props
+const siteOrigin = 'https://officesdk.com'
+const organization = {
+  '@type': 'Organization',
+  '@id': `${siteOrigin}/#organization`,
+  name: 'Office SDK',
+  url: `${siteOrigin}/`,
+  email: 'support@officesdk.com',
+  sameAs: ['https://github.com/officesdk/website'],
+}
+const software = {
+  '@type': 'SoftwareApplication',
+  '@id': `${siteOrigin}/#software`,
+  name: 'Office SDK',
+  applicationCategory: 'BusinessApplication',
+  description: 'A web-based Office document surface for preview, editing, collaboration, import, export, and content workflows inside products.',
+  email: 'support@officesdk.com',
+  publisher: { '@id': `${siteOrigin}/#organization` },
+}
+const graph = { '@context': 'https://schema.org', '@graph': [organization, software] }
+const serializeSchema = (schema: Record<string, unknown>) => JSON.stringify(schema).replaceAll('<', '\\u003c')
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#151816" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${siteOrigin}${canonical}`} />
+    <meta property="og:type" content={articleSchema ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Office SDK" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${siteOrigin}${canonical}`} />
+    {image && <meta property="og:image" content={`${siteOrigin}${image}`} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={`${siteOrigin}${image}`} />}
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={serializeSchema(graph)}></script>
+    {schemas.map((schema) => <script type="application/ld+json" data-blog-schema={articleSchema ? '' : undefined} set:html={serializeSchema(schema)}></script>)}
+  </head>
+  <body>
+    <div class="app-shell">
+      <Header client:load />
+      <main><slot /></main>
+      <Footer />
+    </div>
+  </body>
+</html>

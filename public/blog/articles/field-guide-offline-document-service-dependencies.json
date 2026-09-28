@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-offline-document-service-dependencies",
+  "title": "Air-gapped document collaboration: prepare the full offline lifecycle",
+  "description": "Prepare installation, identity, fonts, updates, support, and recovery for a genuinely disconnected document environment.",
+  "category": "Self-hosting",
+  "format": "architecture",
+  "tags": [
+    "Self-hosting",
+    "Security",
+    "Operations",
+    "Backup and recovery"
+  ],
+  "structure": "prose:steps+document:example:diagnostic:note+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 689,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Document Collaboration on an Air-Gapped Network",
+      "url": "https://shimodocs.com/blog/air-gapped-document-collaboration"
+    }
+  ],
+  "cover": "/blog/images/field-guide-offline-document-service-dependencies.png",
+  "coverAlt": "Air-gapped document collaboration: prepare the full offline lifecycle: Dependency inventory, Transfer procedure, Local identity, Offline updates.",
+  "concepts": [
+    "Dependency inventory",
+    "Transfer procedure",
+    "Local identity",
+    "Offline updates",
+    "Isolation tests"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "numbered",
+    "signature": "masthead:numbered",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 61
+  },
+  "contentHash": "c4017e5abb3c70c5d79536ef5cbe14c4748cb1da638fe89ed555827e18053add",
+  "intro": "An air-gapped document service must install, start cold, authenticate users, render representative files, update, receive support, and recover within its approved boundary. Inventory licensing, fonts, packages, certificates, telemetry, and model dependencies. Verify the exact product configuration in a disconnected test environment before treating self-hosting as offline readiness.",
+  "sections": [
+    {
+      "id": "inventory-external-assumptions-1",
+      "title": "Inventory external assumptions",
+      "html": "<p>Request documentation for the exact product configuration and identify every potential outside dependency. Include package repositories, image registries, license activation, font delivery, certificate validation, telemetry, AI services, and support diagnostics. Verify which dependencies can be removed, replaced, or supplied internally through supported methods. Air gap requirements differ, so record the approved network and transfer boundary with the responsible security owner. A self-hosted label does not establish offline suitability. Observe installation and ordinary workflows in a restricted test network to catch assumptions that a standard deployment guide may not make obvious.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "prepare-controlled-installation-material-2",
+      "title": "Prepare controlled installation material",
+      "html": "<p>Assemble approved software packages, images, configuration templates, fonts, documentation, and integrity evidence before transfer. Record version relationships and prerequisites. Use the organization's authorized media or transfer process and retain a manifest that responders can reproduce. Establish internal DNS, time synchronization, identity, and certificate trust where required. Verify license behavior and renewal procedures in writing for the disconnected configuration. Protect administrative secrets separately from the software bundle. A working one time installation is insufficient if the organization cannot later rebuild the service without accessing a developer's laptop or an unavailable outside registry.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "document",
+        "title": "An offline deployment bundle needs more than images",
+        "items": [
+          {
+            "label": "Software manifest",
+            "detail": "Compatible packages, image versions, and integrity evidence."
+          },
+          {
+            "label": "Runtime resources",
+            "detail": "Fonts, documentation, and any approved local substitutes."
+          },
+          {
+            "label": "Trust instructions",
+            "detail": "Internal DNS, time, certificates, identity, and license procedure."
+          },
+          {
+            "label": "Protected recovery",
+            "detail": "Configuration and secrets available to authorized responders."
+          }
+        ],
+        "alt": "Software, runtime resources, trust instructions, and protected recovery materials.",
+        "caption": "Keep secrets protected separately while preserving a reproducible build procedure.",
+        "src": "/blog/images/field-guide-offline-document-service-dependencies-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-offline-document-service-dependencies-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "the-rebuild-bundle-is-part-of-the-service-3",
+      "title": "The rebuild bundle is part of the service",
+      "html": "<p>Retain an approved bundle that lets another operator recreate the deployment without the original installer's computer. It should include compatible software and images, version relationships, configuration instructions, required fonts, integrity records, and internal dependency information. Protect credentials through the organization's separate approved mechanism rather than placing all secrets beside the software.</p><table><thead><tr><th>Bundle component</th><th>Reason it matters offline</th></tr></thead><tbody><tr><td>Version manifest</td><td>A later package may not be compatible with the retained database</td></tr><tr><td>Internal trust setup</td><td>Services need local certificate and identity validation</td></tr><tr><td>Fonts and rights evidence</td><td>Cold rendering cannot depend on an external download</td></tr><tr><td>License procedure</td><td>Rebuild or renewal must work through the supported disconnected arrangement</td></tr></tbody></table><p>Test the bundle from a fresh environment. A restart of an already warmed server can hide downloaded resources and cached credentials. Ask a responder unfamiliar with the initial install to follow the written instructions and record every missing prerequisite.</p><p>Use the same discipline for updates: retain the candidate artifacts, rehearse in isolated staging, and document the supported recovery path. An air gap can slow obtaining replacements, so reproducibility and compatibility records directly affect the time needed to repair the service.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "test-an-offline-report-review-4",
+      "title": "Test an offline report review",
+      "html": "<p>A research team opens a report, edits a shared table, exports a presentation, and retrieves an earlier version while outbound network access is blocked. Use representative fonts and harmless documents, then inspect attempted connections through approved network observations. Restart the environment and repeat the workflow so cached outside resources do not hide dependencies. Test a new user through internal identity and simulate the documented licensing boundary. This scenario can uncover missing fonts, first run downloads, or support dependencies that are invisible after an administrator has warmed the system on a connected network.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "plan-maintenance-and-diagnosis-5",
+      "title": "Plan maintenance and diagnosis",
+      "html": "<p>Define how security updates enter the network, how their compatibility is checked, and how an earlier version is retained for supported rollback. Keep a staging environment with the same isolation assumptions. Provide internal monitoring and a procedure for collecting diagnostic bundles without confidential document contents or reusable credentials. Determine whether vendor support can work from sanitized evidence and what information transfer is permitted. Rehearse backup restoration using only internal material. Assign an owner to each dependency and update artifact so isolation does not turn routine patching or recovery into an improvised exception process.</p>",
+      "kind": "note",
+      "figure": {
+        "kind": "sequence",
+        "title": "Offline maintenance is a repeatable transfer workflow",
+        "items": [
+          {
+            "label": "Approve artifacts",
+            "detail": "Record source, version, integrity, and compatibility."
+          },
+          {
+            "label": "Controlled transfer",
+            "detail": "Use the organization's permitted media or transfer route."
+          },
+          {
+            "label": "Isolated rehearsal",
+            "detail": "Test upgrade and recovery without outside resources."
+          },
+          {
+            "label": "Production change",
+            "detail": "Apply the approved procedure and verify ordinary document work."
+          }
+        ],
+        "alt": "Artifact approval, controlled transfer, isolated rehearsal, and production maintenance.",
+        "caption": "Every update must preserve the same isolation assumptions as installation.",
+        "src": "/blog/images/field-guide-offline-document-service-dependencies-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-offline-document-service-dependencies-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "offline-acceptance-6",
+      "title": "Offline acceptance",
+      "html": "<ul><li>Verify every dependency against the approved isolation boundary.</li><li>Retain a reproducible installation manifest and protected configuration materials.</li><li>Test fresh starts, new users, representative fonts, and exports without outbound access.</li><li>Rehearse supported offline updates, diagnosis, and recovery.</li><li>Confirm licensing and support procedures for the exact disconnected deployment.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

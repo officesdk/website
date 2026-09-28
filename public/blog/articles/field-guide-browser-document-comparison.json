@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-browser-document-comparison",
+  "title": "ShimoDocs vs Google Docs: a practical browser editor test",
+  "description": "Run identical review, interruption, submitted-version, and export tasks before selecting a browser editor.",
+  "category": "Comparisons",
+  "format": "field-notes",
+  "tags": [
+    "Product selection",
+    "Collaboration",
+    "Word documents",
+    "Accessibility"
+  ],
+  "structure": "prose+sequence:prose:example:prose:example+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 669,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Google Docs: A Working Comparison",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-google-docs"
+    }
+  ],
+  "cover": "/blog/images/field-guide-browser-document-comparison.png",
+  "coverAlt": "ShimoDocs vs Google Docs: a practical browser editor test: Work sample, Review roles, Revision recovery, Export inspection.",
+  "concepts": [
+    "Work sample",
+    "Review roles",
+    "Revision recovery",
+    "Export inspection",
+    "User effort"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "journal",
+    "signature": "visual-first:journal",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 93
+  },
+  "contentHash": "f7b4a1cd2c796b29ac58eaa14df5d332617fb06cd782190cc2ad58072a7f4ede",
+  "intro": "A practical ShimoDocs and Google Docs comparison uses the same document, roles, and delivery task in each proposed offer. Inspect revision behavior and recipient output as well as writing. Record what the tested configurations actually do, especially when connectivity or external review interrupts the workflow.",
+  "sections": [
+    {
+      "id": "choose-a-realistic-sample-1",
+      "title": "Choose a realistic sample",
+      "html": "<p>Use a sanitized report with the structures your team needs: headings, tables, images, lists, references, and page boundaries where relevant. Include a known correction task and a required delivery format. Record the software offer, deployment configuration, browser, and test date for each candidate. Keep the original artifact unchanged and define what counts as success before beginning. A comparison should measure the same work under comparable conditions. Avoid giving one candidate a simple native document while asking another to import a complex file, unless import is specifically the requirement being assessed.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Use one work sample from author to recipient",
+        "items": [
+          {
+            "label": "Author",
+            "detail": "Perform agreed corrections in the same report sample."
+          },
+          {
+            "label": "Reviewer",
+            "detail": "Verify feedback and role boundaries."
+          },
+          {
+            "label": "Submission",
+            "detail": "Identify the version selected for delivery."
+          },
+          {
+            "label": "Recipient",
+            "detail": "Inspect the exported file outside the platform."
+          }
+        ],
+        "alt": "One test follows authoring, review, submission, and external reading.",
+        "caption": "Keep conditions and generated outputs with the observations.",
+        "src": "/blog/images/field-guide-browser-document-comparison-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-browser-document-comparison-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "exercise-the-review-relationship-2",
+      "title": "Exercise the review relationship",
+      "html": "<p>Assign author, reviewer, and viewer roles according to the organization's needs. Have the reviewer identify an issue, propose or request a change, and confirm its resolution. Test the role boundaries through direct actions as well as visible controls. Include an external participant if cross organization review matters. Measure invitation friction, comment discoverability, and whether the author can distinguish unresolved feedback from completed work. Verify current capabilities in the selected offers rather than relying on familiar behavior from another product or edition. Preserve observations that ordinary users can understand and reproduce.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "simulate-a-delayed-proposal-3",
+      "title": "Simulate a delayed proposal",
+      "html": "<p>Imagine two account managers preparing a customer proposal. One loses connectivity while the other changes the pricing explanation. Restore connectivity and inspect the resulting content, user messages, and any documented conflict behavior. Next, retrieve the version submitted before a late correction and produce the requested external file. The team should know which proposal was sent and whether subsequent editing changes that record. This scenario connects collaboration, interruption, and version clarity without assuming either candidate provides a particular offline or history capability. Record unsupported cases as explicit requirements gaps.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "inspect-output-and-daily-effort-4",
+      "title": "Inspect output and daily effort",
+      "html": "<p>Open the exported proposal in the customer's expected application and inspect page layout, tables, images, text structure, and accessibility. Ask an ordinary employee to complete the test, then count manual repairs and support interventions. Include mobile viewing, keyboard navigation, or assistive technology where required. Compare the surrounding ownership model: who stores the file, who administers access, and how retained records are recovered. An editor may meet the writing task while the overall service arrangement conflicts with operational or data handling requirements. Keep these dimensions separate in the scorecard so tradeoffs remain understandable.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "notes-from-a-useful-test-session-5",
+      "title": "Notes from a useful test session",
+      "html": "<p>Give the tester a task sheet rather than a tour. Ask the author to correct one figure and one paragraph, ask the reviewer to verify the correction, and ask a viewer to retrieve the submitted copy. Use employees who resemble the intended users instead of relying only on platform specialists.</p><dl><dt>Task completed</dt><dd>Record the output or decision, not just the button pressed.</dd><dt>Help required</dt><dd>Note every administrator intervention or explanation.</dd><dt>Repair required</dt><dd>Keep before-and-after files for layout or structural repair.</dd><dt>Unresolved behavior</dt><dd>State the observed limitation and the followup needed.</dd></dl><p>In the proposal interruption test, do not assume any particular offline capability. Record what remains editable, what message appears, when work is acknowledged, and what happens after reconnection. Compare the final content with the intended edits from both authors. Then identify the version submitted to the customer and inspect the external file. This yields a concrete description of the tested workflow rather than a claim that one editor is universally better. If a result changes after a release or configuration adjustment, update the test record with the new conditions.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "Record what ordinary users actually needed",
+        "items": [
+          {
+            "label": "Completion",
+            "detail": "Which task and output were successfully finished?"
+          },
+          {
+            "label": "Assistance",
+            "detail": "Which explanation or administrator action was required?"
+          },
+          {
+            "label": "Repair",
+            "detail": "What had to be changed after export?"
+          },
+          {
+            "label": "Constraint",
+            "detail": "What remains unsupported or unverified?"
+          }
+        ],
+        "alt": "Four observation categories distinguish task success from demonstration fluency.",
+        "caption": "Use observed evidence when making the selection recommendation.",
+        "src": "/blog/images/field-guide-browser-document-comparison-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-browser-document-comparison-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "comparison-decision-notes-6",
+      "title": "Comparison Decision notes",
+      "html": "<ul><li>Use the same sample, instructions, and required output for both candidates.</li><li>Verify author, reviewer, viewer, and guest boundaries.</li><li>Test interruption and identification of the submitted version.</li><li>Inspect exported files in the actual recipient application.</li><li>Record user time, repairs, support work, and ownership constraints.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

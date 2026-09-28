@@ -1,0 +1,138 @@
+{
+  "slug": "field-guide-measuring-concurrent-document-load",
+  "title": "Concurrent editor capacity: build a realistic load test",
+  "description": "Plan capacity from active sessions, document behavior, opening bursts, conversion jobs, and degraded operation.",
+  "category": "Operations",
+  "format": "walkthrough",
+  "tags": [
+    "Performance",
+    "Collaboration",
+    "Operations",
+    "Self-hosting"
+  ],
+  "structure": "prose+comparison:steps:example:example:diagnostic+flow:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 695,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Capacity Planning Around Concurrent Editors",
+      "url": "https://shimodocs.com/blog/capacity-planning-concurrent-editors"
+    }
+  ],
+  "cover": "/blog/images/field-guide-measuring-concurrent-document-load.png",
+  "coverAlt": "Concurrent editor capacity: build a realistic load test: Active sessions, Edit intensity, Opening bursts, Queue limits.",
+  "concepts": [
+    "Active sessions",
+    "Edit intensity",
+    "Opening bursts",
+    "Queue limits",
+    "Degraded capacity"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "inset",
+    "signature": "field-notes:inset",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 59
+  },
+  "contentHash": "f527e37bb1e3cd1d85c1413d4b2a1e272597aaeb16ac1e98d49d4f265156a589",
+  "intro": "Define concurrent editor capacity in terms of connected sessions, active editing, shared documents, opening bursts, conversions, and durable saves. Test the representative mix against latency requirements and supported failure cases. A sessions-per-core figure without that workload context is not a dependable sizing result.",
+  "sections": [
+    {
+      "id": "define-what-concurrency-means-1",
+      "title": "Define what concurrency means",
+      "html": "<p>Separate connected sessions, actively editing users, distinct open documents, and collaborators sharing one document. Record how the candidate system counts sessions for both operation and licensing, without assuming those definitions match. Measure session duration, active periods, reopening frequency, and viewing traffic during a pilot. Include browser reconnects and abandoned tabs. A hundred users on one shared report can have a different load profile from a hundred unrelated files. Keep the workload description with the measurements so later hardware changes or product upgrades can be evaluated against the same test rather than an ambiguous headline number.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "A concurrency number needs an activity definition",
+        "items": [
+          {
+            "label": "Connected tabs",
+            "detail": "Sessions can remain present while doing little work."
+          },
+          {
+            "label": "Active document work",
+            "detail": "Edits, calculations, opens, and conversions load distinct services."
+          },
+          {
+            "label": "Shared-document load",
+            "detail": "Many collaborators on one file differ from independent files."
+          }
+        ],
+        "alt": "Connected tabs, active work, and shared-document load compared.",
+        "caption": "Measure the activity behind the headline session count.",
+        "src": "/blog/images/field-guide-measuring-concurrent-document-load-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-measuring-concurrent-document-load-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "represent-the-expensive-activities-2",
+      "title": "Represent the expensive activities",
+      "html": "<p>Choose a realistic mix of document types and sizes, including calculation heavy spreadsheets and long reports where relevant. Measure first open, ordinary edit, save or export, and conversion as distinct activities. Include dependencies such as storage transfer, database writes, and identity checks. Verify that any load harness uses supported interfaces and does not merely keep empty connections alive. Define acceptable latency and durable completion before testing. Record resource consumption alongside user outcomes; low CPU is not reassuring if requests wait in a queue or saving fails behind another constrained service.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "publish-the-workload-beside-the-result-3",
+      "title": "Publish the workload beside the result",
+      "html": "<p>A capacity result should be readable as an experiment definition. Include the product version and topology, test duration, document corpus, session behavior, arrival pattern, background work, and pass criteria. This makes the result reproducible when a later upgrade or workload change raises a sizing question.</p><pre><code>arrival: planning meeting opens over 5 minutes\nsessions: viewers and active editors recorded separately\ncorpus: reports plus shared calculation workbooks\nbackground: normal conversion jobs continue\npass: agreed open latency and durable save completion</code></pre><p>These are illustrative report fields, not measured limits. Replace the descriptions with the actual test data and thresholds. Record percentile latency or another approved summary alongside failures; an average can conceal a small group of users repeatedly waiting too long.</p><p>Observe what the harness truly does. Keeping sockets open is not equivalent to recalculating a workbook or importing a presentation. Conversely, an artificial script that submits edits much faster than humans may test a useful stress boundary without representing ordinary capacity. Label those cases separately. Use the business workload to decide the supported operating envelope and the stress test to understand saturation behavior, admission controls, and recovery after pressure subsides.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "simulate-the-morning-planning-burst-4",
+      "title": "Simulate the morning planning burst",
+      "html": "<p>Suppose 120 staff join a planning meeting within five minutes, with most opening reports and 25 editing shared workbooks. Create a harmless corpus and reproduce that arrival pattern in an approved test environment. Add a normal background conversion workload instead of testing sessions in isolation. Observe opening latency, queue depth, save completion, and database or storage delay. Repeat at a modestly higher load to identify which limit approaches first. The figures are scenario inputs, not a sizing promise. Their value comes from resembling a real business event that the proposed service must handle.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "measure-headroom-and-loss-of-capacity-5",
+      "title": "Measure headroom and loss of capacity",
+      "html": "<p>Define growth and failure cases based on the deployment design. If the service is intended to tolerate a failed node, test the remaining supported configuration and confirm whether admission or queue controls keep it usable. Include the recovery period when sessions reconnect and workers resume accumulated jobs. Decide which activities may be delayed during saturation and which should receive explicit errors. Avoid claiming a universal sessions per core ratio from one document mix. Report a tested operating envelope with version, topology, workload, and latency boundaries so capacity decisions can be revisited when those assumptions change.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "flow",
+        "title": "Evaluate reduced-capacity operation",
+        "items": [
+          {
+            "label": "Supported node loss",
+            "detail": "Use the failure case the deployment is designed to tolerate."
+          },
+          {
+            "label": "Remaining workload",
+            "detail": "Repeat the task mix and reconnect burst."
+          },
+          {
+            "label": "Observed limits",
+            "detail": "Record latency, failed saves, queue age, and first saturation point."
+          },
+          {
+            "label": "Operating decision",
+            "detail": "Define admission, delayed work, and expansion triggers."
+          }
+        ],
+        "alt": "Node loss, remaining workload, observed limits, and operating decision.",
+        "caption": "Failure reserve must be demonstrated, not inferred from average idle CPU.",
+        "src": "/blog/images/field-guide-measuring-concurrent-document-load-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-measuring-concurrent-document-load-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "capacity-envelope-6",
+      "title": "Capacity envelope",
+      "html": "<ul><li>Define session types, document mix, activity rate, and arrival pattern.</li><li>Measure opening, editing, conversion, and durable save outcomes separately.</li><li>Record the first limiting dependency and its observed saturation behavior.</li><li>Test agreed growth and supported failure scenarios.</li><li>Repeat focused measurements after material workload or topology changes.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

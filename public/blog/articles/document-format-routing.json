@@ -1,0 +1,132 @@
+{
+  "slug": "document-format-routing",
+  "title": "Document format routing: choose preview, editing, conversion, or download",
+  "description": "Choose preview, editing, conversion, or download paths using validated content type and task requirements, with clear fallback behavior.",
+  "category": "Integration",
+  "format": "decision-brief",
+  "tags": [
+    "Document preview",
+    "Document conversion",
+    "API integration",
+    "Security"
+  ],
+  "structure": "prose:comparison+decision:diagnostic:checklist:example+matrix",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 638,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: File Upload Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/document-format-routing.png",
+  "coverAlt": "Document format routing: choose preview, editing, conversion, or download: Format detection, Capability check, Routing policy, Protected inputs.",
+  "concepts": [
+    "Format detection",
+    "Capability check",
+    "Routing policy",
+    "Protected inputs",
+    "Route acceptance"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "wide",
+    "signature": "exhibit:wide",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 36
+  },
+  "contentHash": "4f78ff0215ca28238d3371a3a9b4bef33178e24c17e8a0028ef73d364cbe57a6",
+  "intro": "Route a document using validated content type, requested operation, current state, and the configured processor's documented support. Recognizing an extension is not enough: a file may support preview but not editing, or be quarantined and unavailable for either. Keep the same routing policy behind menus, deep links, and jobs.",
+  "sections": [
+    {
+      "id": "detect-content-then-check-the-requested-capability-1",
+      "title": "Detect content, then check the requested capability",
+      "html": "<p>File extensions, declared MIME types, and inspected structure provide evidence about content type, but they serve different purposes and can disagree. Validate uploads using maintained tooling and an appropriate allowlist before routing. Then consult the documented capabilities of the selected service for the intended operation. A format supported for preview may not support editing or round trip export. Record those distinctions in a capability matrix rather than treating a recognized extension as proof that every document workflow is available for that file.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "use-a-reviewed-decision-model-across-entry-points-2",
+      "title": "Use a reviewed decision model across entry points",
+      "html": "<p>Define outcomes such as open in editor, generate preview, show an existing immutable rendition, download only, require a password workflow if supported, or reject with guidance. Include permissions and document state, such as quarantine or pending conversion, in the decision. Keep the policy centralized enough that list actions, direct links, and backend jobs agree. A browser menu that offers Edit while the server routes the same file to download creates a confusing contract and can expose paths that were never included in acceptance testing.</p><table><thead><tr><th>Input to the decision</th><th>Example distinction</th></tr></thead><tbody><tr><td>Validated type</td><td>The inspected container disagrees with its filename extension</td></tr><tr><td>Requested operation</td><td>Preview support exists but round-trip editing is unverified</td></tr><tr><td>Lifecycle state</td><td>Validation pending versus released content</td></tr><tr><td>Authorization</td><td>Viewing allowed but downloading denied</td></tr><tr><td>Processor capability</td><td>Configured service supports the exact requested path</td></tr></tbody></table><p>Keep a reason code with the routing result so support can explain why a file opened in a particular view. It need not expose implementation detail in the ordinary interface. A message such as “This format is available for download only” can be backed by a precise policy result without displaying internal service names.</p><p>When adding a format, test every enabled action rather than only the default icon click. Direct editor URLs, batch conversion, restore flows, and shared links can bypass a frontend menu. The server should reach the same supported decision for the same identity, operation, and state. An unsupported operation should fail predictably without entering a repeated conversion loop.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "decision",
+        "title": "Routing depends on more than the filename",
+        "items": [
+          {
+            "label": "Process",
+            "detail": "Validated, authorized input with a supported requested operation"
+          },
+          {
+            "label": "Wait or review",
+            "detail": "Lifecycle or protection state requires another supported step"
+          },
+          {
+            "label": "Alternative or reject",
+            "detail": "Explain an authorized fallback or unsupported operation"
+          }
+        ],
+        "alt": "Validated format, permissions, state, and capability determine processing, waiting, or rejection.",
+        "caption": "A download fallback must preserve validation and authorization boundaries.",
+        "src": "/blog/images/document-format-routing-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-format-routing-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "ambiguous-encrypted-and-damaged-inputs-differ-3",
+      "title": "Ambiguous, encrypted, and damaged inputs differ",
+      "html": "<p>When filename and inspected content disagree, do not silently select the most permissive route. Apply the validation policy and give a useful explanation. Encrypted documents, damaged containers, and unsupported embedded features may need specific handling distinct from an unknown extension. Avoid repeated conversion attempts for a permanent input limitation. If a safe download fallback is allowed, keep it subject to normal authorization and content handling controls. A fallback should help the user complete an approved task, not bypass the validation boundary that blocked processing.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "maintain-the-supported-route-matrix-4",
+      "title": "Maintain the supported-route matrix",
+      "html": "<ul><li>Track preview, editing, import, and export support separately.</li><li>Validate actual content before selecting a processing path.</li><li>Apply the same policy to menus, deep links, and background jobs.</li><li>Provide specific recovery guidance for unsupported, encrypted, or damaged inputs.</li><li>Retest representative routes when upgrading processors or adding formats.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "exercise-a-mixed-project-folder-5",
+      "title": "Exercise a mixed project folder",
+      "html": "<p>Create a test folder containing a workbook, a PDF, an image, a plain text file, an unsupported archive, and a deliberately mislabeled harmless file. Request preview and edit actions with users who have different permissions. Compare visible actions, backend routing decisions, and final outcomes. Add a pending conversion and a quarantined object to confirm that lifecycle state affects routing. This scenario verifies the complete policy instead of only checking that each extension has an icon or that a filename based switch statement returns a value.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "A mixed-folder test exercises the routing contract",
+        "items": [
+          {
+            "label": "Workbook and PDF",
+            "detail": "Compare preview and editing support separately"
+          },
+          {
+            "label": "Image and text",
+            "detail": "Verify the intended native or rendered viewing path"
+          },
+          {
+            "label": "Unsupported archive",
+            "detail": "Return a clear supported alternative or rejection"
+          },
+          {
+            "label": "Mislabeled or pending",
+            "detail": "Apply validation and lifecycle rules consistently"
+          }
+        ],
+        "alt": "Representative file types and lifecycle states test both visible actions and backend decisions.",
+        "caption": "Repeat direct-link and background-job routes, not only the file-list menu.",
+        "src": "/blog/images/document-format-routing-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-format-routing-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

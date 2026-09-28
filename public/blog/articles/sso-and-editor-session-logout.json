@@ -1,0 +1,136 @@
+{
+  "slug": "sso-and-editor-session-logout",
+  "title": "SSO logout with an embedded editor: which sessions actually end?",
+  "description": "Identify separate session lifetimes and verify what logout, account switching, and access revocation actually terminate.",
+  "category": "Security",
+  "format": "decision-brief",
+  "tags": [
+    "Security",
+    "Access control",
+    "Embedded editing",
+    "Integrations"
+  ],
+  "structure": "comparison+layers:note:diagnostic:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 653,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: Session Management Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/sso-and-editor-session-logout.png",
+  "coverAlt": "SSO logout with an embedded editor: which sessions actually end?: Session inventory, Logout contract, Editor session, Account switch.",
+  "concepts": [
+    "Session inventory",
+    "Logout contract",
+    "Editor session",
+    "Account switch",
+    "Expiry checks"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "rail-right",
+    "signature": "visual-first:rail-right",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 21
+  },
+  "contentHash": "ce026ca6aa4ddc952b417cae9216c8dcfe349eb1c22c579be15b869687a22ebc",
+  "intro": "Logging out of the host application may leave an identity-provider session, an editor session, or a signed storage link valid. Inventory those credentials and define the intended outcome for each. Then test active tabs and account switching, not only whether the main page redirects to login.",
+  "sections": [
+    {
+      "id": "inventory-independent-credentials-1",
+      "title": "Inventory independent credentials",
+      "html": "<p>List the identity provider session, application session, embedded editor credentials, storage links, and any background job authorization. Record who issues each credential, where it is stored, its lifetime, and its supported revocation mechanism. Browser cookies, bearer tokens, and server mappings behave differently. Avoid assuming that deleting one cookie invalidates every credential already issued during the session. Include refresh mechanisms and additional tabs, because a background refresh or another open document can recreate access that appeared to end in the tab where logout was clicked.</p><table><thead><tr><th>Credential</th><th>Logout question</th></tr></thead><tbody><tr><td>Application session</td><td>Can it authorize another host request?</td></tr><tr><td>Identity-provider session</td><td>Can it silently sign the user back in?</td></tr><tr><td>Editor session</td><td>Can an existing frame continue its permitted actions?</td></tr><tr><td>Storage link</td><td>Does independent expiry or revocation still govern retrieval?</td></tr></tbody></table><p>Choose the user-facing message from the observed result. “Signed out of this application” may be accurate when the identity provider intentionally remains signed in. “All document access ended” requires much broader evidence and may be incompatible with previously issued credentials. Use the authentication provider's supported logout mechanism rather than trying to delete cookies belonging to another origin.</p><p>Account switching deserves a separate test because a new session can look healthy while stale document state remains in a frame. Recreate embedded state when identity or tenant changes. Check browser back navigation and application caches for old document names as well as open content. The goal is to prevent a previous user's authorization context from becoming part of the next user's session.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "layers",
+        "title": "One login experience can contain several sessions",
+        "items": [
+          {
+            "label": "Identity provider",
+            "detail": "Controls its own sign-in and logout behavior"
+          },
+          {
+            "label": "Host application",
+            "detail": "Authorizes business requests and issues launch context"
+          },
+          {
+            "label": "Embedded editor",
+            "detail": "Maintains the supported document session"
+          },
+          {
+            "label": "Storage access",
+            "detail": "May remain valid under separately issued credentials"
+          }
+        ],
+        "alt": "Four credential boundaries can have independent lifetimes and revocation behavior.",
+        "caption": "Redirecting the host to login does not prove every issued credential was revoked.",
+        "src": "/blog/images/sso-and-editor-session-logout-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/sso-and-editor-session-logout-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "decide-what-happens-to-pending-work-2",
+      "title": "Decide what happens to pending work",
+      "html": "<p>Decide whether application logout should end only the local application session or also initiate identity provider logout where supported. Define what happens to open documents, pending saves, and later callbacks. A callback representing previously authorized work may need separate treatment from a new interactive request. State the policy before wiring endpoints together. The system should neither discard accepted work accidentally nor permit new user operations indefinitely after logout. Any limitation imposed by the editor's session model should become an explicit acceptance condition rather than a hidden assumption.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "account-switching-can-inherit-stale-document-state-3",
+      "title": "Account switching can inherit stale document state",
+      "html": "<p>A shared browser may switch from one employee to another without restarting every frame or clearing every application cache. Ensure the new account cannot inherit the previous user's document view, permissions, or cached metadata. Key session state to the authenticated identity and tenant, and recreate embedded contexts when that identity changes. Review browser history and back navigation behavior as part of the experience. Sensitive content already displayed cannot be made unseen, but the application can prevent stale state from becoming a newly authorized session for another account.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "session-acceptance-checks-4",
+      "title": "Session acceptance checks",
+      "html": "<ul><li>Document logout effects separately for application, identity provider, editor, and storage credentials.</li><li>Verify account switching with multiple tabs and cached application state.</li><li>Preserve or reject pending work according to a documented save policy.</li><li>Use secure cookie and token storage practices appropriate to each component.</li><li>Retest session boundaries after authentication or editor upgrades.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "log-out-with-two-documents-still-open-5",
+      "title": "Log out with two documents still open",
+      "html": "<p>Open two test documents in separate tabs, begin a harmless edit, and log out from the host application. Attempt a new open, an edit in the remaining tab, an export, and a direct download with a previously issued link. Then sign in as a different test account and use browser back navigation. Record immediate behavior and behavior after the documented credential lifetime. This scenario reveals which boundaries actively revoke access and which depend on expiry, giving administrators an evidence based description of the actual logout window.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Test logout before and after switching accounts",
+        "items": [
+          {
+            "label": "Open two documents",
+            "detail": "Keep multiple tabs and one test download credential"
+          },
+          {
+            "label": "Log out",
+            "detail": "Record which supported termination actions execute"
+          },
+          {
+            "label": "Probe remaining access",
+            "detail": "Try new open, edit, export, and direct retrieval"
+          },
+          {
+            "label": "Switch identity",
+            "detail": "Check stale frames, history, and tenant-specific state"
+          }
+        ],
+        "alt": "A logout drill examines remaining access and then a different user's session.",
+        "caption": "Repeat at the documented expiry boundary when immediate revocation is unsupported.",
+        "src": "/blog/images/sso-and-editor-session-logout-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/sso-and-editor-session-logout-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

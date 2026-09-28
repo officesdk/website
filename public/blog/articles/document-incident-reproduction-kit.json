@@ -1,0 +1,130 @@
+{
+  "slug": "document-incident-reproduction-kit",
+  "title": "How to reproduce document rendering and editing bugs for support",
+  "description": "Collect the environment, operation sequence, and smallest useful fixture so document failures can be reproduced safely and precisely.",
+  "category": "Operations",
+  "format": "playbook",
+  "tags": [
+    "Troubleshooting",
+    "Operations",
+    "Data privacy",
+    "Document conversion"
+  ],
+  "structure": "diagnostic+flow:steps:example:example+document",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 646,
+  "source": null,
+  "references": [
+    {
+      "label": "Google SRE Book: Effective Troubleshooting",
+      "url": "https://sre.google/sre-book/effective-troubleshooting/"
+    }
+  ],
+  "cover": "/blog/images/document-incident-reproduction-kit.png",
+  "coverAlt": "How to reproduce document rendering and editing bugs for support: Observed symptom, Trigger sequence, Minimal fixture, Safe evidence.",
+  "concepts": [
+    "Observed symptom",
+    "Trigger sequence",
+    "Minimal fixture",
+    "Safe evidence",
+    "Support handoff"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "rail-right",
+    "signature": "ledger:rail-right",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 20
+  },
+  "contentHash": "5a83289e4b0ea676eecf83888b0029049baf73c7bed8da2448702546b6487300",
+  "intro": "A useful bug report contains the exact source version, a short action sequence, the expected result, and the smallest authorized file that still reproduces the failure. Capture that evidence before clearing caches or replacing the source. Screenshots alone rarely explain whether the problem comes from content, state, or environment.",
+  "sections": [
+    {
+      "id": "capture-the-failure-before-changing-its-environment-1",
+      "title": "Capture the failure before changing its environment",
+      "html": "<p>Capture the action, expected result, actual result, time with timezone, operation identifier, and affected document version. Add the browser, application build, editor or converter version when known, and relevant deployment context. Describe whether the problem affects one file, one user, one network, or a broader group. Keep hypotheses separate from observations. A report saying font substitution changed pagination is stronger when it also identifies the affected page, expected font, and visible line break difference instead of assuming the cause from appearance alone.</p><p>List the smallest ordered steps that reproduce the issue, including whether the document was newly imported, reopened, copied, or restored. Note concurrent activity and whether a cached preview or active session existed. These conditions can distinguish a content parsing defect from a lifecycle race. Reproduce from a clean session only after capturing the original state, because clearing caches or replacing the source can destroy useful evidence. If the issue disappears, record the intervention and result rather than claiming the underlying cause has been established.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "flow",
+        "title": "Preserve evidence before attempting broad cleanup",
+        "items": [
+          {
+            "label": "Observe",
+            "detail": "Record action, time, version, expected result, and actual result"
+          },
+          {
+            "label": "Capture",
+            "detail": "Keep the operation ID and relevant environment state"
+          },
+          {
+            "label": "Reduce",
+            "detail": "Sanitize in steps while rechecking the symptom"
+          },
+          {
+            "label": "Reproduce",
+            "detail": "Run the minimal sequence in an authorized test environment"
+          }
+        ],
+        "alt": "An incident moves from observation through evidence capture, reduction, and reproduction.",
+        "caption": "Clearing state too early can erase the condition needed to understand the failure.",
+        "src": "/blog/images/document-incident-reproduction-kit-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-incident-reproduction-kit-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "reduce-the-file-without-removing-the-symptom-2",
+      "title": "Reduce the file without removing the symptom",
+      "html": "<p>When authorized, create a sanitized copy and remove unrelated sheets, pages, objects, or text in controlled steps. Recheck the failure after each meaningful reduction. Replacing confidential text can alter line lengths, fonts, or formulas, so preserve the structural characteristics relevant to the issue. If sanitization removes the failure, retain the original only through the approved restricted process and document the limitation. Never promise that replacing names alone makes a complex file anonymous; comments, metadata, hidden sheets, and embedded objects may still contain sensitive information.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "build-a-handoff-someone-else-can-execute-3",
+      "title": "Build a handoff someone else can execute",
+      "html": "<p>Structure the handoff around an executable claim. For example: open fixture revision three, export with the recorded settings, and inspect the chart on page two; the reference contains four labeled series while the generated page is blank. This is a synthetic example of report structure, not an observed product defect.</p><table><thead><tr><th>Evidence</th><th>Why it belongs</th></tr></thead><tbody><tr><td>Fixture digest and version</td><td>Ensures investigators use the same bytes</td></tr><tr><td>Ordered actions</td><td>Preserves state changes that trigger the problem</td></tr><tr><td>Expected and actual output</td><td>Makes the discrepancy inspectable</td></tr><tr><td>Operation ID and environment</td><td>Connects reproduction to service evidence</td></tr><tr><td>Sanitization notes</td><td>Explains what was removed and whether the symptom survived</td></tr></tbody></table><p>Record unsuccessful reproduction attempts too, but keep them separate from the minimal failing sequence. “Works in a fresh profile, fails in the original profile” narrows the investigation. It does not prove a cache defect by itself. If access to the original file is necessary, use the approved restricted location and an expiry or deletion process; do not spread copies across unrelated chat threads.</p><ul><li>Include reproducible steps and clearly separated expected and actual outcomes.</li><li>Identify the precise source version and relevant runtime versions.</li><li>Provide sanitized artifacts through an approved access controlled location.</li><li>Remove tokens, signed links, and unrelated personal information from evidence.</li><li>Record who owns the next investigation and how temporary artifacts will be deleted.</li></ul>",
+      "kind": "example"
+    },
+    {
+      "id": "example-a-chart-disappears-during-export-4",
+      "title": "Example: a chart disappears during export",
+      "html": "<p>Suppose one chart appears blank after a workbook export. The kit should include the smallest authorized workbook that still fails, the expected reference image, the actual rendered page, exact export settings, and the operation ID. Record whether editing the source data or reopening changes the result. A digest can help ensure every investigator uses the same fixture. Avoid attaching unrelated production logs or reusable credentials. This concrete package lets engineering test the rendering path without reconstructing the report from scattered messages and ambiguous screenshots.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "document",
+        "title": "A chart defect handoff needs more than a screenshot",
+        "items": [
+          {
+            "label": "Source fixture",
+            "detail": "Smallest authorized workbook that still fails"
+          },
+          {
+            "label": "Reference",
+            "detail": "Expected chart and the settings that produced it"
+          },
+          {
+            "label": "Actual output",
+            "detail": "The affected rendered page or object"
+          },
+          {
+            "label": "Execution context",
+            "detail": "Export steps, versions, operation ID, and sanitizer notes"
+          }
+        ],
+        "alt": "A chart bug kit combines source, expected output, actual output, and execution context.",
+        "caption": "Keep the exact fixture version stable across investigators.",
+        "src": "/blog/images/document-incident-reproduction-kit-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-incident-reproduction-kit-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

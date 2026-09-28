@@ -1,0 +1,142 @@
+{
+  "slug": "document-trace-id-design",
+  "title": "Trace IDs for document opening, conversion, and save failures",
+  "description": "Connect launch, retrieval, conversion, and save evidence without placing document content or credentials in telemetry.",
+  "category": "Operations",
+  "format": "architecture",
+  "tags": [
+    "Operations",
+    "Troubleshooting",
+    "API integration",
+    "Audit logs"
+  ],
+  "structure": "comparison+layers:prose:example:note:checklist:diagnostic+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 662,
+  "source": null,
+  "references": [
+    {
+      "label": "W3C: Trace Context",
+      "url": "https://www.w3.org/TR/trace-context/"
+    }
+  ],
+  "cover": "/blog/images/document-trace-id-design.png",
+  "coverAlt": "Trace IDs for document opening, conversion, and save failures: Operation ID, Request trace, Queue context, Callback link.",
+  "concepts": [
+    "Operation ID",
+    "Request trace",
+    "Queue context",
+    "Callback link",
+    "Support lookup"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "rail-right",
+    "signature": "compact:rail-right",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 19
+  },
+  "contentHash": "c3872b505c8e31ac38ce35217d9fba563a1359d84153e261fd49dd9185b42e2f",
+  "intro": "Give the user's document operation a durable identifier and connect each request, queue job, and callback to it. A request trace explains one execution; an operation ID explains the complete attempt, including retries. Keep both relationships without putting document text or signed URLs into telemetry.",
+  "sections": [
+    {
+      "id": "operation-identity-versus-request-identity-1",
+      "title": "Operation identity versus request identity",
+      "html": "<p>One user action can produce many requests and several retries. Use a business operation ID for the overall attempt and request or trace context for individual executions. Link them explicitly. A retry may create a new trace while still belonging to the same import or save operation. Document IDs provide useful context but are not substitutes for attempt identifiers, because many operations can affect one document simultaneously. When adopting a standard trace format, validate incoming context and follow the supported instrumentation model rather than treating arbitrary client text as trusted metadata.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "layers",
+        "title": "One document action can contain several executions",
+        "items": [
+          {
+            "label": "Business operation",
+            "detail": "Stable identity for the user's open, import, or save attempt"
+          },
+          {
+            "label": "Request traces",
+            "detail": "Individual executions, including retries"
+          },
+          {
+            "label": "Queue jobs",
+            "detail": "Persisted work linked back to the operation"
+          },
+          {
+            "label": "Provider events",
+            "detail": "External identifiers mapped to the initiating work"
+          }
+        ],
+        "alt": "One business operation links several requests, queue jobs, and provider events.",
+        "caption": "A document ID alone cannot distinguish simultaneous operations on the same file.",
+        "src": "/blog/images/document-trace-id-design-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-trace-id-design-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "cross-queues-and-provider-callbacks-explicitly-2",
+      "title": "Cross queues and provider callbacks explicitly",
+      "html": "<p>Record the operation relationship when creating a queue job and restore it when a worker starts. External services may not forward your trace headers, so retain a mapping to their documented job or event identifiers. A callback can then be linked to the initiating operation without relying on timestamp proximity. Do not require every system to share one tracing implementation before gaining value. Consistent structured fields and a reliable mapping table can connect evidence across boundaries that full distributed tracing cannot currently cross.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-practical-correlation-record-3",
+      "title": "A practical correlation record",
+      "html": "<table><thead><tr><th>Field</th><th>Question it answers</th></tr></thead><tbody><tr><td>Operation ID</td><td>Which user intention are we following?</td></tr><tr><td>Trace or request ID</td><td>Which execution produced this observation?</td></tr><tr><td>Stage and outcome</td><td>Where did work succeed or first fail?</td></tr><tr><td>Source version</td><td>Which content state was involved?</td></tr><tr><td>External event or job ID</td><td>How does a provider callback connect to our operation?</td></tr></tbody></table><p>Use stable, documented field names across your own services. A gateway's request ID and a converter's job ID can both be valuable, but a support operator needs a recorded relationship between them. Asking someone to correlate by filename and approximate time is fragile when several users open the same document together.</p><p>Choose where the user sees the support identifier: an error panel, import activity record, or copyable failure detail. It should not require developer tools for every incident. Verify that the identifier can be searched by the people responsible for support, with the correct tenant restrictions. Telemetry that exists only in a system nobody on call can access does not complete the diagnostic path.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "collect-evidence-without-collecting-the-document-4",
+      "title": "Collect evidence without collecting the document",
+      "html": "<p>Useful fields include operation type, stage, safe document identifier, tenant scope, outcome, duration, and normalized error category. Exclude access tokens, signed URL query strings, full callback secrets, and document text from routine telemetry. Classify identifiers and apply retention and access controls appropriate to their sensitivity. Log enough to tell whether authorization, source retrieval, conversion, or publication failed. A single generic error message repeated by every component adds volume without helping operators identify the first failing stage or the system responsible for recovery.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "support-readiness-checks-5",
+      "title": "Support-readiness checks",
+      "html": "<ul><li>Show a copyable operation or support ID in actionable error states.</li><li>Preserve context across worker restarts, retries, and external event mappings.</li><li>Use consistent names and units for stage durations.</li><li>Redact credentials before logs leave the service boundary.</li><li>Test that an operator can identify the owning component from one synthetic failure.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "follow-a-denied-presentation-source-to-its-first-failure-6",
+      "title": "Follow a denied presentation source to its first failure",
+      "html": "<p>For a test presentation, introduce a storage access denial. Start from the operation ID shown in the user facing error, locate the launch request, then follow its source retrieval and worker records. Confirm that the first failure is visible as a storage authorization outcome rather than only a later editor timeout. Repeat through a queued retry and check that the relationship remains intact. The exercise should be possible for an authorized support operator without requesting the presentation contents or asking the user to expose a signed download link.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "Find the cause before the final editor timeout",
+        "items": [
+          {
+            "label": "User report",
+            "detail": "Start with the copyable support operation ID"
+          },
+          {
+            "label": "Launch record",
+            "detail": "Locate the authorized document and requested version"
+          },
+          {
+            "label": "Retrieval failure",
+            "detail": "Identify the storage denial and its owning component"
+          },
+          {
+            "label": "Later timeout",
+            "detail": "Treat the editor error as a consequence of that failure"
+          }
+        ],
+        "alt": "An operator follows a visible support ID to a storage denial before a downstream timeout.",
+        "caption": "A useful trace makes the first failing boundary visible without exposing source bytes.",
+        "src": "/blog/images/document-trace-id-design-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-trace-id-design-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-document-disaster-recovery-order",
+  "title": "Document platform disaster recovery: restore a consistent business state",
+  "description": "Build a disaster recovery procedure around content consistency, identity, dependencies, user readback, and controlled reopening.",
+  "category": "Operations",
+  "format": "playbook",
+  "tags": [
+    "Backup and recovery",
+    "Operations",
+    "Document storage",
+    "Version control"
+  ],
+  "structure": "prose+layers:diagnostic:steps:example+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 696,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Disaster Recovery for a Document Platform",
+      "url": "https://shimodocs.com/blog/disaster-recovery-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-disaster-recovery-order.png",
+  "coverAlt": "Document platform disaster recovery: restore a consistent business state: Recovery targets, Dependency order, Consistent state, Readback checks.",
+  "concepts": [
+    "Recovery targets",
+    "Dependency order",
+    "Consistent state",
+    "Readback checks",
+    "Reopening authority"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "inset",
+    "signature": "exhibit:inset",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 60
+  },
+  "contentHash": "599df4e4178fe9c4e3d7fdca6fec53f19a2682ce514b0e16f37685c0ea11015d",
+  "intro": "Recover documents in a dependency order that preserves content, version metadata, identity, keys, and supported service state. Keep the recovered environment isolated until ordinary users can read the right versions with the right access. Reopening requires an explicit authority decision, including any known loss of recent changes.",
+  "sections": [
+    {
+      "id": "define-the-recoverable-outcome-1",
+      "title": "Define the recoverable outcome",
+      "html": "<p>Agree the maximum acceptable data loss and service restoration time with business owners. Define which workflows are essential and what temporary limitations they can tolerate. Map application databases, object storage, identity, configuration, certificates, keys, queues, and any external dependencies used by the deployed product. Obtain vendor guidance for supported recovery procedures and consistency boundaries. A queue snapshot or editor state may require special handling rather than arbitrary copying. Record where backups live, how administrators obtain access during an outage, and who can authorize a recovery point that omits the most recent business changes.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A recoverable collection has linked dependencies",
+        "items": [
+          {
+            "label": "Content and versions",
+            "detail": "Stored bytes agree with current and historical metadata."
+          },
+          {
+            "label": "Identity and keys",
+            "detail": "Approved people and services can read the recovered state."
+          },
+          {
+            "label": "Service configuration",
+            "detail": "Endpoints, certificates, and credentials identify the right environment."
+          },
+          {
+            "label": "In-flight work",
+            "detail": "Queues and partial saves receive supported reconciliation."
+          }
+        ],
+        "alt": "Content, identity and keys, configuration, and in-flight state needed for recovery.",
+        "caption": "Running containers alone cannot establish a usable recovery point.",
+        "src": "/blog/images/field-guide-document-disaster-recovery-order-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-disaster-recovery-order-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "check-authority-before-accepting-new-edits-2",
+      "title": "Check authority before accepting new edits",
+      "html": "<p>The difficult moment in recovery is often when two apparently valid systems exist. The primary site may return while the recovery site already holds new work. Prevent both from accepting independent changes unless the supported architecture explicitly provides safe coordination.</p><dl><dt>Before reopening</dt><dd>Confirm the selected recovery point, content references, identity mapping, and which environment will accept new work.</dd><dt>When the old site returns</dt><dd>Keep it isolated from ordinary writes until the approved reconciliation or failback procedure is selected.</dd><dt>Before failback</dt><dd>Account for changes made at the recovery site and verify the supported transfer of authority.</dd></dl><p>Communication should identify the latest recoverable business state and the work users may need to recreate. Saying service has been restored is incomplete when yesterday's approved workbook is present but this morning's changes are not. Ask business owners to identify the practical consequences, then record the accepted recovery point and reopening authority.</p><p>Keep failed jobs and callbacks in the assessment. An old worker that reconnects to the wrong environment may attempt to publish a stale result. Apply the documented state reconciliation and endpoint configuration procedure before resuming it. Startup order is therefore a data integrity decision as well as a service availability decision.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "restore-relationships-before-editing-3",
+      "title": "Restore relationships before editing",
+      "html": "<p>Determine the required startup sequence and keep the recovered environment isolated until state is checked. Metadata must refer to available objects, and credentials must identify the right environment rather than an old endpoint. Reconcile current document pointers, selected historical versions, and incomplete save operations using documented mechanisms. Avoid letting stale workers publish results into the recovered system before their status is understood. Coordinate identity and permissions so users do not inherit access from a mismatched directory snapshot. The recovery runbook should explain each dependency and its verification, not merely list service startup commands.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "rehearse-a-site-loss-scenario-4",
+      "title": "Rehearse a site loss scenario",
+      "html": "<p>Imagine the primary site becomes unavailable during a budget review. In a rehearsal, recover a test workspace into a separate approved environment using only the runbook and protected backup materials. Ask a responder who did not create the backups to perform the work. Check the latest recoverable workbook, its approved prior version, the restricted appendix, and access for a recently removed participant. Measure elapsed time from incident declaration to verified usable service. Record missing credentials or undocumented dependencies as recovery failures even if an expert eventually fixes them through personal knowledge.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "A recovery rehearsal with independent responders",
+        "items": [
+          {
+            "label": "Declare test incident",
+            "detail": "Use the runbook and protected backup materials."
+          },
+          {
+            "label": "Restore isolated state",
+            "detail": "Follow the supported dependency and consistency procedure."
+          },
+          {
+            "label": "Ordinary user readback",
+            "detail": "Check current, prior, and restricted documents."
+          },
+          {
+            "label": "Record reopening time",
+            "detail": "Measure time to usable service and missing prerequisites."
+          }
+        ],
+        "alt": "Incident declaration, isolated restore, user readback, and measured reopening.",
+        "caption": "Undocumented credentials count as a failed recovery prerequisite.",
+        "src": "/blog/images/field-guide-document-disaster-recovery-order-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-disaster-recovery-order-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "control-return-to-normal-service-5",
+      "title": "Control return to normal service",
+      "html": "<p>Choose who declares the recovered system authoritative and how users learn the new entry point. If the original site later returns, prevent both environments from accepting independent changes. Define the reconciliation or failback procedure according to supported architecture. Communicate known data loss precisely enough for teams to identify work that needs recreation. Monitor opens, saves, conversions, and access decisions closely after reopening. The incident ends only when business owners can use the recovered records and operations has restored a sustainable backup and monitoring posture, not simply when a health endpoint starts responding.</p><h3>Recovery readiness</h3><ul><li>Approve recovery targets and essential workflow priorities.</li><li>Protect backup access, configuration, and key recovery material.</li><li>Rehearse dependency restoration and cross system consistency checks.</li><li>Validate documents and permissions with ordinary user accounts.</li><li>Define authority transfer, communication, and supported failback steps.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

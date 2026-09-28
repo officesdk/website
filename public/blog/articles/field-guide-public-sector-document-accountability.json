@@ -1,0 +1,133 @@
+{
+  "slug": "field-guide-public-sector-document-accountability",
+  "title": "Public sector document collaboration: records and publication boundaries",
+  "description": "Define working drafts, official records, access decisions, and accessible publication in public sector workflows.",
+  "category": "Office workflows",
+  "format": "explainer",
+  "tags": [
+    "Business workflows",
+    "Accessibility",
+    "Audit logs",
+    "Access control",
+    "Document conversion"
+  ],
+  "structure": "prose+document:comparison:example:prose+flow:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 664,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Document Collaboration in the Public Sector",
+      "url": "https://shimodocs.com/blog/document-collaboration-public-sector"
+    }
+  ],
+  "cover": "/blog/images/field-guide-public-sector-document-accountability.png",
+  "coverAlt": "Public sector document collaboration: records and publication boundaries: Record status, Publication approval, Accessibility checks, Disclosure review.",
+  "concepts": [
+    "Record status",
+    "Publication approval",
+    "Accessibility checks",
+    "Disclosure review",
+    "Service continuity"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "chapter-rail",
+    "signature": "field-notes:chapter-rail",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 47
+  },
+  "contentHash": "ae9170612daa63b35f7a97a0f032363e3a1bb58ef48216a4b26367148cb82afe",
+  "intro": "Separate staff drafts, approved official records, and public release artifacts. Give each transition an accountable owner, apply the authority's retention and access requirements, and inspect the delivered format for accessibility and unintended disclosures. This makes collaboration compatible with explainable decisions and later retrieval.",
+  "sections": [
+    {
+      "id": "identify-official-record-transitions-1",
+      "title": "Identify official record transitions",
+      "html": "<p>Determine when a working document becomes an official record and who declares that state. A draft briefing, an approved decision, and a public release can require different access and retention treatment. Consult the responsible records authority for the applicable schedule and evidence requirements. Store the relevant identifiers and status changes so a document can be connected to its decision process. Avoid relying on a filename containing Final as the approval record. Document the relationship between the collaboration workspace and any official archive, including who transfers the approved artifact and verifies its receipt.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "document",
+        "title": "An official record needs an identifiable transition",
+        "items": [
+          {
+            "label": "Draft identifier",
+            "detail": "Connect the working material to its approval request."
+          },
+          {
+            "label": "Approved version",
+            "detail": "Identify the exact content accepted by the responsible authority."
+          },
+          {
+            "label": "Decision evidence",
+            "detail": "Retain who approved it and when through the agreed process."
+          },
+          {
+            "label": "Archive reference",
+            "detail": "Record the destination and verified receipt of the official artifact."
+          }
+        ],
+        "alt": "Draft identity, approved version, decision evidence, and archive reference.",
+        "caption": "A filename containing Final does not establish approval.",
+        "src": "/blog/images/field-guide-public-sector-document-accountability-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-public-sector-document-accountability-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "three-versions-can-serve-different-duties-2",
+      "title": "Three versions can serve different duties",
+      "html": "<p>A committee report can have a staff draft, an approved record, and an accessible publication artifact without those objects being interchangeable. The draft supports review. The approved record preserves the decision. The publication artifact serves its audience and may deliberately exclude restricted appendices.</p><table><thead><tr><th>Object</th><th>Authority</th><th>Verification</th></tr></thead><tbody><tr><td>Working draft</td><td>Assigned authors and reviewers</td><td>Appropriate collaboration and denied outside access</td></tr><tr><td>Approved record</td><td>Authorized decision and records process</td><td>Exact version, approval, and retrievable identity</td></tr><tr><td>Public artifact</td><td>Publication authority</td><td>Approved contents and accessible delivery format</td></tr></tbody></table><p>Keep a stable relationship among these objects. A request for the approved decision should not be answered with today's edited draft simply because both share a title. Similarly, the public copy should not silently expose every earlier version available to internal reviewers.</p><p>Decide where publication correction happens. An accessible replacement may fix an error, but the authority may also need to retain the original publication and correction history under its applicable policy. Ask records and publication owners to settle that behavior before launch; a content administrator should not have to infer it during a public correction incident.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "plan-distinct-audience-pathways-3",
+      "title": "Plan distinct audience pathways",
+      "html": "<p>Separate staff drafting, interagency review, contractor participation, and public publication into defined access pathways. Each has different identity and information exposure assumptions. Test the candidate platform's supported controls rather than treating a publicly accessible link as a complete publishing solution. Search previews, comments, attachments, and earlier versions may reveal material beyond the intended release. Administrators need a documented procedure for correcting a mistaken publication. Include the limit that a removed public link does not erase copies already downloaded or indexed outside the authority's systems.</p><h3>Test a committee report</h3><p>A policy team prepares a committee report with a restricted personnel appendix. Reviewers collaborate on the draft, a records officer captures the approved version, and a publication officer releases an accessible copy. Walk through that process using harmless test data. Confirm that the public artifact excludes the appendix and internal comments while preserving meaningful headings, tables, and reading order. Test the released file using the authority's accessibility procedure. Then ask a second records officer to locate the approved version and its authorization without assistance from the author.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "prepare-disclosure-and-continuity-4",
+      "title": "Prepare disclosure and continuity",
+      "html": "<p>Define how authorized staff search and collect records for a disclosure or information request, with appropriate review before release. A full export may include private drafts and personal information, so collection and disclosure should be separate steps. For service outages, identify essential drafting and publication activities and the approved temporary alternatives. Test recovery of both document bytes and approval metadata. Maintain support procedures that collect safe identifiers instead of encouraging staff to email sensitive reports to technicians. Operational accountability includes who can restore service and who can approve a recovered record for use.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "Collection and disclosure are separate decisions",
+        "items": [
+          {
+            "label": "Authorized collection",
+            "detail": "Gather potentially relevant records under the approved request."
+          },
+          {
+            "label": "Disclosure review",
+            "detail": "Assess personal information, restrictions, and permitted release."
+          },
+          {
+            "label": "Controlled delivery",
+            "detail": "Issue the approved package with its required record of disclosure."
+          }
+        ],
+        "alt": "Authorized record collection followed by disclosure review and controlled delivery.",
+        "caption": "A complete export is not automatically a publishable response.",
+        "src": "/blog/images/field-guide-public-sector-document-accountability-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-public-sector-document-accountability-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "publication-readiness-5",
+      "title": "Publication readiness",
+      "html": "<ul><li>Assign record status, publication authority, and retention ownership.</li><li>Verify staff, partner, and public access using separate test identities.</li><li>Inspect the released artifact for restricted appendices and review context.</li><li>Complete accessibility checks on the actual delivery format.</li><li>Demonstrate retrieval of approved records and recovery of their metadata.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

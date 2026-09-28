@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-export-led-knowledge-migrations",
+  "title": "How to migrate Confluence without a dedicated connector",
+  "description": "Prepare a manual knowledge migration with explicit handling for attachments, links, permissions, and unsupported content.",
+  "category": "Migration",
+  "format": "walkthrough",
+  "tags": [
+    "Migration",
+    "Document conversion",
+    "Access control",
+    "Document search"
+  ],
+  "structure": "steps+document:prose:diagnostic:example:steps+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 681,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Migrating from Confluence Without a Connector",
+      "url": "https://shimodocs.com/blog/migrating-without-confluence-connector"
+    }
+  ],
+  "cover": "/blog/images/field-guide-export-led-knowledge-migrations.png",
+  "coverAlt": "How to migrate Confluence without a dedicated connector: Export manifest, Attachment pairing, Link rewriting, Macro exceptions.",
+  "concepts": [
+    "Export manifest",
+    "Attachment pairing",
+    "Link rewriting",
+    "Macro exceptions",
+    "Access mapping"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "chapter-rail",
+    "signature": "centered:chapter-rail",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 41
+  },
+  "contentHash": "27d621cf642811ebc15e2310c36e17963c847e25d145f7a6be808e28b0d1568d",
+  "intro": "A connectorless Confluence migration needs a source manifest, supported exports, a source-to-destination identifier map, and a deliberate policy for macros and attachments. Pilot a complete handbook before bulk transfer. The real acceptance test is whether users can navigate and trust the imported information with the right access.",
+  "sections": [
+    {
+      "id": "create-a-source-manifest-1",
+      "title": "Create a source manifest",
+      "html": "<p>Inventory spaces, pages, attachment counts, owners, and permission exceptions using the source system's supported export or administrative methods. Verify the available export formats for the deployed edition; do not assume every format preserves the same metadata. Record source identifiers and parent relationships independently of display titles. Titles can repeat or change during cleanup. Retain an untouched export with a checksum and export date, then work from a separate transformation copy. This creates a reproducible starting point when a conversion rule accidentally removes a table, caption, or important block of text.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "document",
+        "title": "Minimum useful page migration record",
+        "items": [
+          {
+            "label": "Source identifier",
+            "detail": "Stable page ID retained even when a title changes."
+          },
+          {
+            "label": "Destination identifier",
+            "detail": "New page ID used to resolve internal references."
+          },
+          {
+            "label": "Attachment relationship",
+            "detail": "Files remain paired with the page that explains them."
+          },
+          {
+            "label": "Exception status",
+            "detail": "Unsupported macro or dynamic behavior has a named owner."
+          }
+        ],
+        "alt": "A page migration record showing identifiers, attachments, and exceptions.",
+        "caption": "The manifest is the basis for repair and reconciliation.",
+        "src": "/blog/images/field-guide-export-led-knowledge-migrations-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-export-led-knowledge-migrations-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "handle-unsupported-page-elements-2",
+      "title": "Handle unsupported page elements",
+      "html": "<p>Classify embedded elements such as dynamic reports, diagrams, custom macros, and included pages. For each type, decide whether to recreate behavior, preserve a readable snapshot, or leave a documented exception. Dynamic content needs particular attention because exported output may reflect only one point in time. Ask the page owner whether readers need the underlying query, its latest result, or historical evidence. Keep attachment names and their source page association together. Converting everything into a folder of files can destroy the relationship that makes screenshots and downloadable templates meaningful.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "treat-broken-links-as-mapping-failures-3",
+      "title": "Treat broken links as mapping failures",
+      "html": "<p>Keep a mapping record for each source page containing its source identifier, parent identifier, destination identifier, export date, and conversion status. Include the source identifier in exception reports even if it will not appear in the public page. Repeated titles and renamed pages make title-only reconciliation unreliable.</p><pre><code>source_id: page-042\nparent_id: handbook-01\ndestination_id: guide-117\nstatus: imported\nattachment_count: 3\nlink_review: pending</code></pre><p>These are illustrative manifest fields, not a Confluence API schema. Use the actual source export and destination identifiers available in your environment. After import, review unresolved references by target rather than fixing them one page at a time. A single missing included page can break many referring pages; a mapping correction can address the shared cause.</p><p>For a macro that cannot be recreated, ask the owner what readers need from it. A static screenshot can preserve an old report's appearance but cannot substitute for a live incident queue. Label snapshots with their date and purpose. Keep executable or interactive behavior in the exception queue until it has a supported replacement, then verify the replacement through a real reader's task.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "pilot-an-operations-handbook-4",
+      "title": "Pilot an operations handbook",
+      "html": "<p>Select a handbook containing nested pages, a reused procedure, images, and a restricted incident appendix. Import it into the proposed destination and have an operator find a specific recovery step without assistance. Follow internal links and download the associated scripts or templates. Compare the restricted appendix using both permitted and unpermitted accounts. Check whether code formatting and table columns preserve the intended instructions. Record failures by source identifier so corrections can be replayed across the remaining export. This pilot tests usable navigation and confidentiality together, not simply successful parsing of a document format.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "reconcile-after-the-final-export-5",
+      "title": "Reconcile after the final export",
+      "html": "<p>Set a source editing freeze or define a final change window, then export the remaining delta through a supported procedure. Rewrite internal references using the source to destination mapping. Keep a searchable exception register for pages that require human rebuilding. Owners should approve important content after transformation, especially operational instructions and policy statements. Announce where new edits belong and retain the source in an agreed readable state for a limited period. Without a clear editing boundary, corrections made in the old space can disappear from the new one after migration appears complete.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "Finalize the knowledge migration",
+        "items": [
+          {
+            "label": "Freeze edits",
+            "detail": "Stop or explicitly capture changes in the source space."
+          },
+          {
+            "label": "Export final changes",
+            "detail": "Apply the supported export procedure and update the manifest."
+          },
+          {
+            "label": "Resolve references",
+            "detail": "Use the identifier map to fix internal targets."
+          },
+          {
+            "label": "Owner approval",
+            "detail": "High consequence instructions are reviewed before activation."
+          }
+        ],
+        "alt": "Final source freeze, export, reference resolution, and owner approval.",
+        "caption": "Content transfer and an editing-location decision must happen together.",
+        "src": "/blog/images/field-guide-export-led-knowledge-migrations-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-export-led-knowledge-migrations-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "migration-closeout-6",
+      "title": "Migration closeout",
+      "html": "<ul><li>Reconcile page and attachment counts against the dated source manifest.</li><li>Verify critical tables, code samples, images, and restricted appendices.</li><li>Resolve broken references and record deliberate replacements for dynamic elements.</li><li>Obtain owner approval for high consequence instructions and policies.</li><li>Preserve the original export and document how its contents can be retrieved.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "slug": "document-content-extraction-boundaries",
+  "title": "Document text extraction: hidden content, formulas, and source locations",
+  "description": "Set explicit extraction rules for visible text, comments, hidden sheets, formulas, images, and embedded objects.",
+  "category": "AI & documents",
+  "format": "explainer",
+  "tags": [
+    "AI documents",
+    "Document search",
+    "RAG",
+    "Data privacy",
+    "Excel spreadsheets"
+  ],
+  "structure": "comparison+matrix:prose:note:checklist:example+document",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 659,
+  "source": null,
+  "references": [
+    {
+      "label": "Apache Tika: Document content analysis",
+      "url": "https://tika.apache.org/"
+    }
+  ],
+  "cover": "/blog/images/document-content-extraction-boundaries.png",
+  "coverAlt": "Document text extraction: hidden content, formulas, and source locations: Content scope, Source locations, Formula handling, Image treatment.",
+  "concepts": [
+    "Content scope",
+    "Source locations",
+    "Formula handling",
+    "Image treatment",
+    "Extraction checks"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "wide",
+    "signature": "overprint:wide",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 27
+  },
+  "contentHash": "7fb09103102257e6d0d2484dfb066128834562a673a34c32fa57dbac3870c7f6",
+  "intro": "Define what extraction is allowed to include before indexing a document or sending it to an AI service. Visible text, comments, hidden sheets, formulas, cached values, OCR, and embedded files are different inputs. A parser's ability to return an element does not decide whether your workflow should expose it.",
+  "sections": [
+    {
+      "id": "define-which-document-elements-enter-the-output-1",
+      "title": "Define which document elements enter the output",
+      "html": "<p>List the elements the downstream workflow needs: body text, headings, tables, notes, comments, tracked changes, hidden worksheets, chart labels, image text, and embedded files. Decide inclusion separately for each category. A search index may need approved body content while an audit workflow may require review history. Do not infer visibility from parser output alone. A library that returns hidden text successfully has not decided that your application is authorized to disclose it. Keep extraction policy tied to the business purpose and the document's access rules.</p><table><thead><tr><th>Element</th><th>Policy question</th></tr></thead><tbody><tr><td>Tracked changes and comments</td><td>Should review history enter this task's search or model context?</td></tr><tr><td>Hidden worksheet</td><td>Is its content authorized for this particular extraction purpose?</td></tr><tr><td>Formula cell</td><td>Return the expression, cached result, or both with clear labels?</td></tr><tr><td>Image text</td><td>Is OCR supported, and how is uncertain text distinguished?</td></tr><tr><td>Embedded file</td><td>Should it be processed separately under its own limits?</td></tr></tbody></table><p>Save the extraction policy revision with the output. If a parser upgrade starts recognizing a previously ignored element, the policy should still govern whether it is included. Otherwise, an ordinary dependency update can broaden the data exposed to a search index without anyone reviewing the business decision.</p><p>Locations also need honest semantics. A workbook cell address can be stable within one source version but move after rows are inserted. A page number may depend on rendering rather than raw extraction. Bind references to the source version and use only the location types actually available. When downstream answers quote a passage, the user should be able to find that passage in the same version without guessing.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "matrix",
+        "title": "Extraction policy chooses among different content classes",
+        "items": [
+          {
+            "label": "Visible body",
+            "detail": "Text and structure needed for the stated task"
+          },
+          {
+            "label": "Review material",
+            "detail": "Comments and revisions included only by explicit policy"
+          },
+          {
+            "label": "Hidden or embedded",
+            "detail": "Separate authorization, scope, and processing limits"
+          },
+          {
+            "label": "Derived text",
+            "detail": "OCR and calculated values carry method and meaning"
+          }
+        ],
+        "alt": "Four classes of document content require explicit inclusion and interpretation rules.",
+        "caption": "Recognizing an element in a parser is not permission to expose it downstream.",
+        "src": "/blog/images/document-content-extraction-boundaries-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-content-extraction-boundaries-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "preserve-relationships-and-supported-locations-2",
+      "title": "Preserve relationships and supported locations",
+      "html": "<p>Flattened text can lose relationships between a table header and its cells, a footnote and its reference, or a spreadsheet value and its formula. Retain structural information and source locations where the chosen parser supports them. Record the source document version, extraction tool version, and policy version with the result. These fields make later answers and indexing defects traceable. If exact page locations are unavailable or unstable, do not fabricate them; use supported section, sheet, or element references and explain the granularity available to downstream users.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "formulas-ocr-and-embedded-files-need-explicit-treatment-3",
+      "title": "Formulas, OCR, and embedded files need explicit treatment",
+      "html": "<p>A spreadsheet cell may contain a formula and a cached result, and those are not interchangeable. Decide whether downstream consumers need one, the other, or both, and identify potentially stale cached values. For image text, OCR introduces its own uncertainty and may not preserve reading order or mathematical notation. Label the extraction method and retain enough context for verification. Treat embedded objects and attachments as separate inputs with their own validation and authorization, rather than automatically expanding them into a larger unbounded extraction job.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "extraction-acceptance-conditions-4",
+      "title": "Extraction acceptance conditions",
+      "html": "<ul><li>Declare inclusion rules for comments, revisions, hidden content, and embedded files.</li><li>Retain source version and supported location references.</li><li>Distinguish formulas, cached results, and OCR output.</li><li>Apply size, recursion, and processing limits to complex documents.</li><li>Recheck access permissions when serving extracted content or derived search results.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "inspect-a-workbook-with-hidden-planning-notes-5",
+      "title": "Inspect a workbook with hidden planning notes",
+      "html": "<p>Create a synthetic workbook containing a visible summary, a hidden sheet with internal notes, a formula total, and an image label. Run the extraction policy and inspect the exact output sent to the downstream service. Confirm that excluded notes remain excluded, the total has clear semantics, and any OCR text is identified appropriately. Repeat after changing the document version. This fixture exposes accidental overcollection and structural loss without requiring a real confidential workbook to demonstrate the boundary.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "document",
+        "title": "A workbook fixture tests both inclusion and interpretation",
+        "items": [
+          {
+            "label": "Visible summary",
+            "detail": "Expected searchable or answerable content"
+          },
+          {
+            "label": "Hidden notes",
+            "detail": "Excluded unless the extraction purpose explicitly allows them"
+          },
+          {
+            "label": "Formula total",
+            "detail": "Expression and cached result distinguished"
+          },
+          {
+            "label": "Image label",
+            "detail": "OCR output identified with its extraction method"
+          }
+        ],
+        "alt": "A synthetic workbook contains visible, hidden, formula, and image content for policy testing.",
+        "caption": "Inspect the exact extracted payload, not only the final answer generated from it.",
+        "src": "/blog/images/document-content-extraction-boundaries-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-content-extraction-boundaries-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-document-hardware-sizing-baselines",
+  "title": "Hardware sizing for a document platform: what to measure first",
+  "description": "Translate representative editing, conversion, storage, and failure scenarios into defensible hardware requirements.",
+  "category": "Operations",
+  "format": "decision-brief",
+  "tags": [
+    "Performance",
+    "Self-hosting",
+    "Operations",
+    "Document conversion"
+  ],
+  "structure": "prose+matrix:comparison:example+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 699,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Sizing Hardware for a Self-Hosted Document Platform",
+      "url": "https://shimodocs.com/blog/hardware-sizing-self-hosted-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-hardware-sizing-baselines.png",
+  "coverAlt": "Hardware sizing for a document platform: what to measure first: Supported topology, Workload envelope, Resource limits, Failure reserve.",
+  "concepts": [
+    "Supported topology",
+    "Workload envelope",
+    "Resource limits",
+    "Failure reserve",
+    "Procurement evidence"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "numbered",
+    "signature": "compact:numbered",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 67
+  },
+  "contentHash": "0268028f9ba343a8084e26c526ea8ebaf34a63756d8837404a237a93b117d855",
+  "intro": "Size document infrastructure from the supported topology and a measured workload of editing, calculations, opens, conversions, storage, and recovery. Record latency as well as resource use. User counts and file size alone cannot justify cores, memory, disk performance, or reserve capacity for the failure cases you promise.",
+  "sections": [
+    {
+      "id": "define-the-operating-envelope-1",
+      "title": "Define the operating envelope",
+      "html": "<p>Record active users, peak sessions, document types, file size distribution, opening rate, conversion jobs, and retained data growth. Add latency and recovery expectations. Obtain current minimum requirements and recommended topology for the actual product version, then treat them as a starting constraint rather than proof of workload capacity. Separate editor, conversion, database, storage, and supporting services according to the supported deployment. If resources are shared, document the competing workload. A machine with adequate nominal specifications can still be unsuitable when other applications consume its memory, disk throughput, or network during the same business peak.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "matrix",
+        "title": "Different activities stress different resources",
+        "items": [
+          {
+            "label": "Conversions",
+            "detail": "Measure processor, memory, and transfer behavior for real formats."
+          },
+          {
+            "label": "Active editing",
+            "detail": "Measure concurrent sessions and calculation-heavy work."
+          },
+          {
+            "label": "Version persistence",
+            "detail": "Measure database waits and object storage completion."
+          },
+          {
+            "label": "Recovery and reconnect",
+            "detail": "Measure the supported failure topology and accumulated work."
+          }
+        ],
+        "alt": "Conversion, editing, persistence, and recovery activities mapped to resource measurements.",
+        "caption": "Use simultaneous work when it occurs simultaneously in the business.",
+        "src": "/blog/images/field-guide-document-hardware-sizing-baselines-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-hardware-sizing-baselines-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "write-a-performance-specification-not-just-a-parts-list-2",
+      "title": "Write a performance specification, not just a parts list",
+      "html": "<p>A procurement request should explain the tested operating envelope and the infrastructure properties it depends on. Disk capacity and processor count are necessary descriptions, but they do not capture database write latency, virtual-machine contention, or transfer performance to the actual storage endpoint.</p><dl><dt>Compute and memory</dt><dd>Record the simultaneous editing and conversion workload, resource use, and any dedicated-resource assumption.</dd><dt>Storage</dt><dd>Record both retained capacity and the performance needed by the measured database and object operations.</dd><dt>Network</dt><dd>Record the participating zones and source-transfer path, including the file sizes used in the test.</dd><dt>Failure reserve</dt><dd>Record the supported reduced topology, reconnect burst, and allowed degraded behavior.</dd></dl><p>Compare infrastructure candidates against the same workload and software configuration. If one uses shared resources and another dedicated resources, retain that distinction rather than attributing every difference to nominal core count.</p><p>Attach an expansion trigger to the request: a sustained operating metric or workload change that causes review before the service breaches its target. The trigger should allow for procurement lead time. That gives operations a way to act on the sizing evidence after launch instead of treating the initial purchase as permanently sufficient.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "measure-each-resource-in-context-3",
+      "title": "Measure each resource in context",
+      "html": "<p>Observe processor use during conversion and calculation, memory across active sessions, database wait time, storage latency, and network transfer. Include warm and cold starts because caches can change the result. Record sustained behavior as well as short peaks. Hardware specifications such as core count and disk capacity omit performance characteristics and virtualization contention. Compare the intended infrastructure using a repeatable workload and the same software configuration. Keep the measurement method with the results so the procurement team understands whether an estimate assumes dedicated resources, particular storage performance, or a tested network route.</p><h3>Build a planning office example</h3><p>A planning office expects 80 active sessions, a burst of large presentation imports, and a weekly spreadsheet review. Create a harmless corpus reflecting those activities and test the supported deployment on candidate infrastructure. Run imports during the review instead of measuring them separately. Observe opening latency and durable save completion as resources approach saturation. Increase load gradually to identify the first limiting component. The scenario numbers are illustrative, not a universal recommendation. Their purpose is to show how procurement evidence should represent simultaneous work rather than a benchmark built from small empty documents.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Turn the planning workload into a sizing result",
+        "items": [
+          {
+            "label": "Representative corpus",
+            "detail": "Reports, shared workbooks, and large imports reflect actual use."
+          },
+          {
+            "label": "Controlled test",
+            "detail": "Record topology, versions, timing, and background activity."
+          },
+          {
+            "label": "First limiting resource",
+            "detail": "Identify the boundary using latency and durable completion."
+          },
+          {
+            "label": "Purchase scope",
+            "detail": "Include growth, failure, test, and recovery requirements."
+          }
+        ],
+        "alt": "Corpus, controlled test, resource limit, and purchase scope sequence.",
+        "caption": "The test scenario is evidence only for its stated operating envelope.",
+        "src": "/blog/images/field-guide-document-hardware-sizing-baselines-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-hardware-sizing-baselines-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "reserve-for-growth-and-failure-4",
+      "title": "Reserve for growth and failure",
+      "html": "<p>Estimate growth from measured activity and retention policy, then identify the supported scaling path. If the design requires service continuity after a node fails, test remaining capacity and reconnect behavior rather than assuming unused average CPU provides enough reserve. Include test and recovery infrastructure in the purchase scope. Specify how resource expansion is triggered and what lead time procurement needs. Avoid padding every component by an unexplained percentage; targeted headroom is more defensible when linked to a workload or failure case. Record limitations that remain, such as delayed conversions during a reduced capacity period.</p><h3>Sizing request</h3><ul><li>Attach software version, topology, and workload assumptions.</li><li>Report observed bottlenecks and user latency at the tested load.</li><li>Specify storage performance and network needs alongside capacity.</li><li>Include agreed growth, failure, test, and recovery requirements.</li><li>Define the measurements that will trigger future expansion.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

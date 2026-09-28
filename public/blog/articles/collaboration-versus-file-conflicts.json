@@ -1,0 +1,126 @@
+{
+  "slug": "collaboration-versus-file-conflicts",
+  "title": "Why collaborative editing does not resolve uploaded file conflicts",
+  "description": "Understand why a collaborative editor still needs application rules for uploads, restores, and external replacements.",
+  "category": "Office workflows",
+  "format": "explainer",
+  "tags": [
+    "Collaboration",
+    "Version control",
+    "Document storage",
+    "Business workflows"
+  ],
+  "structure": "prose+layers:comparison:steps:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 664,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: HTTP conditional requests",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Conditional_requests"
+    }
+  ],
+  "cover": "/blog/images/collaboration-versus-file-conflicts.png",
+  "coverAlt": "Why collaborative editing does not resolve uploaded file conflicts: Live edits, File replacement, Base version, Conflict policy.",
+  "concepts": [
+    "Live edits",
+    "File replacement",
+    "Base version",
+    "Conflict policy",
+    "Guarded update"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "rail-left",
+    "signature": "visual-first:rail-left",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 9
+  },
+  "contentHash": "49dfdf1ebce9f22d27b3aefa3da9113892da8a3589ddb33bbd7d953c8f205eb6",
+  "intro": "Collaborative editing coordinates changes inside the editor's supported session. An uploaded replacement is a whole file from outside that session, often based on an older version. Protect that boundary with a base-version check and an explicit conflict policy rather than assuming the editor can merge both histories.",
+  "sections": [
+    {
+      "id": "two-different-kinds-of-concurrent-change-1",
+      "title": "Two different kinds of concurrent change",
+      "html": "<p>Inside a collaborative document, the editor's supported mechanism coordinates operations according to its own model. Outside that session, your application may receive complete files from imports, scheduled jobs, or desktop users. These files express whole states rather than individual editing operations. A replacement can therefore discard changes even when the editor's collaboration algorithm works correctly. Document which operations enter the live session and which replace or fork its source. This map prevents the assumption that enabling collaboration eliminates all version conflicts throughout the application.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Live operations and file replacement cross different boundaries",
+        "items": [
+          {
+            "label": "Collaborative session",
+            "detail": "Coordinates supported edits within the active document model"
+          },
+          {
+            "label": "External candidate",
+            "detail": "Contains a complete file based on an earlier saved state"
+          },
+          {
+            "label": "Publication boundary",
+            "detail": "Checks base version and applies the replacement policy"
+          }
+        ],
+        "alt": "Collaborative operations and an externally edited file meet at a guarded publication boundary.",
+        "caption": "Whole-file replacement still needs application rules even when live collaboration is enabled.",
+        "src": "/blog/images/collaboration-versus-file-conflicts-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/collaboration-versus-file-conflicts-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "choose-a-whole-file-replacement-policy-2",
+      "title": "Choose a whole-file replacement policy",
+      "html": "<p>Possible policies include blocking replacement while a session is active, requiring an explicit checkout, creating a separate branch or copy, and allowing a guarded replacement after users finish. The right policy depends on product capabilities and business expectations. A warning alone is weak protection if an automated job can still overwrite the source. Enforce the chosen policy on the server and define an administrator recovery path. If merging complete files is unsupported, say so clearly instead of implying that later edits will automatically combine.</p><table><thead><tr><th>Replacement policy</th><th>Useful when</th><th>Consequence</th></tr></thead><tbody><tr><td>Block during active work</td><td>Replacement is rare and coordination is practical</td><td>The uploader waits or uses another document</td></tr><tr><td>Create a separate copy</td><td>Both states must remain available</td><td>A person decides how to reconcile the content</td></tr><tr><td>Guarded replacement</td><td>The candidate has an identifiable base version</td><td>A changed base triggers a conflict instead of overwrite</td></tr></tbody></table><p>There is no universal winner. Blocking requires a reliable definition of an active session; a forgotten tab should not lock a project indefinitely without a recovery process. Creating copies preserves content but can scatter decisions across several files. Guarded replacement detects a race but does not perform a semantic merge.</p><p>Keep the rejected upload available for the agreed recovery window. A useful conflict screen shows the candidate's base version, the current version, and the permitted next actions. Avoid a single ambiguous Overwrite button when the action will discard accepted work. If an administrator can force replacement, audit the selected candidate and affected version so the decision can be reconstructed later.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "carry-a-base-version-through-external-editing-3",
+      "title": "Carry a base version through external editing",
+      "html": "<p>When a user downloads a file for external editing, record the version it came from. On upload, compare that base version with the current version before accepting replacement. A mismatch should trigger the agreed conflict workflow. Conditional requests or database compare and update operations can implement this pattern where supported. The version check must be part of the commit operation, because a separate early check can become stale before storage completes. Preserve the uploaded candidate long enough for the user to resolve the conflict safely.</p><ul><li>Test browser upload, bulk import, restore, and automated synchronization with an active editing session.</li><li>Require a base version or an explicitly authorized force operation where replacement is allowed.</li><li>Explain conflicts using document versions and user actions rather than internal locking terminology.</li><li>Retain the rejected candidate for the documented recovery window.</li><li>Verify that administrators can resolve conflicts without silently discarding another user's work.</li></ul>",
+      "kind": "steps"
+    },
+    {
+      "id": "the-monday-download-and-tuesday-upload-4",
+      "title": "The Monday download and Tuesday upload",
+      "html": "<p>An analyst downloads a planning workbook on Monday, edits it offline, and uploads it on Tuesday after colleagues have changed the online version. Treat the upload as a candidate based on Monday's version. Offer a new copy, a controlled comparison, or an authorized replacement according to policy. Do not silently publish it as the latest version merely because its upload time is newer. In testing, keep a live browser session open during the upload and observe how users learn that their document context has changed.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "An offline workbook returns after colleagues have edited",
+        "items": [
+          {
+            "label": "Monday download",
+            "detail": "Record base version A with the external editing workflow"
+          },
+          {
+            "label": "Online changes",
+            "detail": "Colleagues publish version B"
+          },
+          {
+            "label": "Tuesday upload",
+            "detail": "Receive candidate C based on A"
+          },
+          {
+            "label": "Conflict decision",
+            "detail": "Keep C available and ask the authorized workflow to resolve it"
+          }
+        ],
+        "alt": "An offline upload based on A conflicts with online version B instead of silently replacing it.",
+        "caption": "The newest upload time does not mean the candidate includes the newest work.",
+        "src": "/blog/images/collaboration-versus-file-conflicts-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/collaboration-versus-file-conflicts-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

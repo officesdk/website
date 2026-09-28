@@ -1,0 +1,132 @@
+{
+  "slug": "document-template-governance",
+  "title": "Document template versioning: approvals, placeholders, and retirement",
+  "description": "Separate approved template versions from created documents, with clear ownership, change review, and retirement behavior.",
+  "category": "Office workflows",
+  "format": "playbook",
+  "tags": [
+    "Document automation",
+    "Version control",
+    "Business workflows",
+    "Access control"
+  ],
+  "structure": "prose+sequence:steps:example:checklist:example+comparison",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 3,
+  "wordCount": 630,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: Authorization Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/document-template-governance.png",
+  "coverAlt": "Document template versioning: approvals, placeholders, and retirement: Template version, Created document, Content owner, Dynamic fields.",
+  "concepts": [
+    "Template version",
+    "Created document",
+    "Content owner",
+    "Dynamic fields",
+    "Release review"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "wide",
+    "signature": "compact:wide",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 31
+  },
+  "contentHash": "02dece8c7600a61e4393cc2ccf49464f6b1fb2968ba011ce88ff0455f21fe56b",
+  "intro": "Publish templates as versioned sources and record which version created each business document. Updating a template should not silently rewrite existing documents. Give content owners a draft-and-review process, test populated output, and retire outdated versions without erasing the history that explains earlier files.",
+  "sections": [
+    {
+      "id": "keep-template-identity-separate-from-created-documents-1",
+      "title": "Keep template identity separate from created documents",
+      "html": "<p>A template is a reusable source with an approval state; a created document is a new business object. Give them separate identifiers and permissions. Record the template version used at creation so later investigations can explain where initial wording or formulas came from. Updating the template should not silently rewrite existing contracts or reports unless an explicit, supported migration workflow requires that behavior. This distinction protects historical records and prevents a routine template correction from becoming an uncontrolled content change across active projects.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Published templates create independent documents",
+        "items": [
+          {
+            "label": "Draft template",
+            "detail": "Content owners prepare and review changes"
+          },
+          {
+            "label": "Published version",
+            "detail": "A specific approved source becomes available"
+          },
+          {
+            "label": "Document creation",
+            "detail": "Record the template version and generation context"
+          },
+          {
+            "label": "Independent document",
+            "detail": "Continue its own edits, permissions, and retention"
+          }
+        ],
+        "alt": "A published template version creates a separate business document with recorded provenance.",
+        "caption": "Publishing a new template does not authorize rewriting previously created documents.",
+        "src": "/blog/images/document-template-governance-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-template-governance-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "assign-drafting-review-and-publishing-ownership-2",
+      "title": "Assign drafting, review, and publishing ownership",
+      "html": "<p>The team responsible for legal wording or financial formulas may differ from the team operating the library. Define who drafts, reviews, publishes, retires, and restores templates. Use a staged lifecycle so a draft correction can be tested before appearing in the normal creation flow. Permissions should apply to publishing and administration, not merely editing the source file. Keep review evidence and a concise change description with each published version. A template name such as Final approved copy is not a substitute for an actual controlled publication state.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "population-rules-need-output-tests-3",
+      "title": "Population rules need output tests",
+      "html": "<p>If the application fills placeholders, define their types, required values, escaping rules, and behavior when data is missing. Test long organization names, multilingual text, empty optional fields, and values containing punctuation. Spreadsheet templates need formula and number format checks after population; presentation templates need layout checks after replacement. Avoid silently leaving internal placeholder tokens in the final document. Treat external data as untrusted input and use the generation library's supported insertion methods so a field value cannot accidentally alter the surrounding document structure or workflow.</p><p>Template provenance can be small but useful: template ID, published version, population time, and generation policy revision. Avoid storing sensitive field values twice merely to prove where a document came from. If generation must be reproducible, decide deliberately which inputs are retained, by whom, and for how long.</p><table><thead><tr><th>Field case</th><th>Expected template behavior</th></tr></thead><tbody><tr><td>Required field missing</td><td>Stop generation with a named field error</td></tr><tr><td>Optional value absent</td><td>Use the approved omission or empty-state rule</td></tr><tr><td>Long organization name</td><td>Preserve readable layout without clipping</td></tr><tr><td>Special punctuation</td><td>Insert as content through supported library operations</td></tr></tbody></table><p>Test placeholder behavior in the output format users actually receive. A Word template may need a rendered page check; a spreadsheet may need formula validation after values are filled. Treat publication as the point where content review and generation checks meet. A perfectly approved source can still generate a broken document if field insertion damages layout or leaves internal tokens visible.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "library-maintenance-checks-4",
+      "title": "Library maintenance checks",
+      "html": "<ul><li>Show template owner, published version, and intended use in the selection interface.</li><li>Require review for changes to controlled wording or calculations.</li><li>Test populated output with realistic edge values.</li><li>Record template provenance on every created document.</li><li>Retire outdated templates with a clear replacement and a recoverable history.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "publish-version-two-without-changing-prior-agreements-5",
+      "title": "Publish version two without changing prior agreements",
+      "html": "<p>In a test library, create version two of a purchase agreement with revised payment wording and one additional required field. Generate documents from both versions using synthetic data, compare output, and obtain the designated review. Publish version two, then confirm that new documents use it while existing documents retain their original content and provenance. Retire version one from ordinary selection without deleting records that refer to it. This scenario tests the practical difference between updating a reusable source and changing previously created business documents.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "comparison",
+        "title": "Retiring a template is different from deleting its history",
+        "items": [
+          {
+            "label": "New documents",
+            "detail": "Use the newly published approved version"
+          },
+          {
+            "label": "Existing documents",
+            "detail": "Retain original content and template provenance"
+          },
+          {
+            "label": "Retired source",
+            "detail": "Leave ordinary selection while supporting required history"
+          }
+        ],
+        "alt": "New documents, existing documents, and retired template history follow different rules.",
+        "caption": "Keep references to old template versions resolvable for the required retention period.",
+        "src": "/blog/images/document-template-governance-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-template-governance-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    }
+  ]
+}

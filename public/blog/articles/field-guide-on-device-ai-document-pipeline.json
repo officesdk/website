@@ -1,0 +1,146 @@
+{
+  "slug": "field-guide-on-device-ai-document-pipeline",
+  "title": "On-device document AI: extraction, citations, and local output",
+  "description": "Preserve document meaning and evidence through local parsing, context selection, inference, and rendering.",
+  "category": "AI & documents",
+  "format": "explainer",
+  "tags": [
+    "AI documents",
+    "RAG",
+    "Data privacy",
+    "Document conversion"
+  ],
+  "structure": "prose+flow:prose:example:prose:diagnostic+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 707,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeAPI: On-device AI needs an on-device document engine",
+      "url": "https://officeapi.ai/blog/on-device-ai-documents/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-on-device-ai-document-pipeline.png",
+  "coverAlt": "On-device document AI: extraction, citations, and local output: Local extraction, Layout semantics, Source anchors, Context selection.",
+  "concepts": [
+    "Local extraction",
+    "Layout semantics",
+    "Source anchors",
+    "Context selection",
+    "Output rendering"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "reading-room",
+    "signature": "statement:reading-room",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 106
+  },
+  "contentHash": "6f2cc1dc456f48722ecc6a864b7ccf6931bf93787e582097002e83a7cac93861",
+  "intro": "On-device document AI needs local ingestion, extraction, context selection, inference, and output generation if the whole task is meant to remain local. Preserve structure and source anchors so reviewers can verify answers. A local model cannot compensate for missing tables, unreadable pages, or a remote preprocessing step.",
+  "sections": [
+    {
+      "id": "map-the-complete-local-pipeline-1",
+      "title": "Map the complete local pipeline",
+      "html": "<p>Identify ingestion, file parsing, text extraction, image handling, context selection, model inference, output generation, and rendering. Record where each stage executes and whether it makes external requests. Include telemetry, crash reports, model downloads, and update checks in the assessment. Confirm that the chosen document engine supports the required formats and device platform using current evidence. Local model execution addresses only one processing stage. A cloud OCR call or remote conversion step may still send the original document outside the intended boundary, so the privacy claim must reflect the entire implementation.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "A local answer depends on the whole pipeline",
+        "items": [
+          {
+            "label": "Parse",
+            "detail": "Read source structure within the device boundary."
+          },
+          {
+            "label": "Select",
+            "detail": "Choose relevant evidence with source anchors."
+          },
+          {
+            "label": "Infer",
+            "detail": "Generate against the supplied context."
+          },
+          {
+            "label": "Produce",
+            "detail": "Write and render the reviewable artifact."
+          },
+          {
+            "label": "Review",
+            "detail": "Verify claims and incomplete coverage."
+          }
+        ],
+        "alt": "Parsing, selection, inference, output, and review form one task.",
+        "caption": "Check network behavior for each stage before calling the workflow local.",
+        "src": "/blog/images/field-guide-on-device-ai-document-pipeline-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-on-device-ai-document-pipeline-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1350
+      }
+    },
+    {
+      "id": "preserve-meaning-during-extraction-2",
+      "title": "Preserve meaning during extraction",
+      "html": "<p>Plain text alone can lose table relationships, headings, footnotes, chart labels, and reading order. Decide which structures the task requires and retain them in a usable representation. Associate extracted content with page, paragraph, cell, or object anchors when available so generated answers can point back to evidence. Test multilingual files, scanned pages, and documents with repeated headers. Measure extraction quality separately from model answer quality. If the parser drops a negative sign or separates a value from its row label, a capable model can still produce a confidently incorrect summary from the damaged context.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "try-a-laptop-based-contract-review-3",
+      "title": "Try a laptop based contract review",
+      "html": "<p>Imagine a lawyer reviewing a draft contract on a laptop without network access. The task is to identify termination clauses and prepare a comparison table against an approved template. Use local parsing and context selection, then require references to the relevant source locations. Include a scanned appendix and a table with merged cells in the test. The review should identify unreadable or unsupported content instead of implying complete coverage. Open the output document and inspect its citations and layout. A useful local result remains auditable by the professional who makes the legal judgment.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "budget-for-device-constraints-4",
+      "title": "Budget for device constraints",
+      "html": "<p>Measure memory, CPU or accelerator use, battery impact, temporary disk consumption, and processing latency on supported devices. Document size limits and degraded behavior when resources are insufficient. Avoid loading every page into context if targeted extraction can preserve relevant evidence with less resource use. Treat embedded document instructions as untrusted data and limit any agent tools separately. Protect local caches and temporary files according to sensitivity, including after cancellation or application crashes. Plan supported updates for models and parsers, then test the same representative corpus after changes so local behavior remains understandable and reproducible.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "do-not-confuse-coverage-with-confidence-5",
+      "title": "Do not confuse coverage with confidence",
+      "html": "<p>Track extraction coverage as a separate result. A contract with twenty readable pages and one unreadable appendix is not fully processed, even if the generated summary sounds complete. Identify omitted or unsupported content and make that limitation visible before a professional relies on the output.</p><dl><dt>Source anchor</dt><dd>A page, paragraph, cell, or object reference that lets the reviewer locate evidence.</dd><dt>Extraction coverage</dt><dd>The portion of the source successfully interpreted for the task.</dd><dt>Context selection</dt><dd>The evidence actually supplied to the model, which can be narrower than extraction.</dd><dt>Answer support</dt><dd>The relationship between each consequential claim and its source evidence.</dd></dl><p>In the local contract review, test a termination clause split across pages and a table whose merged cells identify exceptions. Inspect extracted structure before evaluating the answer. If an exception loses its row relationship, the model may summarize the wrong obligation.</p><p>Also distinguish a missing answer from a negative answer. Not found in selected context is different from absent from the contract. A useful workflow can expand local retrieval or flag incomplete coverage without inventing certainty. Keep the source anchors in the generated comparison table and open them during review. This validates the document pipeline and the model output together.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "Four evidence checks for a contract answer",
+        "items": [
+          {
+            "label": "Coverage",
+            "detail": "Which pages and objects were successfully read?"
+          },
+          {
+            "label": "Structure",
+            "detail": "Did table and clause relationships survive?"
+          },
+          {
+            "label": "Context",
+            "detail": "Which evidence reached the model?"
+          },
+          {
+            "label": "Support",
+            "detail": "Can the reviewer locate each important claim?"
+          }
+        ],
+        "alt": "Four checks separate extraction quality from answer confidence.",
+        "caption": "Unsupported content should remain visible as a limitation.",
+        "src": "/blog/images/field-guide-on-device-ai-document-pipeline-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-on-device-ai-document-pipeline-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "local-pipeline-decision-notes-6",
+      "title": "Local pipeline Decision notes",
+      "html": "<ul><li>Confirm local execution and network behavior for every processing stage.</li><li>Preserve structures and source anchors required by the task.</li><li>Test difficult formats and explicitly report incomplete coverage.</li><li>Measure device resources and cancellation cleanup.</li><li>Inspect generated files, source references, and supported update behavior.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

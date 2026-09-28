@@ -1,0 +1,126 @@
+{
+  "slug": "document-identifiers-and-ownership",
+  "title": "Document IDs, storage keys, and version IDs: what each should own",
+  "description": "Separate business identity, stored objects, and editor sessions so renames, copies, and migrations remain predictable.",
+  "category": "Integration",
+  "format": "architecture",
+  "tags": [
+    "Office SDK",
+    "Document storage",
+    "Version control",
+    "Multi-tenancy"
+  ],
+  "structure": "prose+layers:example:example+comparison:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 656,
+  "source": null,
+  "references": [
+    {
+      "label": "RFC 9562: Universally Unique Identifiers",
+      "url": "https://www.rfc-editor.org/rfc/rfc9562.html"
+    }
+  ],
+  "cover": "/blog/images/document-identifiers-and-ownership.png",
+  "coverAlt": "Document IDs, storage keys, and version IDs: what each should own: Business ID, Storage key, Version ID, Session ID.",
+  "concepts": [
+    "Business ID",
+    "Storage key",
+    "Version ID",
+    "Session ID",
+    "Copy ownership"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "rail-left",
+    "signature": "masthead:rail-left",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 1
+  },
+  "contentHash": "110534c5286336589e601c0eabcc814d91d3f6a3d96cc50b17689e8b60876118",
+  "intro": "Use a stable business document ID for links and permissions, a storage key for bytes, and a version ID for a particular saved state. An editor session needs a separate identity. This separation lets you rename, copy, restore, or relocate a file without accidentally changing who owns it or which content a link resolves to.",
+  "sections": [
+    {
+      "id": "four-identities-four-different-responsibilities-1",
+      "title": "Four identities, four different responsibilities",
+      "html": "<p>The business document ID should identify the object that users discuss and permissions protect. A storage key identifies bytes at a location. A version ID identifies a particular state of those bytes. A session ID identifies one editing interaction. Record these relationships explicitly instead of deriving one value by removing a filename extension or concatenating a user name. A filename is useful display information, but it changes too easily to act as the foundation of authorization, links, or callback routing.</p><p>For creation, import, editing, export, and deletion, identify the component authorized to change the business record. An editor integration can request a save without owning the surrounding folder or retention policy. Conversely, your storage system may retain bytes while the business document is no longer visible. A small ownership table prevents these boundaries from becoming accidental. Include who generates each identifier, whether it is tenant scoped, whether clients can see it, and whether it survives a storage migration or a restore operation.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "The business record owns the relationship",
+        "items": [
+          {
+            "label": "Business document",
+            "detail": "Stable identity, tenant, permissions, and current version"
+          },
+          {
+            "label": "Content version",
+            "detail": "An immutable saved state belonging to that document"
+          },
+          {
+            "label": "Storage object",
+            "detail": "Bytes located by a physical object reference"
+          },
+          {
+            "label": "Editor session",
+            "detail": "Temporary interaction linked to the business document"
+          }
+        ],
+        "alt": "Four distinct identities connect access, saved state, stored bytes, and the editing session.",
+        "caption": "A storage relocation should change the object reference, not the business document ID.",
+        "src": "/blog/images/document-identifiers-and-ownership-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-identifiers-and-ownership-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "a-minimal-mapping-model-2",
+      "title": "A minimal mapping model",
+      "html": "<p>A minimal mapping can be expressed with three records. The business record contains <code>tenant_id</code>, <code>document_id</code>, and <code>current_version_id</code>. A version record contains its document relationship, storage object reference, and digest. An integration record maps that document to the external service's identifier within the correct tenant and provider scope. These are illustrative application fields, not a prescribed SDK schema.</p><table><thead><tr><th>Action</th><th>Identity that stays</th><th>Identity that changes</th></tr></thead><tbody><tr><td>Rename</td><td>Document and content version</td><td>Display name</td></tr><tr><td>Copy</td><td>Possibly shared immutable bytes</td><td>Business document and permissions</td></tr><tr><td>Restore content</td><td>Business document</td><td>Current version relationship</td></tr><tr><td>Relocate storage</td><td>Document and logical version</td><td>Physical object reference</td></tr></tbody></table><p>Enforce those relationships in storage constraints, not just application conventions. For example, a current version must belong to the same document and tenant as its parent record. During recovery, validate this relationship before making the document visible. A syntactically valid identifier pointing to another tenant's object is still an invalid mapping, even if a privileged storage account can read the bytes.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "copying-budget-xlsx-creates-a-new-business-object-3",
+      "title": "Copying Budget.xlsx creates a new business object",
+      "html": "<p>Suppose an employee duplicates a purchase template called Budget.xlsx into a project folder. The copy needs a new business document ID even when its initial bytes match the original exactly. Its first version may reference a deduplicated storage object, provided access and lifecycle rules support that choice. Sharing a storage object must not silently share collaborators, comments, editing sessions, or deletion behavior. A restore of the original document is different: it normally preserves business identity while selecting or creating a recoverable content version.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "comparison",
+        "title": "Rename and copy produce different identities",
+        "items": [
+          {
+            "label": "Rename",
+            "detail": "Keep the document ID and change only its display name"
+          },
+          {
+            "label": "Copy",
+            "detail": "Allocate a new document ID and independent permissions"
+          },
+          {
+            "label": "Restore",
+            "detail": "Keep the document ID and publish an explicit version choice"
+          }
+        ],
+        "alt": "Rename, copy, and restore are compared by their effects on document identity.",
+        "caption": "Shared initial bytes do not make two copies the same business document.",
+        "src": "/blog/images/document-identifiers-and-ownership-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-identifiers-and-ownership-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "authorization-and-lifecycle-checks-4",
+      "title": "Authorization and lifecycle checks",
+      "html": "<p>Hard to guess identifiers reduce accidental discovery, but do not establish access rights. Resolve the requested document inside the authenticated tenant and check the intended operation before creating an editor session or issuing a download link. Reject a callback whose external document identifier maps to another tenant, even if its syntax looks valid. Store integration mappings with a uniqueness constraint appropriate to the provider and tenant. Log mismatches using identifiers and operation names, without recording source bytes or reusable access tokens.</p><ul><li>Rename a document and confirm that links and permissions still resolve to the same business record.</li><li>Copy it and verify that the new record has independent collaboration and lifecycle settings.</li><li>Restore an old version and document whether the action creates a new version or changes a version pointer.</li><li>Move storage objects without changing the public business identifier.</li><li>Attempt a cross tenant lookup and confirm that mapping resolution cannot bypass authorization.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

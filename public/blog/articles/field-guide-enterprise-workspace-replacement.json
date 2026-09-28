@@ -1,0 +1,132 @@
+{
+  "slug": "field-guide-enterprise-workspace-replacement",
+  "title": "Google Workspace alternatives: an enterprise evaluation plan",
+  "description": "Test complete work and dependencies before selecting a replacement for enterprise workspace services.",
+  "category": "Comparisons",
+  "format": "comparison",
+  "tags": [
+    "Product selection",
+    "Migration",
+    "Integrations",
+    "Business workflows"
+  ],
+  "structure": "prose:prose+layers:example:prose+comparison:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 670,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Google Workspace Alternatives for Enterprise Teams",
+      "url": "https://shimodocs.com/blog/google-workspace-alternatives-for-enterprise"
+    }
+  ],
+  "cover": "/blog/images/field-guide-enterprise-workspace-replacement.png",
+  "coverAlt": "Google Workspace alternatives: an enterprise evaluation plan: Workflow inventory, Dependency map, Acceptance corpus, Operating cost.",
+  "concepts": [
+    "Workflow inventory",
+    "Dependency map",
+    "Acceptance corpus",
+    "Operating cost",
+    "Exit readiness"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "alternating",
+    "signature": "folio:alternating",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 78
+  },
+  "contentHash": "14dad0f1e28ecacc34bcb720a2eb49b3cdead3f6c641e70afd38ba1bd6c45db3",
+  "intro": "An enterprise Google Workspace alternative should be evaluated against the services and workflows you actually plan to replace. Inventory identity, mail, calendar, documents, storage, and automation separately. Run representative work end to end and price transition effort alongside the ongoing service arrangement.",
+  "sections": [
+    {
+      "id": "separate-the-replacement-decisions-1",
+      "title": "Separate the replacement decisions",
+      "html": "<p>List the services actually in scope: documents, spreadsheets, presentations, storage, mail, calendar, chat, and administration. Decide which must move together and which can remain temporarily. A procurement requirement to control document residency may not require replacing email immediately. Conversely, a document migration may fail if access groups depend on an identity system scheduled for retirement. Assign a business owner and technical owner to each service, then map cross service links and automations. The replacement boundary should describe what users will experience on the first day, including any remaining dependencies on the previous environment.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "build-tests-from-recurring-work-2",
+      "title": "Build tests from recurring work",
+      "html": "<p>Use representative artifacts and tasks instead of a feature count. A procurement team might need a supplier pricing workbook, a jointly reviewed contract, a presentation sent externally, and a meeting invitation with guest participation. Include difficult formulas, large tables, embedded charts, comments, and permission boundaries found in real work. Sanitize confidential inputs before sharing them with evaluators. Run the same task on every candidate and record observed results, version numbers, configuration, and deployment model. Product documentation can explain expected behavior, but acceptance should show that the specific configuration meets the organization's requirement.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A workspace decision contains several service decisions",
+        "items": [
+          {
+            "label": "Identity",
+            "detail": "Account lifecycle and groups reach every service."
+          },
+          {
+            "label": "Communication",
+            "detail": "Mail, calendar, and partner invitations."
+          },
+          {
+            "label": "Content",
+            "detail": "Authoring, shared storage, and approved records."
+          },
+          {
+            "label": "Automation",
+            "detail": "Scripts and connectors depend on service APIs."
+          }
+        ],
+        "alt": "The decision spans identity, communication, content, and automation.",
+        "caption": "Draw the replacement boundary around the actual scope.",
+        "src": "/blog/images/field-guide-enterprise-workspace-replacement-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-enterprise-workspace-replacement-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "trace-one-partner-workflow-3",
+      "title": "Trace one partner workflow",
+      "html": "<p>Imagine a regional team preparing a proposal with an external distributor. The distributor must receive an invitation, review designated files, suggest changes, and lose access after submission. Test the entire sequence, including a forgotten password and an attempted visit after revocation. Measure how many steps require administrator intervention. Also export the final files into the formats the buyer accepts and inspect them outside the candidate platform. A replacement that works smoothly for internal staff may create substantial friction at the organizational boundary, where identity, file formats, and support responsibilities differ.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "account-for-transition-costs-4",
+      "title": "Account for transition costs",
+      "html": "<p>Compare licensing with migration tooling, training, support staffing, identity integration, storage, recovery, and coexistence costs. Include the work needed to replace scripts and links that reference the current system. Distinguish one time transition effort from recurring operations, and use a realistic number of users and guests. Establish an exit plan for the alternative before selecting it: verify export formats, permission metadata availability, and recovery from vendor or contract changes. A lower initial price can be outweighed by unplanned manual conversion or by maintaining two environments longer than expected.</p><p>Separate mandatory gates from preferences in the shortlist. A failed residency or identity requirement may disqualify a candidate; a different toolbar layout usually should not. Document any workaround with its owner and cost instead of scoring it as native support.</p><table><thead><tr><th>Decision dimension</th><th>Evidence to collect</th><th>Failure to avoid</th></tr></thead><tbody><tr><td>Business task</td><td>Completed proposal, workbook, or review with ordinary users</td><td>Scoring isolated features only</td></tr><tr><td>Integration</td><td>Working identity, invitations, links, and automation</td><td>Ignoring services left behind</td></tr><tr><td>Operations</td><td>Support, recovery, updates, and administrator workload</td><td>Pricing licenses alone</td></tr><tr><td>Exit</td><td>Usable exports with required metadata</td><td>Treating a download button as full portability</td></tr></tbody></table><p>If the distributor proposal test requires an administrator to create every guest, estimate that work at the expected volume rather than dismissing it as a minor inconvenience. Conversely, a migration repair that occurs once may be acceptable even if it looks awkward in a demonstration. Give business owners the observed task results and give operators the staffing assumptions. The final recommendation should state what is included, what remains elsewhere, and which gaps must close before the next rollout wave.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Compare transition and steady state separately",
+        "items": [
+          {
+            "label": "Transition",
+            "detail": "Import repair, link mapping, training, and coexistence."
+          },
+          {
+            "label": "Steady state",
+            "detail": "Licenses, support, infrastructure, and recurring repairs."
+          },
+          {
+            "label": "Exit",
+            "detail": "Export and rebuild effort if the arrangement changes."
+          }
+        ],
+        "alt": "Three cost periods describe more than the first year license price.",
+        "caption": "Use the same workload and staffing assumptions for each candidate.",
+        "src": "/blog/images/field-guide-enterprise-workspace-replacement-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-enterprise-workspace-replacement-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "pilot-decision-notes-record-5",
+      "title": "Pilot Decision notes record",
+      "html": "<ul><li>Agree on the service boundary and the workflows that must remain intact.</li><li>Run a shared artifact corpus and preserve observed results for each candidate.</li><li>Exercise guest access, revocation, external exports, and administrator support.</li><li>Estimate transition and recurring costs with named assumptions.</li><li>Approve a pilot, rollback route, and export based exit plan.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

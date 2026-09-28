@@ -1,0 +1,148 @@
+{
+  "slug": "field-guide-document-management-system-of-record",
+  "title": "ShimoDocs vs SharePoint: where the authoritative document lives",
+  "description": "Evaluate editing and document management through metadata, approval versions, lifecycle handoffs, and recovery.",
+  "category": "Comparisons",
+  "format": "architecture",
+  "tags": [
+    "Product selection",
+    "Document storage",
+    "Version control",
+    "Business workflows"
+  ],
+  "structure": "prose:prose+layers:example:prose:diagnostic:example+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 696,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs SharePoint for Document Management",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-sharepoint"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-management-system-of-record.png",
+  "coverAlt": "ShimoDocs vs SharePoint: where the authoritative document lives: Record identity, Metadata policy, Approval version, Retention owner.",
+  "concepts": [
+    "Record identity",
+    "Metadata policy",
+    "Approval version",
+    "Retention owner",
+    "Search boundary"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "journal",
+    "signature": "cover-first:journal",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 86
+  },
+  "contentHash": "5b99b9043b3a99d56a071e81f1f2cfa0456630486f5e60b95f22b31a05d3648b",
+  "intro": "A ShimoDocs and SharePoint decision should identify the authoritative record and the rules that govern it. Test metadata, approval versions, search, retention, and export together with editing. Storing a file is different from maintaining a record whose identity and decision history remain trustworthy.",
+  "sections": [
+    {
+      "id": "define-what-constitutes-a-record-1",
+      "title": "Define what constitutes a record",
+      "html": "<p>Choose whether the authoritative object is a live collaborative document, a submitted version, a signed file, or a record package containing several artifacts. Assign a stable identity independent of its display name. List the metadata required to classify and retrieve it, such as project, owner, document type, effective date, and retention category. Evaluate the candidates against these needs using current product evidence. Do not assume that storing a file establishes record management. The organization must also explain which version is authoritative, who may change it, and what rules govern its continued availability.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "trace-a-controlled-specification-2",
+      "title": "Trace a controlled specification",
+      "html": "<p>Imagine a plant maintaining equipment specifications. Engineers collaborate on a draft, a supervisor approves a particular revision, and technicians need the effective version at the machine. Run this sequence with representative files and metadata. Attempt to edit an approved specification, replace an attachment, and access a superseded edition. Check whether the workflow prevents ambiguity and preserves the decision history. An approved record must remain tied to the reviewed content even if a later draft exists. Record any external workflow engine or custom integration required to implement the intended behavior.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Separate editing state from the authoritative record",
+        "items": [
+          {
+            "label": "Working draft",
+            "detail": "Authors collaborate under draft permissions."
+          },
+          {
+            "label": "Submitted version",
+            "detail": "A fixed content state enters review."
+          },
+          {
+            "label": "Approved record",
+            "detail": "Metadata binds the decision to that content."
+          },
+          {
+            "label": "Retained history",
+            "detail": "Superseded editions remain interpretable."
+          }
+        ],
+        "alt": "Four record states distinguish current collaboration from formal authority.",
+        "caption": "Test the proposed candidate configuration against these state meanings.",
+        "src": "/blog/images/field-guide-document-management-system-of-record-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-management-system-of-record-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "assign-lifecycle-responsibilities-3",
+      "title": "Assign lifecycle responsibilities",
+      "html": "<p>Write down who owns creation, classification, collaboration, approval, archiving, legal hold decisions, and deletion. These responsibilities may span multiple systems. If an editor manages active content while another service governs records, define how a submitted version reaches the record store and how identifiers connect the two. Test failures between content export and metadata publication. Publishing metadata before the file is ready creates an unavailable record; losing the metadata after export creates an orphan. Require reconciliation and a clear retry policy for these transitions so the lifecycle can survive operational interruptions.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "inspect-discovery-and-exit-behavior-4",
+      "title": "Inspect discovery and exit behavior",
+      "html": "<p>Ask technicians to locate the current specification by equipment identifier, then ask records staff to retrieve all versions governed by a retention category. Test access restrictions in search and exports. Inspect whether metadata, links, versions, and approval evidence can be extracted in a usable form if the platform changes. A bulk file download may omit relationships required to interpret the archive. Compare the effort to recreate those relationships and include it in the decision. Also examine administrator access and recovery procedures, since the records service must remain trustworthy during personnel changes and infrastructure incidents.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "the-publication-handoff-has-two-commits-5",
+      "title": "The publication handoff has two commits",
+      "html": "<p>When editing and records live in separate systems, publication often involves creating validated bytes and creating the metadata that identifies them as a business version. Those operations can fail independently. Keep a candidate state until the file is readable and the metadata update is safely committed.</p><p>If file storage succeeds but metadata fails, reconciliation must find the candidate rather than leave it permanently orphaned. If the metadata points to an unavailable file, readers see a record they cannot retrieve. Use supported transactions or guarded operations in the actual storage architecture; do not imply that every editor or record platform exposes the same primitive.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "an-example-record-contract-6",
+      "title": "An example record contract",
+      "html": "<dl><dt>record_id</dt><dd>Stable business identity for the equipment specification.</dd><dt>content_version</dt><dd>Exact file state reviewed by the supervisor.</dd><dt>effective_from</dt><dd>When technicians should use this accepted edition.</dd><dt>approval_record</dt><dd>Decision, actor, time, and any stated conditions.</dd><dt>supersedes</dt><dd>The earlier edition retained for historical interpretation.</dd></dl><p>These are example application fields, not vendor API names. Test whether the proposed candidate workflow can preserve their meanings. Then restore the specification and confirm that a technician sees the effective edition while records staff can still interpret superseded ones. That is stronger evidence than a successful bulk download of unnamed file objects.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Publish bytes and record metadata safely",
+        "items": [
+          {
+            "label": "Candidate output",
+            "detail": "Create and validate the proposed file."
+          },
+          {
+            "label": "Readable object",
+            "detail": "Confirm storage retrieval and integrity."
+          },
+          {
+            "label": "Record commit",
+            "detail": "Publish version metadata with a guard."
+          },
+          {
+            "label": "Reconciliation",
+            "detail": "Find incomplete handoffs and retry safely."
+          }
+        ],
+        "alt": "Validated bytes become an authoritative record through a guarded handoff.",
+        "caption": "Content and metadata must agree after retries and restoration.",
+        "src": "/blog/images/field-guide-document-management-system-of-record-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-management-system-of-record-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "record-management-decision-notes-7",
+      "title": "Record management Decision notes",
+      "html": "<ul><li>Specify authoritative objects, stable identifiers, and required metadata.</li><li>Bind approval to an exact content version.</li><li>Assign lifecycle owners and test interrupted export or publication.</li><li>Verify current version discovery and restricted search behavior.</li><li>Export files with sufficient metadata and decision evidence to interpret them.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

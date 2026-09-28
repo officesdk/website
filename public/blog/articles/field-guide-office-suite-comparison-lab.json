@@ -1,0 +1,144 @@
+{
+  "slug": "field-guide-office-suite-comparison-lab",
+  "title": "Self hosted office suite comparisons: build a reproducible lab",
+  "description": "Normalize workload and preserve document outputs so office suite results can be reproduced and interpreted.",
+  "category": "Comparisons",
+  "format": "walkthrough",
+  "tags": [
+    "Product selection",
+    "Self-hosting",
+    "Performance",
+    "Operations"
+  ],
+  "structure": "prose:prose+document:example:prose:example:diagnostic+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 719,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Comparing Self-Hosted Office Suites: What Actually Matters",
+      "url": "https://shimodocs.com/blog/self-hosted-office-suite-comparison"
+    }
+  ],
+  "cover": "/blog/images/field-guide-office-suite-comparison-lab.png",
+  "coverAlt": "Self hosted office suite comparisons: build a reproducible lab: Test conditions, Document corpus, Concurrent sessions, Failure injection.",
+  "concepts": [
+    "Test conditions",
+    "Document corpus",
+    "Concurrent sessions",
+    "Failure injection",
+    "Operating score"
+  ],
+  "recipe": {
+    "hero": "statement",
+    "body": "alternating",
+    "signature": "statement:alternating",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 82
+  },
+  "contentHash": "7c6842c0b0026b2db01f1df242f1e1e6341ecede39dd42698780f87624f89f73",
+  "intro": "Compare self hosted office suites with the same business workload, representative files, and explicit deployment conditions. Inspect calculations and editable structure as well as pages. Preserve outputs and configuration so a result can be reproduced instead of becoming an unsupported claim about a product brand.",
+  "sections": [
+    {
+      "id": "normalize-the-comparison-conditions-1",
+      "title": "Normalize the comparison conditions",
+      "html": "<p>Record software editions, release versions, license terms relevant to the test, infrastructure resources, and external dependencies. Follow supported configurations for each candidate rather than forcing an identical architecture that one product does not support. Explain any difference in resources and include its cost. Set the same business workload and acceptance criteria: opening a workbook, collaborating on a report, exporting a presentation, and recovering after interruption. Preserve installation notes and configuration snapshots without secrets. Another engineer should be able to reproduce the evaluation and tell whether a changed result reflects software behavior or altered test conditions.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "build-a-varied-document-corpus-2",
+      "title": "Build a varied document corpus",
+      "html": "<p>Collect representative files from the teams that will use the suite, then remove sensitive information. Include ordinary examples and known difficult structures such as dense charts, long tables, multilingual text, external links, and complex formulas. Tag every file with the features under inspection and the accepted result. Compare rendered pages, editable structure, calculations, and exports separately. A file that looks correct may have lost editable chart data; a workbook that opens may calculate differently. Keep original files unchanged and preserve outputs so reviewers can inspect differences beyond the initial screen recording.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "document",
+        "title": "What belongs on a reproducible sample result card",
+        "items": [
+          {
+            "label": "Input",
+            "detail": "Corpus ID, original digest, and feature under test."
+          },
+          {
+            "label": "Conditions",
+            "detail": "Suite version, configuration, and resource allocation."
+          },
+          {
+            "label": "Expected result",
+            "detail": "Specific content, calculation, or editability requirement."
+          },
+          {
+            "label": "Observed result",
+            "detail": "Output files, mismatch, and business impact."
+          }
+        ],
+        "alt": "A result card binds input, conditions, expectation, and observed output.",
+        "caption": "Keep the original source and generated files with the card.",
+        "src": "/blog/images/field-guide-office-suite-comparison-lab-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-office-suite-comparison-lab-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "model-realistic-simultaneous-work-3",
+      "title": "Model realistic simultaneous work",
+      "html": "<p>A design office might have eighty staff but only twenty active editors at a typical peak. Model those sessions with the expected mix of reports, spreadsheets, and presentations, then add a measured burst of imports or exports. Observe resource use, startup times, interaction delays, and failed operations. Test two collaborators changing the same section and several users viewing without editing. Do not convert a single user timing into a capacity claim. Publish the workload description beside the results so planners can relate the evidence to their own usage patterns and hardware constraints.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "compare-failure-and-maintenance-work-4",
+      "title": "Compare failure and maintenance work",
+      "html": "<p>Interrupt a worker, temporarily remove storage access, and expire a test certificate in an isolated environment. Verify user messages, retry behavior, monitoring signals, and recovery procedures for each supported architecture. Apply an upgrade and inspect what happens to active sessions and persisted documents. Score the clarity of runbooks and the skills required to diagnose a failure. An office suite becomes a shared dependency, so operational uncertainty affects many departments at once. Include support response arrangements and the time spent by internal administrators instead of presenting only installation speed or interface preferences.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "keep-a-result-card-for-every-sample-5",
+      "title": "Keep a result card for every sample",
+      "html": "<p>A result card makes a difficult sample useful after the demo. Give it an identifier such as CORPUS-12 and record the original file digest, feature under inspection, expected outcome, observed outcome, suite release, deployment resources, and produced files. Attach a short reproduction procedure that starts from the untouched input.</p><p>For a workbook sample, the accepted result may be that a specific formula returns the approved value and the chart references the correct range. For a presentation, the result may be that a chart remains editable after export. Do not collapse both into a single Looks good score. Ask the business owner to classify the consequence of a mismatch: cosmetic repair, lost editability, wrong result, or blocked work.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "separate-three-kinds-of-failure-6",
+      "title": "Separate three kinds of failure",
+      "html": "<dl><dt>Format interpretation</dt><dd>The engine changes a calculation, omits content, or interprets structure differently.</dd><dt>Environment configuration</dt><dd>Fonts, certificates, storage routes, or dependencies differ from the intended setup.</dd><dt>Operating behavior</dt><dd>The task fails under concurrency, interruption, or maintenance.</dd></dl><p>This separation directs followup work. A font package fix may resolve pagination, but it cannot establish formula correctness. An isolated successful conversion may resolve a sample problem without proving peak capacity. Report the corrected condition and rerun only the affected test plus relevant regression samples, preserving both the original failure and the verified result.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "Classify failures before choosing the remedy",
+        "items": [
+          {
+            "label": "Interpretation",
+            "detail": "Check structure, calculations, and supported format behavior."
+          },
+          {
+            "label": "Environment",
+            "detail": "Check fonts, routes, dependencies, and configuration."
+          },
+          {
+            "label": "Operations",
+            "detail": "Check concurrency, retries, recovery, and upgrade behavior."
+          }
+        ],
+        "alt": "Three failure categories point to different followup tests.",
+        "caption": "A correction in one category is not proof about the others.",
+        "src": "/blog/images/field-guide-office-suite-comparison-lab-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-office-suite-comparison-lab-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "publish-the-laboratory-record-7",
+      "title": "Publish the laboratory record",
+      "html": "<ul><li>Identify exact editions, versions, resources, and supported architectures.</li><li>Preserve corpus inputs and inspected output files.</li><li>Describe concurrency, file mix, and conversion bursts beside timing results.</li><li>Record recovery, upgrade, and administrator effort under controlled failures.</li><li>List untested requirements and the assumptions behind cost estimates.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

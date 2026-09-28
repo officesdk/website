@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-retiring-a-server-document-estate",
+  "title": "SharePoint Server retirement: what to migrate beyond the files",
+  "description": "Build a replacement inventory around records, permissions, workflows, and recovery obligations.",
+  "category": "Office workflows",
+  "format": "playbook",
+  "tags": [
+    "Migration",
+    "Business workflows",
+    "Version control",
+    "Access control"
+  ],
+  "structure": "prose+layers:prose:example:steps+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 672,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: SharePoint Server Is Out of Support. What You Replace.",
+      "url": "https://shimodocs.com/blog/sharepoint-server-after-support-ends"
+    }
+  ],
+  "cover": "/blog/images/field-guide-retiring-a-server-document-estate.png",
+  "coverAlt": "SharePoint Server retirement: what to migrate beyond the files: Estate inventory, Workflow owners, Link mapping, Cutover gates.",
+  "concepts": [
+    "Estate inventory",
+    "Workflow owners",
+    "Link mapping",
+    "Cutover gates",
+    "Readback evidence"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "chapter-rail",
+    "signature": "cover-first:chapter-rail",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 38
+  },
+  "contentHash": "1af16a6067caf2875170a1cba6e77aa8ab8563d39c3d494c201f516ea5f7b5f6",
+  "intro": "A SharePoint Server replacement needs to preserve the work attached to each library: permissions, approvals, important links, versions, and retained records. Start with a workflow inventory. Confirm the exact deployed version's support status separately; it determines timing, while the inventory determines what a replacement must do.",
+  "sections": [
+    {
+      "id": "inventory-the-work-people-perform-1",
+      "title": "Inventory the work people perform",
+      "html": "<p>Start with libraries and sites, then connect each collection to an actual business activity. Record its owner, audience, sensitivity, retention obligation, active integrations, and weekly usage. Ask users to demonstrate approvals, searches, edits, and downloads instead of relying on feature names in a spreadsheet. Two libraries with similar storage size can have very different migration risks when one is an archive and the other drives daily procurement. Confirm the support status of the exact deployed edition and version through its official lifecycle documentation before setting a retirement deadline.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "What a library migration has to preserve",
+        "items": [
+          {
+            "label": "Files and versions",
+            "detail": "Working bytes plus the revisions required for later review."
+          },
+          {
+            "label": "Access and ownership",
+            "detail": "Ordinary user rights, restricted branches, and accountable owners."
+          },
+          {
+            "label": "Business evidence",
+            "detail": "Approval record linked to the exact submitted revision."
+          },
+          {
+            "label": "References",
+            "detail": "Old report links resolve through a retained identifier map."
+          }
+        ],
+        "alt": "Four layers of a document library replacement: content, access, evidence, and references.",
+        "caption": "Matching file counts validates only the first layer.",
+        "src": "/blog/images/field-guide-retiring-a-server-document-estate-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-retiring-a-server-document-estate-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "classify-what-must-survive-2",
+      "title": "Classify what must survive",
+      "html": "<p>Separate document bytes from metadata, version history, discussion context, and executable workflows. Decide which elements must remain operational and which can become readable historical evidence. A custom approval process may require a redesigned workflow rather than a direct import. Assign a destination and acceptance criterion to every class of information. For old links, choose redirects, an index, or a documented lookup procedure. Keep the source identifiers in a migration manifest so investigators can connect a new record to its previous location without depending on filenames.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-replacement-map-for-one-library-3",
+      "title": "A replacement map for one library",
+      "html": "<p>A migration worksheet should answer a practical question for each item: where will someone complete this task on Monday morning? For a purchase library, that means more than finding a quotation PDF. The buyer needs the active request; the approver needs the submitted revision; finance needs the issued order; an auditor needs the relationship among all three.</p><table><thead><tr><th>Source dependency</th><th>Destination requirement</th><th>Acceptance evidence</th></tr></thead><tbody><tr><td>Approval list</td><td>Decision tied to request and version</td><td>Retrieve one approved and one rejected request</td></tr><tr><td>Library permissions</td><td>Buyer and approver access stays distinct</td><td>Allowed and denied operations under ordinary accounts</td></tr><tr><td>Links in monthly reports</td><td>Resolvable historical references</td><td>Open a sampled link from an old report</td></tr></tbody></table><p>Give each row an owner and a disposition: rebuild, migrate, archive, or retire. Retire only after the owner confirms that nobody depends on the behavior. Rebuilding an approval process can be sensible, but it is a separate delivery item with its own tests. Do not mark it complete because the files arrived. Estimate effort from these dispositions, then schedule the move by business process rather than equal sized storage batches.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "pilot-a-procurement-library-4",
+      "title": "Pilot a procurement library",
+      "html": "<p>Consider a department with purchase requests, quotations, and approved orders. Move a small complete batch that includes a rejected request, a revised quotation, and an order under retention. Have the requestor, approver, and records owner perform their normal tasks in the proposed destination. Compare access as each person, not as an administrator. Open earlier versions and follow links from exported reports. Record every missing behavior with its business consequence. A visually successful file import is insufficient if an approval can no longer be traced to the version actually approved.</p><h3>Control the transition window</h3><p>Define when the source becomes read only, how final changes are copied, and who can authorize reopening it. Communicate one authoritative editing location for every migrated collection. Reconcile the final manifest using counts, selected content hashes, permission samples, and business owner review. Preserve a recoverable source snapshot and its required software context according to the agreed policy. The rollback decision should depend on explicit failures such as missing restricted documents or broken approval evidence. Avoid allowing two writable systems to diverge while staff assume synchronization will happen automatically.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "A controlled authority transfer",
+        "items": [
+          {
+            "label": "Source freeze",
+            "detail": "Users finish work; source changes stop at an agreed time."
+          },
+          {
+            "label": "Final reconciliation",
+            "detail": "Check changed records, content, permissions, and exceptions."
+          },
+          {
+            "label": "Owner readback",
+            "detail": "Buyers and approvers execute their actual tasks."
+          },
+          {
+            "label": "Destination activation",
+            "detail": "One announced editing location becomes authoritative."
+          }
+        ],
+        "alt": "Source freeze, final reconciliation, owner readback, and destination activation in order.",
+        "caption": "Keep the source recoverable until the destination passes business checks.",
+        "src": "/blog/images/field-guide-retiring-a-server-document-estate-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-retiring-a-server-document-estate-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "retirement-sign-off-5",
+      "title": "Retirement sign-off",
+      "html": "<ul><li>Assign an owner and destination to every active library and custom workflow.</li><li>Verify restricted access, prior versions, important links, and retained records with ordinary accounts.</li><li>Resolve outstanding exceptions before announcing the new editing location.</li><li>Test retrieval from the retained snapshot with documented tools and credentials.</li><li>Schedule decommissioning only after operational ownership and recovery responsibility transfer.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

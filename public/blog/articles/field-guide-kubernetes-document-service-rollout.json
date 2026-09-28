@@ -1,0 +1,149 @@
+{
+  "slug": "field-guide-kubernetes-document-service-rollout",
+  "title": "Kubernetes document collaboration: sessions, probes, and upgrades",
+  "description": "Operate long-lived editing connections and conversion workers with supported topology, graceful drain, and meaningful checks.",
+  "category": "Self-hosting",
+  "format": "architecture",
+  "tags": [
+    "Kubernetes",
+    "Self-hosting",
+    "Operations",
+    "Collaboration",
+    "Performance"
+  ],
+  "structure": "prose:prose+layers:example:prose:example:diagnostic+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 688,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Deploying Self-Hosted Collaboration on Kubernetes",
+      "url": "https://shimodocs.com/blog/self-hosted-collaboration-kubernetes-deployment"
+    }
+  ],
+  "cover": "/blog/images/field-guide-kubernetes-document-service-rollout.png",
+  "coverAlt": "Kubernetes document collaboration: sessions, probes, and upgrades: Session routing, Durable state, Probe design, Graceful drain.",
+  "concepts": [
+    "Session routing",
+    "Durable state",
+    "Probe design",
+    "Graceful drain",
+    "Recovery drill"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "journal",
+    "signature": "centered:journal",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 89
+  },
+  "contentHash": "ea8a5639bb30bf3c24b93911f4f43a4397744e397523c38f8fd06960c7ab7c45",
+  "intro": "A Kubernetes document service needs a supported topology for durable state, editing sessions, and conversion jobs. Configure ingress, probes, resource budgets, and termination around that behavior. Verify an active document workflow during rollout and recovery; healthy pods alone do not establish a usable collaboration service.",
+  "sections": [
+    {
+      "id": "map-supported-service-boundaries-1",
+      "title": "Map supported service boundaries",
+      "html": "<p>Identify editor gateways, collaboration workers, conversion workers, databases, queues, caches, and object storage in the documented deployment. Determine which components are stateless and which contain data that must survive pod replacement. Use supported image versions and installation patterns rather than assuming every component can scale independently. Assign owners to external databases and storage even if they live outside the cluster. Record how the business application maps document identities and receives saved results. Cluster health can appear normal while a callback route is broken, so the complete document workflow must remain visible in the operating model.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "respect-connection-and-session-behavior-2",
+      "title": "Respect connection and session behavior",
+      "html": "<p>Collaborative editing may use persistent connections and product specific session routing. Configure ingress timeouts and routing according to the supported architecture, then test reconnection and draining. Do not assume a generic sticky session setting resolves every state ownership problem. Observe how an active session behaves when its serving pod terminates and whether users can reconnect without losing acknowledged work. For background conversion, test queued job handling and duplicate execution after a restart. Define which component owns retry and how results are matched to the intended business version.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Keep business state visible outside the pod view",
+        "items": [
+          {
+            "label": "Application",
+            "detail": "Permissions, business IDs, and save contract."
+          },
+          {
+            "label": "Session services",
+            "detail": "Connections and documented editing state."
+          },
+          {
+            "label": "Background workers",
+            "detail": "Conversion jobs and retries."
+          },
+          {
+            "label": "Durable services",
+            "detail": "Database, queue, objects, and mappings."
+          }
+        ],
+        "alt": "The service has application, session, worker, and durable layers.",
+        "caption": "Supported state ownership determines what may scale or restart independently.",
+        "src": "/blog/images/field-guide-kubernetes-document-service-rollout-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-kubernetes-document-service-rollout-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "use-a-concrete-rollout-rehearsal-3",
+      "title": "Use a concrete rollout rehearsal",
+      "html": "<p>Suppose a team plans an evening update while several engineers remain in a shared design workbook. In staging, reproduce that session and start the proposed rollout. Measure connection interruption, user messages, save progress, and reopening behavior. Verify that termination grace periods and any documented drain operation give the service time to stop safely. Read the upgrade notes for schema or state compatibility before allowing mixed versions. A rolling deployment is not automatically a zero downtime upgrade when old and new processes cannot share the same persisted state or communication protocol.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "make-probes-and-limits-meaningful-4",
+      "title": "Make probes and limits meaningful",
+      "html": "<p>Separate startup, readiness, and liveness behavior. A worker performing a long conversion should not be restarted simply because a probe mistakes resource pressure for a dead process. Follow vendor recommendations, then verify them under representative documents and peak workload. Set resource requests and limits from measurements, including memory spikes during conversion. Monitor queue age, document startup failures, callback failures, and durable save progress alongside pod status. Back up persistent services and configuration, then restore into an isolated environment. A healthy deployment manifest is insufficient if the documents or their identity mappings cannot be recovered.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "an-illustrative-rollout-record-5",
+      "title": "An illustrative rollout record",
+      "html": "<p>For each rehearsal, record the release pair, database compatibility notes, ingress settings, termination behavior, and the sessions active at the start. Use a workbook with at least two collaborators plus a queued conversion. Observe the user's saved milestone before and after the pod replacement.</p><pre><code>rollout: release-A to release-B\nactive_work: shared workbook + queued export\nobserve: reconnect, save progress, callback delivery\naccept: reopened content matches acknowledged work\nstop: incompatible state or unexplained lost update</code></pre><p>This is a test record, not a vendor manifest or a promise about any particular topology. A deployment that supports reconnection may still need a maintenance pause for a schema migration. Capture that limit explicitly rather than assuming rolling updates cover every release.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "signals-that-distinguish-failure-modes-6",
+      "title": "Signals that distinguish failure modes",
+      "html": "<table><thead><tr><th>Signal</th><th>Likely investigation</th></tr></thead><tbody><tr><td>Pods ready, document open fails</td><td>Source retrieval, identity, storage, or callback path</td></tr><tr><td>Queue age rises</td><td>Worker availability, job errors, resource demand</td></tr><tr><td>Repeated reconnects</td><td>Ingress timeouts, routing, drain, and service behavior</td></tr><tr><td>Memory peaks during export</td><td>Document mix, limits, and conversion concurrency</td></tr></tbody></table><p>Investigate with correlated request and job identifiers. Restarting workers without identifying the failing stage can turn a diagnosable problem into repeated execution and additional load.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "An upgrade must account for active work",
+        "items": [
+          {
+            "label": "Before",
+            "detail": "Identify active sessions and queued jobs."
+          },
+          {
+            "label": "Drain",
+            "detail": "Follow supported stop and termination behavior."
+          },
+          {
+            "label": "Replace",
+            "detail": "Respect release and persisted-state compatibility."
+          },
+          {
+            "label": "Verify",
+            "detail": "Reopen content and check job publication."
+          }
+        ],
+        "alt": "Active work is considered before, during, and after replacement.",
+        "caption": "A successful rollout command is not the final acceptance check.",
+        "src": "/blog/images/field-guide-kubernetes-document-service-rollout-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-kubernetes-document-service-rollout-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "rollout-decision-notes-7",
+      "title": "Rollout Decision notes",
+      "html": "<ul><li>Confirm supported images, topology, state ownership, and external dependencies.</li><li>Test persistent connection timeouts, reconnection, and graceful draining.</li><li>Rehearse an upgrade with active editing and queued conversions.</li><li>Measure resources and verify probes against demanding documents.</li><li>Restore content, mappings, configuration, and permission relationships together.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

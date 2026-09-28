@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-financial-document-control-points",
+  "title": "Secure financial document collaboration: approval and evidence",
+  "description": "Protect financial document workflows with version-bound decisions, controlled external access, and recoverable evidence.",
+  "category": "Security",
+  "format": "playbook",
+  "tags": [
+    "Security",
+    "Access control",
+    "Version control",
+    "Audit logs"
+  ],
+  "structure": "prose+sequence:prose:example:prose:example+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 678,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Secure Document Collaboration for Financial Services",
+      "url": "https://shimodocs.com/blog/secure-document-collaboration-financial-services"
+    }
+  ],
+  "cover": "/blog/images/field-guide-financial-document-control-points.png",
+  "coverAlt": "Secure financial document collaboration: approval and evidence: Preparation role, Approval boundary, Version binding, External distribution.",
+  "concepts": [
+    "Preparation role",
+    "Approval boundary",
+    "Version binding",
+    "External distribution",
+    "Evidence recovery"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "journal",
+    "signature": "report:journal",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 88
+  },
+  "contentHash": "91f1814c40d1b29b511a9a80bf657c66fe5080499afccc2306a4234f0bfa53a7",
+  "intro": "Secure financial document collaboration depends on control points around preparation, approval, distribution, and recovery. Bind decisions to the exact reviewed content and keep access attributable. The controls should follow the institution's assessed obligations and process risks rather than treating every financial file alike.",
+  "sections": [
+    {
+      "id": "classify-the-business-process-1",
+      "title": "Classify the business process",
+      "html": "<p>Identify the document's purpose, information sensitivity, users, and applicable institutional policies. A public investor presentation, an internal risk assessment, and a customer credit file require different handling. Work with compliance and records owners to establish retention, review, and distribution rules instead of assigning one universal policy to every financial file. Map supporting services including editing, storage, conversion, indexing, and support access. Record where regulated or confidential data can appear in logs and exports. The business process owner should approve the resulting control design with security and operations specialists.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Bind the credit decision to a submitted package",
+        "items": [
+          {
+            "label": "Preparation",
+            "detail": "Analyst assembles figures and supporting evidence."
+          },
+          {
+            "label": "Submission",
+            "detail": "Identify the exact content and attachment versions."
+          },
+          {
+            "label": "Approval",
+            "detail": "Reviewer records the decision and conditions."
+          },
+          {
+            "label": "Distribution",
+            "detail": "Recipients receive the accepted edition."
+          }
+        ],
+        "alt": "Preparation leads to a versioned submission, decision, and distribution.",
+        "caption": "A later edit must not silently inherit an earlier decision.",
+        "src": "/blog/images/field-guide-financial-document-control-points-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-financial-document-control-points-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "separate-preparation-from-approval-2",
+      "title": "Separate preparation from approval",
+      "html": "<p>For a credit committee package, analysts prepare the assessment while designated reviewers approve the submitted version. Define whether approvers may alter content, request changes, or only record a decision. Tie approval to an exact content version and relevant attachments. If a spreadsheet changes after approval, the previous decision should not silently authorize the changed figures. Enforce the rule in the workflow and underlying service permissions where possible, and document any compensating procedure. Separation of duties requires meaningful authority boundaries; labeling two buttons Prepare and Approve does not establish independent control.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "control-external-collaboration-3",
+      "title": "Control external collaboration",
+      "html": "<p>When an external auditor or adviser needs access, grant the minimum scope required for the engagement and set a review or expiry date. Test identity verification, invitation forwarding, download permissions, and revocation behavior in the selected environment. A contract clause about confidentiality supports the arrangement but does not replace technical access control. Record who approved the external access and which record set was disclosed. Consider whether a controlled snapshot is preferable to a live draft for the specific request. Make the version and permitted use clear so external parties cannot mistake evolving analysis for a final institutional statement.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "preserve-useful-decision-evidence-4",
+      "title": "Preserve useful decision evidence",
+      "html": "<p>Keep preparation, approval, access, and distribution events attributable to individuals or accountable service identities. Establish time synchronization and safe correlation identifiers across the systems involved. For the committee package, preserve the approved artifact, decision, approver, timestamp, and any stated conditions. Test recovery of both files and their associated metadata, since restoring content alone may not reestablish its status or authority. Avoid copying unnecessary customer information into a general audit log. Protect evidence according to its sensitivity and maintain a defined process for investigation access, correction, and retention.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-changed-figure-should-reopen-the-right-decision-5",
+      "title": "A changed figure should reopen the right decision",
+      "html": "<p>In the credit committee example, define what counts as a material change after submission. A corrected address may have a different review consequence from a changed exposure amount or repayment assumption. The business owner and relevant control owners should set that rule; the editor cannot infer institutional materiality from the number of changed characters.</p><table><thead><tr><th>Event</th><th>Decision to define</th><th>Evidence to retain</th></tr></thead><tbody><tr><td>Draft submitted</td><td>Which content and attachments enter review?</td><td>Submission version and actor</td></tr><tr><td>Figure corrected</td><td>Does the package require new approval?</td><td>Changed field, source, and review outcome</td></tr><tr><td>Package distributed</td><td>Which recipients may receive which edition?</td><td>Approved distribution version and access scope</td></tr></tbody></table><p>Try a deliberate change to the workbook behind the package. Does the narrative still describe the accepted amount? Does a previously approved PDF remain stable? Can the reviewer see that the current draft is newer than the accepted edition? Then revoke an adviser's access and verify the result through the actual delivery path. These checks connect segregation of duties to observable content and permissions, giving the control owner something more precise than a statement that approval is enabled.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "Recover the package and its authority",
+        "items": [
+          {
+            "label": "Content",
+            "detail": "Reviewed file and supporting attachment versions."
+          },
+          {
+            "label": "Decision",
+            "detail": "Approver, outcome, time, and conditions."
+          },
+          {
+            "label": "Access",
+            "detail": "Recipient scope and approved disclosure."
+          },
+          {
+            "label": "Relationships",
+            "detail": "Identifiers reconnect restored files and records."
+          }
+        ],
+        "alt": "Recovery requires content, decision evidence, access, and relationships.",
+        "caption": "Restoring file bytes alone does not restore the package's meaning.",
+        "src": "/blog/images/field-guide-financial-document-control-points-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-financial-document-control-points-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "credit-package-control-decision-notes-6",
+      "title": "Credit package control Decision notes",
+      "html": "<ul><li>Confirm classification, process ownership, and applicable retention requirements.</li><li>Submit a package and bind its decision to the exact reviewed version.</li><li>Attempt changes after approval and verify the intended response.</li><li>Test external access scope, expiry, and revocation.</li><li>Restore the package with approval evidence and permission metadata.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

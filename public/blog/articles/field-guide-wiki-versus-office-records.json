@@ -1,0 +1,126 @@
+{
+  "slug": "field-guide-wiki-versus-office-records",
+  "title": "ShimoDocs vs Confluence: linked knowledge or office deliverables?",
+  "description": "Compare navigation, publishing, file output, and migration relationships using a real release workflow.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Product selection",
+    "Document search",
+    "Migration",
+    "Business workflows"
+  ],
+  "structure": "prose+comparison:example:prose+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 685,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Confluence: Wiki or Document Suite?",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-confluence"
+    }
+  ],
+  "cover": "/blog/images/field-guide-wiki-versus-office-records.png",
+  "coverAlt": "ShimoDocs vs Confluence: linked knowledge or office deliverables?: Linked knowledge, Office artifact, Publication state, Link migration.",
+  "concepts": [
+    "Linked knowledge",
+    "Office artifact",
+    "Publication state",
+    "Link migration",
+    "Content owner"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "journal",
+    "signature": "overprint:journal",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 87
+  },
+  "contentHash": "88f2943f132bb3b2b34ae7b47f6b69d3d28dd361a59daca791704ad0883d2ef8",
+  "intro": "For ShimoDocs and Confluence, separate linked knowledge from office deliverables. A handbook needs discoverable relationships and maintained authority; a customer report may need structured files and precise output. Test the proposed offers against both tasks, including how existing links and attachments would migrate.",
+  "sections": [
+    {
+      "id": "follow-readers-and-deliverables-1",
+      "title": "Follow readers and deliverables",
+      "html": "<p>Identify whether readers follow links through an evolving knowledge collection or consume a self contained deliverable. An engineering handbook may depend on cross references, search, and frequent updates. A customer proposal may require exact page layout and an editable file in a specified format. Some projects produce both. List the required structures and navigation paths, then evaluate current candidate configurations. Avoid interpreting a page export as equivalent to a native office document without examining its structure and editability. Conversely, a folder full of office files may not satisfy a requirement for connected, searchable knowledge.</p><p>Suppose a software team prepares a release. It writes internal design notes, maintains operating procedures, creates a pricing workbook, and sends a presentation to partners. Run these tasks in the proposed environments using sanitized artifacts. Test links between notes, ownership of procedures, formulas in the workbook, and the final exported presentation. Ask a new employee to find the reason for an operational decision using only the available navigation and search. This scenario exposes the distinct requirements of knowledge discovery and file production while keeping the comparison grounded in the team's actual work.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "comparison",
+        "title": "Two outputs require different tests",
+        "items": [
+          {
+            "label": "Linked knowledge",
+            "detail": "Find context, follow references, and identify current guidance."
+          },
+          {
+            "label": "Office deliverable",
+            "detail": "Preserve required structure and external file output."
+          },
+          {
+            "label": "Combined workflow",
+            "detail": "Keep authority and links explicit across both."
+          }
+        ],
+        "alt": "Knowledge navigation and office output have distinct acceptance needs.",
+        "caption": "A candidate may need integrations to satisfy the combined workflow.",
+        "src": "/blog/images/field-guide-wiki-versus-office-records-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-wiki-versus-office-records-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "define-publication-and-ownership-2",
+      "title": "Define publication and ownership",
+      "html": "<p>Working pages and approved procedures need visible status and accountable owners. Define how a draft becomes published, how a review date is maintained, and how superseded instructions are identified. For external deliverables, tie the sent version to an approval record or submission event. Verify whether the products and any required extensions support that workflow in the editions under review. The organization still needs an editorial process regardless of platform. A content system cannot establish accuracy merely by making updates easy, and unrestricted editing may conflict with the need for controlled operational guidance.</p><p>Migration planning should distinguish a page's identity from its location and title. A changed title need not invalidate references, but a move to another system often changes the identifier embedded in tickets and messages. Preserve a mapping even if the first migration wave looks small.</p><ol><li>Export a representative group containing internal links, nested pages, attachments, and embedded office files.</li><li>Assign each source identifier a destination identifier or an explicit retirement decision.</li><li>Inspect link targets after import, including links inside exported office files.</li><li>Test an old reference from a real ticket or message and document the user's route to the current item.</li><li>Give repair work to named content owners rather than leaving a general Broken links task.</li></ol><p>In the software release example, a design note may link to a spreadsheet and an approved operating procedure. Moving only the note leaves an apparently complete page with inaccessible evidence. Decide whether the linked artifacts also move, remain available under controlled access, or are replaced by identified snapshots. The decision should preserve context and authority, not merely make the page look clean. Record any hierarchy or permission behavior that cannot be transferred through the selected tooling.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "plan-migration-with-relationships-3",
+      "title": "Plan migration with relationships",
+      "html": "<p>If replacing an existing wiki, inventory internal links, attachments, page hierarchies, embedded content, and access rules. Test a small export and import with a page that uses all of them. Inspect broken links and missing context, then estimate repair effort across the full collection. If moving office artifacts, include formulas, layout, comments, and version relationships in the sample. Decide which content should remain linked knowledge and which should become an independent file. Keeping a migration map between old and new identifiers helps users find references left in tickets, messages, and external documents.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "A migration map keeps old references interpretable",
+        "items": [
+          {
+            "label": "Source ID",
+            "detail": "Capture page and linked artifact identifiers."
+          },
+          {
+            "label": "Destination ID",
+            "detail": "Record the new target or retirement decision."
+          },
+          {
+            "label": "Reference test",
+            "detail": "Open links from tickets, pages, and exported files."
+          },
+          {
+            "label": "Repair owner",
+            "detail": "Assign missing context and broken links explicitly."
+          }
+        ],
+        "alt": "Source identifiers map to destinations, reference tests, and owned repair.",
+        "caption": "Keep the map beyond the initial transfer window.",
+        "src": "/blog/images/field-guide-wiki-versus-office-records-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-wiki-versus-office-records-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "content-shape-decision-notes-4",
+      "title": "Content shape Decision notes",
+      "html": "<ul><li>Distinguish linked knowledge from self contained office deliverables.</li><li>Run a release workflow covering discovery, editing, and external output.</li><li>Define owners, publication states, review dates, and submitted versions.</li><li>Test migration of links, attachments, structures, and access rules.</li><li>Preserve a mapping for old references and estimate manual repairs.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

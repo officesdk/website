@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-month-one-document-platform-adoption",
+  "title": "A 30-day document platform rollout with measurable gates",
+  "description": "Organize a thirty day rollout around a bounded pilot, working evidence, support readiness, and expansion criteria.",
+  "category": "Migration",
+  "format": "walkthrough",
+  "tags": [
+    "Migration",
+    "Business workflows",
+    "Operations",
+    "Collaboration"
+  ],
+  "structure": "steps+flow:steps:example:diagnostic+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 702,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: A 30-Day Plan for Rolling Out a Document Platform",
+      "url": "https://shimodocs.com/blog/document-platform-adoption-plan"
+    }
+  ],
+  "cover": "/blog/images/field-guide-month-one-document-platform-adoption.png",
+  "coverAlt": "A 30-day document platform rollout with measurable gates: Pilot boundary, Task evidence, Support readiness, Usage signals.",
+  "concepts": [
+    "Pilot boundary",
+    "Task evidence",
+    "Support readiness",
+    "Usage signals",
+    "Expansion decision"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "chapter-rail",
+    "signature": "exhibit:chapter-rail",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 48
+  },
+  "contentHash": "0ad135e67d6a3cf23fe39ae330044222b188822ed595f04abc8c423f9ec66797",
+  "intro": "Use the first thirty days to prove one recurring document task and its support model. Establish a baseline, run real work with a bounded team, test membership and recovery changes, and make an explicit expansion decision. The calendar sets pace; completed tasks and resolved blockers determine readiness.",
+  "sections": [
+    {
+      "id": "week-one-define-the-pilot-1",
+      "title": "Week one: define the pilot",
+      "html": "<p>Select one team and a recurring task such as a weekly planning report. Name a business owner, technical owner, support contact, and records contact where needed. Gather a small document set, current completion times, common errors, and access requirements. Confirm identity setup and the supported deployment configuration. Write acceptance criteria that staff can observe: locating the right report, editing with colleagues, retrieving the approved version, and reporting a failed save. Decide where pilot documents are authoritative and how the team will avoid editing competing copies throughout the evaluation period.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "flow",
+        "title": "Four weeks, four concrete decisions",
+        "items": [
+          {
+            "label": "Week 1: scope",
+            "detail": "Pick a team, task, baseline, authoritative location, and owners."
+          },
+          {
+            "label": "Week 2: work",
+            "detail": "Users complete the task and report specific friction."
+          },
+          {
+            "label": "Week 3: disruption",
+            "detail": "Test transfers, earlier versions, outages, and support."
+          },
+          {
+            "label": "Week 4: gate",
+            "detail": "Expand, revise, or continue against named unresolved criteria."
+          }
+        ],
+        "alt": "Four week rollout sequence from scope to work, disruption testing, and expansion decision.",
+        "caption": "Treat dates as checkpoints, not automatic launch approvals.",
+        "src": "/blog/images/field-guide-month-one-document-platform-adoption-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-month-one-document-platform-adoption-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "week-two-perform-real-work-2",
+      "title": "Week two: perform real work",
+      "html": "<p>Bring the selected users into the workspace and run their actual task with appropriate test or approved business content. Observe where they hesitate and which actions require help. Training should follow the workflow, including naming, review, final delivery, and error reporting. Keep a short issue log with owner and business impact. Technical setup completion is not an adoption metric. Measure whether staff finish the task and whether its resulting artifact can be located and reused. Resolve permission confusion immediately because early workarounds can become persistent habits across the organization.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "measure-one-report-from-start-to-finish-3",
+      "title": "Measure one report from start to finish",
+      "html": "<p>For a weekly planning report, capture a small baseline: preparation time, review handoffs, time to locate the approved copy, and incidents requiring support. Repeat the same observations during the pilot. Keep the participants and report complexity visible so the comparison is not mistaken for a controlled performance study.</p><dl><dt>Useful adoption evidence</dt><dd>A staff member completes review and finds the correct output without intervention from the implementation team.</dd><dt>Useful support evidence</dt><dd>A designated responder identifies an opening or saving failure using the runbook and safe identifiers.</dd><dt>Weak evidence on its own</dt><dd>Accounts created, invitation messages sent, or browser tabs opened. These indicate activity but do not establish task completion.</dd></dl><p>Ask users what caused work to leave the approved path. A mailed attachment might indicate missing external access, unclear version labels, or a failed save. Fix the cause and rerun the task instead of reporting the attachment as mere resistance to change.</p><p>At the end of the month, select one of three decisions: expand this workflow, revise it and repeat the relevant test, or continue the bounded pilot while a specific blocker is resolved. Name the blocker and owner. That makes an extension actionable rather than an indefinite pilot with no acceptance boundary.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "week-three-test-difficult-days-4",
+      "title": "Week three: test difficult days",
+      "html": "<p>For the planning report, remove a participant, add a replacement, restore an earlier version, and simulate an unavailable editing service using safe test conditions. Ask the support contact to diagnose one failure using the runbook. Have the business owner retrieve the approved report without its author. Compare task time and error frequency with the baseline while acknowledging the small sample. These exercises expose dependencies that enthusiastic pilot participants may conceal by helping each other informally. Update support instructions and ownership rules before introducing additional teams with less direct access to the implementation group.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "A difficult day tests several kinds of readiness",
+        "items": [
+          {
+            "label": "Participant removal",
+            "detail": "Check both new requests and an already open session."
+          },
+          {
+            "label": "Earlier version",
+            "detail": "Another user retrieves the approved report without its author."
+          },
+          {
+            "label": "Service interruption",
+            "detail": "Observe the recoverable error and supported return to work."
+          },
+          {
+            "label": "Support handoff",
+            "detail": "A designated responder uses evidence available in the runbook."
+          }
+        ],
+        "alt": "Membership, version, outage, and support readiness checks for the pilot.",
+        "caption": "These transitions expose dependencies a happy-path pilot can hide.",
+        "src": "/blog/images/field-guide-month-one-document-platform-adoption-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-month-one-document-platform-adoption-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "week-four-decide-what-expands-5",
+      "title": "Week four: decide what expands",
+      "html": "<p>Review unresolved issues with their owners and separate launch blockers from tolerable limitations. Choose expansion by workflow and information class rather than assuming every team can reuse the pilot configuration. Confirm capacity, backup responsibility, and support coverage for the next cohort. Communicate the editing location and the transition date for any replaced process. Keep the old path available only according to a defined transition rule. If the pilot has not met essential criteria, extend it with a specific corrective objective instead of announcing a successful organization-wide rollout because the month has ended.</p><h3>Month-one decision</h3><ul><li>Record baseline and pilot task completion results.</li><li>Verify access changes, version retrieval, and ordinary user support.</li><li>Assign owners and deadlines to unresolved limitations.</li><li>Confirm operating capacity and recovery responsibility for the next cohort.</li><li>Publish a clear decision to expand, revise, or continue the bounded pilot.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

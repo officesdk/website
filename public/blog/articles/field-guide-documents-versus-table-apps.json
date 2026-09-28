@@ -1,0 +1,126 @@
+{
+  "slug": "field-guide-documents-versus-table-apps",
+  "title": "ShimoDocs vs Coda: documents, tables, and workflow authority",
+  "description": "A practical evaluation of narrative records, structured facts, automation, and portable outputs.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Product selection",
+    "Business workflows",
+    "Document automation",
+    "Integrations"
+  ],
+  "structure": "prose+layers:example:prose+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 641,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: ShimoDocs vs Coda: Docs, Tables and Where They Diverge",
+      "url": "https://shimodocs.com/blog/shimodocs-vs-coda"
+    }
+  ],
+  "cover": "/blog/images/field-guide-documents-versus-table-apps.png",
+  "coverAlt": "ShimoDocs vs Coda: documents, tables, and workflow authority: Narrative record, Structured facts, Workflow state, Permission granularity.",
+  "concepts": [
+    "Narrative record",
+    "Structured facts",
+    "Workflow state",
+    "Permission granularity",
+    "Export boundary"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "alternating",
+    "signature": "field-notes:alternating",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 83
+  },
+  "contentHash": "5f0317f0d00a0afd9311be80d643f06ae775a88782b5dea5086ff766b03e1aba",
+  "intro": "Evaluate ShimoDocs and Coda by deciding which information is a narrative record and which is structured operational data. Test the current offers against that model. The critical questions are who owns updates, how automation acts, and whether approved records remain interpretable outside the workspace.",
+  "sections": [
+    {
+      "id": "choose-the-information-model-1",
+      "title": "Choose the information model",
+      "html": "<p>A project status report usually combines facts such as owner, deadline, and budget with explanations of risks and decisions. Facts benefit from consistent fields and validation. Explanations benefit from flexible writing and review. Identify the authoritative location for each before evaluating products. If the same deadline appears in several documents and tables, decide which value wins when they disagree. Avoid assuming that placing a table inside a page automatically provides database behavior. Test the actual edition for relations, validation, filtering, and update behavior wherever those functions are necessary for the workflow.</p><p>Suppose an operations team tracks fifty supplier assessments. It needs structured scores, reviewer assignments, evidence attachments, and a narrative justification for the final selection. Model one assessment in each candidate and then produce a portfolio view across all fifty. Change a reviewer and a deadline, and inspect which views update. Separately freeze the approved assessment and export it for the purchasing record. This scenario distinguishes a live operational model from a formal document artifact without making assumptions about either vendor's capabilities. Record any extra integration or manual work needed to complete both outputs.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "An assessment has facts, reasoning, and a decision",
+        "items": [
+          {
+            "label": "Facts",
+            "detail": "Supplier fields and reviewer scores have named owners."
+          },
+          {
+            "label": "Reasoning",
+            "detail": "Narrative explains tradeoffs and supporting evidence."
+          },
+          {
+            "label": "Decision",
+            "detail": "Acceptance binds to the assessed version."
+          },
+          {
+            "label": "Portfolio",
+            "detail": "Aggregate view summarizes identified assessments."
+          }
+        ],
+        "alt": "Four layers distinguish data updates from historical decisions.",
+        "caption": "Evaluate how each candidate supports this proposed information model.",
+        "src": "/blog/images/field-guide-documents-versus-table-apps-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-documents-versus-table-apps-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "inspect-automation-ownership-2",
+      "title": "Inspect automation ownership",
+      "html": "<p>If the model sends reminders, updates external systems, or calculates approval states, assign an owner to those actions. Determine where credentials live and whose authority an automated operation uses. Test an invalid field value, duplicate trigger, and revoked integration credential. A convenient no code interface can still create consequential business behavior. Establish how changes are reviewed and how failures are visible to the team. For complex workflows, require a reproducible definition and an audit trail so the system does not depend on one employee understanding a collection of undocumented buttons and formulas.</p><p>For the supplier assessment, keep three distinct authorities: the reviewer who supplies scores, the procurement owner who accepts the outcome, and any automation that calculates or moves state. Write each authority down before building the interface.</p><table><thead><tr><th>Object</th><th>Normal update</th><th>Approval consequence</th></tr></thead><tbody><tr><td>Supplier facts</td><td>Authorized owner corrects fields</td><td>Historical assessment retains its referenced values</td></tr><tr><td>Working score</td><td>Reviewer edits under the agreed rules</td><td>Material changes return the assessment to review</td></tr><tr><td>Accepted assessment</td><td>Correction creates an identified new edition</td><td>Prior decision remains tied to prior content</td></tr></tbody></table><p>These are proposed workflow rules, not assumed capabilities of either candidate. Implement a small test and record what works natively, what requires integration, and what remains manual. Then simulate a changed supplier price after acceptance. Can staff distinguish today's facts from the values used in the purchasing decision? A table that always shows the newest value is convenient for operations but may erase the context of a historical assessment unless the workflow deliberately retains it.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "test-permissions-and-portability-3",
+      "title": "Test permissions and portability",
+      "html": "<p>A reviewer may be permitted to update an assessment score but not view other suppliers' pricing. Define that requirement independently of page organization, then test access through every applicable view and export. Investigate what leaves the platform when exporting: narrative text, table values, relationships, formulas, comments, and automation definitions may have different portability. Verify current behavior rather than interpreting a downloadable file as a complete system backup. If a workflow cannot be recreated outside the platform, include that dependency and its recovery implications in the purchasing decision.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "Where should the assessment's authority live?",
+        "items": [
+          {
+            "label": "Live model",
+            "detail": "Operational fields update under explicit ownership."
+          },
+          {
+            "label": "Approved artifact",
+            "detail": "Decision binds to a fixed, identifiable edition."
+          },
+          {
+            "label": "Combined workflow",
+            "detail": "Maintain a tested relationship between the two."
+          }
+        ],
+        "alt": "A workflow can use live data, approved artifacts, or a controlled combination.",
+        "caption": "Choose authority first, then test the candidate implementation.",
+        "src": "/blog/images/field-guide-documents-versus-table-apps-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-documents-versus-table-apps-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "model-decision-notes-4",
+      "title": "Model Decision notes",
+      "html": "<ul><li>Identify authoritative facts, explanatory records, and approval states.</li><li>Run one realistic assessment and a portfolio reporting task.</li><li>Assign owners for formulas, triggers, credentials, and failure handling.</li><li>Test required permission granularity through views and exports.</li><li>Inspect what can be exported and what must be rebuilt elsewhere.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

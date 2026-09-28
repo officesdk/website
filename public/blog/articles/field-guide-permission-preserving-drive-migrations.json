@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-permission-preserving-drive-migrations",
+  "title": "Shared drive migration: preserve effective permissions, not just folders",
+  "description": "Inventory effective permissions, resolve group mappings, and verify access after a staged drive migration.",
+  "category": "Migration",
+  "format": "walkthrough",
+  "tags": [
+    "Migration",
+    "Access control",
+    "Document storage",
+    "Multi-tenancy"
+  ],
+  "structure": "steps:comparison+flow:example:diagnostic+matrix:steps",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 669,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Migrating a Shared Drive Without Losing Permissions",
+      "url": "https://shimodocs.com/blog/migrating-shared-drives-to-a-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-permission-preserving-drive-migrations.png",
+  "coverAlt": "Shared drive migration: preserve effective permissions, not just folders: Effective access, Group mapping, Inheritance breaks, Exception review.",
+  "concepts": [
+    "Effective access",
+    "Group mapping",
+    "Inheritance breaks",
+    "Exception review",
+    "User verification"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "inset",
+    "signature": "overprint:inset",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 51
+  },
+  "contentHash": "c3ecf01bef1e1808f79afcf624e35e0f317b95785dadcfe491e2b07ec6de0225",
+  "intro": "Before moving a shared drive, capture effective access, map source groups and rights to destination roles, and test restricted inheritance with ordinary accounts. Reconcile permission changes separately from file changes at cutover. Similar folder structures do not guarantee equivalent access after migration.",
+  "sections": [
+    {
+      "id": "capture-effective-permissions-1",
+      "title": "Capture effective permissions",
+      "html": "<p>Inventory folders, files, owners, groups, direct grants, and places where inheritance changes. Use supported administrative tools for the actual filesystem and directory. Record effective access for representative identities because a raw access list may omit nested groups or other rules. Identify obsolete users and groups without silently discarding their relevance to historical ownership. Keep a dated manifest alongside the content inventory. Permission discovery can itself expose confidential names and structure, so store the manifest appropriately. Ask business owners to approve intended access rather than assuming every legacy exception is still justified.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "build-a-translation-table-2",
+      "title": "Build a translation table",
+      "html": "<p>Map source identities and rights to destination roles using verified platform capabilities. Distinguish reading, editing, deleting, sharing, and managing membership; a source write permission may not imply every administrative operation. Note unsupported distinctions and propose an explicit workflow or collection boundary for each one. When groups are consolidated, check whether the change broadens access. Preserve source identifiers in the mapping so exceptions can be audited later. Avoid using an import administrator's broad privileges as evidence that ordinary users will be able to access the right documents after migration.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "flow",
+        "title": "Translate access through business intent",
+        "items": [
+          {
+            "label": "Source effective rights",
+            "detail": "Resolve direct grants, inheritance, and nested membership."
+          },
+          {
+            "label": "Intended audience",
+            "detail": "Business owner confirms what access is still justified."
+          },
+          {
+            "label": "Destination controls",
+            "detail": "Map intent to supported roles and record exceptions."
+          },
+          {
+            "label": "User evidence",
+            "detail": "Ordinary accounts prove both allowed and denied operations."
+          }
+        ],
+        "alt": "Source rights mapped through business intent to destination controls and user tests.",
+        "caption": "Copying an access list is not the same as preserving effective access.",
+        "src": "/blog/images/field-guide-permission-preserving-drive-migrations-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-permission-preserving-drive-migrations-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "keep-an-exception-register-for-access-3",
+      "title": "Keep an exception register for access",
+      "html": "<p>Use a row for every permission rule that cannot be translated directly. Record the source path and identifier, intended audience, source effective rights, destination role, and owner approval. The point is to prevent a convenient destination role from quietly broadening what someone can do.</p><table><thead><tr><th>Source intent</th><th>Potential mismatch</th><th>Required decision</th></tr></thead><tbody><tr><td>Read but no reshare</td><td>Destination viewer includes a sharing operation</td><td>Verify separate control or approved alternative</td></tr><tr><td>Restricted child folder</td><td>Flattened destination inherits department access</td><td>Preserve an independently restricted collection</td></tr><tr><td>Nested group membership</td><td>Import includes only the immediate group</td><td>Resolve effective users or supported group mapping</td></tr></tbody></table><p>These are possible translation issues, not claims about a particular destination. Check each against actual supported behavior. Assign an approver who understands the content and the audience, not just the migration tooling.</p><p>After activation, investigate a complaint through this register and the user's effective destination access. Recopying a file will not repair a missing identity mapping, and granting a whole department access can hide the symptom while creating a disclosure. Keep correction and verification bounded to the affected rule and collection.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "test-a-restricted-payroll-branch-4",
+      "title": "Test a restricted payroll branch",
+      "html": "<p>A departmental drive contains general procedures and a payroll subfolder with broken inheritance. Migrate a harmless replica into a test workspace. Ask a department member, payroll specialist, and unrelated employee to search, open, edit, export, and share the relevant documents according to their intended roles. Move a file between the general and restricted areas and observe the destination's inheritance behavior. This example can reveal accidental broadening when folder structures are flattened or destination roles combine several source permissions. Test denied operations directly as well as inspecting which buttons appear in the interface.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "matrix",
+        "title": "Test the restricted payroll branch",
+        "items": [
+          {
+            "label": "Department member",
+            "detail": "General procedures allowed; payroll branch denied."
+          },
+          {
+            "label": "Payroll specialist",
+            "detail": "Approved payroll operations allowed under the mapped role."
+          },
+          {
+            "label": "Unrelated employee",
+            "detail": "Search, open, export, and sharing attempts stay denied."
+          },
+          {
+            "label": "Moved document",
+            "detail": "Verify actual inheritance when a file crosses the boundary."
+          }
+        ],
+        "alt": "Access test matrix for a department member, payroll specialist, unrelated user, and moved file.",
+        "caption": "Run direct operation tests as well as inspecting visible controls.",
+        "src": "/blog/images/field-guide-permission-preserving-drive-migrations-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-permission-preserving-drive-migrations-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "control-the-final-synchronization-5",
+      "title": "Control the final synchronization",
+      "html": "<p>During the transition, reconcile content changes and permission changes separately. A final file copy does not necessarily capture a new group membership or revised access exception. Define the source freeze, final mapping export, destination activation, and rollback triggers. Log migration failures against source identifiers and retain a controlled exception queue. Business owners should verify sensitive collections before the new location becomes authoritative. After activation, monitor unexpected denials and grants with safe identifiers. Do not solve an access complaint by temporarily granting everyone broad access without an approved, bounded correction.</p><h3>Permission sign-off</h3><ul><li>Retain the dated content inventory and effective access manifest.</li><li>Approve source to destination identity and permission mappings.</li><li>Test restricted inheritance and direct denied operations with ordinary accounts.</li><li>Reconcile permission changes during the final transition window.</li><li>Assign ownership to unresolved exceptions and post migration access requests.</li></ul>",
+      "kind": "steps"
+    }
+  ]
+}

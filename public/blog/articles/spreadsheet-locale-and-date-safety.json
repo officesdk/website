@@ -1,0 +1,120 @@
+{
+  "slug": "spreadsheet-locale-and-date-safety",
+  "title": "Spreadsheet locale bugs: dates, decimal separators, and leading zeros",
+  "description": "Test stored values, display formats, and text imports separately when spreadsheets move between users and systems.",
+  "category": "Office workflows",
+  "format": "troubleshooting",
+  "tags": [
+    "Excel spreadsheets",
+    "Document conversion",
+    "Integrations",
+    "Business workflows"
+  ],
+  "structure": "diagnostic+comparison:note:steps+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 634,
+  "source": null,
+  "references": [
+    {
+      "label": "Microsoft Support: Date systems in Excel",
+      "url": "https://support.microsoft.com/en-us/office/date-systems-in-excel-e7fe7167-48a9-4b96-bb53-5612a800b487"
+    }
+  ],
+  "cover": "/blog/images/spreadsheet-locale-and-date-safety.png",
+  "coverAlt": "Spreadsheet locale bugs: dates, decimal separators, and leading zeros: Stored values, Display locale, Ambiguous text, Date semantics.",
+  "concepts": [
+    "Stored values",
+    "Display locale",
+    "Ambiguous text",
+    "Date semantics",
+    "Roundtrip checks"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "rail-left",
+    "signature": "exhibit:rail-left",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 12
+  },
+  "contentHash": "db12125880c4e25f418ca89f17d521da0fb28b8a82583bfd9df4ac204a79b845",
+  "intro": "Compare stored cell values as well as displayed text when a workbook crosses locale boundaries. Opening an existing numeric cell is different from parsing a CSV string such as 03/04/2026. Declare import rules explicitly and preserve identifiers as text when leading zeros or exact digits matter.",
+  "sections": [
+    {
+      "id": "where-values-can-change-meaning-1",
+      "title": "Where values can change meaning",
+      "html": "<p>A numeric cell can display as a date, percentage, currency, or plain number depending on its format. Changing the display does not necessarily change the underlying value, while parsing imported text can change the value itself. Record which transformations the workflow performs: opening an existing workbook, importing CSV, copying text, recalculating formulas, or exporting to another format. These operations have different risks. Verify date system handling using the selected spreadsheet engine's documentation, particularly when workbooks originate from environments with different date system settings.</p><p>The string 03/04/2026 can mean different calendar dates in different locales. A value such as 1,234 may be interpreted as a grouped integer or a decimal value depending on parsing rules. For structured imports, prefer an explicit schema and a declared locale. Where the interface accepts ambiguous text, show a preview of the parsed result before committing large changes. Do not infer the desired convention solely from browser language if the business dataset uses a fixed regional standard independent of the user's personal preferences.</p><table><thead><tr><th>Input</th><th>Question the importer must answer</th></tr></thead><tbody><tr><td>03/04/2026</td><td>March 4 or April 3 under the declared date convention?</td></tr><tr><td>1,234</td><td>Grouped integer, decimal number, or literal text?</td></tr><tr><td>000127</td><td>Identifier whose leading zeros must be preserved?</td></tr><tr><td>2026-04-03</td><td>A calendar date or part of an explicitly timed event?</td></tr></tbody></table><p>Give a bulk import a typed schema where possible. If the source has no schema, show a preview that makes the parsed value visible alongside the original string. A display format applied after an incorrect parse can conceal the mistake rather than repair it.</p><p>For exported data, document the convention the receiver should use. A CSV does not carry the same formatting and type information as a workbook. Even a carefully exported identifier may be auto-converted by the next application. Include a field specification or choose a structured transfer format when exact types are essential. Test the real receiving application rather than checking only that the generated text contains the expected characters.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "comparison",
+        "title": "Three layers can disagree about the same cell",
+        "items": [
+          {
+            "label": "Source string",
+            "detail": "What the import receives, including separators and zeros"
+          },
+          {
+            "label": "Stored value",
+            "detail": "The type and value produced by parsing"
+          },
+          {
+            "label": "Displayed text",
+            "detail": "The locale and format applied when showing that value"
+          }
+        ],
+        "alt": "Source text, parsed value, and displayed text are separate layers of spreadsheet interpretation.",
+        "caption": "Checking only the displayed result can miss an incorrectly stored value.",
+        "src": "/blog/images/spreadsheet-locale-and-date-safety-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/spreadsheet-locale-and-date-safety-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "calendar-dates-are-not-timestamps-2",
+      "title": "Calendar dates are not timestamps",
+      "html": "<p>A contract start date is often a calendar date, while an audit timestamp identifies a moment in time. Converting both through the same timezone logic can shift a date unexpectedly. Preserve the intended data type through extraction, APIs, and exports. If a workbook stores local times without timezone information, document the assumption used by downstream systems. Test daylight saving transitions where relevant, but avoid inventing a timezone conversion for values that never represented an instant. A clean display can still conceal a changed business meaning.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "run-a-payroll-fixture-through-the-complete-round-trip-3",
+      "title": "Run a payroll fixture through the complete round trip",
+      "html": "<p>Use a synthetic workbook containing employee start dates, decimal hours, percentages, currency totals, and identifiers with leading zeros. Open and export it under the supported language and locale settings. Compare cell values, formulas, and displayed text with the expected fixture. Include an ambiguous CSV date and a long numeric identifier to expose automatic conversion. Confirm that a text identifier remains text and that the total is unchanged after a round trip. Keep personal data out of the fixture while retaining the exact format patterns that matter.</p><ul><li>Declare locale and date system assumptions for every structured ingestion path.</li><li>Preserve identifiers as text when arithmetic is not intended.</li><li>Compare stored values as well as rendered formats after a round trip.</li><li>Require a parsing preview for ambiguous bulk text imports.</li><li>Document how downstream services distinguish calendar dates from timestamps.</li></ul>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "A locale test follows values through the receiver",
+        "items": [
+          {
+            "label": "Fixture",
+            "detail": "Dates, decimal hours, currency, and text identifiers"
+          },
+          {
+            "label": "Import",
+            "detail": "Apply the declared parsing schema or reviewed preview"
+          },
+          {
+            "label": "Edit and export",
+            "detail": "Check formulas and preserve intended value types"
+          },
+          {
+            "label": "Receiving application",
+            "detail": "Verify values and presentation after the actual round trip"
+          }
+        ],
+        "alt": "A test workbook moves through import, editing, export, and its destination application.",
+        "caption": "A correct CSV string can still be misinterpreted by the next application's import rules.",
+        "src": "/blog/images/spreadsheet-locale-and-date-safety-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/spreadsheet-locale-and-date-safety-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

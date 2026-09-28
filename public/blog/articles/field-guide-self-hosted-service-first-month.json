@@ -1,0 +1,132 @@
+{
+  "slug": "field-guide-self-hosted-service-first-month",
+  "title": "Self hosted collaboration: an operating plan for the first month",
+  "description": "Establish service ownership, document acceptance, pilot support, restoration, and rollout evidence.",
+  "category": "Self-hosting",
+  "format": "playbook",
+  "tags": [
+    "Self-hosting",
+    "Operations",
+    "Collaboration",
+    "Backup and recovery"
+  ],
+  "structure": "prose:prose+sequence:example:prose+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 704,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: A Practical Guide to Self-Hosted Collaboration",
+      "url": "https://shimodocs.com/blog/self-hosted-collaboration-guide"
+    }
+  ],
+  "cover": "/blog/images/field-guide-self-hosted-service-first-month.png",
+  "coverAlt": "Self hosted collaboration: an operating plan for the first month: Service owner, Acceptance gate, Pilot cohort, Incident runbook.",
+  "concepts": [
+    "Service owner",
+    "Acceptance gate",
+    "Pilot cohort",
+    "Incident runbook",
+    "Recovery target"
+  ],
+  "recipe": {
+    "hero": "exhibit",
+    "body": "journal",
+    "signature": "exhibit:journal",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 96
+  },
+  "contentHash": "73b20f6261a0cd501b0db6c9435a90cbbc97cf9c2ed0ee58164f66ad69c3cca9",
+  "intro": "The first month of self hosted collaboration should establish a supported service: named owners, complete document tests, a bounded pilot, and a demonstrated recovery path. Schedule those outcomes rather than measuring progress only by installation steps. Expansion needs evidence that ordinary users and operators can do their jobs.",
+  "sections": [
+    {
+      "id": "week-one-define-the-service-1",
+      "title": "Week one: define the service",
+      "html": "<p>Assign business, application, infrastructure, identity, and support owners. Write the intended workload, supported file types, required integrations, availability expectations, and recovery targets. Use the product's current deployment documentation to establish prerequisites and supported topology. Record certificate, database, storage, network, and licensing responsibilities. Make the document lifecycle explicit: who stores source files, how first opening works, where active editing state lives, and how results return to the business application. A short service description with named owners prevents the installation from becoming a collection of components that nobody is accountable for as a whole.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "week-two-test-complete-workflows-2",
+      "title": "Week two: test complete workflows",
+      "html": "<p>Prepare sanitized documents representing normal and difficult work. Test creation or import, first open, collaborative edits, saved state, download, and reopening. Include denied access, expired credentials, unsupported files, and an unavailable source endpoint. Observe failures from the requesting component's network rather than relying only on an administrator's browser. Record acceptance results with correlation identifiers and safe logs. Check that users receive understandable states when conversion or export is still processing. Resolve contract ambiguities such as what Saved means before the pilot starts, because support staff need consistent explanations for these milestones.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "The first month creates four verifiable outcomes",
+        "items": [
+          {
+            "label": "Service definition",
+            "detail": "Owners, lifecycle, workload, and recovery expectations."
+          },
+          {
+            "label": "Acceptance",
+            "detail": "Complete workflows and meaningful failures are tested."
+          },
+          {
+            "label": "Pilot",
+            "detail": "Users finish work; support follows the runbook."
+          },
+          {
+            "label": "Operations",
+            "detail": "Restoration and maintenance are demonstrated."
+          }
+        ],
+        "alt": "Four stage outcomes support controlled expansion.",
+        "caption": "Calendar dates help coordinate the work; gates determine readiness.",
+        "src": "/blog/images/field-guide-self-hosted-service-first-month-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-self-hosted-service-first-month-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "week-three-run-a-bounded-pilot-3",
+      "title": "Week three: run a bounded pilot",
+      "html": "<p>Choose a team with meaningful but manageable work, such as a procurement group preparing weekly supplier reports. Keep a clear route to the previous workflow during the pilot. Train users on the specific business tasks and tell them where to report incidents. Measure task completion, startup delays, failed exports, administrator interventions, and recurring confusion. Have support staff diagnose one staged failure using the runbook rather than asking the original engineer directly. The pilot should establish whether the service is operable by its intended team, not merely whether enthusiastic early users can work around problems.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "week-four-rehearse-operation-4",
+      "title": "Week four: rehearse operation",
+      "html": "<p>Restore a backup into an isolated environment and verify documents, identities, permissions, and integration mappings. Apply a supported update in staging and record the maintenance steps and rollback limits. Confirm monitoring for user facing failures, queue delays, storage errors, and certificate expiry. Agree on incident severity, escalation, and communication ownership. Review pilot findings with business owners and decide which gaps must be resolved before expansion. Add capacity based on measured workloads rather than extrapolating from user account counts. Keep configuration and runbooks in a maintainable location with access for the responsible operators.</p><p>The four-week schedule is a planning aid, not permission to move on with an unresolved dependency. Give each stage an exit condition and a named reviewer. If source retrieval still fails intermittently, a pilot deadline does not make the problem acceptable by itself.</p><ol><li><strong>Service gate:</strong> owners agree on lifecycle, workload, recovery targets, and support boundaries.</li><li><strong>Workflow gate:</strong> representative files complete first open, editing, save, export, and reopen.</li><li><strong>Pilot gate:</strong> ordinary users finish agreed tasks and support staff diagnose a staged failure.</li><li><strong>Operations gate:</strong> operators demonstrate restoration and the supported update procedure.</li></ol><p>For the procurement pilot, select a weekly report with a workbook and narrative document. Measure completion and failures at the user task level, then correlate them with service observations. If reports complete only because the installer intervenes each Friday, the pilot has exposed an ownership or automation gap.</p><p>At the expansion review, record accepted limitations and their consequences. A file type outside the agreed scope should have a clear user route, while a failed core save path needs correction before broader use. Keep issues as concrete owned work, with the evidence needed to close each one. This makes the next wave a deliberate service decision rather than an automatic date on a rollout calendar.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "Can the service expand beyond the pilot?",
+        "items": [
+          {
+            "label": "Expand",
+            "detail": "Core tasks pass and operators can recover the service."
+          },
+          {
+            "label": "Hold",
+            "detail": "A mandatory task or ownership gap remains unresolved."
+          },
+          {
+            "label": "Bounded exception",
+            "detail": "Owner accepts a specific limit with a documented route."
+          }
+        ],
+        "alt": "Expansion, hold, or a bounded exception requires an explicit decision.",
+        "caption": "Tie the decision to observed tasks and assigned operating capability.",
+        "src": "/blog/images/field-guide-self-hosted-service-first-month-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-self-hosted-service-first-month-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "next-wave-readiness-5",
+      "title": "Next wave readiness",
+      "html": "<ul><li>Confirm owners, workload, recovery targets, and supported architecture.</li><li>Pass complete document workflows and meaningful failure cases.</li><li>Review pilot completion rates and support interventions.</li><li>Demonstrate backup restoration and a supported maintenance procedure.</li><li>Assign remaining issues and establish a controlled expansion schedule.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

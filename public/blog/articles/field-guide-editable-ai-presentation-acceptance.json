@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-editable-ai-presentation-acceptance",
+  "title": "Editable AI PowerPoint: inspect objects before accepting the deck",
+  "description": "Verify editable charts, text, diagrams, themes, and the next real revision in the recipient application.",
+  "category": "Office workflows",
+  "format": "walkthrough",
+  "tags": [
+    "Presentations",
+    "AI documents",
+    "Accessibility",
+    "Document conversion"
+  ],
+  "structure": "prose+document:prose:example:prose:comparison+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 672,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeDex: An editable AI PowerPoint checklist for everyday work",
+      "url": "https://officedex.ai/blog/editable-powerpoint-checklist/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-editable-ai-presentation-acceptance.png",
+  "coverAlt": "Editable AI PowerPoint: inspect objects before accepting the deck: Text objects, Chart data, Layout hierarchy, Asset ownership.",
+  "concepts": [
+    "Text objects",
+    "Chart data",
+    "Layout hierarchy",
+    "Asset ownership",
+    "Revision task"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "reading-room",
+    "signature": "centered:reading-room",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 101
+  },
+  "contentHash": "8ca88cc91637661eeab742080a388f97820fe25b415c6e1ce9af337a806dc116",
+  "intro": "An editable AI PowerPoint deck should let the team change the objects that matter: text, figures, chart data, diagrams, and branding. Inspect the exported file and perform the next revision task. A presentation file extension and an attractive preview do not establish practical editability.",
+  "sections": [
+    {
+      "id": "define-required-editability-1",
+      "title": "Define required editability",
+      "html": "<p>List the changes the team expects to make after generation: update a title, replace a figure, change chart values, move a diagram node, apply the brand theme, or translate a slide. A background image may be acceptable for decoration but unsuitable for a chart that changes weekly. Specify which elements must be native editable objects and which may remain raster images. Inspect the actual exported presentation rather than assuming an editable format guarantees editable content. Also identify the target applications and versions, because a deck's usability can differ when opened in the recipient's environment.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "document",
+        "title": "Inspect the objects that future editors must change",
+        "items": [
+          {
+            "label": "Text",
+            "detail": "Selectable text with sensible grouping and reading order."
+          },
+          {
+            "label": "Charts",
+            "detail": "Required values, series, and labels are editable."
+          },
+          {
+            "label": "Diagrams",
+            "detail": "Shapes and connectors support the intended revision."
+          },
+          {
+            "label": "Layouts",
+            "detail": "Theme and placeholders support reuse."
+          }
+        ],
+        "alt": "Four object families determine the deck's practical editability.",
+        "caption": "Inspect the exported file in the target application.",
+        "src": "/blog/images/field-guide-editable-ai-presentation-acceptance-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-editable-ai-presentation-acceptance-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "inspect-structure-and-data-2",
+      "title": "Inspect structure and data",
+      "html": "<p>Select text and shapes individually, check grouping, and verify that reading order makes sense. For charts, inspect whether the underlying values can be edited and whether labels match the source data. Confirm that diagrams contain manageable objects rather than hundreds of fragmented paths or one flat image. Review fonts, theme colors, slide masters, and placeholders if the workflow relies on consistent branding. Use a representative slide with a dense table and one with a visual diagram. Simple title slides rarely reveal the structural problems that make generated decks costly to maintain.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "try-next-week-s-sales-update-3",
+      "title": "Try next week's sales update",
+      "html": "<p>Suppose a manager uses an AI deck for a weekly sales meeting. Before accepting it, update the regional totals, add a newly opened territory, and replace a product image. Record the time spent and any layout damage. Check whether the total and explanatory sentence still agree after changing the chart. Then duplicate a slide and apply the standard template. This revision exercise tests the deck's practical reuse, not just its first presentation. If the manager must recreate a chart or rebuild the entire slide to change one number, record that as an editability failure.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "check-delivery-and-asset-rights-4",
+      "title": "Check delivery and asset rights",
+      "html": "<p>Open the file in the intended recipient application and inspect text wrapping, missing fonts, object placement, animations if required, and notes. Export a PDF and compare it with the editable file's visible content. Confirm that images and other assets have an appropriate source and permitted use; generation does not automatically establish rights to every incorporated asset. Review alternative text, color contrast, and reading order according to the audience's accessibility needs. Remove temporary notes, placeholder labels, and unsupported factual claims. A useful acceptance process covers structure, accuracy, accessibility, and distribution together.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "object-checks-by-revision-task-5",
+      "title": "Object checks by revision task",
+      "html": "<table><thead><tr><th>Next task</th><th>Inspect</th><th>Common obstacle</th></tr></thead><tbody><tr><td>Update sales figures</td><td>Editable values, series, and chart labels</td><td>Chart is a flat picture</td></tr><tr><td>Translate the deck</td><td>Text objects and room for longer labels</td><td>Text baked into images</td></tr><tr><td>Change a process step</td><td>Manageable shapes, connectors, and grouping</td><td>Diagram is fragmented or flattened</td></tr><tr><td>Apply branding</td><td>Theme, fonts, placeholders, and reusable layouts</td><td>Every slide needs manual formatting</td></tr></tbody></table><p>For the weekly sales update, change one value that alters a chart label and one territory name that wraps to two lines. Both are ordinary revisions, but they expose different structural weaknesses. Inspect whether related totals and narrative remain consistent, then reopen the deck in the application used by the presenter.</p><p>Record limitations precisely. Background photography can reasonably remain an image; a chart reused every week may need editable data. A complex diagram might be acceptable as an image for one final presentation but unsuitable as a reusable template. The acceptance decision should reflect the planned lifecycle, and any regeneration route should preserve approved facts and required assets.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "sequence",
+        "title": "Next week's revision is the acceptance test",
+        "items": [
+          {
+            "label": "Update",
+            "detail": "Change totals, territory labels, and one image."
+          },
+          {
+            "label": "Inspect",
+            "detail": "Check layout, calculations, and related commentary."
+          },
+          {
+            "label": "Reopen",
+            "detail": "Use the presenter's application and environment."
+          },
+          {
+            "label": "Deliver",
+            "detail": "Compare final editable and PDF versions."
+          }
+        ],
+        "alt": "An ordinary revision is followed by inspection, reopening, and delivery.",
+        "caption": "Measure repair work instead of relying only on the first preview.",
+        "src": "/blog/images/field-guide-editable-ai-presentation-acceptance-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-editable-ai-presentation-acceptance-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "deck-decision-notes-record-6",
+      "title": "Deck Decision notes record",
+      "html": "<ul><li>List the elements that must remain editable for future work.</li><li>Inspect text, charts, tables, diagrams, themes, and object grouping.</li><li>Perform the next expected revision and measure repair effort.</li><li>Open the file in recipient software and inspect the exported PDF.</li><li>Review factual claims, assets, notes, and accessibility.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

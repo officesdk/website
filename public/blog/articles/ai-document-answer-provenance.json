@@ -1,0 +1,143 @@
+{
+  "slug": "ai-document-answer-provenance",
+  "title": "AI document citations: link answers to the exact source version",
+  "description": "Attach useful provenance to generated answers so readers can inspect evidence, detect stale sources, and review uncertainty.",
+  "category": "AI & documents",
+  "format": "walkthrough",
+  "tags": [
+    "AI documents",
+    "RAG",
+    "Document search",
+    "Version control",
+    "Access control"
+  ],
+  "structure": "example+layers:steps:note:prose:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 769,
+  "source": null,
+  "references": [
+    {
+      "label": "NIST: Generative AI Profile",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+    }
+  ],
+  "cover": "/blog/images/ai-document-answer-provenance.png",
+  "coverAlt": "AI document citations: link answers to the exact source version: Source version, Retrieved passage, Answer citation, Access boundary.",
+  "concepts": [
+    "Source version",
+    "Retrieved passage",
+    "Answer citation",
+    "Access boundary",
+    "Evidence review"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "wide",
+    "signature": "centered:wide",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 29
+  },
+  "contentHash": "e3a93040e5dfcf8a473a972f2dc470912aa481529e22bedb83cd5c6a64e97ce4",
+  "intro": "Store the document version and supported passage location behind each citation. A link to the current filename may show different wording tomorrow. Validate that citations refer to supplied evidence, show when sources have changed, and keep saved answers subject to the source access policy.",
+  "sections": [
+    {
+      "id": "store-provenance-with-the-answer-1",
+      "title": "Store provenance with the answer",
+      "html": "<p>Store the business document ID, source version or digest, extraction version, and available location reference for each retrieved passage. A link to the current document can lead to different wording tomorrow. Where historical access is supported, link to the version used for generation. Otherwise, explain that the source has changed and offer a controlled refresh. Avoid inventing page numbers when extraction only supplies sections or sheet coordinates. The reference should be precise enough for a reader to locate the evidence using capabilities the document viewer actually provides.</p><pre><code>citation record\n  document_id: the authorized business document\n  source_version: the version used for extraction\n  passage_id: a stable reference within that extraction\n  location: a supported section, sheet, cell, or page reference</code></pre><p>These fields illustrate provenance, not a universal API. The important relationship is that the answer's cited passage can be resolved to the exact source state. If only a current-document link is available, say that the content may have changed instead of presenting the link as a frozen source.</p><p>Validate citation identifiers after generation. Reject or repair references to passages that were never supplied. Then evaluate whether the cited text actually supports the claim. Identifier validation catches fabricated links; it does not catch an answer that cites a real passage about the wrong topic. For sensitive decisions, use a review task that asks someone to locate the evidence and assess the inference, rather than counting the number of citation badges on the page.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "layers",
+        "title": "A useful citation resolves through the full provenance chain",
+        "items": [
+          {
+            "label": "Generated claim",
+            "detail": "The statement a reader wants to verify"
+          },
+          {
+            "label": "Retrieved passage",
+            "detail": "Evidence actually supplied to the generation process"
+          },
+          {
+            "label": "Extraction location",
+            "detail": "Supported reference within a specific extraction"
+          },
+          {
+            "label": "Source version",
+            "detail": "The exact authorized document state behind that passage"
+          }
+        ],
+        "alt": "A generated claim links through a passage and extraction location to its source version.",
+        "caption": "A valid citation identifier is necessary but does not prove the passage supports the claim.",
+        "src": "/blog/images/ai-document-answer-provenance-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/ai-document-answer-provenance-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "check-both-citation-identity-and-claim-support-2",
+      "title": "Check both citation identity and claim support",
+      "html": "<p>Give the generation process stable identifiers for the passages it receives and validate that returned citations refer to those passages. A syntactically valid citation is not proof that the passage supports the claim, so include a review or evaluation step for important use cases. Present quoted source text separately from generated explanation where useful. If no retrieved material supports a requested answer, provide an explicit uncertainty or insufficiency result. A polished answer with unrelated references can be more misleading than an answer that openly identifies its evidential limit.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "permissions-still-apply-to-stored-answers-3",
+      "title": "Permissions still apply to stored answers",
+      "html": "<p>Opening a citation must perform the normal document permission check. Stored answers may themselves reveal protected information, so their visibility should reflect the source access model and the chosen sharing policy. Consider what happens when a source is deleted, access is revoked, or a document moves to a restricted folder. A cached answer should not become a permanent alternative route to material the user can no longer access. Define these behaviors alongside retention and collaboration features rather than adding them after provenance links are already widely shared.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "source-freshness-needs-a-visible-state-4",
+      "title": "Source freshness needs a visible state",
+      "html": "<p>Treat source freshness as an explicit state of a stored answer. It can be current, based on a superseded version, unavailable because the source was removed, or inaccessible to the present reader. These states imply different actions. A superseded answer may still be useful as historical evidence if clearly labeled. An inaccessible answer may itself need to be hidden under the chosen sharing policy.</p><p>A refresh should create a traceable new result using current authorized sources. Do not silently replace evidence while leaving the old generated text unchanged. If the answer changes materially, preserve the relationship between results when the workflow requires history, and identify which source revision caused the change.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "evaluate-whether-a-person-can-verify-the-claim-5",
+      "title": "Evaluate whether a person can verify the claim",
+      "html": "<ul><li>Ask reviewers to locate the exact evidence for important generated claims.</li><li>Check that citations reference supplied passages and supported locations.</li><li>Show source version and freshness clearly when documents change.</li><li>Verify access revocation and deletion behavior for saved answers.</li><li>Record unsupported claims separately from broken citation links.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "change-a-policy-threshold-and-reopen-the-old-answer-6",
+      "title": "Change a policy threshold and reopen the old answer",
+      "html": "<p>Generate an answer from a synthetic travel policy that states one approval threshold. Publish a new policy version with a different threshold, then reopen the saved answer. The interface should identify the version originally used and avoid presenting it as a fresh answer about the new policy. Regenerate on request or through the documented refresh policy, retaining the relationship between old and new results where appropriate. This exercise tests version awareness, citation routing, and permission handling together, without claiming that citations alone eliminate model errors.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "An answer must reveal that its source policy changed",
+        "items": [
+          {
+            "label": "Original policy",
+            "detail": "Generate the answer from a known threshold and version"
+          },
+          {
+            "label": "Policy revision",
+            "detail": "Publish a different threshold in a new version"
+          },
+          {
+            "label": "Saved answer reopened",
+            "detail": "Identify the old source rather than implying freshness"
+          },
+          {
+            "label": "Requested refresh",
+            "detail": "Generate a new result from current authorized evidence"
+          }
+        ],
+        "alt": "A stored policy answer is reopened after its source threshold changes.",
+        "caption": "Updating a source link alone does not update the reasoning in the generated answer.",
+        "src": "/blog/images/ai-document-answer-provenance-figure-6.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/ai-document-answer-provenance-figure-6-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

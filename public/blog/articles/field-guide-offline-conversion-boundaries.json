@@ -1,0 +1,132 @@
+{
+  "slug": "field-guide-offline-conversion-boundaries",
+  "title": "Offline document conversion: dependencies, sandboxing, and cleanup",
+  "description": "Prove the offline boundary and validate local outputs under ordinary operation, failure, and maintenance.",
+  "category": "Self-hosting",
+  "format": "architecture",
+  "tags": [
+    "Document conversion",
+    "Self-hosting",
+    "Security",
+    "Operations"
+  ],
+  "structure": "prose:prose+layers:example:prose+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 685,
+  "source": null,
+  "references": [
+    {
+      "label": "OfficeAPI: Keeping document conversion offline, on device and in your cloud",
+      "url": "https://officeapi.ai/blog/offline-document-processing/"
+    }
+  ],
+  "cover": "/blog/images/field-guide-offline-conversion-boundaries.png",
+  "coverAlt": "Offline document conversion: dependencies, sandboxing, and cleanup: Processing boundary, Local dependencies, Parser sandbox, Temporary data.",
+  "concepts": [
+    "Processing boundary",
+    "Local dependencies",
+    "Parser sandbox",
+    "Temporary data",
+    "Output validation"
+  ],
+  "recipe": {
+    "hero": "visual-first",
+    "body": "reading-room",
+    "signature": "visual-first:reading-room",
+    "accent": "#883b62",
+    "soft": "#f6eaf0",
+    "number": 105
+  },
+  "contentHash": "00ef9ec53ef974c07c69fcef8b8e9ba01ba049c3c0b2f7d641de48ec43549d52",
+  "intro": "Offline document conversion requires a complete local processing path with known dependencies, parser isolation, resource limits, and controlled temporary data. Test output fidelity and failure cleanup inside the promised boundary. Installing a local binary does not establish offline operation for every format or maintenance stage.",
+  "sections": [
+    {
+      "id": "define-what-offline-must-cover-1",
+      "title": "Define what offline must cover",
+      "html": "<p>Specify whether the requirement applies during ordinary operation, installation, license validation, updates, or all of those stages. Identify the required input and output formats, fonts, dictionaries, templates, and supporting libraries. Test the exact engine and version without permitted external connectivity to discover hidden dependencies. Do not claim offline independence from a single successful conversion if other formats or initialization paths contact external systems. For a private cloud deployment, record where workers, logs, and temporary files run. The boundary should cover the complete conversion request and its cleanup, not only the location of the main executable.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "treat-input-files-as-untrusted-2",
+      "title": "Treat input files as untrusted",
+      "html": "<p>Document parsers process complex structures supplied by users or other systems. Run them with appropriate isolation, restricted credentials, resource limits, and no unnecessary network access. Establish file size, decompression, processing time, and memory limits based on tested workloads. Inspect how external links, embedded objects, and unsupported features are handled by the chosen engine. Avoid granting access to unrelated document storage or host directories. Keep security updates and dependency review in the maintenance plan, because offline operation limits data egress but does not eliminate vulnerabilities or denial of service risks in the processing code.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "A local converter still has a data lifecycle",
+        "items": [
+          {
+            "label": "Input",
+            "detail": "Identified source enters the permitted boundary."
+          },
+          {
+            "label": "Parser",
+            "detail": "Restricted process uses local dependencies and limits."
+          },
+          {
+            "label": "Candidate output",
+            "detail": "Temporary result is validated before publication."
+          },
+          {
+            "label": "Cleanup",
+            "detail": "Success, failure, cancellation, and crash paths are covered."
+          }
+        ],
+        "alt": "Input, parsing, validation, and cleanup stay within the assessed boundary.",
+        "caption": "Local execution alone does not specify these lifecycle rules.",
+        "src": "/blog/images/field-guide-offline-conversion-boundaries-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-offline-conversion-boundaries-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "convert-a-confidential-audit-pack-3",
+      "title": "Convert a confidential audit pack",
+      "html": "<p>Suppose an audit team needs to convert financial documents to PDF inside an isolated workstation environment. Prepare sanitized examples containing charts, special fonts, long tables, and external references. Confirm that processing finishes without unauthorized connections and that output matches the required information. Interrupt a job and inspect temporary directories, logs, and partially written files. Restart it and verify a clear result rather than a corrupted output being mistaken for success. This exercise tests confidentiality, fidelity, and lifecycle behavior together, showing whether the engine and wrapper are suitable for the actual audit workflow.</p><p>Build the test around the offline requirement's actual scope. If installation and updates may use an approved transfer route, distinguish those stages from conversion during normal operation. If every stage must remain isolated, verify package completeness, licensing behavior, and supported maintenance without external connectivity.</p><table><thead><tr><th>Test</th><th>Inspect</th></tr></thead><tbody><tr><td>Cold start</td><td>Initialization, fonts, templates, and license dependencies</td></tr><tr><td>Representative formats</td><td>Required inputs complete without remote processing</td></tr><tr><td>Interrupted job</td><td>Partial outputs, caches, temporary bytes, and logs</td></tr><tr><td>Updated engine</td><td>Same boundary and accepted results after maintenance</td></tr></tbody></table><p>For the audit pack, include a document that references an external asset. Decide whether the workflow should reject it, ignore the reference with a visible limitation, or use a supplied local replacement according to supported behavior. Do not allow a silent download merely because it improves rendering.</p><p>Inspect cleanup after forced termination as well as normal cancellation. A crashed process cannot run its usual cleanup code, so the wrapper or service may need an owned reconciliation process. Treat retained diagnostics as another sensitive copy, with access and expiry rules. The offline boundary protects where processing occurs; the data lifecycle protects what remains afterward.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "publish-only-validated-outputs-4",
+      "title": "Publish only validated outputs",
+      "html": "<p>Write candidate outputs to a temporary location, then validate format, readability, expected page or sheet coverage, and required content before publishing them. A process exit code alone may not establish a usable result. Use identifiers and integrity digests to associate output with the intended source version. Define cleanup for successful jobs, failures, cancellations, and crashes. Protect temporary storage according to source sensitivity and document how retained diagnostic artifacts are controlled. If conversion omits unsupported features, expose that limitation to the workflow instead of silently presenting the result as a complete equivalent of the source.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "An external asset needs an explicit policy",
+        "items": [
+          {
+            "label": "Reject",
+            "detail": "Report that the required source is outside the boundary."
+          },
+          {
+            "label": "Omit with limitation",
+            "detail": "Make the incomplete result visible to the workflow."
+          },
+          {
+            "label": "Local replacement",
+            "detail": "Use an approved supplied asset if supported."
+          }
+        ],
+        "alt": "External references can be rejected, visibly omitted, or replaced locally.",
+        "caption": "Choose supported behavior rather than permitting an unplanned fetch.",
+        "src": "/blog/images/field-guide-offline-conversion-boundaries-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-offline-conversion-boundaries-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "boundary-and-output-decision-notes-5",
+      "title": "Boundary and output Decision notes",
+      "html": "<ul><li>Define the network boundary and every stage covered by offline requirements.</li><li>Package required local fonts, libraries, and format support.</li><li>Apply parser isolation and tested resource limits.</li><li>Exercise interruption, restart, temporary storage, and cleanup.</li><li>Validate outputs before publishing them as business records.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

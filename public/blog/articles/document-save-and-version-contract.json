@@ -1,0 +1,132 @@
+{
+  "slug": "document-save-and-version-contract",
+  "title": "What does “saved” mean in an embedded document editor?",
+  "description": "Distinguish session updates, durable application versions, and exported files to build a save contract users can trust.",
+  "category": "Integration",
+  "format": "explainer",
+  "tags": [
+    "Embedded editing",
+    "Version control",
+    "Document storage",
+    "Collaboration"
+  ],
+  "structure": "prose+layers:prose:steps:example+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 641,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: HTTP conditional requests",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Conditional_requests"
+    }
+  ],
+  "cover": "/blog/images/document-save-and-version-contract.png",
+  "coverAlt": "What does “saved” mean in an embedded document editor?: Save event, Stored candidate, Content check, Version publish.",
+  "concepts": [
+    "Save event",
+    "Stored candidate",
+    "Content check",
+    "Version publish",
+    "Recovery state"
+  ],
+  "recipe": {
+    "hero": "report",
+    "body": "rail-left",
+    "signature": "report:rail-left",
+    "accent": "#696030",
+    "soft": "#f1f3df",
+    "number": 4
+  },
+  "contentHash": "5618403e469ab56cb420cc4b28acd02271ca4d347d858413dbad37c666332ebe",
+  "intro": "“Saved” may mean that edits reached the editing service, while the latest downloadable file is still being prepared. Your application should name the persistence milestone it can actually verify. The user needs to know whether their work is durable and whether Download will return that same state.",
+  "sections": [
+    {
+      "id": "the-persistence-milestones-users-encounter-1",
+      "title": "The persistence milestones users encounter",
+      "html": "<p>Document the states supported by the actual integration: accepted locally, synchronized with the editing service, persisted by that service, and available as a business file version are possible examples. Do not invent states that the provider cannot observe. Identify which system is authoritative during an active session and after it closes. If export runs asynchronously, distinguish a durable editing state from the latest downloadable file. This vocabulary should appear consistently in application messages, monitoring, support procedures, and agreements about recovery after an interruption.</p><p>Use separate state fields when the architecture exposes separate milestones. For example, <code>editing_state_confirmed</code> can describe the last acknowledged editor state, while <code>published_file_version</code> identifies a retrievable business file. These are example application concepts; the provider may expose different or fewer signals. Never manufacture a precise status from a timer after the user stops typing.</p><table><thead><tr><th>Visible message</th><th>Evidence it requires</th></tr></thead><tbody><tr><td>Changes synchronized</td><td>The documented editing service acknowledgement</td></tr><tr><td>Preparing download</td><td>A tracked export or publication operation is pending</td></tr><tr><td>Version ready</td><td>The version record references validated retrievable bytes</td></tr></tbody></table><p>Failure messages also need this distinction. If export fails after the editor has persisted changes, saying that all work was lost is inaccurate. Say which result is unavailable and provide the supported recovery action. If the integration cannot prove persistence, avoid reassuring language that exceeds the available signal. Ask the provider which state survives a process restart, and reproduce that recovery in acceptance before deciding what the interface should promise.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Three distinct meanings of saved",
+        "items": [
+          {
+            "label": "Session state",
+            "detail": "Changes accepted through the editor's supported mechanism"
+          },
+          {
+            "label": "Durable editing state",
+            "detail": "Provider-confirmed state available for supported recovery"
+          },
+          {
+            "label": "Business file version",
+            "detail": "Validated bytes published for download and other workflows"
+          }
+        ],
+        "alt": "Session state, durable editing state, and a downloadable business version are separate layers.",
+        "caption": "Only show a milestone that the integration can observe and verify.",
+        "src": "/blog/images/document-save-and-version-contract-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-save-and-version-contract-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "a-save-event-is-not-necessarily-a-named-version-2",
+      "title": "A save event is not necessarily a named version",
+      "html": "<p>A service may produce frequent save notifications without every notification deserving a user visible version. Conversely, a deliberate submission may need a retained version even if little content changed. Define the policy for automatic checkpoints, named versions, approvals, and retention. Store enough metadata to link a durable object to its business document, source editing state, creation time, and integrity digest. Avoid using the arrival time of a notification as the only ordering signal when deliveries may be delayed or repeated across network retries.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "publish-retrievable-bytes-before-advancing-the-record-3",
+      "title": "Publish retrievable bytes before advancing the record",
+      "html": "<p>In a common storage pattern, download or generate the candidate file into a temporary object, validate it, and then update the business version record in a transaction or equivalent guarded operation. If metadata changes before the object is ready, readers may encounter a version that cannot be retrieved. If the object arrives but metadata fails, track it as an uncommitted candidate for reconciliation. The implementation details vary by storage system, but the invariant is simple: a published version must reference a readable, validated object.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "when-download-follows-the-last-edit-immediately-4",
+      "title": "When Download follows the last edit immediately",
+      "html": "<p>Suppose a finance team finishes a report and immediately downloads it for distribution. A save notification has arrived, but the new export is still processing. The application should either wait for the requested version, explain that preparation is underway, or offer a clearly labeled older version. It should not display Saved beside an unlabeled stale download. During acceptance, interrupt the export worker, restart it, and confirm that the final business record points to one complete version with a traceable relationship to the editing state.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "The finance report download can lag behind editing",
+        "items": [
+          {
+            "label": "Last edit",
+            "detail": "The user finishes the report"
+          },
+          {
+            "label": "Save acknowledgement",
+            "detail": "The editing state reaches its documented milestone"
+          },
+          {
+            "label": "File preparation",
+            "detail": "Export or publication remains pending"
+          },
+          {
+            "label": "Download ready",
+            "detail": "A specific published version becomes retrievable"
+          }
+        ],
+        "alt": "A download request may arrive between save acknowledgement and file publication.",
+        "caption": "Offer preparation status or an explicitly labeled older version while the requested file is pending.",
+        "src": "/blog/images/document-save-and-version-contract-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-save-and-version-contract-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "recovery-conditions-to-agree-before-launch-5",
+      "title": "Recovery conditions to agree before launch",
+      "html": "<ul><li>State which milestone the visible saved indicator represents.</li><li>Define how users identify the version returned by download and approval actions.</li><li>Verify temporary object cleanup after failed metadata commits.</li><li>Reconcile unprocessed save events after a worker restart.</li><li>Confirm that concurrent publication cannot move the current version backward.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

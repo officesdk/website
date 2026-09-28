@@ -1,0 +1,149 @@
+{
+  "slug": "distributed-document-backup-drill",
+  "title": "Document backup and restore: metadata, files, permissions, and pending jobs",
+  "description": "Test recovery of metadata, stored bytes, versions, permissions, and integration mappings as one coherent document state.",
+  "category": "Self-hosting",
+  "format": "playbook",
+  "tags": [
+    "Backup and recovery",
+    "Document storage",
+    "Self-hosting",
+    "Operations",
+    "Version control"
+  ],
+  "structure": "prose:prose:comparison+layers:note:example+sequence:checklist:prose",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 759,
+  "source": null,
+  "references": [
+    {
+      "label": "NIST: Contingency Planning Guide for Federal Information Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final"
+    }
+  ],
+  "cover": "/blog/images/distributed-document-backup-drill.png",
+  "coverAlt": "Document backup and restore: metadata, files, permissions, and pending jobs: State inventory, Consistent backup, Isolated restore, Version readback.",
+  "concepts": [
+    "State inventory",
+    "Consistent backup",
+    "Isolated restore",
+    "Version readback",
+    "Recovery evidence"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "wide",
+    "signature": "ledger:wide",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 32
+  },
+  "contentHash": "2a78f153aaddb769627f5785ab800ee7c736b5790ec6a7ae559b6a8211331530",
+  "intro": "Restore a coherent document relationship, not just a database and a bucket independently. The recovered metadata must point to the right bytes and versions, permissions must still work, and pending jobs must not damage the restored state. A backup drill should prove those outcomes in an isolated environment.",
+  "sections": [
+    {
+      "id": "inventory-authoritative-and-rebuildable-state-1",
+      "title": "Inventory authoritative and rebuildable state",
+      "html": "<p>List business metadata, source objects, editing representations where applicable, version mappings, permissions, encryption dependencies, configuration, and queued operations. Identify which data is authoritative and which can be regenerated, such as certain previews or search indexes. Verify the selected editor's documented backup and restore requirements; do not assume exporting a file captures every collaboration feature. Record dependencies between systems and the order in which they must recover. A missing mapping table can make intact content unreachable even when storage reports that every object was restored.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "choose-recovery-points-that-can-be-reconciled-2",
+      "title": "Choose recovery points that can be reconciled",
+      "html": "<p>Use the backup mechanisms supported by each system and define how their recovery points align. Options may include coordinated snapshots, transaction logs, immutable object versions, or a controlled pause in writes. The correct approach depends on the architecture. Establish how to detect metadata that points to missing objects and objects created after the restored metadata state. Plan reconciliation rather than assuming all backups share a perfectly synchronized timestamp. Document the acceptable recovery point and recovery time objectives as requirements to measure, not outcomes automatically guaranteed by a scheduled backup job.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "check-the-recovered-relationships-3",
+      "title": "Check the recovered relationships",
+      "html": "<table><thead><tr><th>Recovered component</th><th>Relationship to verify</th></tr></thead><tbody><tr><td>Document metadata</td><td>Current version belongs to the expected document and tenant</td></tr><tr><td>Stored object</td><td>Referenced bytes exist and match the selected recovery state</td></tr><tr><td>Permissions</td><td>Normal users receive the intended allow and deny decisions</td></tr><tr><td>Editor mapping</td><td>Business identity resolves to the correct supported editing state</td></tr><tr><td>Queued work</td><td>Resumed jobs cannot publish incompatible later results</td></tr></tbody></table><p>Run these checks with ordinary accounts as well as administrators. An administrator can often open files despite broken ownership or group mappings, masking a recovery defect. Include at least one denied-access case in the drill.</p><p>Record the selected recovery point and the maximum expected gap between systems. If storage contains an object newer than the database snapshot, classify it as an orphan or recoverable candidate according to policy. Do not automatically promote it because its timestamp is newer. If metadata references a missing object, keep the document's state explicit while reconciliation or a different recovery point is considered.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "layers",
+        "title": "A usable recovery reconnects several kinds of state",
+        "items": [
+          {
+            "label": "Business records",
+            "detail": "Document identity, tenant, current version, and ownership"
+          },
+          {
+            "label": "Content",
+            "detail": "Source objects and retained versions at the recovery point"
+          },
+          {
+            "label": "Integration state",
+            "detail": "Supported editor mappings and persistence dependencies"
+          },
+          {
+            "label": "Access and jobs",
+            "detail": "Permissions, keys, and controlled background work"
+          }
+        ],
+        "alt": "Recovery reconnects business records, content, integration state, and access controls.",
+        "caption": "Independently successful backups do not prove those relationships are consistent.",
+        "src": "/blog/images/distributed-document-backup-drill-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/distributed-document-backup-drill-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "isolate-restored-services-from-production-effects-4",
+      "title": "Isolate restored services from production effects",
+      "html": "<p>Restore into an isolated environment with outbound notifications and production callbacks controlled. Recovered jobs or credentials should not send duplicate messages, overwrite live files, or reconnect to production services accidentally. Handle secrets through the approved recovery process and verify key availability without copying them into ad hoc notes. Decide which pending operations resume and which require reconciliation. A restore that boots successfully but replays old business actions can create a second incident, so include background workers and scheduled tasks in the isolation plan.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "restore-a-document-with-history-and-a-pending-job-5",
+      "title": "Restore a document with history and a pending job",
+      "html": "<p>Create a synthetic document, save several versions, change a collaborator's role, and leave one background preview job pending. Take the planned backups and restore them to the isolated environment. Open the current and historical versions, verify their content, and test access with both permitted and denied accounts. Reconcile the pending job and inspect for missing objects or duplicate versions. Record elapsed recovery time and any manual intervention. This exercise reveals whether the backup set preserves a usable business document rather than only independently readable infrastructure snapshots.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "The drill must include more than opening the latest file",
+        "items": [
+          {
+            "label": "Create test history",
+            "detail": "Save versions and change a collaborator role"
+          },
+          {
+            "label": "Restore in isolation",
+            "detail": "Apply the selected backup set and control outbound effects"
+          },
+          {
+            "label": "Verify behavior",
+            "detail": "Open current and historical versions; test allowed and denied users"
+          },
+          {
+            "label": "Reconcile work",
+            "detail": "Resolve pending jobs, missing references, and orphan candidates"
+          }
+        ],
+        "alt": "A backup drill restores version history, checks access, and reconciles background work.",
+        "caption": "Do not allow restored callbacks or notifications to target production unintentionally.",
+        "src": "/blog/images/distributed-document-backup-drill-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/distributed-document-backup-drill-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "evidence-required-before-reopening-access-6",
+      "title": "Evidence required before reopening access",
+      "html": "<ul><li>Compare restored document and version counts with the selected recovery point.</li><li>Verify content digests or equivalent integrity checks for representative objects.</li><li>Test permissions and required key access.</li><li>Record reconciliation actions and disabled external side effects.</li><li>Update the runbook with actual recovery duration and unresolved gaps.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "measure-the-recovery-users-actually-depend-on-7",
+      "title": "Measure the recovery users actually depend on",
+      "html": "<p>Measure recovery time from the agreed starting event to usable service, including verification and any reconciliation required before users return. Report preparation that was already completed: preprovisioned infrastructure, downloaded backups, or manually staged credentials can materially shorten a drill compared with an unplanned incident.</p><p>Keep a record of manual steps and their owners. A restoration that works only because one engineer remembers an undocumented mapping is not yet a repeatable procedure. After correcting the runbook, repeat the affected step rather than claiming the written instruction has been validated. The valuable result is an executable recovery procedure with a measured outcome and known remaining gaps.</p>",
+      "kind": "prose"
+    }
+  ]
+}

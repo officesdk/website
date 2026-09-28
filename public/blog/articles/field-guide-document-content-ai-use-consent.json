@@ -1,0 +1,129 @@
+{
+  "slug": "field-guide-document-content-ai-use-consent",
+  "title": "Can document AI reuse your content? Review purposes and consent",
+  "description": "Review inference, training, evaluation, logging, and consent as distinct uses of document information.",
+  "category": "AI & documents",
+  "format": "explainer",
+  "tags": [
+    "AI documents",
+    "Data privacy",
+    "Security"
+  ],
+  "structure": "prose+layers:comparison:example+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 697,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Your Content Is Training AI. Did You Actually Agree to That?",
+      "url": "https://shimodocs.com/blog/ai-training-content-control"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-content-ai-use-consent.png",
+  "coverAlt": "Can document AI reuse your content? Review purposes and consent: Purpose inventory, Training terms, Admin defaults, Retention evidence.",
+  "concepts": [
+    "Purpose inventory",
+    "Training terms",
+    "Admin defaults",
+    "Retention evidence",
+    "Consent authority"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "inset",
+    "signature": "ledger:inset",
+    "accent": "#315f9b",
+    "soft": "#eaf1f9",
+    "number": 56
+  },
+  "contentHash": "fa1d371608e6c66e0bab95e0acd63afa6f4cb773b3b744436c5f999442d12ca6",
+  "intro": "Review inference, training, evaluation, feedback, and logging as separate uses of document content. Check current terms for the exact service and configuration, then establish who can authorize each purpose. An employee's right to edit a document does not automatically include permission to approve its reuse.",
+  "sections": [
+    {
+      "id": "inventory-the-different-data-uses-1",
+      "title": "Inventory the different data uses",
+      "html": "<p>Trace document selections, prompts, generated responses, feedback, attachments, and contextual retrieval through the application and model provider. For each location, ask what is stored, why, for how long, and who can access it. Training and evaluation are not the same as temporary processing to answer a request. Safety review and operational logs may introduce further retention even when training is excluded. Obtain current service terms and configuration documentation for the exact offering being used. Avoid assuming that consumer and enterprise arrangements or different API products have identical data handling policies.</p><h3>Identify who can authorize reuse</h3><p>A staff member who can edit a contract may lack authority to permit model training on it. Documents can contain information belonging to partners, employees, or other parties with separate obligations. Ask legal, privacy, and information owners to define permitted purposes and consent mechanisms for each information class. Configure organizational defaults where supported and document the remaining limits. Personal preference settings should not silently override a business restriction. When terms change, assign an owner to reassess them instead of relying on an old questionnaire or a screenshot of a previously selected option.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Different AI data uses require different answers",
+        "items": [
+          {
+            "label": "Inference",
+            "detail": "Content processed to answer the current document task."
+          },
+          {
+            "label": "Reuse",
+            "detail": "Training and evaluation need explicit term and purpose review."
+          },
+          {
+            "label": "Operations",
+            "detail": "Logs, monitoring, and support can introduce separate retention."
+          },
+          {
+            "label": "Feedback",
+            "detail": "Verify whether ratings send any request or response context."
+          }
+        ],
+        "alt": "Inference, reuse, operations, and feedback uses of AI document content.",
+        "caption": "A no-training answer does not settle every persistence question.",
+        "src": "/blog/images/field-guide-document-content-ai-use-consent-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-content-ai-use-consent-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "a-no-training-statement-is-one-answer-2",
+      "title": "A no-training statement is one answer",
+      "html": "<p>Excluding model training can address an important concern while leaving other processing questions open. The service may still need temporary content to answer a request, retain operational logs, or receive feedback containing the prompt. Ask about each purpose instead of interpreting one answer as permission for everything else.</p><table><thead><tr><th>Purpose</th><th>Review question</th></tr></thead><tbody><tr><td>Inference</td><td>What context is needed to perform the approved task?</td></tr><tr><td>Training or evaluation</td><td>Is reuse allowed, excluded, or configurable under current terms?</td></tr><tr><td>Operational logging</td><td>What content is retained, who can inspect it, and for how long?</td></tr><tr><td>User feedback</td><td>Does a rating include the full request or response?</td></tr></tbody></table><p>These questions do not assert that a particular provider uses content for any of these purposes. They establish the facts the organization needs to verify. Keep the answer's service name, offering, configuration, terms version, and review date.</p><p>For documents containing partner or employee information, approval may need more than the account holder's preference. Ask the relevant information and legal owners to establish allowed uses. If the intended task is approved only for inference, make that boundary explicit in the operating policy and selected configuration. Review it again when an endpoint, provider arrangement, or feedback feature changes.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "review-a-support-summary-example-3",
+      "title": "Review a support summary example",
+      "html": "<p>A support team wants AI summaries of customer incident reports. The reports may include identifiers, diagnostic details, and contract information. Start with a sanitized example and verify which content the application sends. Compare the actual provider terms with the team's allowed purposes, including retention for service monitoring and human evaluation. Determine whether user feedback transmits the entire prompt and response or only a rating. If the boundary is unsuitable, reduce the content, change the approved service configuration, or keep the task manual. A convenient summary does not justify an undocumented downstream use.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Approve a support-report summary",
+        "items": [
+          {
+            "label": "Classify report",
+            "detail": "Identify customer, diagnostic, and contractual information."
+          },
+          {
+            "label": "Inspect payload",
+            "detail": "Verify the selection and context actually sent."
+          },
+          {
+            "label": "Review purposes",
+            "detail": "Check exact service terms and configuration with authorized owners."
+          },
+          {
+            "label": "Choose task scope",
+            "detail": "Approve, reduce content, change the route, or keep it manual."
+          }
+        ],
+        "alt": "Classification, payload inspection, purpose review, and scope decision for an AI summary.",
+        "caption": "A useful output does not justify an undefined downstream use.",
+        "src": "/blog/images/field-guide-document-content-ai-use-consent-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-content-ai-use-consent-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "verify-settings-and-evidence-4",
+      "title": "Verify settings and evidence",
+      "html": "<p>Record relevant administration settings, their scope, and how they apply to existing and future users. Some policies operate at workspace level, others at account or endpoint level; verify the documented behavior. Keep evidence of the terms reviewed and the date rather than copying vague assurances into procurement notes. Test whether disabling an AI feature stops new requests and what happens to retained histories. Document deletion and retention procedures without promising that an application action removes every downstream copy. Include logs and backups in the review, since they can preserve content after the visible conversation has disappeared.</p><h3>Purpose approval</h3><ul><li>Separate inference, training, evaluation, feedback, and logging purposes.</li><li>Review current terms for the exact service and configuration.</li><li>Assign authority for each information class and intended reuse.</li><li>Verify organizational defaults and how exceptions are controlled.</li><li>Document retention, deletion, and policy change review responsibilities.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

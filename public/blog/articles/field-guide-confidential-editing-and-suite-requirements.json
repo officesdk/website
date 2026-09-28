@@ -1,0 +1,132 @@
+{
+  "slug": "field-guide-confidential-editing-and-suite-requirements",
+  "title": "Zero-knowledge document editors: workflow and recovery trade-offs",
+  "description": "Separate cryptographic assurances from the search, recovery, sharing, and administration work a team needs.",
+  "category": "Comparisons",
+  "format": "decision-brief",
+  "tags": [
+    "Security",
+    "Data privacy",
+    "Product selection",
+    "Collaboration"
+  ],
+  "structure": "prose+layers:comparison:example:prose+decision:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 692,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: A Zero-Knowledge Editor Is Not a Document Suite",
+      "url": "https://shimodocs.com/blog/zero-knowledge-editor-vs-document-suite"
+    }
+  ],
+  "cover": "/blog/images/field-guide-confidential-editing-and-suite-requirements.png",
+  "coverAlt": "Zero-knowledge document editors: workflow and recovery trade-offs: Threat model, Client keys, Workflow coverage, Recovery authority.",
+  "concepts": [
+    "Threat model",
+    "Client keys",
+    "Workflow coverage",
+    "Recovery authority",
+    "Search exposure"
+  ],
+  "recipe": {
+    "hero": "overprint",
+    "body": "chapter-rail",
+    "signature": "overprint:chapter-rail",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 39
+  },
+  "contentHash": "4fb927bc9dec7ad89ba7b64013d2274f9aaf04239f651fe3bd6390e41e9b3216",
+  "intro": "A zero-knowledge editor can limit who sees document plaintext, but you still need to evaluate search, shared ownership, account departure, export, and recovery. The key procurement question is whether the confidentiality model supports your team's full document lifecycle without undocumented manual custody procedures.",
+  "sections": [
+    {
+      "id": "define-the-confidentiality-promise-1",
+      "title": "Define the confidentiality promise",
+      "html": "<p>Write down the adversaries and system operators the design should exclude. Then request a precise description of where encryption occurs, where keys live, and which components can receive plaintext. A zero knowledge claim should be evaluated against documented architecture and implementation evidence, including browser delivery and key recovery mechanisms. Distinguish document content from metadata such as titles, participant names, timestamps, and object sizes. These fields can still reveal sensitive relationships. Identify the consequences of a compromised endpoint, because encryption against a storage operator does not automatically protect an already unlocked user device.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Content secrecy has several boundaries",
+        "items": [
+          {
+            "label": "Stored ciphertext",
+            "detail": "Verify what the storage operator can learn or decrypt."
+          },
+          {
+            "label": "Key holders",
+            "detail": "List users and recovery authorities who can unlock content."
+          },
+          {
+            "label": "Unlocked endpoint",
+            "detail": "A compromised device may see content after authorized decryption."
+          },
+          {
+            "label": "Metadata",
+            "detail": "Titles, participants, and timestamps need a separate assessment."
+          }
+        ],
+        "alt": "Storage, key holder, endpoint, and metadata boundaries of confidential editing.",
+        "caption": "The confidentiality claim must name the boundary it protects.",
+        "src": "/blog/images/field-guide-confidential-editing-and-suite-requirements-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-confidential-editing-and-suite-requirements-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "the-recovery-decision-comes-first-2",
+      "title": "The recovery decision comes first",
+      "html": "<p>Ask two people to sign off on recovery: the confidentiality owner and the continuity owner. Their priorities may differ. A design where only individual users possess keys can reduce server access while making a lost device or departed employee a serious records problem. A recovery custodian can address that problem, but becomes part of the trust model.</p><dl><dt>User-only custody</dt><dd>Explain how colleagues retain legitimate access if the author loses every authorized device. If there is no recovery path, record that as a business decision with an owner.</dd><dt>Organizational recovery</dt><dd>Identify who approves recovery, who performs it, what information they can see, and how an exceptional unlock is recorded.</dd><dt>Export for continuity</dt><dd>Specify the format, destination protection, and tool required for future reading. A plaintext export has a different exposure boundary from the live encrypted workspace.</dd></dl><p>Do this before comparing feature lists. Recovery influences group ownership, retention, and incident support. It can also change a seemingly absolute confidentiality statement into a narrower and more accurate one. The appropriate choice depends on what the organization is willing to entrust to custodians and what loss it can tolerate; there is no universally preferable custody arrangement.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "exercise-a-board-paper-scenario-3",
+      "title": "Exercise a board paper scenario",
+      "html": "<p>A board secretary distributes a draft paper to six directors, replaces one director, and must retain the final approved copy. Test how the departing director loses future access, how the replacement receives the right keys, and whether previously downloaded material remains outside revocation control. Next, simulate the secretary losing a device. The recovery process must preserve confidentiality while allowing authorized continuity. Ask the records owner to retrieve the approved version without borrowing the secretary's personal account. These exercises reveal practical custody requirements that a successful encrypted editing demo can leave unresolved.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "list-the-surrounding-team-duties-4",
+      "title": "List the surrounding team duties",
+      "html": "<p>Build a workflow matrix covering shared ownership, membership changes, version retrieval, search, export, accessibility, administration, and retention. Ask whether each operation is supported in the exact candidate configuration and what information it exposes. Server search over plaintext and a design that withholds plaintext from the server require a deliberate reconciliation, such as local search or a different approved mechanism. Do not assume a confidentiality label establishes a particular solution. Evaluate where the workflow becomes slower or relies on manual steps, and give those steps a named operational owner.</p><h3>Choose recovery intentionally</h3><p>Key recovery can improve continuity while changing who can unlock documents. Define whether recovery depends on another user, an organization custodian, a hardware device, or a procedure involving several approvers. Measure the process using a disposable account and document. Record what happens when all authorized key holders leave or lose credentials. Export also needs a policy: encrypted exports preserve one boundary but require compatible future tooling, while plaintext exports need protected destinations. Choose the model that matches the organization's obligations and make its remaining limitations visible during procurement.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "Choose a recovery model with explicit consequences",
+        "items": [
+          {
+            "label": "User-only keys",
+            "detail": "Lower central custody; document the effect of losing every key."
+          },
+          {
+            "label": "Recovery custodian",
+            "detail": "Continuity improves; custodian authority needs approval and audit."
+          },
+          {
+            "label": "Protected export",
+            "detail": "Independent readback requires a format, tool, and secure destination."
+          }
+        ],
+        "alt": "Three recovery approaches and the continuity or custody trade-offs associated with them.",
+        "caption": "Recovery arrangements are part of the security design, not a later convenience.",
+        "src": "/blog/images/field-guide-confidential-editing-and-suite-requirements-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-confidential-editing-and-suite-requirements-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "confidentiality-review-5",
+      "title": "Confidentiality review",
+      "html": "<ul><li>Obtain an architecture description for content, metadata, keys, and recovery.</li><li>Test membership changes and document retrieval with representative ordinary users.</li><li>Demonstrate search, export, retention, and administrator continuity on a real workflow.</li><li>Record which endpoints can see plaintext and how their compromise is handled.</li><li>Assign ownership to every manual procedure introduced by the design.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

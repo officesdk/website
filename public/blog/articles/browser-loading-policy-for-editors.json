@@ -1,0 +1,128 @@
+{
+  "slug": "browser-loading-policy-for-editors",
+  "title": "Embedded editor not loading in one browser: a diagnostic sequence",
+  "description": "Distinguish cookies, mixed content, cross origin requests, extensions, and engine compatibility when an embedded editor fails to load.",
+  "category": "Operations",
+  "format": "troubleshooting",
+  "tags": [
+    "Troubleshooting",
+    "Embedded editing",
+    "Security",
+    "Operations"
+  ],
+  "structure": "diagnostic+decision:steps:prose:checklist:note+comparison",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 659,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: Third-party cookies",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Third-party_cookies"
+    }
+  ],
+  "cover": "/blog/images/browser-loading-policy-for-editors.png",
+  "coverAlt": "Embedded editor not loading in one browser: a diagnostic sequence: Failed request, Browser profile, Policy boundary, Engine version.",
+  "concepts": [
+    "Failed request",
+    "Browser profile",
+    "Policy boundary",
+    "Engine version",
+    "Controlled retry"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "rail-right",
+    "signature": "field-notes:rail-right",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 23
+  },
+  "contentHash": "55dead64a6bbe389142155357b722eb4f75e7ebf3720159af76ddd4d660cc61d",
+  "intro": "Find the first failed browser request before changing the document or server. A request blocked by an extension is different from an HTTP denial, a third-party cookie restriction, or an unsupported engine feature. Compare the same user and file under controlled browser conditions so the result identifies a cause rather than another symptom.",
+  "sections": [
+    {
+      "id": "find-the-first-meaningful-failure-1",
+      "title": "Find the first meaningful failure",
+      "html": "<p>Open browser developer tools before reproducing the issue and preserve the relevant network and console evidence. Identify the earliest meaningful failure, its initiator, and the browser's reason. A later timeout may only be a consequence. Distinguish an HTTP error response from a request blocked locally before reaching the server. Record the origin relationship between host, editor, authentication, and storage endpoints. Remove credentials and sensitive query strings before sharing evidence. A screenshot of a blank frame is useful context, but it cannot identify the failed loading policy alone.</p><table><thead><tr><th>Evidence</th><th>Useful next test</th></tr></thead><tbody><tr><td>Blocked locally; no server request</td><td>Inspect extension, privacy, and browser policy messages</td></tr><tr><td>Authentication redirects repeat</td><td>Compare effective cookie policy and session state</td></tr><tr><td>Mixed-content or frame error</td><td>Inspect the specific origin and embedding rules</td></tr><tr><td>Only an older engine fails</td><td>Reproduce on that actual engine version</td></tr></tbody></table><p>A clean profile is a diagnostic control, not proof that users should permanently reset their browsers. If it changes the result, narrow the difference: extensions, stored site state, managed settings, or cached resources. Change one factor at a time and preserve the original evidence.</p><p>When exporting a network capture, remove authorization headers, cookies, signed URLs, and unnecessary response bodies before sharing it. The useful record usually needs the initiator, timing, destination, status or blocking reason, and operation correlation. Keep the original sensitive capture only through the approved restricted process if deeper investigation requires it. Browser troubleshooting should not turn a failed open into an accidental document or credential disclosure.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "decision",
+        "title": "First determine whether the request reached the server",
+        "items": [
+          {
+            "label": "Blocked in browser",
+            "detail": "Investigate local policy, extensions, or security messages"
+          },
+          {
+            "label": "HTTP response received",
+            "detail": "Inspect authentication, authorization, and service outcome"
+          },
+          {
+            "label": "Resources load; code fails",
+            "detail": "Check runtime evidence and actual engine compatibility"
+          }
+        ],
+        "alt": "A browser failure is routed by local blocking, HTTP response, or runtime execution.",
+        "caption": "A later timeout may hide the first and more informative error.",
+        "src": "/blog/images/browser-loading-policy-for-editors-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/browser-loading-policy-for-editors-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "compare-profiles-without-changing-everything-at-once-2",
+      "title": "Compare profiles without changing everything at once",
+      "html": "<p>Use the same account, document version, and network while changing one condition at a time. A clean profile can help distinguish site state and extensions from application behavior. If private browsing works, do not immediately conclude that clearing cookies is the permanent fix; extension behavior and storage policy can differ too. Inspect explicit blocked request messages and test the relevant condition. Record browser settings that administrators enforce through policy, since a local user's preference screen may not represent the effective enterprise configuration.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "cookies-cors-frames-and-csp-are-different-mechanisms-3",
+      "title": "Cookies, CORS, frames, and CSP are different mechanisms",
+      "html": "<p>Cross origin request permissions, cookie restrictions, frame embedding rules, mixed content blocking, and content security policy solve different problems. A broad change to one does not reliably fix another. For example, allowing a network origin does not guarantee that a browser will send a cookie in a third party context. Follow the browser's specific error and the integration's documented authentication approach. Avoid disabling major protections as a production solution merely because a test succeeds with them removed; use that experiment only to identify the dependency that requires a supported design.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "focused-checks-before-closing-the-incident-4",
+      "title": "Focused checks before closing the incident",
+      "html": "<ul><li>Find the earliest failed request and determine whether it reached the server.</li><li>Compare one browser condition at a time using the same test document.</li><li>Separate cookie, frame, CORS, mixed content, and CSP evidence.</li><li>Use the actual engine for compatibility acceptance.</li><li>Retest the normal security configuration after applying a supported fix.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "user-agent-spoofing-does-not-test-an-older-engine-5",
+      "title": "User-Agent spoofing does not test an older engine",
+      "html": "<p>For a supported older browser requirement, run the actual engine version in an appropriate isolated test environment and open a synthetic document through the real workflow. Changing the User-Agent string can test server side browser detection, but it does not reproduce old rendering, JavaScript, or storage behavior. Record the real engine version and operating system with results. Include opening, editing when permitted, saving, and reconnecting. A successful landing page load under a spoofed identifier is not evidence that the older engine supports the editor.</p>",
+      "kind": "note",
+      "figure": {
+        "kind": "comparison",
+        "title": "Browser identification and engine compatibility are different tests",
+        "items": [
+          {
+            "label": "User-Agent override",
+            "detail": "Exercises server-side browser identification behavior"
+          },
+          {
+            "label": "Actual older engine",
+            "detail": "Exercises its JavaScript, rendering, storage, and policy support"
+          },
+          {
+            "label": "Acceptance record",
+            "detail": "Names the real browser engine, OS, and tested workflow"
+          }
+        ],
+        "alt": "Spoofed browser identification is compared with testing the actual rendering engine.",
+        "caption": "Do not use a successful spoofed page load as compatibility evidence.",
+        "src": "/blog/images/browser-loading-policy-for-editors-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/browser-loading-policy-for-editors-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    }
+  ]
+}

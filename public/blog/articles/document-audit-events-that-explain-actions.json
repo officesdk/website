@@ -1,0 +1,137 @@
+{
+  "slug": "document-audit-events-that-explain-actions",
+  "title": "Document audit logs: record actors, versions, and completed business actions",
+  "description": "Record business actions, version relationships, and authorization context without confusing audit history with raw application logs.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "Audit logs",
+    "Security",
+    "Version control",
+    "Operations",
+    "Access control"
+  ],
+  "structure": "prose:example+layers:note:checklist:example+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 657,
+  "source": null,
+  "references": [
+    {
+      "label": "OWASP: Logging Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
+    }
+  ],
+  "cover": "/blog/images/document-audit-events-that-explain-actions.png",
+  "coverAlt": "Document audit logs: record actors, versions, and completed business actions: Business event, Actor identity, State change, Record integrity.",
+  "concepts": [
+    "Business event",
+    "Actor identity",
+    "State change",
+    "Record integrity",
+    "Incident replay"
+  ],
+  "recipe": {
+    "hero": "masthead",
+    "body": "chapter-rail",
+    "signature": "masthead:chapter-rail",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 37
+  },
+  "contentHash": "f1b64f20c0cde662b562dcfc58cb9461c56336b603a8d3533ceacbc28fe6b342",
+  "intro": "Record audit events around business actions such as version publication, access changes, export, restore, and deletion. Include the actor, affected document and version, outcome, and operation correlation. Raw request logs do not automatically explain what changed, and a successful HTTP response does not always mean the business action completed.",
+  "sections": [
+    {
+      "id": "define-the-business-meaning-of-each-event-1",
+      "title": "Define the business meaning of each event",
+      "html": "<p>Useful events can include document creation, version publication, permission changes, sharing, export, restoration, and deletion according to the application's requirements. Do not imply that every keystroke is audited unless the selected system actually provides and retains that evidence. Distinguish an attempted action from a completed action and identify denied operations where policy requires them. Define each event's semantics in a small schema catalogue. Consistent meanings matter more than collecting a large volume of loosely named messages that reviewers cannot compare across application versions or services.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "use-fields-that-explain-the-affected-state-2",
+      "title": "Use fields that explain the affected state",
+      "html": "<p>Record the authenticated actor, tenant, action, business document ID, relevant source and resulting versions, outcome, timestamp, and operation identifier. For background work, distinguish the service performing the action from the user or process that initiated it. Avoid attributing a scheduled export to the last person who happened to edit the document. Preserve enough identity context to interpret historical events after accounts are renamed or disabled, while applying data minimization and retention rules. Filenames are useful context, but stable identifiers prevent ambiguity when names change.</p><table><thead><tr><th>Event field</th><th>Meaning to preserve</th></tr></thead><tbody><tr><td>Actor and initiator</td><td>Who performed the action and who requested background work</td></tr><tr><td>Document and tenant</td><td>The stable business object and access boundary</td></tr><tr><td>Before and after version</td><td>The content transition, when the event changes a version</td></tr><tr><td>Action and outcome</td><td>Attempted, denied, accepted, or completed under defined semantics</td></tr><tr><td>Operation reference</td><td>A path to related technical evidence without embedding secrets</td></tr></tbody></table><p>Do not fill missing information with misleading defaults. A background service publishing an export is not necessarily acting as the last editor. Preserve the initiating operation or represent an autonomous scheduled action explicitly. Similarly, an export-requested event and an export-ready event describe different outcomes and should not share an ambiguous label.</p><p>Design duplicate handling around the business action identity. Delivery retries may produce several transport records but should not make reviewers believe a permission change happened several times. Retain operational retries where useful for diagnosis while presenting one coherent business transition. Keep schema revisions documented so old event meanings remain interpretable after the application evolves.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "layers",
+        "title": "An audit event connects an actor to a business result",
+        "items": [
+          {
+            "label": "Actor context",
+            "detail": "User or service, initiator, and tenant"
+          },
+          {
+            "label": "Action",
+            "detail": "Defined operation such as publish, export, or revoke"
+          },
+          {
+            "label": "Affected state",
+            "detail": "Document and relevant prior or resulting version"
+          },
+          {
+            "label": "Outcome and evidence",
+            "detail": "Completed or denied result with operation correlation"
+          }
+        ],
+        "alt": "An audit record connects actor context, action, affected state, and outcome.",
+        "caption": "Avoid storing document bodies or reusable credentials merely to make an event verbose.",
+        "src": "/blog/images/document-audit-events-that-explain-actions-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-audit-events-that-explain-actions-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "protect-records-and-define-logging-failure-behavior-3",
+      "title": "Protect records and define logging failure behavior",
+      "html": "<p>Restrict who can write, read, export, and administer audit records. Use storage and integrity controls appropriate to the required assurance level, and verify their actual configuration. Do not call records tamper proof merely because ordinary users cannot see a delete button. Keep secrets, signed URLs, and document bodies out of routine event fields. Define failure behavior if the audit destination is unavailable: some actions may need to wait, while others may use a durable local queue. The choice should follow the business requirement and be tested explicitly.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "audit-readiness-checks-4",
+      "title": "Audit-readiness checks",
+      "html": "<ul><li>Define event semantics and distinguish attempts from completed effects.</li><li>Record actor, document, version, outcome, and correlation context consistently.</li><li>Test audit delivery failure and duplicate handling.</li><li>Review access, retention, export, and integrity controls.</li><li>Verify that a reviewer can reconstruct a representative workflow from the recorded events.</li></ul>",
+      "kind": "checklist"
+    },
+    {
+      "id": "reconstruct-a-permission-change-export-and-restore-5",
+      "title": "Reconstruct a permission change, export, and restore",
+      "html": "<p>In a test project, have an administrator grant a reviewer access, let the reviewer export a named version, then revoke access and restore an older document version. Ask another authorized operator to reconstruct the sequence from audit records. They should identify the actors, versions, completed outcomes, and related operation traces without reading confidential document contents. Repeat one action after a simulated delivery retry and confirm that duplicate telemetry does not appear as two independent business changes. This validates the trail as evidence a person can actually interpret.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "A reviewer should reconstruct the actual business sequence",
+        "items": [
+          {
+            "label": "Access granted",
+            "detail": "Identify administrator, recipient, and affected document"
+          },
+          {
+            "label": "Version exported",
+            "detail": "Identify requester and the version actually produced"
+          },
+          {
+            "label": "Access revoked",
+            "detail": "Record the permission transition and outcome"
+          },
+          {
+            "label": "Version restored",
+            "detail": "Link the selected historical content to its resulting state"
+          }
+        ],
+        "alt": "A reviewer follows grant, export, revoke, and restore events with their actors and versions.",
+        "caption": "Repeated delivery must not appear as repeated independent business changes.",
+        "src": "/blog/images/document-audit-events-that-explain-actions-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-audit-events-that-explain-actions-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

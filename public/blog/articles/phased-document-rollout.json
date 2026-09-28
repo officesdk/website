@@ -1,0 +1,130 @@
+{
+  "slug": "phased-document-rollout",
+  "title": "Rolling out an embedded editor safely: cohorts, release gates, and rollback",
+  "description": "Release to defined cohorts, observe content and save behavior, and prepare a rollback that respects documents already changed.",
+  "category": "Operations",
+  "format": "playbook",
+  "tags": [
+    "Operations",
+    "Embedded editing",
+    "Version control",
+    "Migration"
+  ],
+  "structure": "prose+flow:steps:comparison+layers:example",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 644,
+  "source": null,
+  "references": [
+    {
+      "label": "Google SRE Workbook: Canarying Releases",
+      "url": "https://sre.google/workbook/canarying-releases/"
+    }
+  ],
+  "cover": "/blog/images/phased-document-rollout.png",
+  "coverAlt": "Rolling out an embedded editor safely: cohorts, release gates, and rollback: Pilot cohort, Business gates, Data rollback, Support readiness.",
+  "concepts": [
+    "Pilot cohort",
+    "Business gates",
+    "Data rollback",
+    "Support readiness",
+    "Phase decision"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "wide",
+    "signature": "cover-first:wide",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 26
+  },
+  "contentHash": "97ebbab2defae4364419d3aa01a78f84730fda82597b99087df01b7c96daf2ca",
+  "intro": "Release to a defined cohort, verify opening and durable-save behavior, and expand only after the agreed gates pass. Plan rollback for the documents already created or changed, not just the UI flag. Pending jobs and new storage representations can survive an interface rollback and still affect users.",
+  "sections": [
+    {
+      "id": "select-a-cohort-with-representative-documents-1",
+      "title": "Select a cohort with representative documents",
+      "html": "<p>Begin with a small group whose document types and workflows reflect the intended deployment. Include operational support and document owners who can report meaningful differences. Avoid a pilot made entirely of administrators using simple files. Define cohort membership explicitly and keep the routing stable enough that the same document does not alternate unpredictably between incompatible workflows. If routing is by tenant, folder, or document type, test the boundary conditions and explain them to users. A feature flag is useful only when its scope and consequences are understood.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "flow",
+        "title": "Each cohort expansion follows an evidence gate",
+        "items": [
+          {
+            "label": "Initial cohort",
+            "detail": "Named users and representative document families"
+          },
+          {
+            "label": "Observe",
+            "detail": "Opening, save convergence, correctness, and support evidence"
+          },
+          {
+            "label": "Gate decision",
+            "detail": "Expand, pause, or repair against written criteria"
+          },
+          {
+            "label": "Next cohort",
+            "detail": "Increase scope while retaining a recovery path"
+          }
+        ],
+        "alt": "Rollout expands only after a defined cohort produces sufficient evidence.",
+        "caption": "An absence of complaints means little when the cohort has barely used the workflow.",
+        "src": "/blog/images/phased-document-rollout-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/phased-document-rollout-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "use-outcome-gates-before-expanding-2",
+      "title": "Use outcome gates before expanding",
+      "html": "<p>Monitor opening success, time to useful display, save convergence, export correctness, permission failures, and support incidents. Use the accepted corpus and a small set of real workflow observations to complement aggregate metrics. A low error rate can hide one high impact document family that cannot be processed. Define pause criteria before expanding the cohort, and identify who owns the decision. Expansion should follow evidence that the current phase meets its requirements, not merely the absence of complaints during a short observation period with little actual usage.</p><ul><li>Identify cohort scope, document coverage, and an accountable release owner.</li><li>Review correctness and save outcomes alongside latency and availability.</li><li>Confirm support staff can correlate incidents and recover affected documents.</li><li>Rehearse rollback with newly created content and pending jobs.</li><li>Document unresolved limitations before expanding to the next cohort.</li></ul>",
+      "kind": "steps"
+    },
+    {
+      "id": "rollback-includes-content-and-pending-work-3",
+      "title": "Rollback includes content and pending work",
+      "html": "<p>Disabling a new interface does not automatically convert its saved content back to the old workflow. Identify which objects, metadata, and versions the new path creates and whether the previous path can read them. Preserve a supported export or recovery route where needed. Drain or cancel background jobs carefully so a delayed save cannot publish after routing changes. Record the rollback point and verify that access controls still apply. If rollback requires a migration or manual document recovery, treat that work as part of release preparation.</p><p>Write the rollback decision before the first cohort starts. Identify the previous supported route, the format of new content, and the treatment of in-flight saves. If the old workflow cannot consume the new representation, rollback needs a supported export or migration step. Disabling a button cannot supply that missing conversion.</p><table><thead><tr><th>State at rollback</th><th>Required decision</th></tr></thead><tbody><tr><td>Unopened existing document</td><td>Route back through the previous supported path</td></tr><tr><td>Newly created content</td><td>Preserve identity and provide a readable supported representation</td></tr><tr><td>Active editing session</td><td>Drain, terminate, or defer according to supported behavior</td></tr><tr><td>Pending save or conversion</td><td>Prevent late work from violating the selected recovery state</td></tr></tbody></table><p>Make cohort routing deterministic. A document that alternates between incompatible implementations depending on which user opens it is difficult to support and can complicate persistence. Tenant or document-level assignment may be more understandable than a random per-request flag, depending on the integration. Record the assignment with diagnostic context so incident evidence identifies which path actually processed the document.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "layers",
+        "title": "A rollback must account for more than the interface",
+        "items": [
+          {
+            "label": "Routing",
+            "detail": "Which implementation handles the next open"
+          },
+          {
+            "label": "Content",
+            "detail": "Whether existing and newly created bytes remain usable"
+          },
+          {
+            "label": "Sessions",
+            "detail": "How accepted active work reaches a defined stopping point"
+          },
+          {
+            "label": "Jobs",
+            "detail": "What delayed saves and conversions may still publish"
+          }
+        ],
+        "alt": "Routing, content, active sessions, and pending jobs are distinct rollback concerns.",
+        "caption": "Test the reverse transition after users have actually created and changed documents.",
+        "src": "/blog/images/phased-document-rollout-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/phased-document-rollout-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "rehearse-the-reverse-transition-with-a-department-4",
+      "title": "Rehearse the reverse transition with a department",
+      "html": "<p>Enable the new workflow for a test department containing a few representative documents. Create and edit files, leave one conversion pending, then execute the rollback procedure. Confirm that users can retrieve the latest accepted content and that the pending job follows the documented drain or cancellation rule. Reenable the feature and verify identity mappings remain consistent. This rehearsal is especially useful before introducing a new editing representation, because a successful initial rollout cannot prove that the reverse transition preserves the same business records.</p>",
+      "kind": "example"
+    }
+  ]
+}

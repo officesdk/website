@@ -1,0 +1,138 @@
+{
+  "slug": "field-guide-open-source-collaboration-ownership",
+  "title": "Open source document collaboration: maintenance before adoption",
+  "description": "Inspect licensing, support, upgrade paths, and fork obligations for the exact collaboration distribution.",
+  "category": "Comparisons",
+  "format": "field-notes",
+  "tags": [
+    "Open source",
+    "Product selection",
+    "Self-hosting",
+    "Operations"
+  ],
+  "structure": "prose+decision:prose:example:prose:diagnostic+sequence:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 691,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Open Source Document Collaboration: An Honest Assessment",
+      "url": "https://shimodocs.com/blog/open-source-document-collaboration-options"
+    }
+  ],
+  "cover": "/blog/images/field-guide-open-source-collaboration-ownership.png",
+  "coverAlt": "Open source document collaboration: maintenance before adoption: License boundary, Maintenance path, Integration owner, Patch rehearsal.",
+  "concepts": [
+    "License boundary",
+    "Maintenance path",
+    "Integration owner",
+    "Patch rehearsal",
+    "Fork cost"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "alternating",
+    "signature": "compact:alternating",
+    "accent": "#515c68",
+    "soft": "#edf0f3",
+    "number": 79
+  },
+  "contentHash": "2c2d8a90644cab38b20232cb74a9c737b5bff2fa9032d614eae8de2cc3b5f53c",
+  "intro": "Open source document collaboration is a maintenance commitment as well as a software choice. Verify the licenses and edition of the exact distribution, assign an integration owner, and rehearse an update. The relevant comparison is what your team can keep supported, not the repository's download count.",
+  "sections": [
+    {
+      "id": "inspect-the-exact-distribution-1",
+      "title": "Inspect the exact distribution",
+      "html": "<p>Identify the repository, release, packaging, and optional components proposed for deployment. Read the licenses of the editor, collaboration server, connectors, and included dependencies with appropriate legal support. Do not infer redistribution or embedding rights from a project's marketing label. Some distributions combine components with different obligations or offer features under separate commercial terms. Record which functions are available in the edition being tested and which require additional agreements. The assessment should be reproducible by another engineer who can retrieve the same release and understand the legal and technical boundaries without relying on sales conversation notes.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "decision",
+        "title": "Choose how a customization will be maintained",
+        "items": [
+          {
+            "label": "Extension",
+            "detail": "Use a documented boundary and compatibility tests."
+          },
+          {
+            "label": "Upstream contribution",
+            "detail": "Track acceptance and the release containing the change."
+          },
+          {
+            "label": "Local fork",
+            "detail": "Budget recurring merges and security maintenance."
+          }
+        ],
+        "alt": "Three customization paths carry different maintenance obligations.",
+        "caption": "A source patch should have an intended maintenance path.",
+        "src": "/blog/images/field-guide-open-source-collaboration-ownership-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-open-source-collaboration-ownership-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "evaluate-project-health-concretely-2",
+      "title": "Evaluate project health concretely",
+      "html": "<p>Look at release history, security advisory handling, supported versions, issue response, documentation, and the availability of maintainers or paid support. Raw commit counts are a weak proxy for sustainability. Test whether a clean environment can be installed from documented instructions and whether upgrades have a clear path. Ask who will diagnose a failure involving the editor, storage connector, and identity provider. The upstream community may explain one component but cannot own your entire deployment. Define an internal maintainer and escalation budget before treating community availability as an operational service level.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "try-a-realistic-patch-exercise-3",
+      "title": "Try a realistic patch exercise",
+      "html": "<p>Suppose a nonprofit operates document collaboration for twelve regional offices. A security update arrives during a reporting deadline. In staging, apply the update to a copy of production configuration, reopen representative documents, and test collaborative sessions and exports. Measure downtime, administrator work, and rollback complexity. Confirm that custom connectors still work and that data migrations can be reversed or restored safely. This exercise provides a better estimate of ownership cost than the initial installation. It also reveals whether the team depends on undocumented local changes that nobody can reproduce after the original installer leaves.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "budget-for-customization-restraint-4",
+      "title": "Budget for customization restraint",
+      "html": "<p>A source modification may solve an immediate workflow problem while creating a permanent merge obligation. Before maintaining a fork, examine supported extension points and upstream contribution options. If a fork is necessary, document the change, tests, responsible maintainer, and expected upgrade work. Include monitoring, backups, incident response, user support, and compatibility testing in the operating budget. Open source does not eliminate these activities; it changes how they are obtained and governed. Compare a supported distribution, an internally maintained stack, and a hosted arrangement using the same service expectations and workload assumptions.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "what-to-record-in-the-patch-rehearsal-5",
+      "title": "What to record in the patch rehearsal",
+      "html": "<p>A patch rehearsal should leave notes that another maintainer can use. Capture the starting release, configuration differences, backup point, target release, migration steps, test results, and any required downtime. Separate upstream instructions from local adjustments so the team can tell which obligations come from its own deployment.</p><p>For the nonprofit example, suppose the update works until the regional identity connector rejects new sessions. Check whether the connector calls a changed interface, whether its credentials are still valid, and whether the release notes identify a compatibility requirement. Record the answer rather than simply marking the update Failed. If a local patch fixes it, retain that patch and its rationale in the maintained change set.</p><dl><dt>Upstream fix</dt><dd>Track the release or accepted change that will remove the local workaround.</dd><dt>Supported extension</dt><dd>Keep it within documented extension boundaries and run compatibility checks.</dd><dt>Local fork</dt><dd>Assign merge, security update, and regression responsibilities explicitly.</dd></dl><p>The next update should begin from this record. Otherwise the organization pays again to rediscover the same deployment assumptions, and the apparent saving from free access to source code is consumed by undocumented repair work.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "A patch rehearsal tests the whole deployment",
+        "items": [
+          {
+            "label": "Baseline",
+            "detail": "Record release, configuration, and backup point."
+          },
+          {
+            "label": "Upgrade",
+            "detail": "Apply documented changes in staging."
+          },
+          {
+            "label": "Exercise",
+            "detail": "Reopen files; test identity, sessions, and exports."
+          },
+          {
+            "label": "Decision",
+            "detail": "Record repair cost and production rollout conditions."
+          }
+        ],
+        "alt": "A staging upgrade is followed by document and integration tests.",
+        "caption": "Measure operation, not just whether the containers start.",
+        "src": "/blog/images/field-guide-open-source-collaboration-ownership-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-open-source-collaboration-ownership-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "adoption-decision-notes-6",
+      "title": "Adoption Decision notes",
+      "html": "<ul><li>Verify licenses and terms for the exact components and deployment purpose.</li><li>Assign maintainers for integration, upgrades, security response, and user support.</li><li>Rehearse an upgrade and recovery using representative collaborative work.</li><li>Record local modifications and their recurring maintenance cost.</li><li>Confirm export and exit procedures before moving important records.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "slug": "field-guide-document-data-sovereignty-map",
+  "title": "Document data sovereignty: map processing, access, and law",
+  "description": "Separate storage residency, processing locations, legal access, and operational control in a document workflow.",
+  "category": "Security",
+  "format": "explainer",
+  "tags": [
+    "Data residency",
+    "Data privacy",
+    "Security",
+    "Operations"
+  ],
+  "structure": "prose+layers:prose:example:prose:comparison+flow:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 686,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Data Sovereignty in Document Collaboration",
+      "url": "https://shimodocs.com/blog/data-sovereignty-document-collaboration"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-data-sovereignty-map.png",
+  "coverAlt": "Document data sovereignty: map processing, access, and law: Storage location, Processing location, Legal access, Administrative authority.",
+  "concepts": [
+    "Storage location",
+    "Processing location",
+    "Legal access",
+    "Administrative authority",
+    "Transfer path"
+  ],
+  "recipe": {
+    "hero": "field-notes",
+    "body": "journal",
+    "signature": "field-notes:journal",
+    "accent": "#087b83",
+    "soft": "#e4f3f3",
+    "number": 95
+  },
+  "contentHash": "0ed43c45f54c81ec31955262ea18b6999abcb99e8e073273c7e48331961bfed7",
+  "intro": "Document data sovereignty involves processing locations, operators, legal arrangements, and administrative control as well as storage residency. Map the complete information path and have responsible specialists assess the relevant requirements. A bucket in the selected region does not establish the position of every document copy or operator.",
+  "sections": [
+    {
+      "id": "separate-the-questions-being-asked-1",
+      "title": "Separate the questions being asked",
+      "html": "<p>Identify whether the requirement concerns residency, international transfers, legal jurisdiction, operational control, or continuity under supplier disruption. These questions overlap but are not interchangeable. A local data center can host a service administered from abroad, and a locally operated service can send conversion jobs to an external endpoint. Work with legal and security owners to translate the organization's obligations into technical requirements. Document which data classes and workflows are in scope. Avoid a blanket statement that all information is sovereign when only the primary storage bucket's region has been verified.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "layers",
+        "title": "Sovereignty questions span four boundaries",
+        "items": [
+          {
+            "label": "Storage",
+            "detail": "Objects, caches, logs, and backups have locations."
+          },
+          {
+            "label": "Processing",
+            "detail": "Workers and optional services handle document data."
+          },
+          {
+            "label": "Administration",
+            "detail": "Operators, keys, and support paths control access."
+          },
+          {
+            "label": "Legal arrangement",
+            "detail": "Responsible specialists assess contracts and obligations."
+          }
+        ],
+        "alt": "Four boundaries require different kinds of evidence.",
+        "caption": "Keep technical observations distinguishable from legal assessment.",
+        "src": "/blog/images/field-guide-document-data-sovereignty-map-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-data-sovereignty-map-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "trace-the-complete-processing-path-2",
+      "title": "Trace the complete processing path",
+      "html": "<p>Follow a document from upload through editing, preview generation, search indexing, export, backup, and support investigation. Record each processing location, operator, and permitted access route. Include metadata and logs because they may reveal sensitive business activity even without full file contents. Inspect optional integrations separately, especially analytics and AI services. For each connection, identify purpose, destination, authentication, retention, and governing arrangement. Verify current deployment behavior with network and configuration evidence where practical. Architecture diagrams should be updated when a new feature introduces a worker, cache, or remote service into the information path.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "use-a-cross-border-project-example-3",
+      "title": "Use a cross border project example",
+      "html": "<p>Imagine an infrastructure project involving domestic engineers and an overseas consultant. The contract restricts certain design records to approved locations but allows a sanitized review package to be shared. Create separate workflows for internal collaboration and permitted external disclosure. Test which artifacts and metadata cross the boundary during invitation, preview, export, and support. Confirm who approves each disclosure and how access ends after the engagement. The arrangement may require contractual and legal analysis beyond a technical setting. Keep those decisions linked to the actual file classification and deployment paths instead of relying on a generic guest sharing policy.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "inspect-administrative-independence-4",
+      "title": "Inspect administrative independence",
+      "html": "<p>Determine who holds encryption keys, privileged credentials, backup access, and the ability to change processing destinations. Review supplier support procedures and any exceptional access path. Ask how the service continues if a license server, update channel, or remote operator becomes unavailable. These are operational questions alongside legal ones, and their answers vary by offer and architecture. Test recovery and export within the permitted boundary. A deployment that stores files locally but cannot restore or update without unauthorized external access may not satisfy the organization's intended control requirement.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "ask-four-different-location-questions-5",
+      "title": "Ask four different location questions",
+      "html": "<table><thead><tr><th>Question</th><th>What to inspect</th><th>What it does not establish</th></tr></thead><tbody><tr><td>Where are files stored?</td><td>Primary objects, caches, logs, and backups</td><td>Where every computation runs</td></tr><tr><td>Where are files processed?</td><td>Editing, conversion, indexing, and AI paths</td><td>Who may administer the system</td></tr><tr><td>Who can access them?</td><td>Privileged roles, support, and key ownership</td><td>Applicable legal interpretation</td></tr><tr><td>Which arrangements apply?</td><td>Operators, contracts, and assessed legal obligations</td><td>Actual network behavior</td></tr></tbody></table><p>For the infrastructure project, create one map for internal design records and another for the sanitized review package. Include metadata shared with the consultant, not only the exported drawing. The two workflows may have different approved boundaries, and the decision should make that difference explicit.</p><p>When the architecture changes, compare the new path against the accepted map. A new preview service, AI plugin, or remote support mechanism may change processing or access even if the primary storage location stays the same. Assign a review trigger to those changes. Preserve configuration and observations as technical evidence, while marking contractual or legal conclusions as decisions of the responsible specialists. This prevents the system diagram from claiming more than it can prove.</p>",
+      "kind": "comparison",
+      "figure": {
+        "kind": "flow",
+        "title": "An approved external review package has its own path",
+        "items": [
+          {
+            "label": "Classify",
+            "detail": "Identify restricted design records."
+          },
+          {
+            "label": "Prepare",
+            "detail": "Create the permitted sanitized package."
+          },
+          {
+            "label": "Approve",
+            "detail": "Owner authorizes the scope and recipient."
+          },
+          {
+            "label": "Disclose",
+            "detail": "Use the approved route and record the version."
+          },
+          {
+            "label": "Close",
+            "detail": "Review expiry and terminate engagement access."
+          }
+        ],
+        "alt": "Classification and approval precede disclosure of an identified package.",
+        "caption": "Do not broaden the internal workflow's boundary through an ad hoc export.",
+        "src": "/blog/images/field-guide-document-data-sovereignty-map-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-data-sovereignty-map-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1350
+      }
+    },
+    {
+      "id": "sovereignty-assessment-decision-notes-6",
+      "title": "Sovereignty assessment Decision notes",
+      "html": "<ul><li>State the precise residency, transfer, jurisdiction, and control requirements.</li><li>Map content, metadata, processing, backups, and support access.</li><li>Assess each operator and contractual arrangement with responsible specialists.</li><li>Test approved external disclosure and blocked transfer cases.</li><li>Verify key ownership, recovery, updates, and service continuity assumptions.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

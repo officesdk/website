@@ -1,0 +1,20 @@
+---
+import { Expand } from 'lucide-react'
+import type { ArticleFigure } from '../../blog/types'
+
+interface Props {
+  figure: ArticleFigure
+  number: number
+}
+
+const { figure, number } = Astro.props
+---
+
+<figure class={`article-inline-figure figure-${figure.kind}`}>
+  <picture>
+    <source media="(max-width: 600px)" srcset={figure.mobileSrc} width={figure.mobileWidth} height={figure.mobileHeight} />
+    <img src={figure.src} alt={figure.alt} width={figure.width} height={figure.height} loading="lazy" decoding="async" />
+  </picture>
+  <a class="figure-expand" href={figure.src} target="_blank" rel="noreferrer" title="Open full-size illustration" aria-label={`Open full-size illustration: ${figure.title}`}><Expand size={17} /></a>
+  <figcaption><span>Figure {number}.</span> {figure.caption}</figcaption>
+</figure>

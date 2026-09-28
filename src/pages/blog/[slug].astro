@@ -1,0 +1,26 @@
+---
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import ArticleView from '../../components/blog/ArticleView.astro'
+import { articleSchema } from '../../blog/structuredData'
+import catalog from '../../blog/catalog.json'
+import type { BlogArticleData, BlogEntry } from '../../blog/types'
+
+export function getStaticPaths() {
+  const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
+  return (catalog as BlogEntry[]).map((entry) => {
+    const articlePath = path.join(projectRoot, 'public/blog/articles', `${entry.slug}.json`)
+    const article = JSON.parse(fs.readFileSync(articlePath, 'utf8')) as BlogArticleData
+    return { params: { slug: entry.slug }, props: { article } }
+  })
+}
+
+const { article } = Astro.props as { article: BlogArticleData }
+const title = `${article.title} | Office SDK Journal`
+---
+
+<SiteLayout title={title} description={article.description} canonical={`/blog/${article.slug}`} image={article.cover} schemas={[articleSchema(article)]} articleSchema>
+  <ArticleView article={article} />
+</SiteLayout>

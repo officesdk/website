@@ -1,0 +1,142 @@
+{
+  "slug": "field-guide-google-workspace-cutover",
+  "title": "Migrate from Google Workspace: active work, deltas, and cutover",
+  "description": "Move documents without losing unfinished work or the context of links, permissions, and submitted versions.",
+  "category": "Migration",
+  "format": "walkthrough",
+  "tags": [
+    "Migration",
+    "Version control",
+    "Access control",
+    "Integrations"
+  ],
+  "structure": "prose+sequence:prose:example:prose:steps+decision:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 680,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: How to Migrate from Google Workspace Without Losing Work",
+      "url": "https://shimodocs.com/blog/how-to-migrate-from-google-workspace"
+    }
+  ],
+  "cover": "/blog/images/field-guide-google-workspace-cutover.png",
+  "coverAlt": "Migrate from Google Workspace: active work, deltas, and cutover: Inventory state, Pilot corpus, Delta capture, Cutover authority.",
+  "concepts": [
+    "Inventory state",
+    "Pilot corpus",
+    "Delta capture",
+    "Cutover authority",
+    "Rollback window"
+  ],
+  "recipe": {
+    "hero": "compact",
+    "body": "journal",
+    "signature": "compact:journal",
+    "accent": "#247355",
+    "soft": "#e7f2ec",
+    "number": 91
+  },
+  "contentHash": "1f83349a8cba5169eaf171f17f63cfb26e341d34229ade9e386bbbbe8730728d",
+  "intro": "A safe Google Workspace migration needs an inventory, validated transfer method, change capture, and an explicit cutover authority. Separate active drafts from approved records and preserve old-to-new identifiers. Matching transfer totals cannot prove that formulas, permissions, or ongoing reviews survived.",
+  "sections": [
+    {
+      "id": "inventory-content-and-dependencies-1",
+      "title": "Inventory content and dependencies",
+      "html": "<p>List documents, shared drives or equivalent containers, owners, collaborators, external links, scripts, and connected workflows in scope. Classify active work separately from approved records and archival material. Identify orphaned content and owners who have left before migration begins. Record native formats and the export representations required by the destination. Some metadata or collaborative features may not transfer through the selected method, so verify current tooling and document limitations. Treat email, calendar, and identity migration as explicit scope decisions rather than silently assuming a document transfer replaces the entire workspace.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Move a wave without losing late work",
+        "items": [
+          {
+            "label": "Inventory",
+            "detail": "Owners, source IDs, active states, and permissions."
+          },
+          {
+            "label": "Initial transfer",
+            "detail": "Candidate copies with mapping and validation."
+          },
+          {
+            "label": "Delta reconciliation",
+            "detail": "Capture late changes by the supported method."
+          },
+          {
+            "label": "Cutover",
+            "detail": "Owners verify versions; destination becomes authoritative."
+          },
+          {
+            "label": "Verification window",
+            "detail": "Controlled source access supports checks and rollback."
+          }
+        ],
+        "alt": "A migration wave includes late change handling before cutover.",
+        "caption": "Use the exact transfer method's documented capabilities.",
+        "src": "/blog/images/field-guide-google-workspace-cutover-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-google-workspace-cutover-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1350
+      }
+    },
+    {
+      "id": "pilot-the-difficult-artifacts-2",
+      "title": "Pilot the difficult artifacts",
+      "html": "<p>Choose samples with complex formulas, comments, large tables, linked references, embedded objects, and unusual access rules. Export and import them through the intended migration route, then inspect both visible output and editable structure. Ask owners to complete a real task with the migrated copy. Preserve source identifiers, destination identifiers, chosen versions, and validation results in a mapping file. Count files and bytes where useful, but do not treat matching totals as proof of fidelity. A migrated workbook can have the correct size while losing a calculation or an important permission relationship.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "handle-a-live-reporting-cycle-3",
+      "title": "Handle a live reporting cycle",
+      "html": "<p>Suppose finance is closing the quarter during migration. Keep that team's active work in the original environment until an agreed checkpoint, while transferring approved older records first. Define how changes after the initial export are captured and whether the tooling supports a safe delta transfer. At cutover, identify the authoritative environment and communicate any brief write restriction. Verify the final report and its submission version with the business owner. Running two editable copies without an explicit reconciliation rule can create divergent figures that no file count or migration dashboard will detect.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "preserve-navigation-and-rollback-4",
+      "title": "Preserve navigation and rollback",
+      "html": "<p>Maintain an old to new identifier map for links left in messages, tickets, intranet pages, and external documents. Where redirects are possible, implement and test them; otherwise provide a discoverable lookup process. Recreate access according to approved mappings, then test ordinary users and external collaborators. Keep the previous environment available for the agreed rollback or read only verification period under controlled access. Define which failures trigger rollback and how new destination changes would be preserved. A rollback that simply discards several days of new work is not a credible recovery plan.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "a-cutover-record-for-one-migration-wave-5",
+      "title": "A cutover record for one migration wave",
+      "html": "<p>Give each wave a bounded set of owners and artifacts. The cutover record should state what was transferred, which late changes were reconciled, when the destination became authoritative, and who accepted the result.</p><ol><li>Freeze the inventory for the wave while recording additions separately.</li><li>Transfer initial content and preserve source-to-destination identifiers.</li><li>Collect changes after the export through the method supported by the chosen tooling.</li><li>Validate the final versions with owners before changing the working link.</li><li>Retain the source under the agreed verification or rollback arrangement.</li></ol><p>For the finance team, record the quarter-end workbook version at submission separately from the next quarter's working draft. If the draft changes after cutover, rollback must account for those destination edits rather than merely reopening the old environment.</p><p>Use a status such as Needs owner verification when technical transfer is complete but the business task has not been checked. That prevents a dashboard from compressing distinct milestones into Migrated. Also record untransferred features and manual repairs as named tasks. A comments limitation may be acceptable for an archive but unacceptable for an active contract review. The wave owner needs that distinction before signing off.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "decision",
+        "title": "What state is this document in?",
+        "items": [
+          {
+            "label": "Approved record",
+            "detail": "Preserve exact content, decision, and identity."
+          },
+          {
+            "label": "Active draft",
+            "detail": "Capture ongoing edits and review context."
+          },
+          {
+            "label": "Archive",
+            "detail": "Prioritize readability, context, and retention."
+          }
+        ],
+        "alt": "Different document states require different migration acceptance.",
+        "caption": "Do not apply an archival transfer standard to unfinished work.",
+        "src": "/blog/images/field-guide-google-workspace-cutover-figure-5.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-google-workspace-cutover-figure-5-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "wave-decision-notes-6",
+      "title": "Wave Decision notes",
+      "html": "<ul><li>Inventory active work, owners, links, integrations, and access rules.</li><li>Validate difficult samples through the actual transfer route.</li><li>Agree on delta capture, cutover authority, and any write restriction.</li><li>Test user access and preserve old to new reference mappings.</li><li>Define rollback triggers and protect work created after cutover.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

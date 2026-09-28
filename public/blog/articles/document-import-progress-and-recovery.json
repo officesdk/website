@@ -1,0 +1,130 @@
+{
+  "slug": "document-import-progress-and-recovery",
+  "title": "Document import progress: safe retries after upload and conversion failures",
+  "description": "Give users honest progress, safe retries, and clear recovery when upload, validation, conversion, or registration fails.",
+  "category": "Office workflows",
+  "format": "walkthrough",
+  "tags": [
+    "Document conversion",
+    "Document storage",
+    "Business workflows",
+    "Accessibility"
+  ],
+  "structure": "steps+flow:prose:note:example+matrix",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 659,
+  "source": null,
+  "references": [
+    {
+      "label": "W3C WAI: Understanding status messages",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
+    }
+  ],
+  "cover": "/blog/images/document-import-progress-and-recovery.png",
+  "coverAlt": "Document import progress: safe retries after upload and conversion failures: Import stages, Durable state, Stage retry, Cancellation.",
+  "concepts": [
+    "Import stages",
+    "Durable state",
+    "Stage retry",
+    "Cancellation",
+    "Completion proof"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "rail-right",
+    "signature": "folio:rail-right",
+    "accent": "#8c592d",
+    "soft": "#f6eee5",
+    "number": 18
+  },
+  "contentHash": "6df797016ba8145f47fb34ab3c6ddc8f53fb985adb19f975c0d35abb5476b837",
+  "intro": "Show the import stage you can verify: uploading, waiting, validating, processing, or ready. Persist the operation so a refresh does not lose its result. When a stage fails, retry that work under the same logical import identity rather than asking the user to create another upload by default.",
+  "sections": [
+    {
+      "id": "model-observable-stages-and-durable-operation-identity-1",
+      "title": "Model observable stages and durable operation identity",
+      "html": "<p>Define the backend states that the interface can observe reliably. Uploading can often report transferred bytes, while validation or conversion may only report that work is waiting or running. Avoid combining these into a fabricated percentage that pauses at ninety nine percent for an unknown period. Use stage names and a stable operation identifier instead. Record terminal success, terminal failure, cancellation, and any state requiring manual review. The interface should derive its message from persisted state so a page refresh does not restart or forget the operation.</p><table><thead><tr><th>Stage</th><th>Progress that can be honest</th><th>Possible recovery</th></tr></thead><tbody><tr><td>Uploading</td><td>Transferred bytes when available</td><td>Resume or restart through the supported upload mechanism</td></tr><tr><td>Waiting</td><td>Accepted and queued; no invented percentage</td><td>Cancel or wait according to queue policy</td></tr><tr><td>Processing</td><td>Current observable stage</td><td>Retry retained source if the failure is temporary</td></tr><tr><td>Ready</td><td>Published document identity</td><td>Open the completed result</td></tr></tbody></table><p>Keep the original operation visible even when a retry creates a new execution attempt. The user is tracking one intended import, while support may need to inspect several attempts. Store that relationship so the activity view can show the final outcome without counting attempts as separate documents.</p><p>For batch imports, show item-level results alongside the total. A batch with one unsupported file and nine completed files is neither wholly failed nor wholly successful. Let the user recover the failed item without rerunning the completed nine. If retained sources expire, show that fact before offering Retry; an action that can only fail again is misleading progress design.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "flow",
+        "title": "Import progress follows persisted backend states",
+        "items": [
+          {
+            "label": "Upload received",
+            "detail": "Associate source bytes with an operation ID"
+          },
+          {
+            "label": "Waiting or validating",
+            "detail": "Report the actual pending stage"
+          },
+          {
+            "label": "Processing",
+            "detail": "Track the attempt that can produce a document"
+          },
+          {
+            "label": "Ready or recoverable error",
+            "detail": "Expose a result or a specific supported next action"
+          }
+        ],
+        "alt": "Import stages are tied to a persistent operation rather than a cosmetic timer.",
+        "caption": "Only display a percentage when the stage has a meaningful measurable denominator.",
+        "src": "/blog/images/document-import-progress-and-recovery-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-import-progress-and-recovery-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "retry-the-failed-work-not-the-whole-user-intention-2",
+      "title": "Retry the failed work, not the whole user intention",
+      "html": "<p>If bytes arrived successfully but conversion failed temporarily, the user should not have to upload them again unless retention or integrity checks require it. Keep the source and operation record for a documented period, and retry with the same logical identity. Permanent problems such as an unsupported format need a different action from temporary worker unavailability. Explain that distinction with a useful message. A generic Retry button that starts a complete new import can create duplicate records and leave several workers competing to publish the same intended document.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "cancellation-and-closing-the-tab-mean-different-things-3",
+      "title": "Cancellation and closing the tab mean different things",
+      "html": "<p>Canceling an upload, removing a queued job, and stopping a running converter are different operations. State which one the system can complete at the current stage. If running work cannot be interrupted, cancellation may mean discarding its eventual result and cleaning up temporary objects. Ensure that a canceled operation cannot later appear as a successful document unexpectedly. Also decide what happens when the user closes the browser: background processing may continue, but the result must remain discoverable through an activity view or another persistent application entry point.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "close-and-reopen-a-mixed-batch-import-4",
+      "title": "Close and reopen a mixed batch import",
+      "html": "<p>Import a small synthetic folder containing a valid document, an unsupported file, and a file whose conversion is intentionally delayed. Close the tab after upload, reopen the application, and inspect the operation list. Each item should retain its own state and recovery action. Retry the delayed item after restoring the worker and confirm that only one final document appears. Announce status changes accessibly, and ensure a failure does not disappear merely because neighboring files succeeded. The batch summary should reconcile with its individual results.</p><ul><li>Declare which backend state means the document is ready to open.</li><li>Persist operation IDs and stage results across browser refreshes.</li><li>Separate permanent input problems from temporary service failures.</li><li>Verify safe retry and cleanup after cancellation.</li><li>Show a final count of completed, failed, pending, and canceled items for batch work.</li></ul>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "A batch needs a result for every item",
+        "items": [
+          {
+            "label": "Completed",
+            "detail": "Open the existing document; do not rerun it"
+          },
+          {
+            "label": "Temporary failure",
+            "detail": "Retry retained source under the same logical import"
+          },
+          {
+            "label": "Unsupported input",
+            "detail": "Explain the required change or alternate workflow"
+          },
+          {
+            "label": "Canceled",
+            "detail": "Prevent late processing from publishing unexpectedly"
+          }
+        ],
+        "alt": "Each batch item has its own outcome and recovery action.",
+        "caption": "The batch total should reconcile with completed, failed, pending, and canceled items.",
+        "src": "/blog/images/document-import-progress-and-recovery-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/document-import-progress-and-recovery-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

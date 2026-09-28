@@ -1,0 +1,130 @@
+{
+  "slug": "field-guide-document-identity-lifecycle",
+  "title": "Document SSO integration: provisioning, group changes, and logout",
+  "description": "Connect login, provisioning, group mapping, deactivation, and recovery instead of stopping at a successful redirect.",
+  "category": "Security",
+  "format": "architecture",
+  "tags": [
+    "Access control",
+    "Integrations",
+    "Security",
+    "Collaboration"
+  ],
+  "structure": "prose+sequence:diagnostic:example+matrix:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 683,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Identity and SSO for a Self-Hosted Document Platform",
+      "url": "https://shimodocs.com/blog/sso-self-hosted-document-platform"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-identity-lifecycle.png",
+  "coverAlt": "Document SSO integration: provisioning, group changes, and logout: Stable identity, Group mapping, Session policy, Deactivation.",
+  "concepts": [
+    "Stable identity",
+    "Group mapping",
+    "Session policy",
+    "Deactivation",
+    "Recovery access"
+  ],
+  "recipe": {
+    "hero": "cover-first",
+    "body": "numbered",
+    "signature": "cover-first:numbered",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 62
+  },
+  "contentHash": "bf6d9aeaa7848035ff433e09d749d5703a4ab32005f79bfeb1ba03521b9b3c80",
+  "intro": "A complete document SSO integration needs stable account linking, authorization mapping, provisioning, deactivation, active-session handling, and emergency recovery. Test these transitions with ordinary identities. A successful login redirect proves authentication works at that moment; it does not prove that later access changes reach every document operation.",
+  "sections": [
+    {
+      "id": "choose-a-stable-account-identity-1",
+      "title": "Choose a stable account identity",
+      "html": "<p>Identify the authoritative directory and the stable identifier used to connect a person to an application account. Email addresses and display names can change or be reused, so verify the selected product's mapping rules before adopting either as identity. Document the supported authentication protocol and required claims for the actual edition. Establish who manages trust material, redirect addresses, certificate changes, and clock synchronization. Test account creation and existing account linking using disposable identities. A login that accidentally creates a second account can split document ownership and complicate both access reviews and later recovery.</p><h3>Map authorization separately</h3><p>Define how directory groups become workspace memberships or application roles using verified provisioning capabilities. Authentication says who a person is; the application still needs an operation specific access decision. Check whether group changes arrive through login claims, scheduled synchronization, an API, or manual administration. Record the resulting delay and who monitors failed updates. Avoid mapping a broad employee group to unrestricted document access for convenience. Administrative and support roles should have distinct approval paths. If the candidate cannot express an essential permission boundary, adjust the workflow or document the limitation before rollout.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "Authentication and document access are separate steps",
+        "items": [
+          {
+            "label": "Directory identity",
+            "detail": "Stable identity authenticates through the supported protocol."
+          },
+          {
+            "label": "Account linking",
+            "detail": "The claim maps to the intended existing or new application account."
+          },
+          {
+            "label": "Membership update",
+            "detail": "Supported provisioning applies groups and roles."
+          },
+          {
+            "label": "Operation check",
+            "detail": "The service authorizes the requested document action."
+          }
+        ],
+        "alt": "Directory identity, account linking, membership update, and document operation check.",
+        "caption": "SSO does not replace operation-specific authorization.",
+        "src": "/blog/images/field-guide-document-identity-lifecycle-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-identity-lifecycle-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "write-a-lifecycle-test-account-2",
+      "title": "Write a lifecycle test account",
+      "html": "<p>Create a disposable person in the authoritative directory and track the same identity through all tests. Use a stable identifier to distinguish an account update from a new person who happens to share an email address. Record the application account identifier and group mapping without retaining credentials in the test report.</p><table><thead><tr><th>Transition</th><th>Required observation</th></tr></thead><tbody><tr><td>First login</td><td>One account receives the intended initial membership</td></tr><tr><td>Email change</td><td>Ownership remains attached to the same person where supported</td></tr><tr><td>Department transfer</td><td>New and removed rights arrive within the approved window</td></tr><tr><td>Deactivation</td><td>New requests and active sessions follow the documented policy</td></tr></tbody></table><p>Check direct download and export paths as well as the embedded editor. A browser session may remain usable after the directory account changes, depending on the actual refresh and revocation design. Measure that behavior and compare it with the acceptable window.</p><p>Also test failure of the membership synchronization path. Record who sees the error, whether access remains stale, and how an operator repairs the mapping. Treat the sync mechanism as a service dependency with an owner. Otherwise the directory may show a correct departure while the application quietly retains an obsolete grant.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "test-a-department-transfer-3",
+      "title": "Test a department transfer",
+      "html": "<p>An employee moves from procurement to finance while a procurement workbook remains open. Change the authoritative group membership and observe new logins, the existing session, downloads, and ownership of the employee's documents. Repeat after changing the person's email address and after deactivating the account. Use harmless content and inspect safe authorization evidence rather than reusable tokens. This scenario reveals whether the platform applies new membership only on the next login and whether direct application endpoints independently reject removed access. Compare the measured behavior with the organization's acceptable revocation window.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "matrix",
+        "title": "Test a transfer while a workbook stays open",
+        "items": [
+          {
+            "label": "Existing session",
+            "detail": "Observe whether old procurement rights still work."
+          },
+          {
+            "label": "New session",
+            "detail": "Verify finance membership and removed procurement access."
+          },
+          {
+            "label": "Direct download",
+            "detail": "Test the business endpoint independently of UI controls."
+          },
+          {
+            "label": "Document ownership",
+            "detail": "Confirm legitimate records remain available after deactivation."
+          }
+        ],
+        "alt": "Transfer test for existing sessions, new sessions, direct downloads, and document ownership.",
+        "caption": "Compare measured revocation with the organization's approved window.",
+        "src": "/blog/images/field-guide-document-identity-lifecycle-figure-3.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-identity-lifecycle-figure-3-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "plan-exceptional-access-safely-4",
+      "title": "Plan exceptional access safely",
+      "html": "<p>Define how operators regain control if the identity provider becomes unavailable or its trust configuration breaks. Any emergency account should be scoped, protected, monitored, and tested through the approved procedure. Avoid leaving untracked local accounts with broad permanent access. Establish ownership transfer for departed users and a process for retrieving legitimate business records without impersonating them informally. Coordinate application session expiry with identity policy and the product's documented refresh behavior. Keep configuration recovery material available to authorized responders so restoring login does not depend on a person whose account was also disabled by the incident.</p><h3>Identity acceptance</h3><ul><li>Verify stable account linking through name and email changes.</li><li>Test provisioning, group removal, deactivation, and failed synchronization.</li><li>Measure revocation for active sessions and direct document operations.</li><li>Approve ownership transfer and exceptional recovery access procedures.</li><li>Retain safe configuration and test records for future trust changes.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "slug": "field-guide-private-document-ai-routing",
+  "title": "Private document AI endpoint: payload, permissions, and failure handling",
+  "description": "Define content selection, authentication, model compatibility, logging, and failure behavior before enabling a private AI endpoint.",
+  "category": "AI & documents",
+  "format": "architecture",
+  "tags": [
+    "AI documents",
+    "API integration",
+    "Data privacy",
+    "Access control",
+    "Integrations"
+  ],
+  "structure": "prose+sequence:prose:diagnostic:example+layers:note",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 662,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Wiring Document AI to Your Own Model Endpoint",
+      "url": "https://shimodocs.com/blog/private-model-endpoint-for-document-ai"
+    }
+  ],
+  "cover": "/blog/images/field-guide-private-document-ai-routing.png",
+  "coverAlt": "Private document AI endpoint: payload, permissions, and failure handling: Content selection, Endpoint contract, Prompt retention, Permission checks.",
+  "concepts": [
+    "Content selection",
+    "Endpoint contract",
+    "Prompt retention",
+    "Permission checks",
+    "Failure policy"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "inset",
+    "signature": "centered:inset",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 53
+  },
+  "contentHash": "f38895932be923a05bc107d17743c6d6594018e1218fa6600a5dc18814f54b3a",
+  "intro": "A private model connection needs a defined data contract: selected content and context, per-request authorization, supported payloads, credentials, retention, and failure behavior. Verify the exact endpoint support in your document product. A successful inference response alone does not establish that the workflow is private or safe to operate.",
+  "sections": [
+    {
+      "id": "specify-the-content-boundary-1",
+      "title": "Specify the content boundary",
+      "html": "<p>Determine whether an operation sends selected text, the current section, the whole document, attachments, or retrieved context. Verify the candidate product's supported endpoint configuration and payload behavior rather than assuming arbitrary model compatibility. Include system instructions, metadata, and conversation history in the data flow. Check current document permission before each operation and avoid using a broadly privileged retrieval account without equivalent authorization. A private destination does not justify sending information beyond the task's needs. Define approved information classes and any documents that must remain outside AI processing altogether.</p>",
+      "kind": "prose",
+      "figure": {
+        "kind": "sequence",
+        "title": "The authorized context path to a private model",
+        "items": [
+          {
+            "label": "Document action",
+            "detail": "User selects text and requests a defined assistance task."
+          },
+          {
+            "label": "Permission decision",
+            "detail": "Verify document access and permitted information class."
+          },
+          {
+            "label": "Context assembly",
+            "detail": "Include only approved selection, instructions, and retrieval."
+          },
+          {
+            "label": "Model request",
+            "detail": "Trusted component authenticates to the configured endpoint."
+          },
+          {
+            "label": "Reviewed result",
+            "detail": "User checks output before any consequential document change."
+          }
+        ],
+        "alt": "Document action, permission, context assembly, model request, and reviewed result.",
+        "caption": "Inspect all context, not just the text visible in the user's selection.",
+        "src": "/blog/images/field-guide-private-document-ai-routing-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-private-document-ai-routing-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1350
+      }
+    },
+    {
+      "id": "verify-the-inference-contract-2",
+      "title": "Verify the inference contract",
+      "html": "<p>Record authentication, request schema, supported operations, context limits, streaming behavior, timeouts, and error responses. An endpoint that resembles another API can still differ in required fields or response semantics. Test compatibility with disposable content and the actual connecting service. Keep model credentials on an appropriate trusted component. Decide whether requests can be retried and whether a repeated generation has business consequences. Set a resource budget for long documents and concurrent requests. The endpoint owner and document service owner should agree who diagnoses authentication errors, exhausted capacity, and malformed responses.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "test-errors-before-enabling-real-content-3",
+      "title": "Test errors before enabling real content",
+      "html": "<p>Build a small endpoint compatibility fixture using harmless text and a known expected response shape. Exercise unauthorized credentials, an oversized selection, a slow response, malformed output, and cancellation. These cases should have distinct observable results rather than one spinner that eventually disappears.</p><table><thead><tr><th>Condition</th><th>Document-side requirement</th></tr></thead><tbody><tr><td>Authentication rejected</td><td>No document change; safe error identifier for the endpoint owner</td></tr><tr><td>Context too large</td><td>User can reduce scope without losing the original document</td></tr><tr><td>Timeout or cancellation</td><td>Explain whether server work continues and how results are discarded</td></tr><tr><td>Invalid output</td><td>Reject or present a recoverable error rather than inserting broken content</td></tr></tbody></table><p>Agree these outcomes with both service owners. Do not silently route a failed private request to an outside provider unless that specific route has been approved for the same content and purpose. Also confirm how retries affect cost and histories. A repeated summary request may be harmless for document state but still create additional retained prompt copies. Keep the original document authoritative until the user knowingly accepts a reviewed result.</p>",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "try-a-private-policy-summary-4",
+      "title": "Try a private policy summary",
+      "html": "<p>A compliance employee selects three policy paragraphs and asks for a plain language summary. Capture a safe request trace to confirm that only the intended selection and approved context reach the model. Inspect logs on both sides for document text and credentials. Repeat with a user who lacks permission to the underlying document and with a deliberately oversized selection. Treat the generated summary as a draft requiring review against the policy, especially numbers, exceptions, and obligations. Successful network routing does not establish factual correctness or permission safety for the complete workflow.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "layers",
+        "title": "A private request can persist in several places",
+        "items": [
+          {
+            "label": "Application history",
+            "detail": "Prompts and responses retained by the document workflow."
+          },
+          {
+            "label": "Endpoint logs",
+            "detail": "Model server or gateway may record request and response content."
+          },
+          {
+            "label": "Tracing and caches",
+            "detail": "Operational tooling can create additional copies."
+          },
+          {
+            "label": "Backups",
+            "detail": "Retained histories may outlive visible conversation deletion."
+          }
+        ],
+        "alt": "Application, endpoint, operational, and backup persistence locations for AI requests.",
+        "caption": "Private routing and controlled retention are separate acceptance questions.",
+        "src": "/blog/images/field-guide-private-document-ai-routing-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-private-document-ai-routing-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "control-persistence-and-failure-5",
+      "title": "Control persistence and failure",
+      "html": "<p>Inventory prompt storage, model server logs, tracing, caches, backups, and generated outputs. Define retention and access for each location with the relevant owners. Confirm whether the endpoint or surrounding infrastructure uses request content for any further processing. On failure, keep the document unchanged until the user knowingly accepts a result. Avoid silently switching to an unapproved outside model as a fallback. Provide a useful error and safe correlation identifier. If generation continues after the browser disconnects, document how cancellation, cost accounting, and result cleanup work in the selected implementation.</p><h3>Endpoint acceptance</h3><ul><li>Verify the exact content and metadata sent for each enabled action.</li><li>Confirm authentication and response compatibility in the deployed network.</li><li>Review prompt logs, caches, backups, and model data use terms.</li><li>Test denial, timeout, oversized input, and cancellation behavior.</li><li>Require human review for consequential generated document changes.</li></ul>",
+      "kind": "note"
+    }
+  ]
+}

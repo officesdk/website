@@ -1,0 +1,130 @@
+{
+  "slug": "stale-preview-invalidation",
+  "title": "Stale document previews: versioned cache keys and safe publication",
+  "description": "Design preview cache keys and publication rules so a fast cached response does not show silently outdated content.",
+  "category": "Integration",
+  "format": "troubleshooting",
+  "tags": [
+    "Document preview",
+    "Version control",
+    "Document conversion",
+    "Document storage"
+  ],
+  "structure": "example+layers:steps:prose:diagnostic+sequence",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 665,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: HTTP caching",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
+    }
+  ],
+  "cover": "/blog/images/stale-preview-invalidation.png",
+  "coverAlt": "Stale document previews: versioned cache keys and safe publication: Source version, Render inputs, Cache key, Matching publish.",
+  "concepts": [
+    "Source version",
+    "Render inputs",
+    "Cache key",
+    "Matching publish",
+    "View freshness"
+  ],
+  "recipe": {
+    "hero": "centered",
+    "body": "rail-right",
+    "signature": "centered:rail-right",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 17
+  },
+  "contentHash": "ea95c28f7f2bd456405c6271d59a6644755202c1b88591ca048ba761ef4f84f3",
+  "intro": "A preview must identify the source version that produced it. Use that identity in the cache key and guard updates to any “current preview” pointer. Otherwise, a delayed conversion for revision A can overwrite the preview for revision B even when the source document itself is up to date.",
+  "sections": [
+    {
+      "id": "give-the-preview-an-explicit-source-identity-1",
+      "title": "Give the preview an explicit source identity",
+      "html": "<p>Include the business document version or immutable source digest, output format, and rendering options that affect the result. If changing fonts or converter versions can change output, decide whether those dependencies belong in the key or trigger an explicit regeneration. A cache keyed only by filename will collide across copies and survive renames unpredictably. Scope private document results by the appropriate tenant or access boundary. Content identity and authorization are separate concerns: knowing the cache key should never grant permission to retrieve its object.</p><pre><code>preview identity = source version + output mode + rendering options\npreview metadata = document ID + source version + renderer revision\ncurrent pointer = only a preview matching the intended current version</code></pre><p>These are design ingredients, not an instruction to concatenate untrusted strings into a path. Normalize and validate the fields, and retain ordinary access checks when serving cached objects. Include renderer or font changes in regeneration policy when they can affect the result.</p><p>Distinguish a content-addressed immutable result from an endpoint named current. The former can often be cached for a long time under the correct private-access rules. The latter represents a changing selection and needs validation or cache controls consistent with that promise. A browser refresh is not a dependable invalidation protocol.</p><p>When a user reports a mismatch, compare the document version selected by the page, the source version recorded on the preview, and the URL actually served by the browser. Those three observations localize the problem: wrong selection, late publication, or a stale downstream response. Purging every cache may conceal the defect without identifying which relationship broke.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "layers",
+        "title": "A preview is a derived versioned object",
+        "items": [
+          {
+            "label": "Source version",
+            "detail": "The exact saved document state being rendered"
+          },
+          {
+            "label": "Render configuration",
+            "detail": "Output mode, options, and regeneration dependencies"
+          },
+          {
+            "label": "Preview object",
+            "detail": "Stored result carrying source and renderer metadata"
+          },
+          {
+            "label": "Current selection",
+            "detail": "A guarded pointer to the intended version's result"
+          }
+        ],
+        "alt": "Source, render configuration, output object, and current selection are separate cache concerns.",
+        "caption": "Preserving historical previews does not require presenting them as current.",
+        "src": "/blog/images/stale-preview-invalidation-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/stale-preview-invalidation-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "reject-late-results-from-the-current-pointer-2",
+      "title": "Reject late results from the current pointer",
+      "html": "<p>A conversion started for version A may finish after version B becomes current. Store its result as a preview of A, and update any current preview pointer only through a guard that checks the source version. Otherwise, an old worker can overwrite a newer result. Keep the relationship visible in metadata and diagnostics. When the current preview is not ready, show preparation status or a clearly labeled older snapshot according to policy. Never silently attach a stale preview to the newest version label merely to avoid an empty state.</p>",
+      "kind": "steps"
+    },
+    {
+      "id": "coordinate-the-browser-and-service-caches-3",
+      "title": "Coordinate the browser and service caches",
+      "html": "<p>Versioned URLs can support long lived caching for immutable output, while mutable current endpoints need deliberate validation or cache control. Review intermediary caches, authenticated download handlers, and browser behavior together. A server cache purge alone may not invalidate an already cached browser response. Conversely, disabling every cache can create unnecessary conversion load. Use the HTTP semantics supported by your deployment and verify private response handling. Avoid placing sensitive preview URLs into shared caches unless the access model and response directives explicitly support that behavior.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "race-two-revisions-and-inspect-the-served-version-4",
+      "title": "Race two revisions and inspect the served version",
+      "html": "<p>Open a contract preview for revision A, then save revision B with a conspicuous test change. Delay A's conversion until B's preview has finished, and refresh from an existing browser tab as well as a new session. Confirm that the current view displays B, historical links still identify A, and no response mixes B's title with A's pages. Repeat after a rendering configuration change. This controlled race exercises worker publication and browser caching together, where many apparently random stale preview reports originate.</p><ul><li>Record source version and renderer configuration with every generated preview.</li><li>Guard updates to current preview pointers against delayed jobs.</li><li>Label historical or temporarily stale results explicitly.</li><li>Verify authorization even when the cached object already exists.</li><li>Define cleanup rules for superseded previews without removing retained historical versions.</li></ul>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "sequence",
+        "title": "A late preview must not move the current view backward",
+        "items": [
+          {
+            "label": "A starts",
+            "detail": "Conversion begins for source revision A"
+          },
+          {
+            "label": "B completes",
+            "detail": "A later revision gets its own preview and current selection"
+          },
+          {
+            "label": "A completes",
+            "detail": "Its result remains associated with A"
+          },
+          {
+            "label": "Browser opens current",
+            "detail": "The served result must identify B"
+          }
+        ],
+        "alt": "Revision A finishes after B without replacing B's current preview.",
+        "caption": "Inspect version metadata and the actual browser response when diagnosing stale pages.",
+        "src": "/blog/images/stale-preview-invalidation-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/stale-preview-invalidation-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    }
+  ]
+}

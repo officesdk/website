@@ -1,0 +1,132 @@
+{
+  "slug": "duplicate-and-out-of-order-saves",
+  "title": "Out-of-order document saves: stop older results overwriting newer versions",
+  "description": "Use explicit version ordering and guarded publication to handle duplicates and delayed save delivery without moving content backward.",
+  "category": "Integration",
+  "format": "architecture",
+  "tags": [
+    "Webhooks",
+    "Version control",
+    "Document storage",
+    "Operations"
+  ],
+  "structure": "prose:example+sequence:note:diagnostic+comparison:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 680,
+  "source": null,
+  "references": [
+    {
+      "label": "MDN: If-Match header",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match"
+    }
+  ],
+  "cover": "/blog/images/duplicate-and-out-of-order-saves.png",
+  "coverAlt": "Out-of-order document saves: stop older results overwriting newer versions: Source revision, Candidate object, Duplicate guard, Publish guard.",
+  "concepts": [
+    "Source revision",
+    "Candidate object",
+    "Duplicate guard",
+    "Publish guard",
+    "Current version"
+  ],
+  "recipe": {
+    "hero": "ledger",
+    "body": "rail-left",
+    "signature": "ledger:rail-left",
+    "accent": "#725494",
+    "soft": "#f0ebf7",
+    "number": 8
+  },
+  "contentHash": "455940779832afb79bfe414bac03664e0d5eff478eeb099bf6cc833991feeff4",
+  "intro": "Store each save result as a candidate, then advance the current version only when its source revision is allowed to do so. Arrival time and worker completion time are not reliable ordering rules. A slow save for revision A must not replace revision B merely because A finished downloading later.",
+  "sections": [
+    {
+      "id": "establish-a-trustworthy-revision-order-1",
+      "title": "Establish a trustworthy revision order",
+      "html": "<p>Inspect the selected integration's version and event semantics. A monotonic source revision can support ordering if the provider documents that guarantee within the relevant document or session scope. An opaque revision identifier may support equality checks without supporting numeric comparison. Timestamps from different machines are weaker evidence because clocks and precision differ. If the provider supplies no ordering guarantee, serialize the relevant workflow or use a documented retrieval of authoritative current state. Do not invent ordering by sorting arbitrary IDs or comparing arrival times.</p>",
+      "kind": "prose"
+    },
+    {
+      "id": "candidate-objects-and-guarded-publication-2",
+      "title": "Candidate objects and guarded publication",
+      "html": "<p>Persist each candidate under a version specific key instead of overwriting a shared current file path immediately. After validation, update the current version pointer only if the expected predecessor or accepted source revision still matches. This guarded publication prevents a slow worker from undoing a faster newer save. Retain enough metadata to explain why a candidate was rejected as stale. Depending on retention policy, that object can become a historical version or be cleaned up after a reconciliation period rather than remaining an unexplained orphan.</p><pre><code>candidate: source revision B → immutable object B\npublish: advance current only if the expected state still matches\nlate candidate: source revision A → retain or discard by policy</code></pre><p>The publication guard belongs at the atomic state change. Checking the current version before a large download leaves a race: another worker can publish while that download is in progress. Recheck with a compare-and-update transaction, conditional object operation, or the equivalent supported by your storage design.</p><p>Distinguish a source revision from a delivery ID. Two deliveries can describe one revision, while two distinct revisions can arrive in reverse order. Deduplicating delivery IDs does not solve revision ordering. If revision identifiers are opaque, compare them only in ways the provider documents; lexical sorting of strings is not evidence of chronology.</p><p>A reconciliation process must use the same guard as the normal worker. Otherwise an operator's repair can reintroduce the exact race the production path prevents. Its report should identify the candidate revision, prior current version, publication decision, and retained object. This makes a stale rejection explainable without requiring operators to inspect document bytes.</p>",
+      "kind": "example",
+      "figure": {
+        "kind": "sequence",
+        "title": "Publication decides which candidate becomes current",
+        "items": [
+          {
+            "label": "Revision A candidate",
+            "detail": "Download into an object tied to source revision A"
+          },
+          {
+            "label": "Revision B published",
+            "detail": "Advance current through a guarded state change"
+          },
+          {
+            "label": "A finishes late",
+            "detail": "Validate its ordering before changing current"
+          },
+          {
+            "label": "Publication decision",
+            "detail": "Keep B current; retain or clean A according to policy"
+          }
+        ],
+        "alt": "A delayed candidate is checked after a newer revision has already been published.",
+        "caption": "The guard must run when publishing, not only before retrieval begins.",
+        "src": "/blog/images/duplicate-and-out-of-order-saves-figure-2.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/duplicate-and-out-of-order-saves-figure-2-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "duplicates-and-interrupted-workers-are-separate-cases-3",
+      "title": "Duplicates and interrupted workers are separate cases",
+      "html": "<p>Two deliveries of the same logical save should converge on one business effect. Keep a stable operation identity and track whether retrieval, validation, and publication completed. A duplicate that arrives while processing is pending should not launch uncontrolled parallel downloads. A retry after a worker crash must still be able to resume incomplete work. Deduplication and version ordering solve different problems: one avoids repeating the same action, while the other prevents an older distinct action from replacing newer content that has already been published.</p>",
+      "kind": "note"
+    },
+    {
+      "id": "reverse-a-and-b-in-a-controlled-test-4",
+      "title": "Reverse A and B in a controlled test",
+      "html": "<p>Create revision A, then revision B of a test spreadsheet. Delay retrieval or publication of A until B has become the current business version. Release A and inspect the pointer, download result, history, and audit records. The current document should remain B, while A follows the documented historical or cleanup policy. Repeat with two deliveries of B and with a crash immediately after its object is stored. These controlled failures show whether ordering protects the complete storage path, not just the callback handler.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "comparison",
+        "title": "Duplicate delivery and stale revision are different cases",
+        "items": [
+          {
+            "label": "Duplicate",
+            "detail": "Same logical save; reuse or resume its existing result"
+          },
+          {
+            "label": "Stale revision",
+            "detail": "Different older save; prevent backward publication"
+          },
+          {
+            "label": "Incomplete publication",
+            "detail": "Recover the candidate without losing ordering checks"
+          }
+        ],
+        "alt": "Three save conditions call for different recovery decisions.",
+        "caption": "A healthy callback count does not establish that the latest durable file is correct.",
+        "src": "/blog/images/duplicate-and-out-of-order-saves-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/duplicate-and-out-of-order-saves-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 930
+      }
+    },
+    {
+      "id": "watch-whether-the-business-version-converges-5",
+      "title": "Watch whether the business version converges",
+      "html": "<ul><li>Track stale candidates, duplicate operations, and incomplete publications separately.</li><li>Alert when the business version remains behind the authoritative editing state beyond the agreed interval.</li><li>Retain source revision and business version mappings for diagnosis.</li><li>Provide a reconciliation job with the same publication guards as normal processing.</li><li>Confirm that cleanup cannot delete the object referenced by the current pointer.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}

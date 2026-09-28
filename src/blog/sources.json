@@ -1,0 +1,570 @@
+[
+  {
+    "slug": "sharepoint-server-after-support-ends",
+    "title": "SharePoint Server Is Out of Support. What You Replace.",
+    "url": "https://shimodocs.com/blog/sharepoint-server-after-support-ends",
+    "source": "ShimoDocs",
+    "category": "Office workflows",
+    "cacheFile": "dbac72d33ae7a60068afdfd4b5994197354ad7581477730ea854096a091de49f.html"
+  },
+  {
+    "slug": "zero-knowledge-editor-vs-document-suite",
+    "title": "A Zero-Knowledge Editor Is Not a Document Suite",
+    "url": "https://shimodocs.com/blog/zero-knowledge-editor-vs-document-suite",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "0608bb94f747190e83e4ad4dd1e35dbfd71dea8b09368f411f145f60452c46f6.html"
+  },
+  {
+    "slug": "self-hosted-office-suite-vs-wiki",
+    "title": "Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
+    "url": "https://shimodocs.com/blog/self-hosted-office-suite-vs-wiki",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "7a268efacc8f03bb06c6d6e0fc151b3ac47a04c690b03af2f99018b63873d301.html"
+  },
+  {
+    "slug": "migrating-without-confluence-connector",
+    "title": "Migrating from Confluence Without a Connector",
+    "url": "https://shimodocs.com/blog/migrating-without-confluence-connector",
+    "source": "ShimoDocs",
+    "category": "Migration",
+    "cacheFile": "4d03cf601494b7a8f044dc10ceff2a774893b8a371b4688cb2e0b1ec8bea4783.html"
+  },
+  {
+    "slug": "collabora-nextcloud-vs-document-suite",
+    "title": "Collabora in Nextcloud vs a Document Suite",
+    "url": "https://shimodocs.com/blog/collabora-nextcloud-vs-document-suite",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "9a5224decbcd98cb29320f77d12a2808ed67f741e4073772a5bab54f06e984a6.html"
+  },
+  {
+    "slug": "shimodocs-vs-onlyoffice",
+    "title": "ShimoDocs vs ONLYOFFICE: Fidelity, Open Core, Controls",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-onlyoffice",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "70a21c47091ab1ffcf7d7fce92864d92192432d168c31c3bacfb75efbb9774e7.html"
+  },
+  {
+    "slug": "shimodocs-vs-nextcloud",
+    "title": "ShimoDocs vs Nextcloud: File Platform or Document Suite?",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-nextcloud",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "508bf450a11b82ae645445ed0fa96e4e59de09f634dca2ad7e6ef944e5f1f10a.html"
+  },
+  {
+    "slug": "document-collaboration-financial-services-rollout",
+    "title": "Rolling Out Document Collaboration Across a Bank",
+    "url": "https://shimodocs.com/blog/document-collaboration-financial-services-rollout",
+    "source": "ShimoDocs",
+    "category": "Office workflows",
+    "cacheFile": "875f23862c8398f8ea5436a7c52723ad6b240da0a2ed5dff9f26b0543c88e74c.html"
+  },
+  {
+    "slug": "document-collaboration-legal-teams",
+    "title": "Matter Files: How Legal Teams Run Document Collaboration",
+    "url": "https://shimodocs.com/blog/document-collaboration-legal-teams",
+    "source": "ShimoDocs",
+    "category": "Office workflows",
+    "cacheFile": "770b56cd7f5db5bb4c283fc78086767c7618f40ab95ecf744e84f8936f676a33.html"
+  },
+  {
+    "slug": "document-collaboration-public-sector",
+    "title": "Document Collaboration in the Public Sector",
+    "url": "https://shimodocs.com/blog/document-collaboration-public-sector",
+    "source": "ShimoDocs",
+    "category": "Office workflows",
+    "cacheFile": "16799086874f5863656f6ede7f50c1e9825b1c030695e568bce2d21d11c12907.html"
+  },
+  {
+    "slug": "document-platform-adoption-plan",
+    "title": "A 30-Day Plan for Rolling Out a Document Platform",
+    "url": "https://shimodocs.com/blog/document-platform-adoption-plan",
+    "source": "ShimoDocs",
+    "category": "Migration",
+    "cacheFile": "99524447ebfd7da0cedb62af6603dd3c6bf80345bbd67a69ccc762f391dbc865.html"
+  },
+  {
+    "slug": "document-platform-lock-in-and-exit-planning",
+    "title": "Leaving a Document Platform: Lock-In and the Exit Path",
+    "url": "https://shimodocs.com/blog/document-platform-lock-in-and-exit-planning",
+    "source": "ShimoDocs",
+    "category": "Migration",
+    "cacheFile": "ad50ee0620f688f71b7d9ec87147a09f7d603272ca2512c9229e6c5ef8f48adf.html"
+  },
+  {
+    "slug": "document-platform-operations-cost",
+    "title": "What a Self-Hosted Document Platform Costs to Run",
+    "url": "https://shimodocs.com/blog/document-platform-operations-cost",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "0fcd51fd59208d10856a5690fbb88e9c923181fbb5886b9a274ad8a0b60a0c11.html"
+  },
+  {
+    "slug": "migrating-shared-drives-to-a-document-platform",
+    "title": "Migrating a Shared Drive Without Losing Permissions",
+    "url": "https://shimodocs.com/blog/migrating-shared-drives-to-a-document-platform",
+    "source": "ShimoDocs",
+    "category": "Migration",
+    "cacheFile": "d13deed9f721377ed4d8155212817419167a3cc36f64243146b5a979562e6f29.html"
+  },
+  {
+    "slug": "passing-a-document-platform-security-review",
+    "title": "Answering a Security Review of a Self-Hosted Platform",
+    "url": "https://shimodocs.com/blog/passing-a-document-platform-security-review",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "f2b89edac950272b8cc5344e504c4a09eb40a1e890d033ccfecd6ea735747405.html"
+  },
+  {
+    "slug": "private-model-endpoint-for-document-ai",
+    "title": "Wiring Document AI to Your Own Model Endpoint",
+    "url": "https://shimodocs.com/blog/private-model-endpoint-for-document-ai",
+    "source": "ShimoDocs",
+    "category": "AI & documents",
+    "cacheFile": "f067322db6b10c114afc798e8a1b8af15a8b91e0a3cf3981988d08dcbe39051a.html"
+  },
+  {
+    "slug": "self-hosted-document-platform-pricing",
+    "title": "How Self-Hosted Document Software Is Priced",
+    "url": "https://shimodocs.com/blog/self-hosted-document-platform-pricing",
+    "source": "ShimoDocs",
+    "category": "Self-hosting",
+    "cacheFile": "5c247a0525d8b3dd4ad81474d8491c047c13ca3f01d1c9f978962438eb136084.html"
+  },
+  {
+    "slug": "secure-cloud-collaboration",
+    "title": "Secure Cloud Collaboration: Balancing Security and Productivity",
+    "url": "https://shimodocs.com/blog/secure-cloud-collaboration",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "a6133e04a819f6990a29e2201fcddf8898c0b6ecf6dba9388be293314960d18c.html"
+  },
+  {
+    "slug": "ai-training-content-control",
+    "title": "Your Content Is Training AI. Did You Actually Agree to That?",
+    "url": "https://shimodocs.com/blog/ai-training-content-control",
+    "source": "ShimoDocs",
+    "category": "AI & documents",
+    "cacheFile": "587f07c72038ab2f82046fd44307e58db54b919fff9a6455fce1816bad43b326.html"
+  },
+  {
+    "slug": "web3-security-tools-resources",
+    "title": "50 Web3 Security Tools & Resources for Builders",
+    "url": "https://shimodocs.com/blog/web3-security-tools-resources",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "8531577f3c0af07dc5864984c1d02c969b3d1e3b759f63a22b2d83e39563e4c4.html"
+  },
+  {
+    "slug": "object-storage-document-platform",
+    "title": "Choosing Object Storage for a Document Platform",
+    "url": "https://shimodocs.com/blog/object-storage-document-platform",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "54ccf195093a1dd7519cebb1a3b0ff106284fd39a4b713f0ea86a30522282540.html"
+  },
+  {
+    "slug": "capacity-planning-concurrent-editors",
+    "title": "Capacity Planning Around Concurrent Editors",
+    "url": "https://shimodocs.com/blog/capacity-planning-concurrent-editors",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "45bb55debc7c6efa1efcd8efb113773667293a627b4c0d729ca60b75dd0cddd3.html"
+  },
+  {
+    "slug": "disaster-recovery-document-platform",
+    "title": "Disaster Recovery for a Document Platform",
+    "url": "https://shimodocs.com/blog/disaster-recovery-document-platform",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "04b4ef5672ecfbfdb13d1226e2959607cd0c1479e154cef33f92692bd28642c0.html"
+  },
+  {
+    "slug": "air-gapped-document-collaboration",
+    "title": "Document Collaboration on an Air-Gapped Network",
+    "url": "https://shimodocs.com/blog/air-gapped-document-collaboration",
+    "source": "ShimoDocs",
+    "category": "Self-hosting",
+    "cacheFile": "1e98b87bb5a3582bf67e38af0fe2034ec3bd8ab0e57b211543ad1827f4499de2.html"
+  },
+  {
+    "slug": "sso-self-hosted-document-platform",
+    "title": "Identity and SSO for a Self-Hosted Document Platform",
+    "url": "https://shimodocs.com/blog/sso-self-hosted-document-platform",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "5783a8e4445a477d28a43af55d1aba318a486145748c69fecc357025921825d6.html"
+  },
+  {
+    "slug": "upgrade-and-rollback-document-platform",
+    "title": "Upgrading a Document Platform Without Downtime Drama",
+    "url": "https://shimodocs.com/blog/upgrade-and-rollback-document-platform",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "a2f0e9da18efcaa6737b935fbc6e9f36a62c8eea31402d5ac6ff69af7c241fe5.html"
+  },
+  {
+    "slug": "monitoring-self-hosted-document-platform",
+    "title": "Monitoring a Self-Hosted Document Platform",
+    "url": "https://shimodocs.com/blog/monitoring-self-hosted-document-platform",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "7c0c920baeb2eaf5d8ebf1a4eb2f5647f56a7d636da9b4cc5cb54970e31f2d9f.html"
+  },
+  {
+    "slug": "backup-and-restore-document-platform",
+    "title": "Backup and Restore for a Document Platform",
+    "url": "https://shimodocs.com/blog/backup-and-restore-document-platform",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "6ca6c3dbe2cc626a44ac21494cd7c5f19d4af520529e9479d1839cad8ab1e67d.html"
+  },
+  {
+    "slug": "database-tuning-document-collaboration",
+    "title": "Tuning the Database Behind a Document Platform",
+    "url": "https://shimodocs.com/blog/database-tuning-document-collaboration",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "d782cd1f6928304953e7325d58fbacf87662a70ce499ffab2b39a3831fb0754a.html"
+  },
+  {
+    "slug": "hardware-sizing-self-hosted-document-platform",
+    "title": "Sizing Hardware for a Self-Hosted Document Platform",
+    "url": "https://shimodocs.com/blog/hardware-sizing-self-hosted-document-platform",
+    "source": "ShimoDocs",
+    "category": "Operations",
+    "cacheFile": "531fde2236bb4491acb21c9585000f81ca0196939aef7809b926ee4ebd9152e9.html"
+  },
+  {
+    "slug": "byo-key-encryption-documents",
+    "title": "Document Encryption and Key Custody",
+    "url": "https://shimodocs.com/blog/byo-key-encryption-documents",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "f5ea5dc686aa2784f9802c8e880d7084ee1d8cb9c624cd5fcb312d98711f56d9.html"
+  },
+  {
+    "slug": "external-sharing-risks-documents",
+    "title": "External Document Sharing: Where Audits Find Problems",
+    "url": "https://shimodocs.com/blog/external-sharing-risks-documents",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "26affa9937dcaf4005e9fe10baddef6875f9d032380c2ded920d7b7454b33521.html"
+  },
+  {
+    "slug": "access-control-best-practices-documents",
+    "title": "Access Control for Document Platforms",
+    "url": "https://shimodocs.com/blog/access-control-best-practices-documents",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "26f2a04df389d4576171b18543d350e449c856e183b6677c3cd538d81ec302a0.html"
+  },
+  {
+    "slug": "legal-hold-document-management",
+    "title": "Legal Hold in Document Platforms",
+    "url": "https://shimodocs.com/blog/legal-hold-document-management",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "01ef44df1c1db0d934d619a12e46682439e6b4307a9447ef76d657cc43a2c34f.html"
+  },
+  {
+    "slug": "document-retention-policy-guide",
+    "title": "Building a Document Retention Policy That Holds",
+    "url": "https://shimodocs.com/blog/document-retention-policy-guide",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "dc34cde474e3bc7c4c960e0eba6892cfc150fea29ae08490056a9aa475add24d.html"
+  },
+  {
+    "slug": "data-residency-requirements-guide",
+    "title": "A Practical Guide to Data Residency Requirements",
+    "url": "https://shimodocs.com/blog/data-residency-requirements-guide",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "ce285afb55a30395210d6e37cf49580f32b79b3f20e6e80f5e8648f1c6375f28.html"
+  },
+  {
+    "slug": "iso27001-document-management",
+    "title": "ISO 27001 and Document Management",
+    "url": "https://shimodocs.com/blog/iso27001-document-management",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "9dd6341928dbb4914b01f5b20b1030ca50fcc76cfb76fc2f9a7c6e135f734054.html"
+  },
+  {
+    "slug": "soc2-document-collaboration-controls",
+    "title": "SOC 2 Controls for Document Collaboration",
+    "url": "https://shimodocs.com/blog/soc2-document-collaboration-controls",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "70d0ef333d178b424a731a74e79d897f1a5cf2e3eca71e7bd41638eb745ca915.html"
+  },
+  {
+    "slug": "hipaa-compliant-document-collaboration",
+    "title": "HIPAA-Compliant Document Collaboration",
+    "url": "https://shimodocs.com/blog/hipaa-compliant-document-collaboration",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "cd6aeb432946feb0c95ae7bf2d9cdee0af4973812468b26c1066271b252b4574.html"
+  },
+  {
+    "slug": "gdpr-compliant-document-collaboration",
+    "title": "GDPR-Compliant Document Collaboration",
+    "url": "https://shimodocs.com/blog/gdpr-compliant-document-collaboration",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "4a96e26a51b39e825d678439a7244015ffe001974359044d307acc92ad9a16ae.html"
+  },
+  {
+    "slug": "google-workspace-alternatives-for-enterprise",
+    "title": "Google Workspace Alternatives for Enterprise Teams",
+    "url": "https://shimodocs.com/blog/google-workspace-alternatives-for-enterprise",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "a4070060dd1c0ff93e1c4a6cae7e5f9e0e05bafb5aee3893b8c1c027bbd27f84.html"
+  },
+  {
+    "slug": "open-source-document-collaboration-options",
+    "title": "Open Source Document Collaboration: An Honest Assessment",
+    "url": "https://shimodocs.com/blog/open-source-document-collaboration-options",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "884e54215bbe5ebce92e3d08b73dd1c17f5eb9815f9a60c945a64ff7a472d5ba.html"
+  },
+  {
+    "slug": "best-self-hosted-document-collaboration-tools",
+    "title": "Self-Hosted Document Collaboration: What to Look For",
+    "url": "https://shimodocs.com/blog/best-self-hosted-document-collaboration-tools",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "2220f13c42d758be20f19e52f79847a36b6ff697052217761937d72d8abf0ecf.html"
+  },
+  {
+    "slug": "best-google-docs-alternatives",
+    "title": "The Best Google Docs Alternatives, by What You Need",
+    "url": "https://shimodocs.com/blog/best-google-docs-alternatives",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "083bee3597f0d13b3bde6e8b2ebcf73105c10d2c8dde5c295f7a36085ec018ab.html"
+  },
+  {
+    "slug": "self-hosted-office-suite-comparison",
+    "title": "Comparing Self-Hosted Office Suites: What Actually Matters",
+    "url": "https://shimodocs.com/blog/self-hosted-office-suite-comparison",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "3f8c36330cb6acf55d9cc882dd6bc122ce89aab6ed5fa13703e13acc0a5e8596.html"
+  },
+  {
+    "slug": "shimodocs-vs-coda",
+    "title": "ShimoDocs vs Coda: Docs, Tables and Where They Diverge",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-coda",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "e6ba1182eff6e754c214473f80c8fdad216b960282a21c5bbdf574f0a691fad8.html"
+  },
+  {
+    "slug": "shimodocs-vs-slab",
+    "title": "ShimoDocs vs Slab: Knowledge Base or Workspace?",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-slab",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "a36e1a52788f40715e238a8f99389e699d1f6f7abd01f5051d818f08b538ac54.html"
+  },
+  {
+    "slug": "shimodocs-vs-microsoft-365",
+    "title": "ShimoDocs vs Microsoft 365: Suite Against Suite",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-microsoft-365",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "53e36a2f1b05dceeb18eaec2671983b6215e53f726387a9835df0f6f15c9b3c2.html"
+  },
+  {
+    "slug": "shimodocs-vs-sharepoint",
+    "title": "ShimoDocs vs SharePoint for Document Management",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-sharepoint",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "88ae7baf810daa1c60551f06d595702ffb30a6d35bdb41bc48796a7fefb3ac25.html"
+  },
+  {
+    "slug": "shimodocs-vs-confluence",
+    "title": "ShimoDocs vs Confluence: Wiki or Document Suite?",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-confluence",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "e0d5fc8a0ffe7c066f3addf41d2cf45b9edbf200610a5209c9ed1761e3f91e16.html"
+  },
+  {
+    "slug": "secure-document-collaboration-financial-services",
+    "title": "Secure Document Collaboration for Financial Services",
+    "url": "https://shimodocs.com/blog/secure-document-collaboration-financial-services",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "d4ac039ad33dfc1f39a4e198cae44a50497f046c7940ffdbc367ea840544f407.html"
+  },
+  {
+    "slug": "self-hosted-collaboration-kubernetes-deployment",
+    "title": "Deploying Self-Hosted Collaboration on Kubernetes",
+    "url": "https://shimodocs.com/blog/self-hosted-collaboration-kubernetes-deployment",
+    "source": "ShimoDocs",
+    "category": "Self-hosting",
+    "cacheFile": "90705f2885eea4ac550512edd9cdf375eaa76aceb4073ed590a4fb971b479cbc.html"
+  },
+  {
+    "slug": "ai-agents-in-documents-security",
+    "title": "AI Agents Inside Your Documents: What to Secure",
+    "url": "https://shimodocs.com/blog/ai-agents-in-documents-security",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "0279101948ed1df40293a30ae887f635713daffa1bf3b460a2a50b00b6d85c94.html"
+  },
+  {
+    "slug": "how-to-migrate-from-google-workspace",
+    "title": "How to Migrate from Google Workspace Without Losing Work",
+    "url": "https://shimodocs.com/blog/how-to-migrate-from-google-workspace",
+    "source": "ShimoDocs",
+    "category": "Migration",
+    "cacheFile": "ca8baaea90979b8cd8853d911b746fcfa3ca86128fb43fbd710746b9bd44a3ec.html"
+  },
+  {
+    "slug": "shimodocs-vs-notion",
+    "title": "ShimoDocs vs Notion: Documents, Wikis or Both?",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-notion",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "20bf1e6340afcff812d2d85e0e6beeb0f0240fd875304e44dab7d24c73406a55.html"
+  },
+  {
+    "slug": "shimodocs-vs-google-docs",
+    "title": "ShimoDocs vs Google Docs: A Working Comparison",
+    "url": "https://shimodocs.com/blog/shimodocs-vs-google-docs",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "022462aa134a03d2dbc7c78489e025992a47f040699912e7a8d17c219208300c.html"
+  },
+  {
+    "slug": "google-docs-alternative-private-cloud",
+    "title": "Self-Hosted Google Docs Alternative for Private Deployment",
+    "url": "https://shimodocs.com/blog/google-docs-alternative-private-cloud",
+    "source": "ShimoDocs",
+    "category": "Comparisons",
+    "cacheFile": "3d8628bf580c4ddc33ed7c627763cd9e2cb4ee11faf4a8d7e6ed7f8aa5ffb720.html"
+  },
+  {
+    "slug": "data-sovereignty-document-collaboration",
+    "title": "Data Sovereignty in Document Collaboration",
+    "url": "https://shimodocs.com/blog/data-sovereignty-document-collaboration",
+    "source": "ShimoDocs",
+    "category": "Security",
+    "cacheFile": "dd1d92e2af24b7539e03acd9ba0798c74202153621c36c990a8327cf89693560.html"
+  },
+  {
+    "slug": "self-hosted-collaboration-guide",
+    "title": "A Practical Guide to Self-Hosted Collaboration",
+    "url": "https://shimodocs.com/blog/self-hosted-collaboration-guide",
+    "source": "ShimoDocs",
+    "category": "Self-hosting",
+    "cacheFile": "7a84db444db32c5d99d354812cbfb177b86711c7b6ef390afd5be8262bdde946.html"
+  },
+  {
+    "slug": "what-is-private-cloud-document-collaboration",
+    "title": "Private Cloud Document Collaboration: Self-Hosted Guide",
+    "url": "https://shimodocs.com/blog/what-is-private-cloud-document-collaboration",
+    "source": "ShimoDocs",
+    "category": "Self-hosting",
+    "cacheFile": "3ab8215ea3b3df7d5ecba6560d13448490b43fecf548e3de47dc55634ad8060f.html"
+  },
+  {
+    "slug": "a-timeline-for-every-deck",
+    "title": "Every deck has a history. OfficeDex lets you walk back into it",
+    "url": "https://officedex.ai/blog/a-timeline-for-every-deck/",
+    "source": "OfficeDex",
+    "category": "AI & documents",
+    "cacheFile": "073fe99d72a4195ce929e4f7d2a9c40d3c188bfd37f239f9e7d168cb6cbe5e73.html"
+  },
+  {
+    "slug": "agent-office-next-generation",
+    "title": "Stop Calling It AI Office. The Next Generation Is Agent Office",
+    "url": "https://officedex.ai/blog/agent-office-next-generation/",
+    "source": "OfficeDex",
+    "category": "AI & documents",
+    "cacheFile": "470f68d040cd5e09433fd3c33dabf99aa73285a58f101ff18641d71fc7153d8d.html"
+  },
+  {
+    "slug": "documents-that-follow-their-data",
+    "title": "Keep Reports Current with Connected Data",
+    "url": "https://officedex.ai/blog/documents-that-follow-their-data/",
+    "source": "OfficeDex",
+    "category": "Office workflows",
+    "cacheFile": "852d279c0997839894662eaf1c07d6c319691bc203b361539454ae141e1e1854.html"
+  },
+  {
+    "slug": "editable-powerpoint-checklist",
+    "title": "An editable AI PowerPoint checklist for everyday work",
+    "url": "https://officedex.ai/blog/editable-powerpoint-checklist/",
+    "source": "OfficeDex",
+    "category": "Office workflows",
+    "cacheFile": "e0c1e058db142eba076607d809a3c56e21684d124504efa77456af8e01cbac45.html"
+  },
+  {
+    "slug": "infoq-vibe-officing-final",
+    "title": "Vibe Officing: AI for Everyday Office Work",
+    "url": "https://officedex.ai/blog/infoq-vibe-officing-final/",
+    "source": "OfficeDex",
+    "category": "Office workflows",
+    "cacheFile": "33afe28376a03fd90da37c0b8f4f744cdae8285c1fcb4bf512203bc80a68c94b.html"
+  },
+  {
+    "slug": "steer-a-deck-while-it-draws",
+    "title": "Steer a deck while it is still drawing",
+    "url": "https://officedex.ai/blog/steer-a-deck-while-it-draws/",
+    "source": "OfficeDex",
+    "category": "AI & documents",
+    "cacheFile": "6002b3021b77905486abf1d304a7ab49f519abb3ff6f9a400d1dcff19947b41e.html"
+  },
+  {
+    "slug": "word-formatting-checklist",
+    "title": "AI Word document formatting: A pre-send checklist",
+    "url": "https://officedex.ai/blog/word-formatting-checklist/",
+    "source": "OfficeDex",
+    "category": "AI & documents",
+    "cacheFile": "27737d3f0b847124dc8d7728c9c663a7d3c49e3b2e86f8c297a4535269114692.html"
+  },
+  {
+    "slug": "offline-document-processing",
+    "title": "Keeping document conversion offline, on device and in your cloud",
+    "url": "https://officeapi.ai/blog/offline-document-processing/",
+    "source": "OfficeAPI",
+    "category": "Self-hosting",
+    "cacheFile": "f90186b0301e7e7a118434c2cd84b6ebc0bcc3a8da4845457fb2a4b106d794eb.html"
+  },
+  {
+    "slug": "on-device-ai-documents",
+    "title": "On-device AI needs an on-device document engine",
+    "url": "https://officeapi.ai/blog/on-device-ai-documents/",
+    "source": "OfficeAPI",
+    "category": "AI & documents",
+    "cacheFile": "8440cc17924da35b296fc5de8d5c7148c7180ca9e16e9d12e6e4cdcf5852444e.html"
+  },
+  {
+    "slug": "one-engine-two-surfaces",
+    "title": "One engine, two surfaces — conversion and preview from the same core",
+    "url": "https://officeapi.ai/blog/one-engine-two-surfaces/",
+    "source": "OfficeAPI",
+    "category": "Integration",
+    "cacheFile": "54bfa1b041b0047d7297e26f66e04a94730bfe989726787dacc70cc7dde8be54.html"
+  },
+  {
+    "slug": "why-rust",
+    "title": "Why OfficeAPI is written in Rust",
+    "url": "https://officeapi.ai/blog/why-rust/",
+    "source": "OfficeAPI",
+    "category": "Integration",
+    "cacheFile": "4bc92026080b1266de038e4b790d348e148df690f92d27423e0a44a2217ef3f7.html"
+  }
+]

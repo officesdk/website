@@ -1,0 +1,136 @@
+{
+  "slug": "field-guide-document-database-performance-evidence",
+  "title": "Slow document database operations: diagnose waits before tuning",
+  "description": "Connect slow document operations to database evidence before changing indexes, pools, memory, or maintenance settings.",
+  "category": "Operations",
+  "format": "troubleshooting",
+  "tags": [
+    "Troubleshooting",
+    "Performance",
+    "Operations",
+    "Version control"
+  ],
+  "structure": "diagnostic+flow:comparison:example:steps+sequence:checklist",
+  "author": "Office SDK Editorial",
+  "publishedAt": "2026-09-28",
+  "readMinutes": 4,
+  "wordCount": 685,
+  "source": null,
+  "references": [
+    {
+      "label": "ShimoDocs: Tuning the Database Behind a Document Platform",
+      "url": "https://shimodocs.com/blog/database-tuning-document-collaboration"
+    }
+  ],
+  "cover": "/blog/images/field-guide-document-database-performance-evidence.png",
+  "coverAlt": "Slow document database operations: diagnose waits before tuning: Operation latency, Query plans, Lock waits, Pool pressure.",
+  "concepts": [
+    "Operation latency",
+    "Query plans",
+    "Lock waits",
+    "Pool pressure",
+    "Measured changes"
+  ],
+  "recipe": {
+    "hero": "folio",
+    "body": "numbered",
+    "signature": "folio:numbered",
+    "accent": "#ae463d",
+    "soft": "#f8eeeb",
+    "number": 66
+  },
+  "contentHash": "0b0a642251f07e1371e646d47030cc62f2e0b5a59e77f24589e43c9693abdd48",
+  "intro": "Identify the delayed document operation and determine whether it waits for a connection, query execution, a lock, or durable writes. Inspect representative plans and workload before changing pools or indexes. Use supported changes, a reproducible baseline, and rollback evidence; more concurrency can make a saturated database slower.",
+  "sections": [
+    {
+      "id": "find-the-delayed-operation-1",
+      "title": "Find the delayed operation",
+      "html": "<p>Separate login, folder listing, document open, version publication, and search latency. Correlate the delayed application operation with database activity using safe identifiers and the database's supported diagnostic tools. Check whether time is spent waiting for a connection, executing a query, acquiring a lock, or writing durable data. Avoid collecting full confidential values in routine query logs. Record the engine, version, deployment topology, and relevant vendor support boundaries. A generic database tuning recipe may conflict with the application's expected schema or a managed configuration, so obtain the appropriate operating guidance before changing it.</p><h3>Inspect plans and access patterns</h3><p>Review expensive queries and their plans using representative data. Examine filtering, ordering, row estimates, existing indexes, and the effect of collection growth. A folder list that is fast with 20 records may behave differently with 200,000. Check statistics and maintenance status before assuming a new index is necessary. Include write amplification and storage cost in index decisions, especially for frequently updated metadata. If the schema belongs to packaged software, confirm whether custom indexes or settings are supported. Keep a reproducible baseline so the proposed change can be evaluated against the same query and workload.</p>",
+      "kind": "diagnostic",
+      "figure": {
+        "kind": "flow",
+        "title": "Trace a slow document operation into database evidence",
+        "items": [
+          {
+            "label": "User latency",
+            "detail": "Identify folder list, open, search, or version publication."
+          },
+          {
+            "label": "Database wait",
+            "detail": "Separate pool wait, query time, lock, and durable write."
+          },
+          {
+            "label": "Representative evidence",
+            "detail": "Capture supported plans and waits without confidential values."
+          },
+          {
+            "label": "Focused hypothesis",
+            "detail": "Choose a supported change that addresses the observed cause."
+          }
+        ],
+        "alt": "User operation to wait classification, evidence, and focused tuning hypothesis.",
+        "caption": "Start from the document task rather than a generic tuning recipe.",
+        "src": "/blog/images/field-guide-document-database-performance-evidence-figure-1.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-database-performance-evidence-figure-1-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "match-the-wait-to-the-next-investigation-2",
+      "title": "Match the wait to the next investigation",
+      "html": "<table><thead><tr><th>Observed wait</th><th>Next useful evidence</th><th>Avoid assuming</th></tr></thead><tbody><tr><td>Connection acquisition</td><td>Pool usage, request duration, and database capacity</td><td>A bigger pool must improve latency</td></tr><tr><td>Lock contention</td><td>Blocking transaction and its scope or duration</td><td>More CPU removes the lock</td></tr><tr><td>Query execution</td><td>Representative plan, estimates, statistics, and data shape</td><td>Every slow query needs a new index</td></tr><tr><td>Durable write</td><td>Storage latency and relevant engine configuration</td><td>The application is the only possible cause</td></tr></tbody></table><p>Use the actual database engine's diagnostic tools and the packaged application's support guidance. This table is a starting point, not a tuning command list. Keep confidential values out of routine logs and restrict access to captured evidence.</p><p>For a slow folder list, preserve the query shape and representative collection size. For a delayed version publication, preserve concurrency and transaction timing. Testing either against an almost empty database can hide the cause. State the hypothesis before changing a setting, then compare the target operation with related resource behavior. A successful change improves the required user task without creating unacceptable write cost, memory pressure, or recovery delays elsewhere.</p>",
+      "kind": "comparison"
+    },
+    {
+      "id": "investigate-a-slow-version-publish-3",
+      "title": "Investigate a slow version publish",
+      "html": "<p>A report save retrieves and stores bytes quickly but takes several seconds to become the current version. In a test environment, trace the metadata transaction and inspect lock or connection waits during concurrent saves. Determine whether an unnecessarily broad transaction holds a lock or whether all workers contend for a limited connection pool. Do not simply raise the pool size: more simultaneous queries can worsen a saturated database. Try a supported targeted change, then measure publication latency and total resource use. This scenario connects tuning to durable user completion instead of an isolated query benchmark.</p>",
+      "kind": "example"
+    },
+    {
+      "id": "make-one-justified-change-4",
+      "title": "Make one justified change",
+      "html": "<p>State the hypothesis, expected metric improvement, rollback procedure, and potential side effects. Change one meaningful variable in a controlled environment, then repeat the workload. For production changes, use the organization's normal change process and monitor both the target operation and related write or memory behavior. Review replication delay, backup duration, and maintenance impact where applicable. Preserve enough evidence to explain why the change helped or failed. Stop tuning when the required workflow meets its operating target; speculative adjustments after that point add complexity without a concrete user benefit.</p>",
+      "kind": "steps",
+      "figure": {
+        "kind": "sequence",
+        "title": "Make a performance change explainable",
+        "items": [
+          {
+            "label": "Baseline",
+            "detail": "Retain workload, latency, resource use, and query context."
+          },
+          {
+            "label": "One justified change",
+            "detail": "Document expected benefit, risk, and reversal procedure."
+          },
+          {
+            "label": "Repeat workload",
+            "detail": "Compare target latency and related write or memory effects."
+          },
+          {
+            "label": "Keep or revert",
+            "detail": "Stop when the required task target is met."
+          }
+        ],
+        "alt": "Baseline, justified change, repeat measurement, and keep-or-revert decision.",
+        "caption": "Optional tuning after the target is met adds complexity without a defined benefit.",
+        "src": "/blog/images/field-guide-document-database-performance-evidence-figure-4.png",
+        "width": 1200,
+        "height": 900,
+        "mobileSrc": "/blog/images/field-guide-document-database-performance-evidence-figure-4-mobile.png",
+        "mobileWidth": 600,
+        "mobileHeight": 1140
+      }
+    },
+    {
+      "id": "tuning-record-5",
+      "title": "Tuning record",
+      "html": "<ul><li>Identify the affected document operation and database wait class.</li><li>Capture representative plans and workload without sensitive values.</li><li>Verify support for schema, index, and configuration changes.</li><li>Compare latency, contention, memory, and write cost before and after.</li><li>Document rollback and stop when the required target is met.</li></ul>",
+      "kind": "checklist"
+    }
+  ]
+}
