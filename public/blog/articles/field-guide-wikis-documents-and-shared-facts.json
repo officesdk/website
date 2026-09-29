@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-wikis-documents-and-shared-facts",
-  "title": "ShimoDocs vs Notion: shared facts, knowledge, and final records",
+  "title": "Office SDK vs Notion: shared facts, knowledge, and final records",
   "description": "Compare the proposed content models through project handover, update ownership, synchronization, and portable exports.",
   "category": "Comparisons",
   "format": "comparison",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 662,
+  "wordCount": 676,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Notion: Documents, Wikis or Both?",
+      "label": "Original topic reference: document platform vs Notion: Documents, Wikis or Both?",
       "url": "https://shimodocs.com/blog/shimodocs-vs-notion"
     }
   ],
   "cover": "/blog/images/field-guide-wikis-documents-and-shared-facts.png",
-  "coverAlt": "ShimoDocs vs Notion: shared facts, knowledge, and final records: Shared facts, Knowledge page, Office deliverable, Sync rule.",
+  "coverAlt": "Office SDK vs Notion: shared facts, knowledge, and final records: Shared facts, Knowledge page, Office deliverable, Sync rule.",
   "concepts": [
     "Shared facts",
     "Knowledge page",
@@ -39,8 +39,8 @@
     "soft": "#eaf1f9",
     "number": 92
   },
-  "contentHash": "8e2b07287fb2143c686161fb5dbf19319231405d4f0d51d93da908b060aeae20",
-  "intro": "Compare ShimoDocs and Notion by locating the authority for shared facts, maintained knowledge, and approved files. Test a project handover in the proposed configurations. A convenient page model is useful only if users can tell which values are current and which records are historical.",
+  "contentHash": "d9ab5835dc441e0aee819050f501d6f7c0a2bc76f60321c54e0363bef46c196f",
+  "intro": "Compare Office SDK and Notion by locating the authority for shared facts, maintained knowledge, and approved files. This is a workflow comparison between an embedded Office document surface and a connected workspace, not a claim of feature equivalence. Test a project handover in the current proposed configurations and verify which values are current and which records are historical.",
   "sections": [
     {
       "id": "model-the-information-before-the-ui-1",

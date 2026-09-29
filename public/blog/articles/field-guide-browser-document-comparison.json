@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-browser-document-comparison",
-  "title": "ShimoDocs vs Google Docs: a practical browser editor test",
+  "title": "Office SDK vs Google Docs: a practical browser editor test",
   "description": "Run identical review, interruption, submitted-version, and export tasks before selecting a browser editor.",
   "category": "Comparisons",
   "format": "field-notes",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 669,
+  "wordCount": 685,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Google Docs: A Working Comparison",
+      "label": "Original topic reference: document platform vs Google Docs: A Working Comparison",
       "url": "https://shimodocs.com/blog/shimodocs-vs-google-docs"
     }
   ],
   "cover": "/blog/images/field-guide-browser-document-comparison.png",
-  "coverAlt": "ShimoDocs vs Google Docs: a practical browser editor test: Work sample, Review roles, Revision recovery, Export inspection.",
+  "coverAlt": "Office SDK vs Google Docs: a practical browser editor test: Work sample, Review roles, Revision recovery, Export inspection.",
   "concepts": [
     "Work sample",
     "Review roles",
@@ -39,8 +39,8 @@
     "soft": "#f8eeeb",
     "number": 93
   },
-  "contentHash": "f7b4a1cd2c796b29ac58eaa14df5d332617fb06cd782190cc2ad58072a7f4ede",
-  "intro": "A practical ShimoDocs and Google Docs comparison uses the same document, roles, and delivery task in each proposed offer. Inspect revision behavior and recipient output as well as writing. Record what the tested configurations actually do, especially when connectivity or external review interrupts the workflow.",
+  "contentHash": "7ddde0596a12b2fd0bad5842550e876aa9c0b8cd9016f2241a3033dff7c51648",
+  "intro": "A practical Office SDK and Google Docs comparison uses the same document, roles, and delivery task in each proposed offer. The scope is an embedded Office document surface against the tested browser workspace, not an assertion that the products are feature-equivalent. Record current editions and configurations, then inspect revision behavior and recipient output when connectivity or external review interrupts the workflow.",
   "sections": [
     {
       "id": "choose-a-realistic-sample-1",

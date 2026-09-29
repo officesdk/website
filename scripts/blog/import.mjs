@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import * as cheerio from 'cheerio'
 import sanitizeHtml from 'sanitize-html'
+import { articleActionGuides, articleComparisonSections, articleMeasurementNotes, articleReferenceAdditions } from '../../src/blog/articleAdditions.mjs'
 import { articleFormats, categorize, editorialRecipe, figureKinds, keywordTags, sectionKinds } from './editorial.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
@@ -27,6 +28,37 @@ export const cleanHtml = (html, anchorIds = new Set()) => sanitizeHtml(html, {
     return { tagName, attribs }
   } },
 })
+
+const escapeText = (value) => value.replace(/[&<>"']/g, character => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+})[character])
+
+const comparisonHtml = (comparison) => [
+  '<table><thead><tr>',
+  ...comparison.headers.map(header => `<th>${escapeText(header)}</th>`),
+  '</tr></thead><tbody>',
+  ...comparison.rows.map(row => `<tr>${row.map(cell => `<td>${escapeText(cell)}</td>`).join('')}</tr>`),
+  '</tbody></table>',
+].join('')
+
+const withArticleAdditions = (article) => {
+  const guide = articleActionGuides[article.slug]
+  const comparison = articleComparisonSections[article.slug]
+  const measurement = articleMeasurementNotes[article.slug]
+  return [
+    ...article.sections,
+    ...(comparison ? [{ title: comparison.title, kind: 'comparison', html: comparisonHtml(comparison) }] : []),
+    ...(guide ? [{
+      title: guide.title,
+      kind: 'steps',
+      html: `${measurement ? `<p>${escapeText(measurement)}</p>` : ''}<ol>${guide.steps.map(step => `<li>${escapeText(step)}</li>`).join('')}</ol>`,
+    }] : measurement ? [{
+      title: 'Bound the first-open test fixture',
+      kind: 'note',
+      html: `<p>${escapeText(measurement)}</p>`,
+    }] : []),
+  ]
+}
 
 export function discoverPostUrls(xml) {
   const $ = cheerio.load(xml, { xmlMode: true })
@@ -226,7 +258,7 @@ export async function buildCorpus({ authorized = false } = {}) {
       originals.push(...topics)
     }
   }
-  const articles = originals.map(article => ({ ...article, source: null, sections: article.sections.map((section, index) => ({
+  const articles = originals.map(article => ({ ...article, source: null, references: [...(article.references ?? []), ...(articleReferenceAdditions[article.slug] ?? [])], sections: withArticleAdditions(article).map((section, index) => ({
     id: `${slugify(section.title)}-${index + 1}`, title: section.title, html: cleanHtml(section.html),
     kind: section.kind ?? 'prose',
     ...(section.figure ? { figure: {
@@ -241,6 +273,7 @@ export async function buildCorpus({ authorized = false } = {}) {
   }
   if (new Set(articles.map(article => article.slug)).size !== articles.length) throw new Error('Duplicate article slugs')
   const catalogue = []
+  const searchIndex = {}
   await fs.mkdir(path.join(root, 'public/blog/articles'), { recursive: true })
   for (let index = 0; index < articles.length; index++) {
     const article = articles[index]
@@ -258,6 +291,8 @@ export async function buildCorpus({ authorized = false } = {}) {
       if (section.figure && (!figureKinds.includes(section.figure.kind) || !section.figure.alt || !section.figure.caption || section.figure.items.length < 2 || section.figure.items.length > 5)) throw new Error(`Invalid figure brief: ${article.slug}/${section.id}`)
     }
     const structure = article.sections.map(section => `${section.kind}${section.figure ? `+${section.figure.kind}` : ''}`).join(':')
+    const searchableText = `${article.title} ${article.description} ${article.category} ${tags.join(' ')} ${concepts.join(' ')} ${text}`.toLocaleLowerCase()
+    searchIndex[article.slug] = [...new Set(searchableText.match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu) ?? [])].join(' ')
     const entry = {
       slug: article.slug, title: article.title, description: article.description.slice(0, 200), category: article.category,
       format, tags, structure,
@@ -270,6 +305,7 @@ export async function buildCorpus({ authorized = false } = {}) {
     await fs.writeFile(path.join(root, 'public/blog/articles', `${article.slug}.json`), JSON.stringify({ ...entry, intro: article.intro, sections: article.sections }, null, 2) + '\n')
   }
   if (new Set(catalogue.map(entry => entry.contentHash)).size !== catalogue.length) throw new Error('Duplicate article bodies')
+  await fs.writeFile(path.join(root, 'src/blog/search-index.json'), JSON.stringify(searchIndex, null, 2) + '\n')
   await fs.writeFile(path.join(root, 'src/blog/catalog.json'), JSON.stringify(catalogue, null, 2) + '\n')
   console.log(`Materialized ${catalogue.length} complete articles (${authorized ? 'authorized source articles included' : 'original editorial collection only'})`)
   return catalogue

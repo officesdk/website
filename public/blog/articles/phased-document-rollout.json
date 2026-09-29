@@ -10,16 +10,24 @@
     "Version control",
     "Migration"
   ],
-  "structure": "prose+flow:steps:comparison+layers:example",
+  "structure": "prose+flow:steps:comparison+layers:example:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 644,
+  "wordCount": 730,
   "source": null,
   "references": [
     {
       "label": "Google SRE Workbook: Canarying Releases",
       "url": "https://sre.google/workbook/canarying-releases/"
+    },
+    {
+      "label": "Google SRE Book: Release engineering",
+      "url": "https://sre.google/sre-book/release-engineering/"
+    },
+    {
+      "label": "Kubernetes: Deployments",
+      "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
     }
   ],
   "cover": "/blog/images/phased-document-rollout.png",
@@ -39,8 +47,8 @@
     "soft": "#f0ebf7",
     "number": 26
   },
-  "contentHash": "97ebbab2defae4364419d3aa01a78f84730fda82597b99087df01b7c96daf2ca",
-  "intro": "Release to a defined cohort, verify opening and durable-save behavior, and expand only after the agreed gates pass. Plan rollback for the documents already created or changed, not just the UI flag. Pending jobs and new storage representations can survive an interface rollback and still affect users.",
+  "contentHash": "73d3b9fddeface28637e9950d88d93b61e17fb54241c4849b653c7ec2fe1e04a",
+  "intro": "A phased embedded-editor rollout is a cohort-based release that expands only after agreed opening, saving, permission, and recovery gates pass. Plan rollback for the documents already created or changed, not just the UI flag. Pending jobs and new storage representations can survive an interface rollback and still affect users.",
   "sections": [
     {
       "id": "select-a-cohort-with-representative-documents-1",
@@ -125,6 +133,12 @@
       "title": "Rehearse the reverse transition with a department",
       "html": "<p>Enable the new workflow for a test department containing a few representative documents. Create and edit files, leave one conversion pending, then execute the rollback procedure. Confirm that users can retrieve the latest accepted content and that the pending job follows the documented drain or cancellation rule. Reenable the feature and verify identity mappings remain consistent. This rehearsal is especially useful before introducing a new editing representation, because a successful initial rollout cannot prove that the reverse transition preserves the same business records.</p>",
       "kind": "example"
+    },
+    {
+      "id": "move-from-one-rollout-cohort-to-the-next-5",
+      "title": "Move from one rollout cohort to the next",
+      "html": "<p>Use a pilot of 10 users, 20 documents, and 1 pending conversion job so rollback is tested after real document changes.</p><ol><li>Choose a cohort and document corpus that represent the intended workflow.</li><li>Set opening, save, export, permission, support, and recovery gates before release.</li><li>Monitor user outcomes and pause criteria during the cohort window.</li><li>Rehearse rollback for changed documents and pending jobs, not only the interface flag.</li><li>Expand only after the current phase meets the recorded gates.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

@@ -1,0 +1,141 @@
+<pointer-backdrop aria-hidden="true">
+  <div class="pointer-backdrop-trail"></div>
+  <div class="pointer-backdrop-light"></div>
+</pointer-backdrop>
+
+<script>
+  class PointerBackdrop extends HTMLElement {
+    private cleanup?: () => void
+
+    connectedCallback() {
+      const light = this.querySelector<HTMLElement>('.pointer-backdrop-light')!
+      const trail = this.querySelector<HTMLElement>('.pointer-backdrop-trail')!
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+      const listeners = new AbortController()
+      const options = { passive: true, signal: listeners.signal }
+      let frame = 0
+      let previousTime = 0
+      let enabled = finePointer.matches && !reducedMotion.matches
+      let initialized = false
+      let targetX = 0
+      let targetY = 0
+      let lightX = 0
+      let lightY = 0
+      let trailX = 0
+      let trailY = 0
+
+      const position = () => {
+        light.style.transform = `translate3d(${lightX}px, ${lightY}px, 0)`
+        trail.style.transform = `translate3d(${trailX}px, ${trailY}px, 0)`
+      }
+
+      const animate = (time: number) => {
+        const delta = previousTime ? Math.min(time - previousTime, 64) : 16.67
+        previousTime = time
+        const follow = 1 - Math.exp(-delta / 85)
+        const drift = 1 - Math.exp(-delta / 240)
+        lightX += (targetX - lightX) * follow
+        lightY += (targetY - lightY) * follow
+        trailX += (targetX - trailX) * drift
+        trailY += (targetY - trailY) * drift
+        position()
+
+        // Rest when the pointer rests; no idle animation loop.
+        if (Math.max(Math.abs(targetX - trailX), Math.abs(targetY - trailY)) > .2) {
+          frame = requestAnimationFrame(animate)
+        } else {
+          frame = 0
+          previousTime = 0
+        }
+      }
+
+      const hide = () => {
+        this.removeAttribute('data-active')
+        cancelAnimationFrame(frame)
+        frame = 0
+        previousTime = 0
+        initialized = false
+      }
+
+      const move = (event: PointerEvent) => {
+        if (!enabled || event.pointerType !== 'mouse' || document.hidden) return
+        targetX = event.clientX
+        targetY = event.clientY
+        if (!initialized) {
+          lightX = trailX = targetX
+          lightY = trailY = targetY
+          position()
+          initialized = true
+        }
+        this.setAttribute('data-active', '')
+        if (!frame) frame = requestAnimationFrame(animate)
+      }
+
+      const updatePreferences = () => {
+        enabled = finePointer.matches && !reducedMotion.matches
+        if (!enabled) hide()
+      }
+
+      window.addEventListener('pointermove', move, options)
+      document.documentElement.addEventListener('pointerleave', hide, options)
+      window.addEventListener('blur', hide, options)
+      window.addEventListener('pagehide', hide, options)
+      document.addEventListener('visibilitychange', () => { if (document.hidden) hide() }, options)
+      finePointer.addEventListener('change', updatePreferences, options)
+      reducedMotion.addEventListener('change', updatePreferences, options)
+      this.cleanup = () => { listeners.abort(); hide() }
+    }
+
+    disconnectedCallback() {
+      this.cleanup?.()
+    }
+  }
+
+  if (!customElements.get('pointer-backdrop')) customElements.define('pointer-backdrop', PointerBackdrop)
+</script>
+
+<style>
+  pointer-backdrop {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    contain: strict;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .8s ease;
+  }
+
+  pointer-backdrop[data-active] { opacity: 1; }
+
+  .pointer-backdrop-light,
+  .pointer-backdrop-trail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 880px;
+    height: 880px;
+    margin: -440px;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .pointer-backdrop-light {
+    background:
+      radial-gradient(ellipse at 48% 46%, rgb(54 134 214 / 19%), rgb(45 115 188 / 9%) 30%, transparent 66%),
+      radial-gradient(ellipse at 62% 60%, rgb(45 175 174 / 9%), transparent 55%);
+  }
+
+  .pointer-backdrop-trail {
+    width: 760px;
+    height: 760px;
+    margin: -380px;
+    background: radial-gradient(ellipse, rgb(123 91 206 / 13%), rgb(87 72 159 / 5%) 36%, transparent 68%);
+  }
+
+  @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+    pointer-backdrop { display: none; }
+  }
+</style>

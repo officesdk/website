@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-documents-versus-table-apps",
-  "title": "ShimoDocs vs Coda: documents, tables, and workflow authority",
+  "title": "Office SDK vs Coda: documents, tables, and workflow authority",
   "description": "A practical evaluation of narrative records, structured facts, automation, and portable outputs.",
   "category": "Comparisons",
   "format": "decision-brief",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 641,
+  "wordCount": 659,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Coda: Docs, Tables and Where They Diverge",
+      "label": "Original topic reference: document platform vs Coda: Docs, Tables and Where They Diverge",
       "url": "https://shimodocs.com/blog/shimodocs-vs-coda"
     }
   ],
   "cover": "/blog/images/field-guide-documents-versus-table-apps.png",
-  "coverAlt": "ShimoDocs vs Coda: documents, tables, and workflow authority: Narrative record, Structured facts, Workflow state, Permission granularity.",
+  "coverAlt": "Office SDK vs Coda: documents, tables, and workflow authority: Narrative record, Structured facts, Workflow state, Permission granularity.",
   "concepts": [
     "Narrative record",
     "Structured facts",
@@ -39,8 +39,8 @@
     "soft": "#eaf1f9",
     "number": 83
   },
-  "contentHash": "5f0317f0d00a0afd9311be80d643f06ae775a88782b5dea5086ff766b03e1aba",
-  "intro": "Evaluate ShimoDocs and Coda by deciding which information is a narrative record and which is structured operational data. Test the current offers against that model. The critical questions are who owns updates, how automation acts, and whether approved records remain interpretable outside the workspace.",
+  "contentHash": "9326cebcb295a3e9e649f2ab64b45c40ebaa11fac04619bdd48d7e3a0f5383f7",
+  "intro": "Evaluate Office SDK and Coda by deciding which information is a narrative record and which is structured operational data. This is a task-level comparison between an embedded Office document surface and a document-and-table workspace, not a claim of feature equivalence. Test the current offers and configurations against that model, including who owns updates and whether approved records remain interpretable outside the workspace.",
   "sections": [
     {
       "id": "choose-the-information-model-1",

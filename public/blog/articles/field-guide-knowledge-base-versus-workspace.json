@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-knowledge-base-versus-workspace",
-  "title": "ShimoDocs vs Slab: working documents or trusted knowledge?",
+  "title": "Office SDK vs Slab: working documents or trusted knowledge?",
   "description": "Evaluate a knowledge workflow through drafting, publication, discovery, ownership, and review expiry.",
   "category": "Comparisons",
   "format": "comparison",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 691,
+  "wordCount": 709,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Slab: Knowledge Base or Workspace?",
+      "label": "Original topic reference: document platform vs Slab: Knowledge Base or Workspace?",
       "url": "https://shimodocs.com/blog/shimodocs-vs-slab"
     }
   ],
   "cover": "/blog/images/field-guide-knowledge-base-versus-workspace.png",
-  "coverAlt": "ShimoDocs vs Slab: working documents or trusted knowledge?: Knowledge owner, Draft state, Publication gate, Search quality.",
+  "coverAlt": "Office SDK vs Slab: working documents or trusted knowledge?: Knowledge owner, Draft state, Publication gate, Search quality.",
   "concepts": [
     "Knowledge owner",
     "Draft state",
@@ -39,8 +39,8 @@
     "soft": "#f8eeeb",
     "number": 84
   },
-  "contentHash": "8b6caacfb358d18ce7f838cb286de4fa023ccf269efec9b9e9b25d786729dd10",
-  "intro": "For ShimoDocs and Slab, test whether the team needs collaborative production, trusted published guidance, or both. A knowledge workflow must make current approved answers discoverable and distinguish them from drafts. A working document space must also support the artifacts authors actually produce.",
+  "contentHash": "2806ff2965ef545f47fbc05644e97769713f01ac6c91c15f3e187e79cb405d3c",
+  "intro": "For Office SDK and Slab, test whether the team needs collaborative production, trusted published guidance, or both. The scope compares an embedded Office document surface with a knowledge-base workflow for those tasks; it does not treat them as equivalent products. Verify the current offers and configurations, including how approved answers are distinguished from drafts and which artifacts authors can produce.",
   "sections": [
     {
       "id": "name-the-information-states-1",

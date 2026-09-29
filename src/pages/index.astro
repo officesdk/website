@@ -1,6 +1,8 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro'
-import { Hero, WorkflowDemo, WorkflowThemes, ProductSection, FormatsSection, SolutionsSection, DeploymentSection, ResourcesSection, FAQ, FinalCTA } from '../components/SiteSections'
+import { Hero, HomeEvidence, WorkflowThemes, ProductSection, FormatsSection, SolutionsSection, DeploymentSection, ResourcesSection, FAQ, FinalCTA } from '../components/SiteSections'
+import { CoreEditorsBand } from '../components/CoreEditorsStory'
+import CapabilityArchitecture from '../components/CapabilityArchitecture'
 import { faqs } from '../content'
 
 const title = 'Office SDK | Build Office workflows into your product'
@@ -17,8 +19,10 @@ const faqSchema = {
 ---
 
 <SiteLayout {title} {description} canonical="/" schemas={[faqSchema]}>
-  <Hero />
-  <WorkflowDemo client:load />
+  <Hero client:load />
+  <CapabilityArchitecture client:load />
+  <CoreEditorsBand />
+  <HomeEvidence />
   <WorkflowThemes />
   <ProductSection />
   <FormatsSection />

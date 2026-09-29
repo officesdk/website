@@ -10,16 +10,24 @@
     "Business workflows",
     "Access control"
   ],
-  "structure": "prose+sequence:steps:example:checklist:example+comparison",
+  "structure": "prose+sequence:steps:example:checklist:example+comparison:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
-  "readMinutes": 3,
-  "wordCount": 630,
+  "readMinutes": 4,
+  "wordCount": 702,
   "source": null,
   "references": [
     {
       "label": "OWASP: Authorization Cheat Sheet",
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    },
+    {
+      "label": "OWASP: Input Validation Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+    },
+    {
+      "label": "NIST: Secure Software Development Framework",
+      "url": "https://csrc.nist.gov/Projects/ssdf"
     }
   ],
   "cover": "/blog/images/document-template-governance.png",
@@ -39,7 +47,7 @@
     "soft": "#f1f3df",
     "number": 31
   },
-  "contentHash": "02dece8c7600a61e4393cc2ccf49464f6b1fb2968ba011ce88ff0455f21fe56b",
+  "contentHash": "ff3329071d56901d7321431d94726bda66cd606346d1479281c23f4a13dc1a4e",
   "intro": "Publish templates as versioned sources and record which version created each business document. Updating a template should not silently rewrite existing documents. Give content owners a draft-and-review process, test populated output, and retire outdated versions without erasing the history that explains earlier files.",
   "sections": [
     {
@@ -127,6 +135,12 @@
         "mobileWidth": 600,
         "mobileHeight": 930
       }
+    },
+    {
+      "id": "publish-a-template-as-a-controlled-version-6",
+      "title": "Publish a template as a controlled version",
+      "html": "<p>Compare 2 template versions, populate 5 placeholder values, and create 3 documents before retiring the earlier version.</p><ol><li>Assign drafting, review, publishing, retirement, and restoration owners.</li><li>Create a versioned draft outside the normal document-creation flow.</li><li>Test populated wording, placeholders, formulas, and edge values.</li><li>Publish the approved version and record it on every document created from it.</li><li>Retire outdated versions with a named replacement and recoverable history.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

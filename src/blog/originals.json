@@ -114,7 +114,7 @@
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
       }
     ],
-    "intro": "When a document opens in your browser but fails inside an embedded editor, test the source URL from the system that actually fetches the file. That may be a backend worker with different DNS, routing, and credentials. Start by identifying that requester; otherwise, a successful browser download can send the investigation in the wrong direction.",
+    "intro": "First-open source retrieval is the request path used by the backend document service to fetch the authorized file bytes before the embedded editor can initialize. Test the source URL from that requester, which may have different DNS, routing, and credentials from the browser. Otherwise, a successful browser download can send the investigation in the wrong direction.",
     "sections": [
       {
         "title": "Who makes each request?",
@@ -503,7 +503,7 @@
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
       }
     ],
-    "intro": "Authorize document operations separately and decide how permission changes reach an already open editor. A launch-time read only flag cannot, by itself, protect downloads, exports, comments, or later requests. The critical question is what an existing session can still do after access is removed.",
+    "intro": "An embedded editor permission lifecycle is the set of authorization decisions that governs document operations before and during an open session. A launch-time read only flag cannot, by itself, protect downloads, exports, comments, or later requests. The critical question is what an existing session can still do after access is removed.",
     "sections": [
       {
         "title": "Permission matrix: operation and enforcement point",
@@ -1182,7 +1182,7 @@
         "url": "https://www.w3.org/TR/WCAG22/"
       }
     ],
-    "intro": "Test whether someone can open the preview, find a section, understand its content, and return to the application using a keyboard and relevant assistive technology. Accessibility depends on both the preview controls and the document representation. A labeled frame does not make page images or lost table structure readable.",
+    "intro": "An accessible document preview is a view in which users can open, navigate, understand, and leave the document with a keyboard and relevant assistive technology. Accessibility depends on both the preview controls and the document representation. A labeled frame does not make page images or lost table structure readable.",
     "sections": [
       {
         "title": "Start with tasks a reader must finish",
@@ -1286,7 +1286,7 @@
         "url": "https://learn.microsoft.com/en-us/typography/fonts/"
       }
     ],
-    "intro": "When line breaks shift or glyphs disappear, compare the fonts available to the rendering workers with those required by the source. Fonts installed on a laptop do not establish what a container can render. Package approved font files consistently, record their versions, and verify output after installation.",
+    "intro": "Font deployment for document conversion is the controlled distribution of approved font files and cache state to every rendering worker. When line breaks shift or glyphs disappear, compare the worker fonts with those required by the source; fonts installed on a laptop do not establish what a container can render. Record the deployed versions and verify output after installation.",
     "sections": [
       {
         "title": "Identify the font dependency behind the symptom",
@@ -1589,7 +1589,7 @@
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
       }
     ],
-    "intro": "A preview must identify the source version that produced it. Use that identity in the cache key and guard updates to any “current preview” pointer. Otherwise, a delayed conversion for revision A can overwrite the preview for revision B even when the source document itself is up to date.",
+    "intro": "A stale document preview is a rendered result generated from an older source version but presented as current. Bind each result to its source identity in the cache key and guard updates to any “current preview” pointer. Otherwise, a delayed conversion for revision A can overwrite the preview for revision B even when the source document itself is up to date.",
     "sections": [
       {
         "title": "Give the preview an explicit source identity",
@@ -1787,7 +1787,7 @@
         "url": "https://www.w3.org/TR/trace-context/"
       }
     ],
-    "intro": "Give the user's document operation a durable identifier and connect each request, queue job, and callback to it. A request trace explains one execution; an operation ID explains the complete attempt, including retries. Keep both relationships without putting document text or signed URLs into telemetry.",
+    "intro": "A document-operation trace ID is a durable identifier that connects the launch, request, queue, worker, and callback records for one user operation. A request trace explains one execution; an operation ID explains the complete attempt, including retries. Keep both relationships without putting document text or signed URLs into telemetry.",
     "sections": [
       {
         "title": "Operation identity versus request identity",
@@ -1995,7 +1995,7 @@
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
       }
     ],
-    "intro": "Logging out of the host application may leave an identity-provider session, an editor session, or a signed storage link valid. Inventory those credentials and define the intended outcome for each. Then test active tabs and account switching, not only whether the main page redirects to login.",
+    "intro": "SSO logout in an embedded editor is the combined behavior of the host, identity-provider, editor, and storage credentials rather than one session event. Logging out of the host may leave another session or a signed storage link valid. Inventory the credentials, define the intended outcome for each, and test active tabs and account switching.",
     "sections": [
       {
         "title": "Inventory independent credentials",
@@ -2504,7 +2504,7 @@
         "url": "https://sre.google/workbook/canarying-releases/"
       }
     ],
-    "intro": "Release to a defined cohort, verify opening and durable-save behavior, and expand only after the agreed gates pass. Plan rollback for the documents already created or changed, not just the UI flag. Pending jobs and new storage representations can survive an interface rollback and still affect users.",
+    "intro": "A phased embedded-editor rollout is a cohort-based release that expands only after agreed opening, saving, permission, and recovery gates pass. Plan rollback for the documents already created or changed, not just the UI flag. Pending jobs and new storage representations can survive an interface rollback and still affect users.",
     "sections": [
       {
         "title": "Select a cohort with representative documents",
@@ -2708,7 +2708,7 @@
         "url": "https://www.nist.gov/itl/ai-risk-management-framework"
       }
     ],
-    "intro": "Send the content needed for the requested task, after checking the user's access to it. Rewriting a selected clause rarely requires an entire contract and its appendices. Preserve necessary definitions and structure, but apply the same permissions and lifecycle rules to extracted chunks, prompts, and stored answers as to their sources.",
+    "intro": "AI document data minimization is the practice of sending only the authorized content needed for the requested model task. Rewriting a selected clause rarely requires an entire contract and its appendices. Preserve necessary definitions and structure, but apply the same permissions and lifecycle rules to extracted chunks, prompts, and stored answers as to their sources.",
     "sections": [
       {
         "title": "Start with the task's smallest useful context",
@@ -2803,7 +2803,7 @@
         "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
       }
     ],
-    "intro": "Store the document version and supported passage location behind each citation. A link to the current filename may show different wording tomorrow. Validate that citations refer to supplied evidence, show when sources have changed, and keep saved answers subject to the source access policy.",
+    "intro": "AI document citation provenance is the link between a generated claim and the exact source version and passage that supports it. A link to the current filename may show different wording tomorrow. Validate that citations refer to supplied evidence, show when sources have changed, and keep saved answers subject to the source access policy.",
     "sections": [
       {
         "title": "Store provenance with the answer",
@@ -3337,7 +3337,7 @@
         "url": "https://csrc.nist.gov/pubs/sp/800/88/r2/final"
       }
     ],
-    "intro": "Treat deletion as a tracked lifecycle across the source and its derived copies. Hiding a document in the application does not remove historical versions, previews, extracted text, or backup data. State when access ends, which retention exceptions apply, and how cleanup completion is verified in each system.",
+    "intro": "Document deletion is a tracked lifecycle that removes access and cleans up the source file and its derived copies under the applicable retention rules. Hiding a document in the application does not remove historical versions, previews, extracted text, or backup data. State when access ends and how cleanup completion is verified in each system.",
     "sections": [
       {
         "title": "Define access removal and permanent cleanup separately",
@@ -3442,7 +3442,7 @@
         "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
       }
     ],
-    "intro": "Model capacity with the work the platform performs, not only the number of users. Idle sessions, first-time conversions, large workbook edits, and save bursts stress different components. Measure latency and correctness alongside queue age and resource use under a stated document mix and concurrency profile.",
+    "intro": "Office document capacity planning is the process of sizing sessions, conversions, saves, and dependencies against a representative workload. Idle sessions, first-time conversions, large workbook edits, and save bursts stress different components. Measure latency and correctness alongside queue age and resource use under a stated document mix and concurrency profile.",
     "sections": [
       {
         "title": "Choose workload units with clear definitions",
@@ -3547,7 +3547,7 @@
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
       }
     ],
-    "intro": "Route a document using validated content type, requested operation, current state, and the configured processor's documented support. Recognizing an extension is not enough: a file may support preview but not editing, or be quarantined and unavailable for either. Keep the same routing policy behind menus, deep links, and jobs.",
+    "intro": "Document format routing is the decision that maps a validated file and requested operation to preview, editing, conversion, download, or rejection. Recognizing an extension is not enough: a file may support preview but not editing, or be quarantined and unavailable for either. Keep the same routing policy behind menus, deep links, and jobs.",
     "sections": [
       {
         "title": "Detect content, then check the requested capability",

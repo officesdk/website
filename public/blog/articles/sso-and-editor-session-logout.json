@@ -10,16 +10,24 @@
     "Embedded editing",
     "Integrations"
   ],
-  "structure": "comparison+layers:note:diagnostic:checklist:example+sequence",
+  "structure": "comparison+layers:note:diagnostic:checklist:example+sequence:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 653,
+  "wordCount": 745,
   "source": null,
   "references": [
     {
       "label": "OWASP: Session Management Cheat Sheet",
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+    },
+    {
+      "label": "OpenID Connect: RP-Initiated Logout",
+      "url": "https://openid.net/specs/openid-connect-rpinitiated-1_0.html"
+    },
+    {
+      "label": "NIST SP 800-63B: Session management",
+      "url": "https://pages.nist.gov/800-63-4/sp800-63b.html"
     }
   ],
   "cover": "/blog/images/sso-and-editor-session-logout.png",
@@ -39,8 +47,8 @@
     "soft": "#f8eeeb",
     "number": 21
   },
-  "contentHash": "ce026ca6aa4ddc952b417cae9216c8dcfe349eb1c22c579be15b869687a22ebc",
-  "intro": "Logging out of the host application may leave an identity-provider session, an editor session, or a signed storage link valid. Inventory those credentials and define the intended outcome for each. Then test active tabs and account switching, not only whether the main page redirects to login.",
+  "contentHash": "aacf350c2031558bc1ce3d33c17c28a1f6422789c095dd2bb2f4b67dbba9d57a",
+  "intro": "SSO logout in an embedded editor is the combined behavior of the host, identity-provider, editor, and storage credentials rather than one session event. Logging out of the host may leave another session or a signed storage link valid. Inventory the credentials, define the intended outcome for each, and test active tabs and account switching.",
   "sections": [
     {
       "id": "inventory-independent-credentials-1",
@@ -131,6 +139,12 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "verify-what-logout-ends-in-every-document-context-6",
+      "title": "Verify what logout ends in every document context",
+      "html": "<p>Use 2 accounts, 2 browser tabs, and 1 signed download URL to test logout, account switching, and residual access.</p><ol><li>Inventory host, identity-provider, editor, and signed-storage credentials separately.</li><li>Define the intended logout result for active tabs, pending work, and prior links.</li><li>Log out with two documents open and attempt a new document action in each tab.</li><li>Switch accounts and test history navigation and cached application state.</li><li>Confirm the new account inherits no prior content or permission context.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

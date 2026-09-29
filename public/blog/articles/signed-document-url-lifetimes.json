@@ -10,16 +10,24 @@
     "Document conversion",
     "Performance"
   ],
-  "structure": "prose+comparison:note:example+sequence",
+  "structure": "prose+comparison:note:example+sequence:comparison:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 639,
+  "wordCount": 794,
   "source": null,
   "references": [
     {
       "label": "Amazon S3: Sharing objects with presigned URLs",
       "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html"
+    },
+    {
+      "label": "Google Cloud: Signed URLs",
+      "url": "https://cloud.google.com/storage/docs/access-control/signed-urls"
+    },
+    {
+      "label": "Microsoft Learn: Shared access signatures",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview"
     }
   ],
   "cover": "/blog/images/signed-document-url-lifetimes.png",
@@ -39,7 +47,7 @@
     "soft": "#edf0f3",
     "number": 7
   },
-  "contentHash": "54b025ce3e320a29d8abb4639a88c5e66aa078cbc843af0b4b316d9c7879dab7",
+  "contentHash": "3ce97533964a2a712d2a0172bdf404fc9cceac929393e16fc4d88ee7ace98895",
   "intro": "A signed source URL needs to cover the time until the intended service can successfully retrieve the file, including realistic queueing and retry delays. Issue it as close to retrieval as the supported workflow allows. Conversion time after a complete download may not need to be included at all.",
   "sections": [
     {
@@ -115,6 +123,18 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "balance-url-lifetime-against-retrieval-delay-4",
+      "title": "Balance URL lifetime against retrieval delay",
+      "html": "<table><thead><tr><th>Issuance choice</th><th>Operational effect</th><th>Exposure tradeoff</th></tr></thead><tbody><tr><td>Issue when the job enters the queue</td><td>The validity window includes queueing and retry time</td><td>A longer window may be required</td></tr><tr><td>Issue immediately before retrieval</td><td>Most of the window is available to the worker</td><td>The credential exists for less time</td></tr><tr><td>Refresh after an authorized retry</td><td>A delayed worker obtains a new supported access path</td><td>The expired URL does not need to remain valid</td></tr></tbody></table>",
+      "kind": "comparison"
+    },
+    {
+      "id": "set-and-test-the-source-access-window-5",
+      "title": "Set and test the source-access window",
+      "html": "<p>Exercise 3 retrieval windows: 30 seconds, 5 minutes, and 30 minutes, including one attempt that crosses each expiry boundary.</p><ol><li>Identify when the link is issued and which service consumes it.</li><li>Measure queue wait, connection setup, transfer, and supported retry delay separately.</li><li>Choose the validity window from the storage provider behavior and the accepted operating range.</li><li>Test a delayed fetch and an expired retry using a disposable document.</li><li>Require fresh authorization before issuing replacement access.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

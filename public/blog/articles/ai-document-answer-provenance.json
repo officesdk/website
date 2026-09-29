@@ -11,16 +11,24 @@
     "Version control",
     "Access control"
   ],
-  "structure": "example+layers:steps:note:prose:checklist:example+sequence",
+  "structure": "example+layers:steps:note:prose:checklist:example+sequence:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
-  "readMinutes": 4,
-  "wordCount": 769,
+  "readMinutes": 5,
+  "wordCount": 858,
   "source": null,
   "references": [
     {
       "label": "NIST: Generative AI Profile",
       "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+    },
+    {
+      "label": "W3C: PROV-O provenance ontology",
+      "url": "https://www.w3.org/TR/prov-o/"
+    },
+    {
+      "label": "NIST: AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
     }
   ],
   "cover": "/blog/images/ai-document-answer-provenance.png",
@@ -40,8 +48,8 @@
     "soft": "#eaf1f9",
     "number": 29
   },
-  "contentHash": "e3a93040e5dfcf8a473a972f2dc470912aa481529e22bedb83cd5c6a64e97ce4",
-  "intro": "Store the document version and supported passage location behind each citation. A link to the current filename may show different wording tomorrow. Validate that citations refer to supplied evidence, show when sources have changed, and keep saved answers subject to the source access policy.",
+  "contentHash": "d39a111d597814d558a762f627ef23835b1c6f6460275a28381e23112a26f426",
+  "intro": "AI document citation provenance is the link between a generated claim and the exact source version and passage that supports it. A link to the current filename may show different wording tomorrow. Validate that citations refer to supplied evidence, show when sources have changed, and keep saved answers subject to the source access policy.",
   "sections": [
     {
       "id": "store-provenance-with-the-answer-1",
@@ -138,6 +146,12 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "make-each-generated-claim-traceable-to-supplied-evidence-7",
+      "title": "Make each generated claim traceable to supplied evidence",
+      "html": "<p>Use 3 generated claims, 3 cited passages, and 2 source versions so citation validity and freshness can be reviewed separately.</p><ol><li>Store the source document version and passage location supplied to generation.</li><li>Check that every returned citation resolves to one of those authorized passages.</li><li>Review whether the cited passage supports the claim, separately from link validity.</li><li>Mark saved answers when a source changes, access is revoked, or evidence is no longer available.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

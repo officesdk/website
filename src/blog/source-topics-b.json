@@ -8,7 +8,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ISO 27001 and Document Management",
+        "label": "Original topic reference: ISO 27001 and Document Management",
         "url": "https://shimodocs.com/blog/iso27001-document-management"
       }
     ],
@@ -117,7 +117,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: SOC 2 Controls for Document Collaboration",
+        "label": "Original topic reference: SOC 2 Controls for Document Collaboration",
         "url": "https://shimodocs.com/blog/soc2-document-collaboration-controls"
       }
     ],
@@ -216,7 +216,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: HIPAA-Compliant Document Collaboration",
+        "label": "Original topic reference: HIPAA-Compliant Document Collaboration",
         "url": "https://shimodocs.com/blog/hipaa-compliant-document-collaboration"
       }
     ],
@@ -326,7 +326,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: GDPR-Compliant Document Collaboration",
+        "label": "Original topic reference: GDPR-Compliant Document Collaboration",
         "url": "https://shimodocs.com/blog/gdpr-compliant-document-collaboration"
       }
     ],
@@ -435,7 +435,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Google Workspace Alternatives for Enterprise Teams",
+        "label": "Original topic reference: Google Workspace Alternatives for Enterprise Teams",
         "url": "https://shimodocs.com/blog/google-workspace-alternatives-for-enterprise"
       }
     ],
@@ -535,7 +535,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Open Source Document Collaboration: An Honest Assessment",
+        "label": "Original topic reference: Open Source Document Collaboration: An Honest Assessment",
         "url": "https://shimodocs.com/blog/open-source-document-collaboration-options"
       }
     ],
@@ -640,7 +640,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Self-Hosted Document Collaboration: What to Look For",
+        "label": "Original topic reference: Self-Hosted Document Collaboration: What to Look For",
         "url": "https://shimodocs.com/blog/best-self-hosted-document-collaboration-tools"
       }
     ],
@@ -739,7 +739,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: The Best Google Docs Alternatives, by What You Need",
+        "label": "Original topic reference: The Best Google Docs Alternatives, by What You Need",
         "url": "https://shimodocs.com/blog/best-google-docs-alternatives"
       }
     ],
@@ -844,7 +844,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Comparing Self-Hosted Office Suites: What Actually Matters",
+        "label": "Original topic reference: Comparing Self-Hosted Office Suites: What Actually Matters",
         "url": "https://shimodocs.com/blog/self-hosted-office-suite-comparison"
       }
     ],
@@ -947,18 +947,18 @@
   },
   {
     "slug": "field-guide-documents-versus-table-apps",
-    "title": "ShimoDocs vs Coda: documents, tables, and workflow authority",
+    "title": "Office SDK vs Coda: documents, tables, and workflow authority",
     "description": "A practical evaluation of narrative records, structured facts, automation, and portable outputs.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Coda: Docs, Tables and Where They Diverge",
+        "label": "Original topic reference: document platform vs Coda: Docs, Tables and Where They Diverge",
         "url": "https://shimodocs.com/blog/shimodocs-vs-coda"
       }
     ],
-    "intro": "Evaluate ShimoDocs and Coda by deciding which information is a narrative record and which is structured operational data. Test the current offers against that model. The critical questions are who owns updates, how automation acts, and whether approved records remain interpretable outside the workspace.",
+    "intro": "Evaluate Office SDK and Coda by deciding which information is a narrative record and which is structured operational data. This is a task-level comparison between an embedded Office document surface and a document-and-table workspace, not a claim of feature equivalence. Test the current offers and configurations against that model, including who owns updates and whether approved records remain interpretable outside the workspace.",
     "concepts": [
       "Narrative record",
       "Structured facts",
@@ -1042,18 +1042,18 @@
   },
   {
     "slug": "field-guide-knowledge-base-versus-workspace",
-    "title": "ShimoDocs vs Slab: working documents or trusted knowledge?",
+    "title": "Office SDK vs Slab: working documents or trusted knowledge?",
     "description": "Evaluate a knowledge workflow through drafting, publication, discovery, ownership, and review expiry.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Slab: Knowledge Base or Workspace?",
+        "label": "Original topic reference: document platform vs Slab: Knowledge Base or Workspace?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-slab"
       }
     ],
-    "intro": "For ShimoDocs and Slab, test whether the team needs collaborative production, trusted published guidance, or both. A knowledge workflow must make current approved answers discoverable and distinguish them from drafts. A working document space must also support the artifacts authors actually produce.",
+    "intro": "For Office SDK and Slab, test whether the team needs collaborative production, trusted published guidance, or both. The scope compares an embedded Office document surface with a knowledge-base workflow for those tasks; it does not treat them as equivalent products. Verify the current offers and configurations, including how approved answers are distinguished from drafts and which artifacts authors can produce.",
     "concepts": [
       "Knowledge owner",
       "Draft state",
@@ -1151,18 +1151,18 @@
   },
   {
     "slug": "field-guide-suite-replacement-boundaries",
-    "title": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries",
+    "title": "Office SDK vs Microsoft 365: file exchange and suite boundaries",
     "description": "Compare the exact proposed offers through file round trips, board pack workflows, integrations, and operating cost.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Microsoft 365: Suite Against Suite",
+        "label": "Original topic reference: document platform vs Microsoft 365: Suite Against Suite",
         "url": "https://shimodocs.com/blog/shimodocs-vs-microsoft-365"
       }
     ],
-    "intro": "Compare ShimoDocs and Microsoft 365 at the boundaries your users cross: partner file exchange, identity, automation, guest access, and final publication. Specify the exact offers and services in scope. Suite brand names alone do not define the deployment, functionality, or cost being considered.",
+    "intro": "Compare Office SDK and Microsoft 365 at the boundaries your users cross: partner file exchange, identity, automation, guest access, and final publication. The scope is an embedded Office document surface against the exact Microsoft 365 services proposed for the workflow, not suite-wide feature equivalence. Record the current offers and configurations because brand names alone do not define deployment, functionality, or cost.",
     "concepts": [
       "Suite boundary",
       "File round trip",
@@ -1251,18 +1251,18 @@
   },
   {
     "slug": "field-guide-document-management-system-of-record",
-    "title": "ShimoDocs vs SharePoint: where the authoritative document lives",
+    "title": "Office SDK vs SharePoint: where the authoritative document lives",
     "description": "Evaluate editing and document management through metadata, approval versions, lifecycle handoffs, and recovery.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs SharePoint for Document Management",
+        "label": "Original topic reference: document platform vs SharePoint for Document Management",
         "url": "https://shimodocs.com/blog/shimodocs-vs-sharepoint"
       }
     ],
-    "intro": "A ShimoDocs and SharePoint decision should identify the authoritative record and the rules that govern it. Test metadata, approval versions, search, retention, and export together with editing. Storing a file is different from maintaining a record whose identity and decision history remain trustworthy.",
+    "intro": "An Office SDK and SharePoint decision should identify the authoritative record and the rules that govern it. This scope compares an embedded Office document surface with the proposed SharePoint record and workflow configuration; it does not assume product equivalence. Test current metadata, approval versions, search, retention, export, and editing behavior together.",
     "concepts": [
       "Record identity",
       "Metadata policy",
@@ -1365,18 +1365,18 @@
   },
   {
     "slug": "field-guide-wiki-versus-office-records",
-    "title": "ShimoDocs vs Confluence: linked knowledge or office deliverables?",
+    "title": "Office SDK vs Confluence: linked knowledge or office deliverables?",
     "description": "Compare navigation, publishing, file output, and migration relationships using a real release workflow.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Confluence: Wiki or Document Suite?",
+        "label": "Original topic reference: document platform vs Confluence: Wiki or Document Suite?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-confluence"
       }
     ],
-    "intro": "For ShimoDocs and Confluence, separate linked knowledge from office deliverables. A handbook needs discoverable relationships and maintained authority; a customer report may need structured files and precise output. Test the proposed offers against both tasks, including how existing links and attachments would migrate.",
+    "intro": "For Office SDK and Confluence, separate linked knowledge from office deliverables. The scope compares an embedded Office document surface with a wiki workflow for those tasks; it does not claim the products are feature-equivalent. Test the current proposed configurations against both tasks, including how existing links and attachments would migrate.",
     "concepts": [
       "Linked knowledge",
       "Office artifact",
@@ -1467,7 +1467,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Secure Document Collaboration for Financial Services",
+        "label": "Original topic reference: Secure Document Collaboration for Financial Services",
         "url": "https://shimodocs.com/blog/secure-document-collaboration-financial-services"
       }
     ],
@@ -1576,7 +1576,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Deploying Self-Hosted Collaboration on Kubernetes",
+        "label": "Original topic reference: Deploying Self-Hosted Collaboration on Kubernetes",
         "url": "https://shimodocs.com/blog/self-hosted-collaboration-kubernetes-deployment"
       }
     ],
@@ -1691,7 +1691,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: AI Agents Inside Your Documents: What to Secure",
+        "label": "Original topic reference: AI Agents Inside Your Documents: What to Secure",
         "url": "https://shimodocs.com/blog/ai-agents-in-documents-security"
       }
     ],
@@ -1790,7 +1790,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: How to Migrate from Google Workspace Without Losing Work",
+        "label": "Original topic reference: How to Migrate from Google Workspace Without Losing Work",
         "url": "https://shimodocs.com/blog/how-to-migrate-from-google-workspace"
       }
     ],
@@ -1892,18 +1892,18 @@
   },
   {
     "slug": "field-guide-wikis-documents-and-shared-facts",
-    "title": "ShimoDocs vs Notion: shared facts, knowledge, and final records",
+    "title": "Office SDK vs Notion: shared facts, knowledge, and final records",
     "description": "Compare the proposed content models through project handover, update ownership, synchronization, and portable exports.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Notion: Documents, Wikis or Both?",
+        "label": "Original topic reference: document platform vs Notion: Documents, Wikis or Both?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-notion"
       }
     ],
-    "intro": "Compare ShimoDocs and Notion by locating the authority for shared facts, maintained knowledge, and approved files. Test a project handover in the proposed configurations. A convenient page model is useful only if users can tell which values are current and which records are historical.",
+    "intro": "Compare Office SDK and Notion by locating the authority for shared facts, maintained knowledge, and approved files. This is a workflow comparison between an embedded Office document surface and a connected workspace, not a claim of feature equivalence. Test a project handover in the current proposed configurations and verify which values are current and which records are historical.",
     "concepts": [
       "Shared facts",
       "Knowledge page",
@@ -1996,18 +1996,18 @@
   },
   {
     "slug": "field-guide-browser-document-comparison",
-    "title": "ShimoDocs vs Google Docs: a practical browser editor test",
+    "title": "Office SDK vs Google Docs: a practical browser editor test",
     "description": "Run identical review, interruption, submitted-version, and export tasks before selecting a browser editor.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Google Docs: A Working Comparison",
+        "label": "Original topic reference: document platform vs Google Docs: A Working Comparison",
         "url": "https://shimodocs.com/blog/shimodocs-vs-google-docs"
       }
     ],
-    "intro": "A practical ShimoDocs and Google Docs comparison uses the same document, roles, and delivery task in each proposed offer. Inspect revision behavior and recipient output as well as writing. Record what the tested configurations actually do, especially when connectivity or external review interrupts the workflow.",
+    "intro": "A practical Office SDK and Google Docs comparison uses the same document, roles, and delivery task in each proposed offer. The scope is an embedded Office document surface against the tested browser workspace, not an assertion that the products are feature-equivalent. Record current editions and configurations, then inspect revision behavior and recipient output when connectivity or external review interrupts the workflow.",
     "concepts": [
       "Work sample",
       "Review roles",
@@ -2112,7 +2112,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Self-Hosted Google Docs Alternative for Private Deployment",
+        "label": "Original topic reference: Self-Hosted Google Docs Alternative for Private Deployment",
         "url": "https://shimodocs.com/blog/google-docs-alternative-private-cloud"
       }
     ],
@@ -2207,7 +2207,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Data Sovereignty in Document Collaboration",
+        "label": "Original topic reference: Data Sovereignty in Document Collaboration",
         "url": "https://shimodocs.com/blog/data-sovereignty-document-collaboration"
       }
     ],
@@ -2320,7 +2320,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: A Practical Guide to Self-Hosted Collaboration",
+        "label": "Original topic reference: A Practical Guide to Self-Hosted Collaboration",
         "url": "https://shimodocs.com/blog/self-hosted-collaboration-guide"
       }
     ],
@@ -2420,7 +2420,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Private Cloud Document Collaboration: Self-Hosted Guide",
+        "label": "Original topic reference: Private Cloud Document Collaboration: Self-Hosted Guide",
         "url": "https://shimodocs.com/blog/what-is-private-cloud-document-collaboration"
       }
     ],

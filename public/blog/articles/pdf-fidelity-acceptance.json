@@ -11,16 +11,24 @@
     "Excel spreadsheets",
     "Presentations"
   ],
-  "structure": "prose:comparison+matrix:steps:example+document:checklist",
+  "structure": "prose:comparison+matrix:steps:example+document:checklist:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 641,
+  "wordCount": 721,
   "source": null,
   "references": [
     {
       "label": "PDF Association: PDF technical resources",
       "url": "https://pdfa.org/resource/"
+    },
+    {
+      "label": "veraPDF: PDF/A validation",
+      "url": "https://verapdf.org/"
+    },
+    {
+      "label": "W3C WAI: PDF accessibility techniques",
+      "url": "https://www.w3.org/WAI/WCAG21/Techniques/pdf/"
     }
   ],
   "cover": "/blog/images/pdf-fidelity-acceptance.png",
@@ -40,7 +48,7 @@
     "soft": "#eaf1f9",
     "number": 11
   },
-  "contentHash": "09fbc63f5bbfb05804557e570ebb2e8ad49b09f96eafa9d46c5c760bde5f5187",
+  "contentHash": "1f2d7c006a612a29b6e3c4e7c8728fef49e379a6badfffe971d5b2049d63cf21",
   "intro": "A successful conversion response only establishes that an output was produced. To accept a PDF, compare critical content and rendered pages against an agreed reference: text and values first, then pagination, clipping, charts, and fonts. The reference application and export settings must be recorded or the comparison is ambiguous.",
   "sections": [
     {
@@ -132,6 +140,12 @@
       "title": "Evidence to retain with the release",
       "html": "<ul><li>List critical content that must survive conversion without alteration.</li><li>Record approved fonts, print settings, and the reference application version.</li><li>Inspect every page for small critical documents and use justified sampling for larger collections.</li><li>Classify clipping, missing content, and changed values separately from cosmetic shifts.</li><li>Retain failing sources and comparison images in a restricted regression corpus.</li></ul>",
       "kind": "checklist"
+    },
+    {
+      "id": "accept-converted-pdf-output-with-retained-evidence-6",
+      "title": "Accept converted PDF output with retained evidence",
+      "html": "<p>Convert 3 source files with 10 pages per file in 2 font environments, then retain both semantic and visual comparison evidence.</p><ol><li>Record the reference application, export settings, and critical content before conversion.</li><li>Convert the representative Word, spreadsheet, and presentation corpus.</li><li>Compare text, values, formulas, and object presence before judging appearance.</li><li>Render comparable pages and inspect pagination, clipping, charts, and fonts.</li><li>Classify failures and retain the source, output, and comparison evidence with the decision.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

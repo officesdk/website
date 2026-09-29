@@ -26,7 +26,7 @@ page.on('console', message => {
 })
 
 async function loadPageImages() {
-  for (const image of await page.locator('main img').all()) {
+  for (const image of await page.locator('main img:not(.journal-masthead-image)').all()) {
     await image.scrollIntoViewIfNeeded()
     await image.evaluate(element => element.decode())
     assert.ok(await image.evaluate(element => getComputedStyle(element).objectFit === 'contain' && getComputedStyle(element).transform === 'none'), 'Generated illustrations retain their complete frame')
@@ -74,20 +74,51 @@ try {
   await page.goto(`${base}/blog`, { waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: 'Office SDK Journal.', exact: true }).waitFor()
   await loadPageImages()
+  assert.equal(await page.getByRole('status').count(), 1, 'Search results expose one live status region')
+  await page.evaluate(() => {
+    const original = Element.prototype.scrollIntoView
+    Element.prototype.scrollIntoView = function(options) {
+      window.__journalScrollBehavior = options?.behavior
+      return original.call(this, options)
+    }
+  })
+  await page.getByRole('navigation', { name: 'Explore journal topics' }).getByRole('button', { name: 'Security', exact: true }).click()
+  await page.waitForFunction(() => document.activeElement?.id === 'article-results-heading')
+  assert.equal(await page.evaluate(() => window.__journalScrollBehavior), 'auto', 'Reduced motion disables smooth topic scrolling')
+  await page.getByRole('group', { name: 'Filter by topic' }).getByRole('button', { name: 'All topics', exact: true }).click()
   await page.screenshot({ path: path.join(output, 'index-desktop.png'), fullPage: true })
   await page.getByRole('textbox', { name: 'Search articles' }).fill('signed')
   await page.locator('.journal-feature').waitFor({ state: 'detached' })
   assert.ok((await page.locator('.blog-card').count()) > 0, 'Search returns expected stories')
   assert.ok(page.url().includes('q=signed'), 'Search is preserved in the URL')
   await page.getByRole('button', { name: 'Clear search', exact: true }).click()
+  await page.getByRole('textbox', { name: 'Search articles' }).fill('concatenating')
+  await page.getByRole('heading', { name: 'Document IDs, storage keys, and version IDs: what each should own', exact: true }).waitFor()
+  assert.equal(await page.locator('.blog-card').count(), 1, 'Body-only search returns the matching article')
+  await page.getByRole('button', { name: 'Clear search', exact: true }).click()
+  await page.getByRole('textbox', { name: 'Search articles' }).fill('ai')
+  await page.getByRole('status').filter({ hasText: '19 matching articles' }).waitFor()
+  assert.equal(await page.locator('.blog-card').count(), 12, 'Short-word search uses exact tokens and paginates the matching articles')
+  await page.getByRole('button', { name: 'Clear search', exact: true }).click()
   await page.getByRole('group', { name: 'Filter by topic' }).getByRole('button', { name: 'Security', exact: true }).click()
   const categories = await page.locator('.blog-card .entry-meta > span:first-child').allTextContents()
   assert.ok(categories.length > 0 && categories.every(value => value === 'Security'), 'Category filter')
   await page.getByRole('group', { name: 'Filter by topic' }).getByRole('button', { name: 'All topics', exact: true }).click()
   const keyword = catalogue[0].tags[0]
-  await page.locator('#journal-keyword').selectOption(keyword)
+  const keywordTrigger = page.getByRole('button', { name: /Filter by keyword/ })
+  await keywordTrigger.click()
+  const keywordDialog = page.getByRole('dialog', { name: 'Filter by keyword' })
+  const keywordDialogBounds = await keywordDialog.boundingBox()
+  assert.ok(keywordDialogBounds && keywordDialogBounds.y >= 0 && keywordDialogBounds.y + keywordDialogBounds.height <= 1000, 'Keyword dialog stays inside the desktop viewport')
+  await keywordDialog.getByRole('textbox', { name: 'Search keywords' }).fill(keyword)
+  await keywordDialog.getByRole('button', { name: new RegExp(`^${keyword},`) }).click()
   assert.equal(new URL(page.url()).searchParams.get('tag'), keyword, 'Keyword filter is preserved in the URL')
   assert.ok((await page.locator('.blog-card').count()) > 0, 'Keyword filter returns stories')
+  await keywordTrigger.click()
+  assert.equal(await keywordDialog.getByRole('button', { name: new RegExp(`^${keyword},`) }).getAttribute('aria-pressed'), 'true', 'Selected keyword is exposed')
+  await page.keyboard.press('Escape')
+  await keywordDialog.waitFor({ state: 'detached' })
+  assert.equal(await keywordTrigger.evaluate(element => element === document.activeElement), true, 'Escape returns focus to the keyword trigger')
   await page.getByRole('textbox', { name: 'Search articles' }).fill('no-such-topic-0987654321')
   await page.getByRole('heading', { name: 'No matching stories.', exact: true }).waitFor()
   await page.getByRole('button', { name: 'Reset filters', exact: true }).click()

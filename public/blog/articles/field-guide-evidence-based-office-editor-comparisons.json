@@ -1,7 +1,7 @@
 {
   "slug": "field-guide-evidence-based-office-editor-comparisons",
-  "title": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test",
-  "description": "Evaluate ShimoDocs and ONLYOFFICE candidates without substituting brand claims for demonstrated behavior.",
+  "title": "Office SDK vs ONLYOFFICE: a repeatable document test",
+  "description": "Evaluate Office SDK and ONLYOFFICE with the same evidence instead of substituting brand claims for demonstrated behavior.",
   "category": "Comparisons",
   "format": "comparison",
   "tags": [
@@ -15,16 +15,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 656,
+  "wordCount": 673,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs ONLYOFFICE: Fidelity, Open Core, Controls",
+      "label": "Original topic reference: document platform vs ONLYOFFICE: Fidelity, Open Core, Controls",
       "url": "https://shimodocs.com/blog/shimodocs-vs-onlyoffice"
     }
   ],
   "cover": "/blog/images/field-guide-evidence-based-office-editor-comparisons.png",
-  "coverAlt": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test: Document corpus, Roundtrip fidelity, Control tests, Edition scope.",
+  "coverAlt": "Office SDK vs ONLYOFFICE: a repeatable document test: Document corpus, Roundtrip fidelity, Control tests, Edition scope.",
   "concepts": [
     "Document corpus",
     "Roundtrip fidelity",
@@ -40,8 +40,8 @@
     "soft": "#edf0f3",
     "number": 43
   },
-  "contentHash": "a4e77341eb1828f54855ae2c742b34470e67a1266d0060ccfc890a2d0c548314",
-  "intro": "Compare ShimoDocs and ONLYOFFICE using the same sanitized file corpus, prescribed edits, exported artifacts, permission tests, and written commercial scope. Record exact editions and versions. This produces a decision your team can repeat without treating a vendor's sample files or general feature claims as proof of fit.",
+  "contentHash": "441ec0607b5c0229c5c3b691527a9ea316d939f6a1807ac4f7d25870e2f7453d",
+  "intro": "Compare Office SDK and ONLYOFFICE using the same sanitized file corpus, prescribed edits, exported artifacts, permission tests, and written commercial scope. The comparison covers the proposed document surfaces and workflow, not feature equivalence between every product or edition. Record exact editions, versions, and configurations so the decision can be repeated without treating a vendor sample file or general feature claim as proof of fit.",
   "sections": [
     {
       "id": "assemble-a-representative-corpus-1",

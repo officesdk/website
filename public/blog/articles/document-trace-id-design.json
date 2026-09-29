@@ -10,16 +10,24 @@
     "API integration",
     "Audit logs"
   ],
-  "structure": "comparison+layers:prose:example:note:checklist:diagnostic+sequence",
+  "structure": "comparison+layers:prose:example:note:checklist:diagnostic+sequence:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 662,
+  "wordCount": 751,
   "source": null,
   "references": [
     {
       "label": "W3C: Trace Context",
       "url": "https://www.w3.org/TR/trace-context/"
+    },
+    {
+      "label": "OpenTelemetry: Traces",
+      "url": "https://opentelemetry.io/docs/concepts/signals/traces/"
+    },
+    {
+      "label": "OWASP: Logging Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
     }
   ],
   "cover": "/blog/images/document-trace-id-design.png",
@@ -39,8 +47,8 @@
     "soft": "#e7f2ec",
     "number": 19
   },
-  "contentHash": "c3872b505c8e31ac38ce35217d9fba563a1359d84153e261fd49dd9185b42e2f",
-  "intro": "Give the user's document operation a durable identifier and connect each request, queue job, and callback to it. A request trace explains one execution; an operation ID explains the complete attempt, including retries. Keep both relationships without putting document text or signed URLs into telemetry.",
+  "contentHash": "8e994eebc8040cab728f7bea7fb5c6a5ea7c28451dca9ae37fc3063ae90001fe",
+  "intro": "A document-operation trace ID is a durable identifier that connects the launch, request, queue, worker, and callback records for one user operation. A request trace explains one execution; an operation ID explains the complete attempt, including retries. Keep both relationships without putting document text or signed URLs into telemetry.",
   "sections": [
     {
       "id": "operation-identity-versus-request-identity-1",
@@ -137,6 +145,12 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "follow-one-user-operation-across-every-service-boundary-7",
+      "title": "Follow one user operation across every service boundary",
+      "html": "<p>Trace 1 user operation across 3 service requests and 2 retries, then start from the support ID and find the first failed boundary.</p><ol><li>Create a durable operation ID when the user starts the document action.</li><li>Attach request, queue, worker, and callback identifiers to that operation.</li><li>Map external provider IDs without recording document text or signed credentials.</li><li>Expose a safe support ID in the actionable user error.</li><li>Trace one synthetic failure from launch to its first failed boundary.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

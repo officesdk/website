@@ -11,16 +11,24 @@
     "Document search",
     "Backup and recovery"
   ],
-  "structure": "prose:comparison+layers:steps:checklist:example+sequence",
+  "structure": "prose:comparison+layers:steps:checklist:example+sequence:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 649,
+  "wordCount": 740,
   "source": null,
   "references": [
     {
       "label": "NIST: Guidelines for Media Sanitization",
       "url": "https://csrc.nist.gov/pubs/sp/800/88/r2/final"
+    },
+    {
+      "label": "EU GDPR Article 17: Right to erasure",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj"
+    },
+    {
+      "label": "NIST SP 800-34 Rev. 1: Contingency planning",
+      "url": "https://csrc.nist.gov/pubs/sp/800/34/r1/final"
     }
   ],
   "cover": "/blog/images/document-deletion-lifecycle.png",
@@ -40,8 +48,8 @@
     "soft": "#edf0f3",
     "number": 34
   },
-  "contentHash": "64edffe63c8678baa2fd41bb30a12e5eb4cf885c47ff980c8d71c0ce81a084fe",
-  "intro": "Treat deletion as a tracked lifecycle across the source and its derived copies. Hiding a document in the application does not remove historical versions, previews, extracted text, or backup data. State when access ends, which retention exceptions apply, and how cleanup completion is verified in each system.",
+  "contentHash": "192c763ba9e2a8a0f0023139f462aa04b99b9913416fff2f675d5067f727e111",
+  "intro": "Document deletion is a tracked lifecycle that removes access and cleans up the source file and its derived copies under the applicable retention rules. Hiding a document in the application does not remove historical versions, previews, extracted text, or backup data. State when access ends and how cleanup completion is verified in each system.",
   "sections": [
     {
       "id": "define-access-removal-and-permanent-cleanup-separately-1",
@@ -132,6 +140,12 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "track-deletion-through-the-source-and-every-derived-copy-6",
+      "title": "Track deletion through the source and every derived copy",
+      "html": "<p>Create 2 source versions, track copies in 3 derived stores, and complete 1 isolated restore drill before signing off deletion behavior.</p><ol><li>Inventory source versions, previews, extracted text, indexes, temporary files, and backups.</li><li>Define when ordinary access ends and when permanent cleanup is expected.</li><li>Start a durable per-system cleanup operation with version and retention guards.</li><li>Retry and reconcile incomplete work without deleting a restored or replaced version.</li><li>Verify completion and the behavior of later backup restores.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

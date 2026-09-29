@@ -10,16 +10,24 @@
     "Operations",
     "Document conversion"
   ],
-  "structure": "prose+matrix:steps:note:example+sequence:checklist",
+  "structure": "prose+matrix:steps:note:example+sequence:checklist:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 648,
+  "wordCount": 730,
   "source": null,
   "references": [
     {
       "label": "Microsoft Learn: Excel performance and calculation",
       "url": "https://learn.microsoft.com/en-us/office/vba/excel/concepts/excel-performance/excel-improving-calculation-performance"
+    },
+    {
+      "label": "Microsoft Support: Excel specifications and limits",
+      "url": "https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3"
+    },
+    {
+      "label": "Microsoft Learn: Excel performance tips",
+      "url": "https://learn.microsoft.com/en-us/office/vba/excel/concepts/excel-performance/excel-tips-for-optimizing-performance-obstructions"
     }
   ],
   "cover": "/blog/images/large-workbook-acceptance.png",
@@ -39,7 +47,7 @@
     "soft": "#f6eaf0",
     "number": 15
   },
-  "contentHash": "f4f0be83ee3131b3e16e35ec0ff068c1e7fb29adb2833cc1d6b281ea8d0b8c61",
+  "contentHash": "0832db021c68e92deb12be5f60b5c440002502070f5c44aaa3aa417f32b1cd3b",
   "intro": "Test large workbooks by populated cells, formula dependencies, formatting, objects, and the tasks users perform. File size alone is a poor predictor of usability. Two similarly sized workbooks can place very different demands on initialization, recalculation, browser memory, and export.",
   "sections": [
     {
@@ -131,6 +139,12 @@
       "title": "Agree on the supported operating envelope",
       "html": "<ul><li>Define supported workbook patterns and known unsupported features.</li><li>Agree on acceptable times for first display, common edits, and durable save.</li><li>Verify formula results after editing and after export.</li><li>Document the tested concurrency and client device profile.</li><li>Provide a clear recovery or alternative workflow when a workbook exceeds the accepted envelope.</li></ul>",
       "kind": "checklist"
+    },
+    {
+      "id": "accept-a-workbook-against-a-stated-operating-envelope-6",
+      "title": "Accept a workbook against a stated operating envelope",
+      "html": "<p>Use 3 workbooks with 10 worksheets and 100,000 populated cells, varying formulas and objects instead of testing file size alone.</p><ol><li>Select representative workbook complexity and the user tasks that must succeed.</li><li>Fix the browser, client device, server environment, and concurrency conditions.</li><li>Measure retrieval, first display, recalculation, editing, save, reopen, and export separately.</li><li>Verify formulas and dependent values after editing and after export.</li><li>Record the supported envelope and the recovery path for files outside it.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import * as cheerio from 'cheerio'
 import { articleFormats, editorialRecipe, figureKinds, keywordTags, sectionKinds } from './editorial.mjs'
 import { normalizeArticle, discoverPostUrls } from './import.mjs'
+import { matchesSearchText } from '../../src/blog/search.ts'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 
@@ -38,6 +39,33 @@ test('editorial sources carry SEO tags, varied formats, and non-adjacent figure 
     structures.add(article.sections.map(section => `${section.kind}${section.figure ? `+${section.figure.kind}` : ''}`).join(':'))
   }
   assert.ok(structures.size >= 90, `Only ${structures.size} editorial structures found`)
+})
+
+test('the generated search index covers article titles, tags, and body text', () => {
+  const searchIndexPath = path.join(root, 'src/blog/search-index.json')
+  assert.ok(fs.existsSync(searchIndexPath), 'Full-text search index is missing')
+  const searchIndex = JSON.parse(fs.readFileSync(searchIndexPath, 'utf8'))
+  const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'src/blog/catalog.json'), 'utf8'))
+  assert.deepEqual(Object.keys(searchIndex).sort(), catalogue.map(entry => entry.slug).sort())
+  for (const entry of catalogue) {
+    const article = JSON.parse(fs.readFileSync(path.join(root, 'public/blog/articles', `${entry.slug}.json`), 'utf8'))
+    const htmlText = value => cheerio.load(value.replace(/<[^>]+>/g, ' ')).text()
+    const searchableText = [entry.title, entry.category, ...entry.tags, ...entry.concepts, htmlText(article.intro), ...article.sections.flatMap(section => [section.title, htmlText(section.html), section.figure?.caption ?? ''])].join(' ').toLocaleLowerCase()
+    const expectedTokens = new Set(searchableText.match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu) ?? [])
+    const indexedTokens = new Set(searchIndex[entry.slug].split(' '))
+    assert.ok([...expectedTokens].every(token => indexedTokens.has(token)), `Search text is incomplete: ${entry.slug}`)
+  }
+  const articleText = searchIndex['document-identifiers-and-ownership']
+  assert.equal(typeof articleText, 'string')
+  assert.match(articleText, /document ids/)
+  assert.match(articleText, /multi-tenancy/)
+  assert.match(articleText, /concatenating/)
+})
+
+test('short search terms match complete words instead of unrelated substrings', () => {
+  assert.equal(matchesSearchText('ai document workflows', 'AI'), true)
+  assert.equal(matchesSearchText('failed document workflows', 'ai'), false)
+  assert.equal(matchesSearchText('document capability matrix', 'api'), false)
 })
 
 test('article discovery excludes indexes, tags and category navigation', () => {

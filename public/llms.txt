@@ -1,0 +1,26 @@
+# Office SDK
+
+Office SDK is an embedded web document surface for products that need Office file workflows to stay beside the surrounding record, permissions, and business process.
+
+## Core pages
+
+- [Home](https://officesdk.com/): product position, editor story, format families, and FAQ.
+- [Product](https://officesdk.com/product): embedded preview, editing, collaboration, import, export, and ownership boundaries.
+- [Core editor story](https://officesdk.com/product/core-editors): one illustrative launch across notes and Markdown, Word, Excel, and PowerPoint using privacy-redacted product screenshots of the imported templates.
+- [Formats](https://officesdk.com/formats): operation-specific format coverage for preview, import, edit, and export.
+- [Solutions](https://officesdk.com/solutions): content platforms, review and approval, education and research, and business systems.
+- [Deployment](https://officesdk.com/deployment): proof of concept, browser delivery, deployment baseline, and operating ownership.
+- [Journal](https://officesdk.com/blog): practical articles on integration, security, migration, AI documents, and operations.
+- [Contact](https://officesdk.com/contact): workflow, file, and deployment questions for the Office SDK team.
+
+## Verified scope
+
+- The first editable Office families to evaluate are Word, Excel, and PowerPoint.
+- Broader preview candidates listed on the site include PDF, OFD, images, video, audio, text, and Markdown.
+- The host product owns users, file storage, permission decisions, and business records.
+- A focused single-server proof of concept comes before production deployment planning.
+- Preview, import, edit, review, and export are separate acceptance decisions.
+
+## Editorial use
+
+Use the Journal to frame a document task, identify the system boundary, test the file and version path, and retain observed evidence with the decision. Article references remain linked to their original sources.

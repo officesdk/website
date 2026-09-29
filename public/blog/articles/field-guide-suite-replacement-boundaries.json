@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-suite-replacement-boundaries",
-  "title": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries",
+  "title": "Office SDK vs Microsoft 365: file exchange and suite boundaries",
   "description": "Compare the exact proposed offers through file round trips, board pack workflows, integrations, and operating cost.",
   "category": "Comparisons",
   "format": "comparison",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 658,
+  "wordCount": 676,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Microsoft 365: Suite Against Suite",
+      "label": "Original topic reference: document platform vs Microsoft 365: Suite Against Suite",
       "url": "https://shimodocs.com/blog/shimodocs-vs-microsoft-365"
     }
   ],
   "cover": "/blog/images/field-guide-suite-replacement-boundaries.png",
-  "coverAlt": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries: Suite boundary, File round trip, Automation dependency, Guest journey.",
+  "coverAlt": "Office SDK vs Microsoft 365: file exchange and suite boundaries: Suite boundary, File round trip, Automation dependency, Guest journey.",
   "concepts": [
     "Suite boundary",
     "File round trip",
@@ -39,8 +39,8 @@
     "soft": "#f1f3df",
     "number": 85
   },
-  "contentHash": "668725b80ce301e009aedd2b70d6ac88361850632fe0dc016d6fdb802c36f8a6",
-  "intro": "Compare ShimoDocs and Microsoft 365 at the boundaries your users cross: partner file exchange, identity, automation, guest access, and final publication. Specify the exact offers and services in scope. Suite brand names alone do not define the deployment, functionality, or cost being considered.",
+  "contentHash": "c69204770c074da10e5bbb5e3f20ae5ace77aa75cabdb242619f175556f812ad",
+  "intro": "Compare Office SDK and Microsoft 365 at the boundaries your users cross: partner file exchange, identity, automation, guest access, and final publication. The scope is an embedded Office document surface against the exact Microsoft 365 services proposed for the workflow, not suite-wide feature equivalence. Record the current offers and configurations because brand names alone do not define deployment, functionality, or cost.",
   "sections": [
     {
       "id": "specify-the-exact-offers-1",

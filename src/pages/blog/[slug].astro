@@ -18,7 +18,15 @@ export function getStaticPaths() {
 }
 
 const { article } = Astro.props as { article: BlogArticleData }
-const title = `${article.title} | Office SDK Journal`
+const MAX_SEO_TITLE_LENGTH = 60
+const conciseSeoTitle = (value: string) => {
+  if (value.length <= MAX_SEO_TITLE_LENGTH) return value
+  const prefix = value.slice(0, MAX_SEO_TITLE_LENGTH - 3)
+  const boundary = prefix.lastIndexOf(' ')
+  const clipped = prefix.slice(0, boundary >= 42 ? boundary : MAX_SEO_TITLE_LENGTH - 3).replace(/[\s,:;.-]+$/, '')
+  return `${clipped}...`
+}
+const title = conciseSeoTitle(article.title)
 ---
 
 <SiteLayout title={title} description={article.description} canonical={`/blog/${article.slug}`} image={article.cover} schemas={[articleSchema(article)]} articleSchema>

@@ -1,7 +1,9 @@
 ---
 import { Header, Footer } from '../components/SiteSections'
+import PointerBackdrop from '../components/PointerBackdrop.astro'
 import '../styles.css'
 import '../blog/blog.css'
+import '../site-theme.css'
 
 interface Props {
   title: string
@@ -27,7 +29,7 @@ const organization = {
   name: 'Office SDK',
   url: `${siteOrigin}/`,
   email: 'support@officesdk.com',
-  sameAs: ['https://github.com/officesdk/website'],
+  sameAs: ['https://github.com/officesdk/'],
 }
 const software = {
   '@type': 'SoftwareApplication',
@@ -47,8 +49,10 @@ const serializeSchema = (schema: Record<string, unknown>) => JSON.stringify(sche
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#151816" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#080808" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <link rel="canonical" href={`${siteOrigin}${canonical}`} />
     <meta property="og:type" content={articleSchema ? 'article' : 'website'} />
@@ -66,6 +70,7 @@ const serializeSchema = (schema: Record<string, unknown>) => JSON.stringify(sche
     {schemas.map((schema) => <script type="application/ld+json" data-blog-schema={articleSchema ? '' : undefined} set:html={serializeSchema(schema)}></script>)}
   </head>
   <body>
+    <PointerBackdrop />
     <div class="app-shell">
       <Header client:load />
       <main><slot /></main>

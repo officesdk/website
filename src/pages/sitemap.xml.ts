@@ -13,7 +13,7 @@ function escapeXml(value: string) {
     .replaceAll("'", '&apos;')
 }
 
-const staticEntries = [...siteRoutes, '/blog'].map((path) => ({
+const staticEntries = [...siteRoutes, '/product/core-editors', '/blog'].map((path) => ({
   path,
   changefreq: 'weekly',
   priority: path === '/' ? '1.0' : path === '/blog' ? '0.9' : '0.8',

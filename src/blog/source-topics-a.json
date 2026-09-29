@@ -8,7 +8,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: SharePoint Server Is Out of Support. What You Replace.",
+        "label": "Original topic reference: SharePoint Server Is Out of Support. What You Replace.",
         "url": "https://shimodocs.com/blog/sharepoint-server-after-support-ends"
       }
     ],
@@ -112,7 +112,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: A Zero-Knowledge Editor Is Not a Document Suite",
+        "label": "Original topic reference: A Zero-Knowledge Editor Is Not a Document Suite",
         "url": "https://shimodocs.com/blog/zero-knowledge-editor-vs-document-suite"
       }
     ],
@@ -212,7 +212,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
+        "label": "Original topic reference: Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
         "url": "https://shimodocs.com/blog/self-hosted-office-suite-vs-wiki"
       }
     ],
@@ -299,7 +299,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Migrating from Confluence Without a Connector",
+        "label": "Original topic reference: Migrating from Confluence Without a Connector",
         "url": "https://shimodocs.com/blog/migrating-without-confluence-connector"
       }
     ],
@@ -408,7 +408,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Collabora in Nextcloud vs a Document Suite",
+        "label": "Original topic reference: Collabora in Nextcloud vs a Document Suite",
         "url": "https://shimodocs.com/blog/collabora-nextcloud-vs-document-suite"
       }
     ],
@@ -506,18 +506,18 @@
   },
   {
     "slug": "field-guide-evidence-based-office-editor-comparisons",
-    "title": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test",
-    "description": "Evaluate ShimoDocs and ONLYOFFICE candidates without substituting brand claims for demonstrated behavior.",
+    "title": "Office SDK vs ONLYOFFICE: a repeatable document test",
+    "description": "Evaluate Office SDK and ONLYOFFICE with the same evidence instead of substituting brand claims for demonstrated behavior.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs ONLYOFFICE: Fidelity, Open Core, Controls",
+        "label": "Original topic reference: document platform vs ONLYOFFICE: Fidelity, Open Core, Controls",
         "url": "https://shimodocs.com/blog/shimodocs-vs-onlyoffice"
       }
     ],
-    "intro": "Compare ShimoDocs and ONLYOFFICE using the same sanitized file corpus, prescribed edits, exported artifacts, permission tests, and written commercial scope. Record exact editions and versions. This produces a decision your team can repeat without treating a vendor's sample files or general feature claims as proof of fit.",
+    "intro": "Compare Office SDK and ONLYOFFICE using the same sanitized file corpus, prescribed edits, exported artifacts, permission tests, and written commercial scope. The comparison covers the proposed document surfaces and workflow, not feature equivalence between every product or edition. Record exact editions, versions, and configurations so the decision can be repeated without treating a vendor sample file or general feature claim as proof of fit.",
     "concepts": [
       "Document corpus",
       "Roundtrip fidelity",
@@ -612,18 +612,18 @@
   },
   {
     "slug": "field-guide-file-estate-or-document-workspace",
-    "title": "ShimoDocs or Nextcloud: compare the work, not the folder screen",
+    "title": "Office SDK vs Nextcloud: compare the work, not the folder screen",
     "description": "Compare platform fit through file lifecycle, collaborative tasks, integration ownership, and operating effort.",
     "category": "Comparisons",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Nextcloud: File Platform or Document Suite?",
+        "label": "Original topic reference: document platform vs Nextcloud: File Platform or Document Suite?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-nextcloud"
       }
     ],
-    "intro": "Choose between these candidates by testing the responsibility you need to own: a broad file estate, a collaborative document workflow, or both. Include non-office files, approved versions, external delivery, and the extra components required by the offered configuration. An appealing folder view does not answer those questions.",
+    "intro": "Choose between these candidates by testing the responsibility you need to own: a broad file estate, a collaborative document workflow, or both. This scope compares an embedded Office document surface with the proposed Nextcloud file platform; it does not assume that the products are equivalent. Include non-office files, approved versions, external delivery, and the extra components required by the current tested configuration.",
     "concepts": [
       "File lifecycle",
       "Workspace tasks",
@@ -715,7 +715,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Rolling Out Document Collaboration Across a Bank",
+        "label": "Original topic reference: Rolling Out Document Collaboration Across a Bank",
         "url": "https://shimodocs.com/blog/document-collaboration-financial-services-rollout"
       }
     ],
@@ -812,7 +812,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Matter Files: How Legal Teams Run Document Collaboration",
+        "label": "Original topic reference: Matter Files: How Legal Teams Run Document Collaboration",
         "url": "https://shimodocs.com/blog/document-collaboration-legal-teams"
       }
     ],
@@ -916,7 +916,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Document Collaboration in the Public Sector",
+        "label": "Original topic reference: Document Collaboration in the Public Sector",
         "url": "https://shimodocs.com/blog/document-collaboration-public-sector"
       }
     ],
@@ -1017,7 +1017,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: A 30-Day Plan for Rolling Out a Document Platform",
+        "label": "Original topic reference: A 30-Day Plan for Rolling Out a Document Platform",
         "url": "https://shimodocs.com/blog/document-platform-adoption-plan"
       }
     ],
@@ -1121,7 +1121,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Leaving a Document Platform: Lock-In and the Exit Path",
+        "label": "Original topic reference: Leaving a Document Platform: Lock-In and the Exit Path",
         "url": "https://shimodocs.com/blog/document-platform-lock-in-and-exit-planning"
       }
     ],
@@ -1230,7 +1230,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: What a Self-Hosted Document Platform Costs to Run",
+        "label": "Original topic reference: What a Self-Hosted Document Platform Costs to Run",
         "url": "https://shimodocs.com/blog/document-platform-operations-cost"
       }
     ],
@@ -1326,7 +1326,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Migrating a Shared Drive Without Losing Permissions",
+        "label": "Original topic reference: Migrating a Shared Drive Without Losing Permissions",
         "url": "https://shimodocs.com/blog/migrating-shared-drives-to-a-document-platform"
       }
     ],
@@ -1430,7 +1430,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Answering a Security Review of a Self-Hosted Platform",
+        "label": "Original topic reference: Answering a Security Review of a Self-Hosted Platform",
         "url": "https://shimodocs.com/blog/passing-a-document-platform-security-review"
       }
     ],
@@ -1535,7 +1535,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Wiring Document AI to Your Own Model Endpoint",
+        "label": "Original topic reference: Wiring Document AI to Your Own Model Endpoint",
         "url": "https://shimodocs.com/blog/private-model-endpoint-for-document-ai"
       }
     ],
@@ -1644,7 +1644,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: How Self-Hosted Document Software Is Priced",
+        "label": "Original topic reference: How Self-Hosted Document Software Is Priced",
         "url": "https://shimodocs.com/blog/self-hosted-document-platform-pricing"
       }
     ],
@@ -1744,7 +1744,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Secure Cloud Collaboration: Balancing Security and Productivity",
+        "label": "Original topic reference: Secure Cloud Collaboration: Balancing Security and Productivity",
         "url": "https://shimodocs.com/blog/secure-cloud-collaboration"
       }
     ],
@@ -1849,7 +1849,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Your Content Is Training AI. Did You Actually Agree to That?",
+        "label": "Original topic reference: Your Content Is Training AI. Did You Actually Agree to That?",
         "url": "https://shimodocs.com/blog/ai-training-content-control"
       }
     ],
@@ -1947,7 +1947,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: 50 Web3 Security Tools & Resources for Builders",
+        "label": "Original topic reference: 50 Web3 Security Tools & Resources for Builders",
         "url": "https://shimodocs.com/blog/web3-security-tools-resources"
       }
     ],
@@ -2056,7 +2056,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Choosing Object Storage for a Document Platform",
+        "label": "Original topic reference: Choosing Object Storage for a Document Platform",
         "url": "https://shimodocs.com/blog/object-storage-document-platform"
       }
     ],
@@ -2165,7 +2165,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Capacity Planning Around Concurrent Editors",
+        "label": "Original topic reference: Capacity Planning Around Concurrent Editors",
         "url": "https://shimodocs.com/blog/capacity-planning-concurrent-editors"
       }
     ],
@@ -2270,7 +2270,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Disaster Recovery for a Document Platform",
+        "label": "Original topic reference: Disaster Recovery for a Document Platform",
         "url": "https://shimodocs.com/blog/disaster-recovery-document-platform"
       }
     ],
@@ -2374,7 +2374,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Document Collaboration on an Air-Gapped Network",
+        "label": "Original topic reference: Document Collaboration on an Air-Gapped Network",
         "url": "https://shimodocs.com/blog/air-gapped-document-collaboration"
       }
     ],
@@ -2483,7 +2483,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Identity and SSO for a Self-Hosted Document Platform",
+        "label": "Original topic reference: Identity and SSO for a Self-Hosted Document Platform",
         "url": "https://shimodocs.com/blog/sso-self-hosted-document-platform"
       }
     ],
@@ -2582,7 +2582,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Upgrading a Document Platform Without Downtime Drama",
+        "label": "Original topic reference: Upgrading a Document Platform Without Downtime Drama",
         "url": "https://shimodocs.com/blog/upgrade-and-rollback-document-platform"
       }
     ],
@@ -2691,7 +2691,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Monitoring a Self-Hosted Document Platform",
+        "label": "Original topic reference: Monitoring a Self-Hosted Document Platform",
         "url": "https://shimodocs.com/blog/monitoring-self-hosted-document-platform"
       }
     ],
@@ -2793,7 +2793,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Backup and Restore for a Document Platform",
+        "label": "Original topic reference: Backup and Restore for a Document Platform",
         "url": "https://shimodocs.com/blog/backup-and-restore-document-platform"
       }
     ],
@@ -2902,7 +2902,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Tuning the Database Behind a Document Platform",
+        "label": "Original topic reference: Tuning the Database Behind a Document Platform",
         "url": "https://shimodocs.com/blog/database-tuning-document-collaboration"
       }
     ],
@@ -3006,7 +3006,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Sizing Hardware for a Self-Hosted Document Platform",
+        "label": "Original topic reference: Sizing Hardware for a Self-Hosted Document Platform",
         "url": "https://shimodocs.com/blog/hardware-sizing-self-hosted-document-platform"
       }
     ],
@@ -3105,7 +3105,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Document Encryption and Key Custody",
+        "label": "Original topic reference: Document Encryption and Key Custody",
         "url": "https://shimodocs.com/blog/byo-key-encryption-documents"
       }
     ],
@@ -3214,7 +3214,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: External Document Sharing: Where Audits Find Problems",
+        "label": "Original topic reference: External Document Sharing: Where Audits Find Problems",
         "url": "https://shimodocs.com/blog/external-sharing-risks-documents"
       }
     ],
@@ -3318,7 +3318,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Access Control for Document Platforms",
+        "label": "Original topic reference: Access Control for Document Platforms",
         "url": "https://shimodocs.com/blog/access-control-best-practices-documents"
       }
     ],
@@ -3427,7 +3427,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Legal Hold in Document Platforms",
+        "label": "Original topic reference: Legal Hold in Document Platforms",
         "url": "https://shimodocs.com/blog/legal-hold-document-management"
       }
     ],
@@ -3536,7 +3536,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: Building a Document Retention Policy That Holds",
+        "label": "Original topic reference: Building a Document Retention Policy That Holds",
         "url": "https://shimodocs.com/blog/document-retention-policy-guide"
       }
     ],
@@ -3631,7 +3631,7 @@
     "publishedAt": "2026-09-28",
     "references": [
       {
-        "label": "ShimoDocs: A Practical Guide to Data Residency Requirements",
+        "label": "Original topic reference: A Practical Guide to Data Residency Requirements",
         "url": "https://shimodocs.com/blog/data-residency-requirements-guide"
       }
     ],

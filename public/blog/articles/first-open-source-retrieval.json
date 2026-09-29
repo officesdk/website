@@ -10,16 +10,24 @@
     "Troubleshooting",
     "API integration"
   ],
-  "structure": "prose+sequence:diagnostic:steps+flow:note",
+  "structure": "prose+sequence:diagnostic:steps+flow:note:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 661,
+  "wordCount": 759,
   "source": null,
   "references": [
     {
       "label": "MDN: HTTP overview",
       "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+    },
+    {
+      "label": "MDN: Cross-Origin Resource Sharing",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+    },
+    {
+      "label": "OWASP: Server-Side Request Forgery Prevention",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
     }
   ],
   "cover": "/blog/images/first-open-source-retrieval.png",
@@ -39,8 +47,8 @@
     "soft": "#eaf1f9",
     "number": 2
   },
-  "contentHash": "6dae9a5adec022a7d1d26c6af9bf98319fb50950b571c2f7312abf7b768fa490",
-  "intro": "When a document opens in your browser but fails inside an embedded editor, test the source URL from the system that actually fetches the file. That may be a backend worker with different DNS, routing, and credentials. Start by identifying that requester; otherwise, a successful browser download can send the investigation in the wrong direction.",
+  "contentHash": "0f62818a8f70b9e171f53a716c8f8828f07541a97f030ce0ed5f736afb63e8b9",
+  "intro": "First-open source retrieval is the request path used by the backend document service to fetch the authorized file bytes before the embedded editor can initialize. Test the source URL from that requester, which may have different DNS, routing, and credentials from the browser. Otherwise, a successful browser download can send the investigation in the wrong direction.",
   "sections": [
     {
       "id": "who-makes-each-request-1",
@@ -125,6 +133,12 @@
       "title": "Decide what reopening should retrieve",
       "html": "<p>Some integrations continue to use the business source as their authority; others establish an editing representation with a separate save or export path. Verify the chosen product's documented behavior before deciding when the original object may be replaced or removed. Specify what reopening means after the first successful import, and what happens if initialization fails halfway through. A retry should either resume a known attempt or start an independent attempt whose results cannot overwrite a newer successful state without an explicit version check.</p>",
       "kind": "note"
+    },
+    {
+      "id": "reproduce-first-open-retrieval-from-the-actual-requester-5",
+      "title": "Reproduce first-open retrieval from the actual requester",
+      "html": "<p>Use 2 files, 2 user roles, and 3 network locations so browser access and backend retrieval can be compared without changing the fixture.</p><ol><li>Identify the browser, document service, or worker that performs the first source fetch.</li><li>Test the same authorized URL from both the user network and the requester network.</li><li>Compare DNS, routing, TLS, redirect, and credential behavior at each boundary.</li><li>Repeat after the credential expires and record the response visible to the host product.</li><li>Keep the request trace with the file version and the owner of the failed boundary.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

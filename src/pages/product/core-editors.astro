@@ -1,0 +1,12 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import { CoreEditorsStory } from '../../components/CoreEditorsStory'
+
+const title = 'Core Editors Product Story | Office SDK'
+const description = 'Follow one illustrative business workflow through the notes and Markdown, Word, Excel, and PowerPoint editor surfaces in Office SDK.'
+const image = '/product/core-editors/markdown-editor.png'
+---
+
+<SiteLayout {title} {description} canonical="/product/core-editors" {image}>
+  <CoreEditorsStory />
+</SiteLayout>

@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-document-management-system-of-record",
-  "title": "ShimoDocs vs SharePoint: where the authoritative document lives",
+  "title": "Office SDK vs SharePoint: where the authoritative document lives",
   "description": "Evaluate editing and document management through metadata, approval versions, lifecycle handoffs, and recovery.",
   "category": "Comparisons",
   "format": "architecture",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 696,
+  "wordCount": 704,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs SharePoint for Document Management",
+      "label": "Original topic reference: document platform vs SharePoint for Document Management",
       "url": "https://shimodocs.com/blog/shimodocs-vs-sharepoint"
     }
   ],
   "cover": "/blog/images/field-guide-document-management-system-of-record.png",
-  "coverAlt": "ShimoDocs vs SharePoint: where the authoritative document lives: Record identity, Metadata policy, Approval version, Retention owner.",
+  "coverAlt": "Office SDK vs SharePoint: where the authoritative document lives: Record identity, Metadata policy, Approval version, Retention owner.",
   "concepts": [
     "Record identity",
     "Metadata policy",
@@ -39,8 +39,8 @@
     "soft": "#e4f3f3",
     "number": 86
   },
-  "contentHash": "5b99b9043b3a99d56a071e81f1f2cfa0456630486f5e60b95f22b31a05d3648b",
-  "intro": "A ShimoDocs and SharePoint decision should identify the authoritative record and the rules that govern it. Test metadata, approval versions, search, retention, and export together with editing. Storing a file is different from maintaining a record whose identity and decision history remain trustworthy.",
+  "contentHash": "0e9a34bbe050b610afedc1c3b3228bc6040e4ae24450b9eb4d4ff73079396222",
+  "intro": "An Office SDK and SharePoint decision should identify the authoritative record and the rules that govern it. This scope compares an embedded Office document surface with the proposed SharePoint record and workflow configuration; it does not assume product equivalence. Test current metadata, approval versions, search, retention, export, and editing behavior together.",
   "sections": [
     {
       "id": "define-what-constitutes-a-record-1",

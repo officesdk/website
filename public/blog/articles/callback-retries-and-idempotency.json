@@ -10,16 +10,24 @@
     "API integration",
     "Document storage"
   ],
-  "structure": "steps+sequence:prose:example+decision:diagnostic",
+  "structure": "steps+sequence:prose:example+decision:diagnostic:comparison:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 667,
+  "wordCount": 800,
   "source": null,
   "references": [
     {
       "label": "AWS Builders Library: Making retries safe with idempotent APIs",
       "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+    },
+    {
+      "label": "RFC 9110: Idempotent methods",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110#section-9.2.2"
+    },
+    {
+      "label": "CloudEvents: Core specification",
+      "url": "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md"
     }
   ],
   "cover": "/blog/images/callback-retries-and-idempotency.png",
@@ -39,7 +47,7 @@
     "soft": "#e4f3f3",
     "number": 5
   },
-  "contentHash": "4a189445c56c55057247cdab390bcc22b5eb7d1f9df8a5f4471bd454401b78a8",
+  "contentHash": "5135709f8966581f982536eca7ce9001aaae9df5d8b0078c4b96c50cb2c4c4e4",
   "intro": "A document save webhook can arrive twice even when the first delivery succeeded. Authenticate it, identify the logical operation, and make publication repeatable without creating another version. The deduplication record must also let a crashed worker resume; merely marking an event as seen can permanently lose a save.",
   "sections": [
     {
@@ -121,6 +129,18 @@
       "title": "Force a lost response and a worker crash",
       "html": "<p>For a test document, let the callback complete its database change, then intentionally close the connection before sending the response. Deliver the same event again. The expected outcome is one published version and a response consistent with the provider contract. Repeat while two workers process the event concurrently, and once with a changed payload under the same event ID. Use synthetic credentials and a test object. These experiments expose gaps that a happy path test with one successful request cannot reveal.</p><ul><li>Record authentication failures separately from temporary storage or database failures.</li><li>Set a retention period for deduplication records that covers the documented delivery window and replay process.</li><li>Expose counts and age of pending or failed events.</li><li>Provide a controlled replay operation that preserves the original event identity.</li><li>Verify that a duplicate never triggers a second external notification or approval transition.</li></ul>",
       "kind": "diagnostic"
+    },
+    {
+      "id": "compare-duplicate-handling-designs-5",
+      "title": "Compare duplicate-handling designs",
+      "html": "<table><thead><tr><th>Design</th><th>Failure mode</th><th>Durable behavior</th></tr></thead><tbody><tr><td>Memory-only queue</td><td>A process restart can lose accepted work</td><td>Persist acceptance before acknowledgement</td></tr><tr><td>Seen-event flag</td><td>A crash after the flag can leave work unfinished</td><td>Track pending, completed, and failed states</td></tr><tr><td>Atomic operation key</td><td>Duplicate deliveries compete for one logical effect</td><td>Use a uniqueness constraint or equivalent atomic claim</td></tr></tbody></table>",
+      "kind": "comparison"
+    },
+    {
+      "id": "process-a-repeated-save-callback-once-6",
+      "title": "Process a repeated save callback once",
+      "html": "<p>Deliver 10 duplicate callbacks through 2 concurrent workers and force 1 worker restart before checking the published result.</p><ol><li>Authenticate and validate the callback against the documented delivery contract.</li><li>Derive a stable key for the logical save operation.</li><li>Persist acceptance before sending an acknowledgement when asynchronous work is allowed.</li><li>Make publication and downstream effects atomic or repeatable under that key.</li><li>Test duplicate delivery, concurrent workers, a lost response, and a worker restart.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

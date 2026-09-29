@@ -32,7 +32,6 @@ The homepage is the product entry point. The independent SEO pages are:
 
 - `/product` - capability and responsibility boundary.
 - `/formats` - preview, import, edit, and export format fit.
-- `/workflows` - product context, Office surface, callback, and result flow.
 - `/solutions` - document management, review, knowledge, CRM/ERP, and collaboration workflows.
 - `/deployment` - proof of concept, web delivery, platform baseline, and ownership.
 - `/contact` - real workflow intake and `support@officesdk.com` fallback.

@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-file-estate-or-document-workspace",
-  "title": "ShimoDocs or Nextcloud: compare the work, not the folder screen",
+  "title": "Office SDK vs Nextcloud: compare the work, not the folder screen",
   "description": "Compare platform fit through file lifecycle, collaborative tasks, integration ownership, and operating effort.",
   "category": "Comparisons",
   "format": "decision-brief",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 685,
+  "wordCount": 700,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Nextcloud: File Platform or Document Suite?",
+      "label": "Original topic reference: document platform vs Nextcloud: File Platform or Document Suite?",
       "url": "https://shimodocs.com/blog/shimodocs-vs-nextcloud"
     }
   ],
   "cover": "/blog/images/field-guide-file-estate-or-document-workspace.png",
-  "coverAlt": "ShimoDocs or Nextcloud: compare the work, not the folder screen: File lifecycle, Workspace tasks, Integration burden, Authoritative copy.",
+  "coverAlt": "Office SDK vs Nextcloud: compare the work, not the folder screen: File lifecycle, Workspace tasks, Integration burden, Authoritative copy.",
   "concepts": [
     "File lifecycle",
     "Workspace tasks",
@@ -39,8 +39,8 @@
     "soft": "#f0ebf7",
     "number": 44
   },
-  "contentHash": "d94c5d00d30c83cecf7b6290274c81159ca9de585ce0157c15cc4da9c404502e",
-  "intro": "Choose between these candidates by testing the responsibility you need to own: a broad file estate, a collaborative document workflow, or both. Include non-office files, approved versions, external delivery, and the extra components required by the offered configuration. An appealing folder view does not answer those questions.",
+  "contentHash": "bc2bd781908bae4f4e3ac18f128d989927c44303f8c12aa008f63b3c1374ec2e",
+  "intro": "Choose between these candidates by testing the responsibility you need to own: a broad file estate, a collaborative document workflow, or both. This scope compares an embedded Office document surface with the proposed Nextcloud file platform; it does not assume that the products are equivalent. Include non-office files, approved versions, external delivery, and the extra components required by the current tested configuration.",
   "sections": [
     {
       "id": "describe-the-estate-and-the-work-1",

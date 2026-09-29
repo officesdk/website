@@ -10,16 +10,24 @@
     "API integration",
     "Security"
   ],
-  "structure": "prose:comparison+decision:diagnostic:checklist:example+matrix",
+  "structure": "prose:comparison+decision:diagnostic:checklist:example+matrix:comparison:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 638,
+  "wordCount": 806,
   "source": null,
   "references": [
     {
       "label": "OWASP: File Upload Cheat Sheet",
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+    },
+    {
+      "label": "IANA: Media Types registry",
+      "url": "https://www.iana.org/assignments/media-types/media-types.xhtml"
+    },
+    {
+      "label": "RFC 9110: HTTP Semantics",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110"
     }
   ],
   "cover": "/blog/images/document-format-routing.png",
@@ -39,8 +47,8 @@
     "soft": "#f6eee5",
     "number": 36
   },
-  "contentHash": "4f78ff0215ca28238d3371a3a9b4bef33178e24c17e8a0028ef73d364cbe57a6",
-  "intro": "Route a document using validated content type, requested operation, current state, and the configured processor's documented support. Recognizing an extension is not enough: a file may support preview but not editing, or be quarantined and unavailable for either. Keep the same routing policy behind menus, deep links, and jobs.",
+  "contentHash": "aa590d387701f88f36215891ff46acab47731d9f8a314238ba7c55707766daeb",
+  "intro": "Document format routing is the decision that maps a validated file and requested operation to preview, editing, conversion, download, or rejection. Recognizing an extension is not enough: a file may support preview but not editing, or be quarantined and unavailable for either. Keep the same routing policy behind menus, deep links, and jobs.",
   "sections": [
     {
       "id": "detect-content-then-check-the-requested-capability-1",
@@ -127,6 +135,18 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "choose-the-route-from-validated-capability-6",
+      "title": "Choose the route from validated capability",
+      "html": "<table><thead><tr><th>Requested action</th><th>Required evidence</th><th>Fallback when unavailable</th></tr></thead><tbody><tr><td>Edit</td><td>Validated content type, edit support, permission, and usable document state</td><td>Offer preview or download with a specific reason</td></tr><tr><td>Preview</td><td>Validated content type, render support, and read permission</td><td>Use an existing immutable rendition or an authorized download</td></tr><tr><td>Download</td><td>Authorized access to the original file</td><td>Preserve the source without implying preview or edit support</td></tr><tr><td>Reject or quarantine</td><td>Validation failure, unsafe input, or unavailable document state</td><td>Explain the blocked condition and the next supported action</td></tr></tbody></table>",
+      "kind": "comparison"
+    },
+    {
+      "id": "route-a-document-through-one-reviewed-decision-sequence-7",
+      "title": "Route a document through one reviewed decision sequence",
+      "html": "<p>Use 5 files, 4 requested operations, and 2 user roles to cover supported, mislabeled, pending, unsafe, and unsupported routes.</p><ol><li>Inspect the actual content type and current document state.</li><li>Name the requested operation: preview, edit, convert, or download.</li><li>Check operation support and the user permission required for that route.</li><li>Select the supported processor, a specific fallback, or an explicit rejection.</li><li>Apply the same rule to menus, deep links, and background jobs.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

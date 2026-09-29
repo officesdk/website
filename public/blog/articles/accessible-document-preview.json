@@ -10,16 +10,24 @@
     "PDF",
     "Business workflows"
   ],
-  "structure": "prose:diagnostic+layers:prose:example+flow:checklist",
+  "structure": "prose:diagnostic+layers:prose:example+flow:checklist:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 664,
+  "wordCount": 748,
   "source": null,
   "references": [
     {
       "label": "W3C: Web Content Accessibility Guidelines 2.2",
       "url": "https://www.w3.org/TR/WCAG22/"
+    },
+    {
+      "label": "W3C WAI: Understanding keyboard access",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard"
+    },
+    {
+      "label": "W3C WAI: Images tutorial",
+      "url": "https://www.w3.org/WAI/tutorials/images/"
     }
   ],
   "cover": "/blog/images/accessible-document-preview.png",
@@ -39,8 +47,8 @@
     "soft": "#f1f3df",
     "number": 13
   },
-  "contentHash": "d5c27ae87f232d042c032cde59f96df09491a2df94896cf0a07ec01500ced803",
-  "intro": "Test whether someone can open the preview, find a section, understand its content, and return to the application using a keyboard and relevant assistive technology. Accessibility depends on both the preview controls and the document representation. A labeled frame does not make page images or lost table structure readable.",
+  "contentHash": "682a989549ee9b640cb0991a03215deed14d079b08d95f7db010c442df2d6cd6",
+  "intro": "An accessible document preview is a view in which users can open, navigate, understand, and leave the document with a keyboard and relevant assistive technology. Accessibility depends on both the preview controls and the document representation. A labeled frame does not make page images or lost table structure readable.",
   "sections": [
     {
       "id": "start-with-tasks-a-reader-must-finish-1",
@@ -131,6 +139,12 @@
       "title": "Record support and provide a usable alternative",
       "html": "<ul><li>Record the browser, assistive technology, document format, and preview mode tested.</li><li>Verify visible focus, accessible names, loading announcements, and error recovery.</li><li>Offer an authorized accessible source or alternate representation when the preview cannot meet the task.</li><li>Keep alternative downloads subject to the same document permissions.</li><li>Retest representative structured and unstructured sources after rendering changes.</li></ul>",
       "kind": "checklist"
+    },
+    {
+      "id": "run-an-accessibility-check-as-a-complete-reader-task-6",
+      "title": "Run an accessibility check as a complete reader task",
+      "html": "<p>Run the fixture in 2 browsers, complete 2 keyboard-only passes, and repeat at 200% zoom with the selected assistive technology.</p><ol><li>Define how a reader opens, navigates, understands, and leaves the preview.</li><li>Test focus, controls, loading, and errors using the keyboard.</li><li>Inspect reading order, headings, tables, and image descriptions in the rendered content.</li><li>Repeat with the relevant browser, assistive technology, zoom, and source formats.</li><li>Verify an authorized alternate representation when the preview cannot support the task.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

@@ -10,16 +10,24 @@
     "Document conversion",
     "Document storage"
   ],
-  "structure": "example+layers:steps:prose:diagnostic+sequence",
+  "structure": "example+layers:steps:prose:diagnostic+sequence:comparison:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 665,
+  "wordCount": 826,
   "source": null,
   "references": [
     {
       "label": "MDN: HTTP caching",
       "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
+    },
+    {
+      "label": "RFC 9111: HTTP Caching",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111"
+    },
+    {
+      "label": "MDN: HTTP conditional requests",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Conditional_requests"
     }
   ],
   "cover": "/blog/images/stale-preview-invalidation.png",
@@ -39,8 +47,8 @@
     "soft": "#f0ebf7",
     "number": 17
   },
-  "contentHash": "ea95c28f7f2bd456405c6271d59a6644755202c1b88591ca048ba761ef4f84f3",
-  "intro": "A preview must identify the source version that produced it. Use that identity in the cache key and guard updates to any “current preview” pointer. Otherwise, a delayed conversion for revision A can overwrite the preview for revision B even when the source document itself is up to date.",
+  "contentHash": "d2865416da3f5393f0160717de700d0b42bf237c49603e219bdfb67b809d666f",
+  "intro": "A stale document preview is a rendered result generated from an older source version but presented as current. Bind each result to its source identity in the cache key and guard updates to any “current preview” pointer. Otherwise, a delayed conversion for revision A can overwrite the preview for revision B even when the source document itself is up to date.",
   "sections": [
     {
       "id": "give-the-preview-an-explicit-source-identity-1",
@@ -125,6 +133,18 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "compare-preview-publication-paths-5",
+      "title": "Compare preview publication paths",
+      "html": "<table><thead><tr><th>Path</th><th>Identity or cache rule</th><th>Safe publication behavior</th></tr></thead><tbody><tr><td>Immutable revision preview</td><td>File ID, source version, output format, and rendering options</td><td>Keep the result attached to that exact source version</td></tr><tr><td>Mutable current preview</td><td>Document identity plus deliberate cache validation</td><td>Move the pointer only when the completed source version is still current</td></tr><tr><td>Late conversion result</td><td>Original source version remains explicit</td><td>Retain it as historical output without replacing a newer preview</td></tr></tbody></table>",
+      "kind": "comparison"
+    },
+    {
+      "id": "publish-a-preview-without-moving-version-identity-backward-6",
+      "title": "Publish a preview without moving version identity backward",
+      "html": "<p>Use 2 file revisions, 2 browser sessions, and 1 deliberately delayed conversion job to make a backward version change observable.</p><ol><li>Record the source version and rendering configuration when the preview job is created.</li><li>Store the completed output against that exact source identity.</li><li>Move the current-preview pointer only when the completed source is still current.</li><li>Race two revisions and verify both existing and new browser sessions show the intended version.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

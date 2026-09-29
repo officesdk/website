@@ -1,6 +1,6 @@
 {
   "slug": "field-guide-wiki-versus-office-records",
-  "title": "ShimoDocs vs Confluence: linked knowledge or office deliverables?",
+  "title": "Office SDK vs Confluence: linked knowledge or office deliverables?",
   "description": "Compare navigation, publishing, file output, and migration relationships using a real release workflow.",
   "category": "Comparisons",
   "format": "decision-brief",
@@ -14,16 +14,16 @@
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 685,
+  "wordCount": 692,
   "source": null,
   "references": [
     {
-      "label": "ShimoDocs: ShimoDocs vs Confluence: Wiki or Document Suite?",
+      "label": "Original topic reference: document platform vs Confluence: Wiki or Document Suite?",
       "url": "https://shimodocs.com/blog/shimodocs-vs-confluence"
     }
   ],
   "cover": "/blog/images/field-guide-wiki-versus-office-records.png",
-  "coverAlt": "ShimoDocs vs Confluence: linked knowledge or office deliverables?: Linked knowledge, Office artifact, Publication state, Link migration.",
+  "coverAlt": "Office SDK vs Confluence: linked knowledge or office deliverables?: Linked knowledge, Office artifact, Publication state, Link migration.",
   "concepts": [
     "Linked knowledge",
     "Office artifact",
@@ -39,8 +39,8 @@
     "soft": "#f6eaf0",
     "number": 87
   },
-  "contentHash": "88f2943f132bb3b2b34ae7b47f6b69d3d28dd361a59daca791704ad0883d2ef8",
-  "intro": "For ShimoDocs and Confluence, separate linked knowledge from office deliverables. A handbook needs discoverable relationships and maintained authority; a customer report may need structured files and precise output. Test the proposed offers against both tasks, including how existing links and attachments would migrate.",
+  "contentHash": "5db7f78c0e538f81635dc9a05bdc6da0fde13e1934bc48e30e208f9598984ab1",
+  "intro": "For Office SDK and Confluence, separate linked knowledge from office deliverables. The scope compares an embedded Office document surface with a wiki workflow for those tasks; it does not claim the products are feature-equivalent. Test the current proposed configurations against both tasks, including how existing links and attachments would migrate.",
   "sections": [
     {
       "id": "follow-readers-and-deliverables-1",

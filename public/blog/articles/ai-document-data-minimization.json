@@ -10,16 +10,24 @@
     "RAG",
     "Access control"
   ],
-  "structure": "example+flow:prose:note:diagnostic+comparison",
+  "structure": "example+flow:prose:note:diagnostic+comparison:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 672,
+  "wordCount": 758,
   "source": null,
   "references": [
     {
       "label": "NIST: AI Risk Management Framework",
       "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "label": "EU GDPR Article 5: Data processing principles",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj"
+    },
+    {
+      "label": "NIST: Privacy Framework",
+      "url": "https://www.nist.gov/privacy-framework"
     }
   ],
   "cover": "/blog/images/ai-document-data-minimization.png",
@@ -39,8 +47,8 @@
     "soft": "#e7f2ec",
     "number": 28
   },
-  "contentHash": "5336ac71441ca27548d120ca583dad2007700768735bbf62dd7a38d98cc522b9",
-  "intro": "Send the content needed for the requested task, after checking the user's access to it. Rewriting a selected clause rarely requires an entire contract and its appendices. Preserve necessary definitions and structure, but apply the same permissions and lifecycle rules to extracted chunks, prompts, and stored answers as to their sources.",
+  "contentHash": "e6b8a1348b479fd22e400c1190c56511ef86b71090695d274186e0486ccfbd99",
+  "intro": "AI document data minimization is the practice of sending only the authorized content needed for the requested model task. Rewriting a selected clause rarely requires an entire contract and its appendices. Preserve necessary definitions and structure, but apply the same permissions and lifecycle rules to extracted chunks, prompts, and stored answers as to their sources.",
   "sections": [
     {
       "id": "start-with-the-task-s-smallest-useful-context-1",
@@ -121,6 +129,12 @@
         "mobileWidth": 600,
         "mobileHeight": 930
       }
+    },
+    {
+      "id": "limit-an-ai-request-to-the-authorized-task-context-5",
+      "title": "Limit an AI request to the authorized task context",
+      "html": "<p>Compare 3 model tasks, 2 document scopes, and 1 revoked source file to verify that retained context follows the source lifecycle.</p><ol><li>Define the smallest source scope that can support the requested task.</li><li>Check tenant and document access before retrieving any passage.</li><li>Send only the selected content and definitions needed to interpret it.</li><li>Inspect the actual outbound request and application logs during acceptance.</li><li>Trace cached chunks and stored answers back to the source lifecycle.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

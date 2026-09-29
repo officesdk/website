@@ -32,7 +32,7 @@ const sections = article.sections.map(section => ({ ...section, figureNumber: se
       <TopicTags tags={article.tags} />
       <div class="article-byline">
         <span class="byline-mark" aria-hidden="true">{article.author.slice(0, 1)}</span>
-        <div><strong>{article.author}</strong><span>{article.source ? 'Republished with source attribution' : 'Office SDK Editorial'}</span></div>
+        <div><strong>{article.author}</strong><span>Editorial brief</span></div>
         <span class="article-folio">{String(article.recipe.number).padStart(3, '0')}</span>
       </div>
     </div>
@@ -59,8 +59,8 @@ const sections = article.sections.map(section => ({ ...section, figureNumber: se
         </div>
       </section>)}
       <div class="article-sources">
-        <h2>{article.source ? 'Source & further reading' : 'Further reading'}</h2>
-        {article.source && <p>This article was originally published by <a href={article.source.url} target="_blank" rel="noreferrer">{article.source.name} <ArrowUpRight size={13} /></a>. Product names and capabilities refer to the original subject of the article.</p>}
+        <h2>{article.source ? 'Topic source & further reading' : 'Further reading'}</h2>
+        {article.source && <p>This article began with a topic from <a href={article.source.url} target="_blank" rel="noreferrer">{article.source.name} <ArrowUpRight size={13} /></a>. The analysis, wording, and illustrations were created for Office SDK; product names and capabilities in the reference belong to its original subject.</p>}
         {article.references.length > 0 && <ul>{article.references.map(reference => <li><a href={reference.url} target="_blank" rel="noreferrer">{reference.label} <ArrowUpRight size={13} /></a></li>)}</ul>}
         <a class="article-back" href="/blog"><ArrowLeft size={16} /> Back to all stories</a>
       </div>

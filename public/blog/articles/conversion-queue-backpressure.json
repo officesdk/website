@@ -10,16 +10,24 @@
     "Operations",
     "Multi-tenancy"
   ],
-  "structure": "prose+layers:prose:note:diagnostic+flow",
+  "structure": "prose+layers:prose:note:diagnostic+flow:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 645,
+  "wordCount": 726,
   "source": null,
   "references": [
     {
       "label": "Google SRE Book: Handling Overload",
       "url": "https://sre.google/sre-book/handling-overload/"
+    },
+    {
+      "label": "AWS Builders Library: Avoiding queue backlogs",
+      "url": "https://aws.amazon.com/builders-library/avoiding-insurmountable-queue-backlogs/"
+    },
+    {
+      "label": "AWS Builders Library: Timeouts, retries, and backoff",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
     }
   ],
   "cover": "/blog/images/conversion-queue-backpressure.png",
@@ -39,7 +47,7 @@
     "soft": "#edf0f3",
     "number": 16
   },
-  "contentHash": "b0c24b9a03da413c6e11e8bfab9b4adc658250380abac41b6e9c04b5f28d292a",
+  "contentHash": "cb4456d5eee4396201ce3435799d8972ccb7db5686ce47b2390397a3fa1b60d8",
   "intro": "Limit both accepted work and active conversion workers. Worker concurrency alone cannot protect an unbounded queue from expired source links, growing storage use, or hours of waiting. Use queue age, queued bytes, and per-tenant demand to decide when to accept, defer, or reject a job.",
   "sections": [
     {
@@ -125,6 +133,12 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "exercise-admission-and-recovery-under-a-conversion-burst-5",
+      "title": "Exercise admission and recovery under a conversion burst",
+      "html": "<p>Queue 20 batch jobs beside 5 interactive preview requests and include 2 worker restarts to expose backlog and recovery behavior.</p><ol><li>Set admission, worker concurrency, retry, and cancellation limits.</li><li>Observe oldest-job age, queued bytes, and per-tenant demand as a batch arrives.</li><li>Keep interactive preview work in the test while bulk jobs are queued.</li><li>Introduce one permanent failure and stop a worker during processing.</li><li>Verify bounded retries, fair scheduling, job recovery, and clear rejection states.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

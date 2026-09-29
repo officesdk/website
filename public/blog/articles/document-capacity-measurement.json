@@ -10,16 +10,24 @@
     "Document conversion",
     "Collaboration"
   ],
-  "structure": "comparison+matrix:prose:steps:example+comparison:checklist:diagnostic",
+  "structure": "comparison+matrix:prose:steps:example+comparison:checklist:diagnostic:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 746,
+  "wordCount": 831,
   "source": null,
   "references": [
     {
       "label": "Google SRE Book: Monitoring Distributed Systems",
       "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+    },
+    {
+      "label": "Google SRE Book: Handling overload",
+      "url": "https://sre.google/sre-book/handling-overload/"
+    },
+    {
+      "label": "OpenTelemetry: Metrics data model",
+      "url": "https://opentelemetry.io/docs/specs/otel/metrics/data-model/"
     }
   ],
   "cover": "/blog/images/document-capacity-measurement.png",
@@ -39,8 +47,8 @@
     "soft": "#f0ebf7",
     "number": 35
   },
-  "contentHash": "ee36b2fbdff8d0f781ba5322f392ddf04149857e300f93c3e5bac86d6cdfcf61",
-  "intro": "Model capacity with the work the platform performs, not only the number of users. Idle sessions, first-time conversions, large workbook edits, and save bursts stress different components. Measure latency and correctness alongside queue age and resource use under a stated document mix and concurrency profile.",
+  "contentHash": "497bfb8a240fc738cfab40832ec18e5c7eefd4cc81b1ceea174c59cb6c064ef1",
+  "intro": "Office document capacity planning is the process of sizing sessions, conversions, saves, and dependencies against a representative workload. Idle sessions, first-time conversions, large workbook edits, and save bursts stress different components. Measure latency and correctness alongside queue age and resource use under a stated document mix and concurrency profile.",
   "sections": [
     {
       "id": "choose-workload-units-with-clear-definitions-1",
@@ -133,6 +141,12 @@
       "title": "Let the bottleneck determine the next experiment",
       "html": "<p>Use the bottleneck to choose the next experiment. If queue age rises while converters remain busy, test scheduling, admitted load, or converter capacity within downstream limits. If workers wait for object storage, adding more workers may only multiply waiting connections. If browsers run out of memory on one workbook pattern, a backend replica change may not address the user-visible problem.</p><p>Reserve a scenario for recovery: restart a worker or briefly interrupt a dependency, then watch retry demand and backlog drain. Normal steady-state headroom is not the same as recovery capacity. Record how long the service takes to return to its agreed operating range and whether current users remain able to save during that period.</p>",
       "kind": "diagnostic"
+    },
+    {
+      "id": "build-a-capacity-test-around-representative-work-7",
+      "title": "Build a capacity test around representative work",
+      "html": "<p>Start with 25 users, 10 preview requests per minute, and 5 conversion jobs per minute, then increase one workload dimension at a time.</p><ol><li>Define the document mix, user actions, concurrency, and expected peaks.</li><li>Prepare representative files and separate cold-cache from warm-cache runs.</li><li>Increase demand gradually while measuring user outcomes, queue age, and dependencies.</li><li>Introduce a dependency interruption and observe retry demand and backlog recovery.</li><li>Record the supported operating range and the first limiting component.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

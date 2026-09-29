@@ -11,16 +11,24 @@
     "Presentations",
     "Troubleshooting"
   ],
-  "structure": "diagnostic+matrix:note:steps+flow:example",
+  "structure": "diagnostic+matrix:note:steps+flow:example:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 660,
+  "wordCount": 754,
   "source": null,
   "references": [
     {
       "label": "Microsoft Typography: Fonts and products",
       "url": "https://learn.microsoft.com/en-us/typography/fonts/"
+    },
+    {
+      "label": "W3C: CSS Fonts Module Level 4",
+      "url": "https://www.w3.org/TR/css-fonts-4/"
+    },
+    {
+      "label": "Microsoft Learn: OpenType specification",
+      "url": "https://learn.microsoft.com/en-us/typography/opentype/spec/"
     }
   ],
   "cover": "/blog/images/font-deployment-as-a-dependency.png",
@@ -40,8 +48,8 @@
     "soft": "#e4f3f3",
     "number": 14
   },
-  "contentHash": "afd0e543dcfdb8ec6af00164f8f5dca250a96fb88d6f83b2bfd0f05040b24fca",
-  "intro": "When line breaks shift or glyphs disappear, compare the fonts available to the rendering workers with those required by the source. Fonts installed on a laptop do not establish what a container can render. Package approved font files consistently, record their versions, and verify output after installation.",
+  "contentHash": "b26985152e8e6e376ac02d262beb7441c5b56c2f6d1e22e3f0352c651b0039b4",
+  "intro": "Font deployment for document conversion is the controlled distribution of approved font files and cache state to every rendering worker. When line breaks shift or glyphs disappear, compare the worker fonts with those required by the source; fonts installed on a laptop do not establish what a container can render. Record the deployed versions and verify output after installation.",
   "sections": [
     {
       "id": "identify-the-font-dependency-behind-the-symptom-1",
@@ -126,6 +134,12 @@
       "title": "A multilingual fixture makes fallback visible",
       "html": "<p>Create a synthetic document with Latin text, Chinese text, numerals, currency symbols, bold and italic runs, and a narrow table near a page boundary. Render it on each worker image and compare line breaks, glyph coverage, table width, and page count. Then intentionally remove one expected font in a test environment to observe the fallback. This makes the dependency visible and provides a recognizable symptom for troubleshooting. Include only scripts relevant to the deployment, while preserving any uncommon symbols that business templates actually require.</p>",
       "kind": "example"
+    },
+    {
+      "id": "deploy-and-verify-one-approved-font-package-5",
+      "title": "Deploy and verify one approved font package",
+      "html": "<p>Render 3 writing systems on 2 worker images and repeat 1 case with a required font removed to make fallback behavior visible.</p><ol><li>Inventory required families, styles, versions, digests, licenses, and scripts.</li><li>Package the approved files through the normal worker build or deployment path.</li><li>Refresh the documented font cache or restart every relevant worker.</li><li>Render the multilingual regression fixture on each supported worker environment.</li><li>Compare output and retain the prior image and font package for rollback.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

@@ -10,16 +10,24 @@
     "Security",
     "Multi-tenancy"
   ],
-  "structure": "comparison+matrix:prose:prose:diagnostic+sequence",
+  "structure": "comparison+matrix:prose:prose:diagnostic+sequence:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 637,
+  "wordCount": 731,
   "source": null,
   "references": [
     {
       "label": "OWASP: Authorization Cheat Sheet",
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    },
+    {
+      "label": "OWASP: Session Management Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+    },
+    {
+      "label": "NIST SP 800-63B: Authentication and session management",
+      "url": "https://pages.nist.gov/800-63-4/sp800-63b.html"
     }
   ],
   "cover": "/blog/images/editor-permission-lifecycle.png",
@@ -39,8 +47,8 @@
     "soft": "#f6eaf0",
     "number": 6
   },
-  "contentHash": "00d6a6b15c7131dec3f5f966026e97bea0c3e4563843b8f3d5df86a356418bf9",
-  "intro": "Authorize document operations separately and decide how permission changes reach an already open editor. A launch-time read only flag cannot, by itself, protect downloads, exports, comments, or later requests. The critical question is what an existing session can still do after access is removed.",
+  "contentHash": "2a47e8a38ae116cc5137f20cb8bd50b33ae1ee702f98883e501c42b4f396b1cc",
+  "intro": "An embedded editor permission lifecycle is the set of authorization decisions that governs document operations before and during an open session. A launch-time read only flag cannot, by itself, protect downloads, exports, comments, or later requests. The critical question is what an existing session can still do after access is removed.",
   "sections": [
     {
       "id": "permission-matrix-operation-and-enforcement-point-1",
@@ -125,6 +133,12 @@
         "mobileWidth": 600,
         "mobileHeight": 1140
       }
+    },
+    {
+      "id": "test-permission-changes-across-an-active-editor-session-5",
+      "title": "Test permission changes across an active editor session",
+      "html": "<p>Use 2 user roles, 2 open browser tabs, and 1 previously issued download link to observe what revocation actually ends.</p><ol><li>List edit, comment, export, download, and reopen as separate operations.</li><li>Map each operation to the server endpoint that authorizes it.</li><li>Remove a test user while the document, a second tab, and a prior link remain open.</li><li>Attempt every operation and record immediate and delayed revocation behavior.</li><li>Close any path that still relies only on hidden controls or launch-time state.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

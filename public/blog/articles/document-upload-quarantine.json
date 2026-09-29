@@ -10,16 +10,24 @@
     "Document conversion",
     "Access control"
   ],
-  "structure": "steps+flow:diagnostic:example+decision:example:checklist",
+  "structure": "steps+flow:diagnostic:example+decision:example:checklist:steps",
   "author": "Office SDK Editorial",
   "publishedAt": "2026-09-28",
   "readMinutes": 4,
-  "wordCount": 636,
+  "wordCount": 725,
   "source": null,
   "references": [
     {
       "label": "OWASP: File Upload Cheat Sheet",
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+    },
+    {
+      "label": "NIST SP 800-83 Rev. 1: Malware prevention and handling",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-83r1.pdf"
+    },
+    {
+      "label": "CISA: StopRansomware guide",
+      "url": "https://www.cisa.gov/stopransomware/ransomware-guide"
     }
   ],
   "cover": "/blog/images/document-upload-quarantine.png",
@@ -39,7 +47,7 @@
     "soft": "#e7f2ec",
     "number": 10
   },
-  "contentHash": "7fa339b4cd93b9a8c11af4fed2e11c3cd2cc57b23d6c35c0f484eb58d247dea8",
+  "contentHash": "28d6b4a1b17fb034ffffcfd4da204bb5cebc44126fa903d93273775e843292dc",
   "intro": "Keep new uploads outside normal preview, download, and editing routes until validation releases them. Bind the release decision to an immutable object or verified digest. Otherwise, a scanner can approve one file while downstream workers process different bytes under the same storage key.",
   "sections": [
     {
@@ -127,6 +135,12 @@
       "title": "Operate the pending queue",
       "html": "<ul><li>Show upload owners whether validation is pending, failed, or rejected.</li><li>Alert on the age of pending objects and scanner health.</li><li>Restrict manual release to an audited administrative process.</li><li>Remove abandoned or rejected objects according to a defined retention policy.</li><li>Verify that every processing path consumes only released immutable versions.</li></ul>",
       "kind": "checklist"
+    },
+    {
+      "id": "release-only-the-immutable-bytes-that-passed-validation-6",
+      "title": "Release only the immutable bytes that passed validation",
+      "html": "<p>Submit 5 files through 2 scanner states and replace 1 stored object during validation to prove that only checked bytes are released.</p><ol><li>Store the received object outside normal preview, editing, and download routes.</li><li>Validate content type, size, structure, and the policy for encrypted or active content.</li><li>Bind the scan decision to an immutable object version or verified digest.</li><li>Publish that exact version only after every required check succeeds.</li><li>Monitor pending items and remove rejected or abandoned objects under the retention rule.</li></ol>",
+      "kind": "steps"
     }
   ]
 }

@@ -8,15 +8,21 @@ import { articleFormats, figureKinds, keywordTags, sectionKinds } from './editor
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const catalog = JSON.parse(await fs.readFile(path.join(root, 'src/blog/catalog.json'), 'utf8'))
+const searchIndex = JSON.parse(await fs.readFile(path.join(root, 'src/blog/search-index.json'), 'utf8'))
 const originalMode = process.argv.includes('--originals')
 const inventory = JSON.parse(await fs.readFile(path.join(root, 'src/blog/sources.json'), 'utf8'))
 const errors = []
 const hashes = new Set()
 const check = (condition, message) => { if (!condition) errors.push(message) }
+const plainText = html => {
+  const $ = cheerio.load(html)
+  return $('body').find('*').addBack().contents().filter((_, node) => node.type === 'text').map((_, node) => $(node).text()).get().join(' ').replace(/\s+/g, ' ').trim()
+}
 check(catalog.length >= 101, `100+ requirement is incomplete: ${catalog.length} articles exist, at least 101 required`)
 check(new Set(catalog.map(entry => entry.slug)).size === catalog.length, 'Article slugs are not unique')
 check(new Set(catalog.map(entry => entry.recipe.signature)).size === catalog.length, 'Editorial compositions are not unique')
 check(new Set(catalog.map(entry => entry.contentHash)).size === catalog.length, 'Article bodies are duplicated')
+check(Object.keys(searchIndex).length === catalog.length && catalog.every(entry => typeof searchIndex[entry.slug] === 'string' && searchIndex[entry.slug].includes(entry.title.toLocaleLowerCase().split(/\s+/)[0])), 'Search index is stale or incomplete')
 
 const sources = {}
 const referencedTopics = new Set(catalog.flatMap(entry => entry.references.map(reference => reference.url)))
@@ -38,6 +44,11 @@ for (const entry of catalog) {
     const bodyText = $('body').find('*').addBack().contents().filter((_, node) => node.type === 'text').map((_, node) => $(node).text()).get().join(' ')
     const wordCount = `${article.intro} ${bodyText}`.split(/\s+/).filter(Boolean).length
     check(wordCount >= (entry.source ? 200 : 500), `Insufficient substantive body: ${entry.slug} (${wordCount} words)`)
+    const metadataText = plainText(article.intro + ' ' + article.sections.map(section => section.title + ' ' + section.html + ' ' + (section.figure?.caption ?? '')).join(' '))
+    const metadataWordCount = metadataText.split(/\s+/).filter(Boolean).length
+    check(article.wordCount === entry.wordCount && entry.wordCount === metadataWordCount, `Article word count mismatch: ${entry.slug}`)
+    check(article.readMinutes === entry.readMinutes && entry.readMinutes === Math.max(2, Math.ceil(metadataWordCount / 210)), `Article reading time mismatch: ${entry.slug}`)
+    check(article.contentHash === entry.contentHash && entry.contentHash === createHash('sha256').update(metadataText).digest('hex'), `Article content hash mismatch: ${entry.slug}`)
     const figures = article.sections.filter(section => section.figure).map(section => section.figure)
     check(figures.length >= 2, `Too few body illustrations: ${entry.slug}`)
     check(figures.every(figure => figureKinds.includes(figure.kind) && figure.items.length >= 2 && figure.items.length <= 5 && figure.title.length <= 68 && figure.alt && figure.caption), `Invalid body illustration brief: ${entry.slug}`)

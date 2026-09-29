@@ -54,16 +54,24 @@
       "Troubleshooting",
       "API integration"
     ],
-    "structure": "prose+sequence:diagnostic:steps+flow:note",
+    "structure": "prose+sequence:diagnostic:steps+flow:note:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 661,
+    "wordCount": 759,
     "source": null,
     "references": [
       {
         "label": "MDN: HTTP overview",
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+      },
+      {
+        "label": "MDN: Cross-Origin Resource Sharing",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+      },
+      {
+        "label": "OWASP: Server-Side Request Forgery Prevention",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
       }
     ],
     "cover": "/blog/images/first-open-source-retrieval.png",
@@ -83,7 +91,7 @@
       "soft": "#eaf1f9",
       "number": 2
     },
-    "contentHash": "6dae9a5adec022a7d1d26c6af9bf98319fb50950b571c2f7312abf7b768fa490"
+    "contentHash": "0f62818a8f70b9e171f53a716c8f8828f07541a97f030ce0ed5f736afb63e8b9"
   },
   {
     "slug": "preview-versus-readonly-editor",
@@ -97,16 +105,24 @@
       "Access control",
       "Business workflows"
     ],
-    "structure": "comparison+comparison:prose:example+sequence:checklist",
+    "structure": "comparison+comparison:prose:example+sequence:checklist:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 649,
+    "wordCount": 731,
     "source": null,
     "references": [
       {
         "label": "OWASP: Authorization Cheat Sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "label": "RFC 9110: HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110"
+      },
+      {
+        "label": "OWASP: Session Management Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
       }
     ],
     "cover": "/blog/images/preview-versus-readonly-editor.png",
@@ -126,7 +142,7 @@
       "soft": "#f8eeeb",
       "number": 3
     },
-    "contentHash": "3cdc2b466c620744b89cbb01196fc1c13479acdcd0d7e762346d589b04f5a2bc"
+    "contentHash": "425075de579adf88fa801ece00a7652331b594b82bb4638496301ada13c2c819"
   },
   {
     "slug": "document-save-and-version-contract",
@@ -183,16 +199,24 @@
       "API integration",
       "Document storage"
     ],
-    "structure": "steps+sequence:prose:example+decision:diagnostic",
+    "structure": "steps+sequence:prose:example+decision:diagnostic:comparison:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 667,
+    "wordCount": 800,
     "source": null,
     "references": [
       {
         "label": "AWS Builders Library: Making retries safe with idempotent APIs",
         "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+      },
+      {
+        "label": "RFC 9110: Idempotent methods",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110#section-9.2.2"
+      },
+      {
+        "label": "CloudEvents: Core specification",
+        "url": "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md"
       }
     ],
     "cover": "/blog/images/callback-retries-and-idempotency.png",
@@ -212,7 +236,7 @@
       "soft": "#e4f3f3",
       "number": 5
     },
-    "contentHash": "4a189445c56c55057247cdab390bcc22b5eb7d1f9df8a5f4471bd454401b78a8"
+    "contentHash": "5135709f8966581f982536eca7ce9001aaae9df5d8b0078c4b96c50cb2c4c4e4"
   },
   {
     "slug": "editor-permission-lifecycle",
@@ -226,16 +250,24 @@
       "Security",
       "Multi-tenancy"
     ],
-    "structure": "comparison+matrix:prose:prose:diagnostic+sequence",
+    "structure": "comparison+matrix:prose:prose:diagnostic+sequence:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 637,
+    "wordCount": 731,
     "source": null,
     "references": [
       {
         "label": "OWASP: Authorization Cheat Sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "label": "OWASP: Session Management Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+      },
+      {
+        "label": "NIST SP 800-63B: Authentication and session management",
+        "url": "https://pages.nist.gov/800-63-4/sp800-63b.html"
       }
     ],
     "cover": "/blog/images/editor-permission-lifecycle.png",
@@ -255,7 +287,7 @@
       "soft": "#f6eaf0",
       "number": 6
     },
-    "contentHash": "00d6a6b15c7131dec3f5f966026e97bea0c3e4563843b8f3d5df86a356418bf9"
+    "contentHash": "2a47e8a38ae116cc5137f20cb8bd50b33ae1ee702f98883e501c42b4f396b1cc"
   },
   {
     "slug": "signed-document-url-lifetimes",
@@ -269,16 +301,24 @@
       "Document conversion",
       "Performance"
     ],
-    "structure": "prose+comparison:note:example+sequence",
+    "structure": "prose+comparison:note:example+sequence:comparison:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 639,
+    "wordCount": 794,
     "source": null,
     "references": [
       {
         "label": "Amazon S3: Sharing objects with presigned URLs",
         "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html"
+      },
+      {
+        "label": "Google Cloud: Signed URLs",
+        "url": "https://cloud.google.com/storage/docs/access-control/signed-urls"
+      },
+      {
+        "label": "Microsoft Learn: Shared access signatures",
+        "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview"
       }
     ],
     "cover": "/blog/images/signed-document-url-lifetimes.png",
@@ -298,7 +338,7 @@
       "soft": "#edf0f3",
       "number": 7
     },
-    "contentHash": "54b025ce3e320a29d8abb4639a88c5e66aa078cbc843af0b4b316d9c7879dab7"
+    "contentHash": "3ce97533964a2a712d2a0172bdf404fc9cceac929393e16fc4d88ee7ace98895"
   },
   {
     "slug": "duplicate-and-out-of-order-saves",
@@ -398,16 +438,24 @@
       "Document conversion",
       "Access control"
     ],
-    "structure": "steps+flow:diagnostic:example+decision:example:checklist",
+    "structure": "steps+flow:diagnostic:example+decision:example:checklist:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 636,
+    "wordCount": 725,
     "source": null,
     "references": [
       {
         "label": "OWASP: File Upload Cheat Sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+      },
+      {
+        "label": "NIST SP 800-83 Rev. 1: Malware prevention and handling",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-83r1.pdf"
+      },
+      {
+        "label": "CISA: StopRansomware guide",
+        "url": "https://www.cisa.gov/stopransomware/ransomware-guide"
       }
     ],
     "cover": "/blog/images/document-upload-quarantine.png",
@@ -427,7 +475,7 @@
       "soft": "#e7f2ec",
       "number": 10
     },
-    "contentHash": "7fa339b4cd93b9a8c11af4fed2e11c3cd2cc57b23d6c35c0f484eb58d247dea8"
+    "contentHash": "28d6b4a1b17fb034ffffcfd4da204bb5cebc44126fa903d93273775e843292dc"
   },
   {
     "slug": "pdf-fidelity-acceptance",
@@ -442,16 +490,24 @@
       "Excel spreadsheets",
       "Presentations"
     ],
-    "structure": "prose:comparison+matrix:steps:example+document:checklist",
+    "structure": "prose:comparison+matrix:steps:example+document:checklist:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 641,
+    "wordCount": 721,
     "source": null,
     "references": [
       {
         "label": "PDF Association: PDF technical resources",
         "url": "https://pdfa.org/resource/"
+      },
+      {
+        "label": "veraPDF: PDF/A validation",
+        "url": "https://verapdf.org/"
+      },
+      {
+        "label": "W3C WAI: PDF accessibility techniques",
+        "url": "https://www.w3.org/WAI/WCAG21/Techniques/pdf/"
       }
     ],
     "cover": "/blog/images/pdf-fidelity-acceptance.png",
@@ -471,7 +527,7 @@
       "soft": "#eaf1f9",
       "number": 11
     },
-    "contentHash": "09fbc63f5bbfb05804557e570ebb2e8ad49b09f96eafa9d46c5c760bde5f5187"
+    "contentHash": "1f2d7c006a612a29b6e3c4e7c8728fef49e379a6badfffe971d5b2049d63cf21"
   },
   {
     "slug": "spreadsheet-locale-and-date-safety",
@@ -528,16 +584,24 @@
       "PDF",
       "Business workflows"
     ],
-    "structure": "prose:diagnostic+layers:prose:example+flow:checklist",
+    "structure": "prose:diagnostic+layers:prose:example+flow:checklist:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 664,
+    "wordCount": 748,
     "source": null,
     "references": [
       {
         "label": "W3C: Web Content Accessibility Guidelines 2.2",
         "url": "https://www.w3.org/TR/WCAG22/"
+      },
+      {
+        "label": "W3C WAI: Understanding keyboard access",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard"
+      },
+      {
+        "label": "W3C WAI: Images tutorial",
+        "url": "https://www.w3.org/WAI/tutorials/images/"
       }
     ],
     "cover": "/blog/images/accessible-document-preview.png",
@@ -557,7 +621,7 @@
       "soft": "#f1f3df",
       "number": 13
     },
-    "contentHash": "d5c27ae87f232d042c032cde59f96df09491a2df94896cf0a07ec01500ced803"
+    "contentHash": "682a989549ee9b640cb0991a03215deed14d079b08d95f7db010c442df2d6cd6"
   },
   {
     "slug": "font-deployment-as-a-dependency",
@@ -572,16 +636,24 @@
       "Presentations",
       "Troubleshooting"
     ],
-    "structure": "diagnostic+matrix:note:steps+flow:example",
+    "structure": "diagnostic+matrix:note:steps+flow:example:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 660,
+    "wordCount": 754,
     "source": null,
     "references": [
       {
         "label": "Microsoft Typography: Fonts and products",
         "url": "https://learn.microsoft.com/en-us/typography/fonts/"
+      },
+      {
+        "label": "W3C: CSS Fonts Module Level 4",
+        "url": "https://www.w3.org/TR/css-fonts-4/"
+      },
+      {
+        "label": "Microsoft Learn: OpenType specification",
+        "url": "https://learn.microsoft.com/en-us/typography/opentype/spec/"
       }
     ],
     "cover": "/blog/images/font-deployment-as-a-dependency.png",
@@ -601,7 +673,7 @@
       "soft": "#e4f3f3",
       "number": 14
     },
-    "contentHash": "afd0e543dcfdb8ec6af00164f8f5dca250a96fb88d6f83b2bfd0f05040b24fca"
+    "contentHash": "b26985152e8e6e376ac02d262beb7441c5b56c2f6d1e22e3f0352c651b0039b4"
   },
   {
     "slug": "large-workbook-acceptance",
@@ -615,16 +687,24 @@
       "Operations",
       "Document conversion"
     ],
-    "structure": "prose+matrix:steps:note:example+sequence:checklist",
+    "structure": "prose+matrix:steps:note:example+sequence:checklist:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 648,
+    "wordCount": 730,
     "source": null,
     "references": [
       {
         "label": "Microsoft Learn: Excel performance and calculation",
         "url": "https://learn.microsoft.com/en-us/office/vba/excel/concepts/excel-performance/excel-improving-calculation-performance"
+      },
+      {
+        "label": "Microsoft Support: Excel specifications and limits",
+        "url": "https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3"
+      },
+      {
+        "label": "Microsoft Learn: Excel performance tips",
+        "url": "https://learn.microsoft.com/en-us/office/vba/excel/concepts/excel-performance/excel-tips-for-optimizing-performance-obstructions"
       }
     ],
     "cover": "/blog/images/large-workbook-acceptance.png",
@@ -644,7 +724,7 @@
       "soft": "#f6eaf0",
       "number": 15
     },
-    "contentHash": "f4f0be83ee3131b3e16e35ec0ff068c1e7fb29adb2833cc1d6b281ea8d0b8c61"
+    "contentHash": "0832db021c68e92deb12be5f60b5c440002502070f5c44aaa3aa417f32b1cd3b"
   },
   {
     "slug": "conversion-queue-backpressure",
@@ -658,16 +738,24 @@
       "Operations",
       "Multi-tenancy"
     ],
-    "structure": "prose+layers:prose:note:diagnostic+flow",
+    "structure": "prose+layers:prose:note:diagnostic+flow:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 645,
+    "wordCount": 726,
     "source": null,
     "references": [
       {
         "label": "Google SRE Book: Handling Overload",
         "url": "https://sre.google/sre-book/handling-overload/"
+      },
+      {
+        "label": "AWS Builders Library: Avoiding queue backlogs",
+        "url": "https://aws.amazon.com/builders-library/avoiding-insurmountable-queue-backlogs/"
+      },
+      {
+        "label": "AWS Builders Library: Timeouts, retries, and backoff",
+        "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
       }
     ],
     "cover": "/blog/images/conversion-queue-backpressure.png",
@@ -687,7 +775,7 @@
       "soft": "#edf0f3",
       "number": 16
     },
-    "contentHash": "b0c24b9a03da413c6e11e8bfab9b4adc658250380abac41b6e9c04b5f28d292a"
+    "contentHash": "cb4456d5eee4396201ce3435799d8972ccb7db5686ce47b2390397a3fa1b60d8"
   },
   {
     "slug": "stale-preview-invalidation",
@@ -701,16 +789,24 @@
       "Document conversion",
       "Document storage"
     ],
-    "structure": "example+layers:steps:prose:diagnostic+sequence",
+    "structure": "example+layers:steps:prose:diagnostic+sequence:comparison:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 665,
+    "wordCount": 826,
     "source": null,
     "references": [
       {
         "label": "MDN: HTTP caching",
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
+      },
+      {
+        "label": "RFC 9111: HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111"
+      },
+      {
+        "label": "MDN: HTTP conditional requests",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Conditional_requests"
       }
     ],
     "cover": "/blog/images/stale-preview-invalidation.png",
@@ -730,7 +826,7 @@
       "soft": "#f0ebf7",
       "number": 17
     },
-    "contentHash": "ea95c28f7f2bd456405c6271d59a6644755202c1b88591ca048ba761ef4f84f3"
+    "contentHash": "d2865416da3f5393f0160717de700d0b42bf237c49603e219bdfb67b809d666f"
   },
   {
     "slug": "document-import-progress-and-recovery",
@@ -787,16 +883,24 @@
       "API integration",
       "Audit logs"
     ],
-    "structure": "comparison+layers:prose:example:note:checklist:diagnostic+sequence",
+    "structure": "comparison+layers:prose:example:note:checklist:diagnostic+sequence:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 662,
+    "wordCount": 751,
     "source": null,
     "references": [
       {
         "label": "W3C: Trace Context",
         "url": "https://www.w3.org/TR/trace-context/"
+      },
+      {
+        "label": "OpenTelemetry: Traces",
+        "url": "https://opentelemetry.io/docs/concepts/signals/traces/"
+      },
+      {
+        "label": "OWASP: Logging Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
       }
     ],
     "cover": "/blog/images/document-trace-id-design.png",
@@ -816,7 +920,7 @@
       "soft": "#e7f2ec",
       "number": 19
     },
-    "contentHash": "c3872b505c8e31ac38ce35217d9fba563a1359d84153e261fd49dd9185b42e2f"
+    "contentHash": "8e994eebc8040cab728f7bea7fb5c6a5ea7c28451dca9ae37fc3063ae90001fe"
   },
   {
     "slug": "document-incident-reproduction-kit",
@@ -873,16 +977,24 @@
       "Embedded editing",
       "Integrations"
     ],
-    "structure": "comparison+layers:note:diagnostic:checklist:example+sequence",
+    "structure": "comparison+layers:note:diagnostic:checklist:example+sequence:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 653,
+    "wordCount": 745,
     "source": null,
     "references": [
       {
         "label": "OWASP: Session Management Cheat Sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+      },
+      {
+        "label": "OpenID Connect: RP-Initiated Logout",
+        "url": "https://openid.net/specs/openid-connect-rpinitiated-1_0.html"
+      },
+      {
+        "label": "NIST SP 800-63B: Session management",
+        "url": "https://pages.nist.gov/800-63-4/sp800-63b.html"
       }
     ],
     "cover": "/blog/images/sso-and-editor-session-logout.png",
@@ -902,7 +1014,7 @@
       "soft": "#f8eeeb",
       "number": 21
     },
-    "contentHash": "ce026ca6aa4ddc952b417cae9216c8dcfe349eb1c22c579be15b869687a22ebc"
+    "contentHash": "aacf350c2031558bc1ce3d33c17c28a1f6422789c095dd2bb2f4b67dbba9d57a"
   },
   {
     "slug": "embedded-editor-content-security-policy",
@@ -1089,16 +1201,24 @@
       "Version control",
       "Migration"
     ],
-    "structure": "prose+flow:steps:comparison+layers:example",
+    "structure": "prose+flow:steps:comparison+layers:example:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 644,
+    "wordCount": 730,
     "source": null,
     "references": [
       {
         "label": "Google SRE Workbook: Canarying Releases",
         "url": "https://sre.google/workbook/canarying-releases/"
+      },
+      {
+        "label": "Google SRE Book: Release engineering",
+        "url": "https://sre.google/sre-book/release-engineering/"
+      },
+      {
+        "label": "Kubernetes: Deployments",
+        "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
       }
     ],
     "cover": "/blog/images/phased-document-rollout.png",
@@ -1118,7 +1238,7 @@
       "soft": "#f0ebf7",
       "number": 26
     },
-    "contentHash": "97ebbab2defae4364419d3aa01a78f84730fda82597b99087df01b7c96daf2ca"
+    "contentHash": "73d3b9fddeface28637e9950d88d93b61e17fb54241c4849b653c7ec2fe1e04a"
   },
   {
     "slug": "document-content-extraction-boundaries",
@@ -1176,16 +1296,24 @@
       "RAG",
       "Access control"
     ],
-    "structure": "example+flow:prose:note:diagnostic+comparison",
+    "structure": "example+flow:prose:note:diagnostic+comparison:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 672,
+    "wordCount": 758,
     "source": null,
     "references": [
       {
         "label": "NIST: AI Risk Management Framework",
         "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+      },
+      {
+        "label": "EU GDPR Article 5: Data processing principles",
+        "url": "https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj"
+      },
+      {
+        "label": "NIST: Privacy Framework",
+        "url": "https://www.nist.gov/privacy-framework"
       }
     ],
     "cover": "/blog/images/ai-document-data-minimization.png",
@@ -1205,7 +1333,7 @@
       "soft": "#e7f2ec",
       "number": 28
     },
-    "contentHash": "5336ac71441ca27548d120ca583dad2007700768735bbf62dd7a38d98cc522b9"
+    "contentHash": "e6b8a1348b479fd22e400c1190c56511ef86b71090695d274186e0486ccfbd99"
   },
   {
     "slug": "ai-document-answer-provenance",
@@ -1220,16 +1348,24 @@
       "Version control",
       "Access control"
     ],
-    "structure": "example+layers:steps:note:prose:checklist:example+sequence",
+    "structure": "example+layers:steps:note:prose:checklist:example+sequence:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
-    "readMinutes": 4,
-    "wordCount": 769,
+    "readMinutes": 5,
+    "wordCount": 858,
     "source": null,
     "references": [
       {
         "label": "NIST: Generative AI Profile",
         "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      },
+      {
+        "label": "W3C: PROV-O provenance ontology",
+        "url": "https://www.w3.org/TR/prov-o/"
+      },
+      {
+        "label": "NIST: AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework"
       }
     ],
     "cover": "/blog/images/ai-document-answer-provenance.png",
@@ -1249,7 +1385,7 @@
       "soft": "#eaf1f9",
       "number": 29
     },
-    "contentHash": "e3a93040e5dfcf8a473a972f2dc470912aa481529e22bedb83cd5c6a64e97ce4"
+    "contentHash": "d39a111d597814d558a762f627ef23835b1c6f6460275a28381e23112a26f426"
   },
   {
     "slug": "editable-presentation-acceptance",
@@ -1306,16 +1442,24 @@
       "Business workflows",
       "Access control"
     ],
-    "structure": "prose+sequence:steps:example:checklist:example+comparison",
+    "structure": "prose+sequence:steps:example:checklist:example+comparison:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
-    "readMinutes": 3,
-    "wordCount": 630,
+    "readMinutes": 4,
+    "wordCount": 702,
     "source": null,
     "references": [
       {
         "label": "OWASP: Authorization Cheat Sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "label": "OWASP: Input Validation Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+      },
+      {
+        "label": "NIST: Secure Software Development Framework",
+        "url": "https://csrc.nist.gov/Projects/ssdf"
       }
     ],
     "cover": "/blog/images/document-template-governance.png",
@@ -1335,7 +1479,7 @@
       "soft": "#f1f3df",
       "number": 31
     },
-    "contentHash": "02dece8c7600a61e4393cc2ccf49464f6b1fb2968ba011ce88ff0455f21fe56b"
+    "contentHash": "ff3329071d56901d7321431d94726bda66cd606346d1479281c23f4a13dc1a4e"
   },
   {
     "slug": "distributed-document-backup-drill",
@@ -1437,16 +1581,24 @@
       "Document search",
       "Backup and recovery"
     ],
-    "structure": "prose:comparison+layers:steps:checklist:example+sequence",
+    "structure": "prose:comparison+layers:steps:checklist:example+sequence:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 649,
+    "wordCount": 740,
     "source": null,
     "references": [
       {
         "label": "NIST: Guidelines for Media Sanitization",
         "url": "https://csrc.nist.gov/pubs/sp/800/88/r2/final"
+      },
+      {
+        "label": "EU GDPR Article 17: Right to erasure",
+        "url": "https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj"
+      },
+      {
+        "label": "NIST SP 800-34 Rev. 1: Contingency planning",
+        "url": "https://csrc.nist.gov/pubs/sp/800/34/r1/final"
       }
     ],
     "cover": "/blog/images/document-deletion-lifecycle.png",
@@ -1466,7 +1618,7 @@
       "soft": "#edf0f3",
       "number": 34
     },
-    "contentHash": "64edffe63c8678baa2fd41bb30a12e5eb4cf885c47ff980c8d71c0ce81a084fe"
+    "contentHash": "192c763ba9e2a8a0f0023139f462aa04b99b9913416fff2f675d5067f727e111"
   },
   {
     "slug": "document-capacity-measurement",
@@ -1480,16 +1632,24 @@
       "Document conversion",
       "Collaboration"
     ],
-    "structure": "comparison+matrix:prose:steps:example+comparison:checklist:diagnostic",
+    "structure": "comparison+matrix:prose:steps:example+comparison:checklist:diagnostic:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 746,
+    "wordCount": 831,
     "source": null,
     "references": [
       {
         "label": "Google SRE Book: Monitoring Distributed Systems",
         "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      },
+      {
+        "label": "Google SRE Book: Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      },
+      {
+        "label": "OpenTelemetry: Metrics data model",
+        "url": "https://opentelemetry.io/docs/specs/otel/metrics/data-model/"
       }
     ],
     "cover": "/blog/images/document-capacity-measurement.png",
@@ -1509,7 +1669,7 @@
       "soft": "#f0ebf7",
       "number": 35
     },
-    "contentHash": "ee36b2fbdff8d0f781ba5322f392ddf04149857e300f93c3e5bac86d6cdfcf61"
+    "contentHash": "497bfb8a240fc738cfab40832ec18e5c7eefd4cc81b1ceea174c59cb6c064ef1"
   },
   {
     "slug": "document-format-routing",
@@ -1523,16 +1683,24 @@
       "API integration",
       "Security"
     ],
-    "structure": "prose:comparison+decision:diagnostic:checklist:example+matrix",
+    "structure": "prose:comparison+decision:diagnostic:checklist:example+matrix:comparison:steps",
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 638,
+    "wordCount": 806,
     "source": null,
     "references": [
       {
         "label": "OWASP: File Upload Cheat Sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+      },
+      {
+        "label": "IANA: Media Types registry",
+        "url": "https://www.iana.org/assignments/media-types/media-types.xhtml"
+      },
+      {
+        "label": "RFC 9110: HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110"
       }
     ],
     "cover": "/blog/images/document-format-routing.png",
@@ -1552,7 +1720,7 @@
       "soft": "#f6eee5",
       "number": 36
     },
-    "contentHash": "4f78ff0215ca28238d3371a3a9b4bef33178e24c17e8a0028ef73d364cbe57a6"
+    "contentHash": "aa590d387701f88f36215891ff46acab47731d9f8a314238ba7c55707766daeb"
   },
   {
     "slug": "document-audit-events-that-explain-actions",
@@ -1618,7 +1786,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: SharePoint Server Is Out of Support. What You Replace.",
+        "label": "Original topic reference: SharePoint Server Is Out of Support. What You Replace.",
         "url": "https://shimodocs.com/blog/sharepoint-server-after-support-ends"
       }
     ],
@@ -1661,7 +1829,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: A Zero-Knowledge Editor Is Not a Document Suite",
+        "label": "Original topic reference: A Zero-Knowledge Editor Is Not a Document Suite",
         "url": "https://shimodocs.com/blog/zero-knowledge-editor-vs-document-suite"
       }
     ],
@@ -1704,7 +1872,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
+        "label": "Original topic reference: Self-Hosted Office Suite vs Wiki: Which Shape of Work?",
         "url": "https://shimodocs.com/blog/self-hosted-office-suite-vs-wiki"
       }
     ],
@@ -1747,7 +1915,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Migrating from Confluence Without a Connector",
+        "label": "Original topic reference: Migrating from Confluence Without a Connector",
         "url": "https://shimodocs.com/blog/migrating-without-confluence-connector"
       }
     ],
@@ -1791,7 +1959,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Collabora in Nextcloud vs a Document Suite",
+        "label": "Original topic reference: Collabora in Nextcloud vs a Document Suite",
         "url": "https://shimodocs.com/blog/collabora-nextcloud-vs-document-suite"
       }
     ],
@@ -1816,8 +1984,8 @@
   },
   {
     "slug": "field-guide-evidence-based-office-editor-comparisons",
-    "title": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test",
-    "description": "Evaluate ShimoDocs and ONLYOFFICE candidates without substituting brand claims for demonstrated behavior.",
+    "title": "Office SDK vs ONLYOFFICE: a repeatable document test",
+    "description": "Evaluate Office SDK and ONLYOFFICE with the same evidence instead of substituting brand claims for demonstrated behavior.",
     "category": "Comparisons",
     "format": "comparison",
     "tags": [
@@ -1831,16 +1999,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 656,
+    "wordCount": 673,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs ONLYOFFICE: Fidelity, Open Core, Controls",
+        "label": "Original topic reference: document platform vs ONLYOFFICE: Fidelity, Open Core, Controls",
         "url": "https://shimodocs.com/blog/shimodocs-vs-onlyoffice"
       }
     ],
     "cover": "/blog/images/field-guide-evidence-based-office-editor-comparisons.png",
-    "coverAlt": "Compare ShimoDocs and ONLYOFFICE with a repeatable document test: Document corpus, Roundtrip fidelity, Control tests, Edition scope.",
+    "coverAlt": "Office SDK vs ONLYOFFICE: a repeatable document test: Document corpus, Roundtrip fidelity, Control tests, Edition scope.",
     "concepts": [
       "Document corpus",
       "Roundtrip fidelity",
@@ -1856,11 +2024,11 @@
       "soft": "#edf0f3",
       "number": 43
     },
-    "contentHash": "a4e77341eb1828f54855ae2c742b34470e67a1266d0060ccfc890a2d0c548314"
+    "contentHash": "441ec0607b5c0229c5c3b691527a9ea316d939f6a1807ac4f7d25870e2f7453d"
   },
   {
     "slug": "field-guide-file-estate-or-document-workspace",
-    "title": "ShimoDocs or Nextcloud: compare the work, not the folder screen",
+    "title": "Office SDK vs Nextcloud: compare the work, not the folder screen",
     "description": "Compare platform fit through file lifecycle, collaborative tasks, integration ownership, and operating effort.",
     "category": "Comparisons",
     "format": "decision-brief",
@@ -1874,16 +2042,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 685,
+    "wordCount": 700,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Nextcloud: File Platform or Document Suite?",
+        "label": "Original topic reference: document platform vs Nextcloud: File Platform or Document Suite?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-nextcloud"
       }
     ],
     "cover": "/blog/images/field-guide-file-estate-or-document-workspace.png",
-    "coverAlt": "ShimoDocs or Nextcloud: compare the work, not the folder screen: File lifecycle, Workspace tasks, Integration burden, Authoritative copy.",
+    "coverAlt": "Office SDK vs Nextcloud: compare the work, not the folder screen: File lifecycle, Workspace tasks, Integration burden, Authoritative copy.",
     "concepts": [
       "File lifecycle",
       "Workspace tasks",
@@ -1899,7 +2067,7 @@
       "soft": "#f0ebf7",
       "number": 44
     },
-    "contentHash": "d94c5d00d30c83cecf7b6290274c81159ca9de585ce0157c15cc4da9c404502e"
+    "contentHash": "bc2bd781908bae4f4e3ac18f128d989927c44303f8c12aa008f63b3c1374ec2e"
   },
   {
     "slug": "field-guide-bank-collaboration-rollout-controls",
@@ -1922,7 +2090,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Rolling Out Document Collaboration Across a Bank",
+        "label": "Original topic reference: Rolling Out Document Collaboration Across a Bank",
         "url": "https://shimodocs.com/blog/document-collaboration-financial-services-rollout"
       }
     ],
@@ -1965,7 +2133,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Matter Files: How Legal Teams Run Document Collaboration",
+        "label": "Original topic reference: Matter Files: How Legal Teams Run Document Collaboration",
         "url": "https://shimodocs.com/blog/document-collaboration-legal-teams"
       }
     ],
@@ -2009,7 +2177,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Document Collaboration in the Public Sector",
+        "label": "Original topic reference: Document Collaboration in the Public Sector",
         "url": "https://shimodocs.com/blog/document-collaboration-public-sector"
       }
     ],
@@ -2052,7 +2220,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: A 30-Day Plan for Rolling Out a Document Platform",
+        "label": "Original topic reference: A 30-Day Plan for Rolling Out a Document Platform",
         "url": "https://shimodocs.com/blog/document-platform-adoption-plan"
       }
     ],
@@ -2095,7 +2263,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Leaving a Document Platform: Lock-In and the Exit Path",
+        "label": "Original topic reference: Leaving a Document Platform: Lock-In and the Exit Path",
         "url": "https://shimodocs.com/blog/document-platform-lock-in-and-exit-planning"
       }
     ],
@@ -2138,7 +2306,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: What a Self-Hosted Document Platform Costs to Run",
+        "label": "Original topic reference: What a Self-Hosted Document Platform Costs to Run",
         "url": "https://shimodocs.com/blog/document-platform-operations-cost"
       }
     ],
@@ -2181,7 +2349,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Migrating a Shared Drive Without Losing Permissions",
+        "label": "Original topic reference: Migrating a Shared Drive Without Losing Permissions",
         "url": "https://shimodocs.com/blog/migrating-shared-drives-to-a-document-platform"
       }
     ],
@@ -2224,7 +2392,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Answering a Security Review of a Self-Hosted Platform",
+        "label": "Original topic reference: Answering a Security Review of a Self-Hosted Platform",
         "url": "https://shimodocs.com/blog/passing-a-document-platform-security-review"
       }
     ],
@@ -2268,7 +2436,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Wiring Document AI to Your Own Model Endpoint",
+        "label": "Original topic reference: Wiring Document AI to Your Own Model Endpoint",
         "url": "https://shimodocs.com/blog/private-model-endpoint-for-document-ai"
       }
     ],
@@ -2311,7 +2479,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: How Self-Hosted Document Software Is Priced",
+        "label": "Original topic reference: How Self-Hosted Document Software Is Priced",
         "url": "https://shimodocs.com/blog/self-hosted-document-platform-pricing"
       }
     ],
@@ -2354,7 +2522,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Secure Cloud Collaboration: Balancing Security and Productivity",
+        "label": "Original topic reference: Secure Cloud Collaboration: Balancing Security and Productivity",
         "url": "https://shimodocs.com/blog/secure-cloud-collaboration"
       }
     ],
@@ -2396,7 +2564,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Your Content Is Training AI. Did You Actually Agree to That?",
+        "label": "Original topic reference: Your Content Is Training AI. Did You Actually Agree to That?",
         "url": "https://shimodocs.com/blog/ai-training-content-control"
       }
     ],
@@ -2439,7 +2607,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: 50 Web3 Security Tools & Resources for Builders",
+        "label": "Original topic reference: 50 Web3 Security Tools & Resources for Builders",
         "url": "https://shimodocs.com/blog/web3-security-tools-resources"
       }
     ],
@@ -2482,7 +2650,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Choosing Object Storage for a Document Platform",
+        "label": "Original topic reference: Choosing Object Storage for a Document Platform",
         "url": "https://shimodocs.com/blog/object-storage-document-platform"
       }
     ],
@@ -2525,7 +2693,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Capacity Planning Around Concurrent Editors",
+        "label": "Original topic reference: Capacity Planning Around Concurrent Editors",
         "url": "https://shimodocs.com/blog/capacity-planning-concurrent-editors"
       }
     ],
@@ -2568,7 +2736,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Disaster Recovery for a Document Platform",
+        "label": "Original topic reference: Disaster Recovery for a Document Platform",
         "url": "https://shimodocs.com/blog/disaster-recovery-document-platform"
       }
     ],
@@ -2611,7 +2779,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Document Collaboration on an Air-Gapped Network",
+        "label": "Original topic reference: Document Collaboration on an Air-Gapped Network",
         "url": "https://shimodocs.com/blog/air-gapped-document-collaboration"
       }
     ],
@@ -2654,7 +2822,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Identity and SSO for a Self-Hosted Document Platform",
+        "label": "Original topic reference: Identity and SSO for a Self-Hosted Document Platform",
         "url": "https://shimodocs.com/blog/sso-self-hosted-document-platform"
       }
     ],
@@ -2697,7 +2865,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Upgrading a Document Platform Without Downtime Drama",
+        "label": "Original topic reference: Upgrading a Document Platform Without Downtime Drama",
         "url": "https://shimodocs.com/blog/upgrade-and-rollback-document-platform"
       }
     ],
@@ -2741,7 +2909,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Monitoring a Self-Hosted Document Platform",
+        "label": "Original topic reference: Monitoring a Self-Hosted Document Platform",
         "url": "https://shimodocs.com/blog/monitoring-self-hosted-document-platform"
       }
     ],
@@ -2784,7 +2952,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Backup and Restore for a Document Platform",
+        "label": "Original topic reference: Backup and Restore for a Document Platform",
         "url": "https://shimodocs.com/blog/backup-and-restore-document-platform"
       }
     ],
@@ -2827,7 +2995,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Tuning the Database Behind a Document Platform",
+        "label": "Original topic reference: Tuning the Database Behind a Document Platform",
         "url": "https://shimodocs.com/blog/database-tuning-document-collaboration"
       }
     ],
@@ -2870,7 +3038,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Sizing Hardware for a Self-Hosted Document Platform",
+        "label": "Original topic reference: Sizing Hardware for a Self-Hosted Document Platform",
         "url": "https://shimodocs.com/blog/hardware-sizing-self-hosted-document-platform"
       }
     ],
@@ -2913,7 +3081,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Document Encryption and Key Custody",
+        "label": "Original topic reference: Document Encryption and Key Custody",
         "url": "https://shimodocs.com/blog/byo-key-encryption-documents"
       }
     ],
@@ -2956,7 +3124,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: External Document Sharing: Where Audits Find Problems",
+        "label": "Original topic reference: External Document Sharing: Where Audits Find Problems",
         "url": "https://shimodocs.com/blog/external-sharing-risks-documents"
       }
     ],
@@ -2999,7 +3167,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Access Control for Document Platforms",
+        "label": "Original topic reference: Access Control for Document Platforms",
         "url": "https://shimodocs.com/blog/access-control-best-practices-documents"
       }
     ],
@@ -3042,7 +3210,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Legal Hold in Document Platforms",
+        "label": "Original topic reference: Legal Hold in Document Platforms",
         "url": "https://shimodocs.com/blog/legal-hold-document-management"
       }
     ],
@@ -3085,7 +3253,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Building a Document Retention Policy That Holds",
+        "label": "Original topic reference: Building a Document Retention Policy That Holds",
         "url": "https://shimodocs.com/blog/document-retention-policy-guide"
       }
     ],
@@ -3129,7 +3297,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: A Practical Guide to Data Residency Requirements",
+        "label": "Original topic reference: A Practical Guide to Data Residency Requirements",
         "url": "https://shimodocs.com/blog/data-residency-requirements-guide"
       }
     ],
@@ -3172,7 +3340,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ISO 27001 and Document Management",
+        "label": "Original topic reference: ISO 27001 and Document Management",
         "url": "https://shimodocs.com/blog/iso27001-document-management"
       }
     ],
@@ -3215,7 +3383,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: SOC 2 Controls for Document Collaboration",
+        "label": "Original topic reference: SOC 2 Controls for Document Collaboration",
         "url": "https://shimodocs.com/blog/soc2-document-collaboration-controls"
       }
     ],
@@ -3258,7 +3426,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: HIPAA-Compliant Document Collaboration",
+        "label": "Original topic reference: HIPAA-Compliant Document Collaboration",
         "url": "https://shimodocs.com/blog/hipaa-compliant-document-collaboration"
       }
     ],
@@ -3301,7 +3469,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: GDPR-Compliant Document Collaboration",
+        "label": "Original topic reference: GDPR-Compliant Document Collaboration",
         "url": "https://shimodocs.com/blog/gdpr-compliant-document-collaboration"
       }
     ],
@@ -3344,7 +3512,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Google Workspace Alternatives for Enterprise Teams",
+        "label": "Original topic reference: Google Workspace Alternatives for Enterprise Teams",
         "url": "https://shimodocs.com/blog/google-workspace-alternatives-for-enterprise"
       }
     ],
@@ -3387,7 +3555,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Open Source Document Collaboration: An Honest Assessment",
+        "label": "Original topic reference: Open Source Document Collaboration: An Honest Assessment",
         "url": "https://shimodocs.com/blog/open-source-document-collaboration-options"
       }
     ],
@@ -3430,7 +3598,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Self-Hosted Document Collaboration: What to Look For",
+        "label": "Original topic reference: Self-Hosted Document Collaboration: What to Look For",
         "url": "https://shimodocs.com/blog/best-self-hosted-document-collaboration-tools"
       }
     ],
@@ -3473,7 +3641,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: The Best Google Docs Alternatives, by What You Need",
+        "label": "Original topic reference: The Best Google Docs Alternatives, by What You Need",
         "url": "https://shimodocs.com/blog/best-google-docs-alternatives"
       }
     ],
@@ -3516,7 +3684,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Comparing Self-Hosted Office Suites: What Actually Matters",
+        "label": "Original topic reference: Comparing Self-Hosted Office Suites: What Actually Matters",
         "url": "https://shimodocs.com/blog/self-hosted-office-suite-comparison"
       }
     ],
@@ -3541,7 +3709,7 @@
   },
   {
     "slug": "field-guide-documents-versus-table-apps",
-    "title": "ShimoDocs vs Coda: documents, tables, and workflow authority",
+    "title": "Office SDK vs Coda: documents, tables, and workflow authority",
     "description": "A practical evaluation of narrative records, structured facts, automation, and portable outputs.",
     "category": "Comparisons",
     "format": "decision-brief",
@@ -3555,16 +3723,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 641,
+    "wordCount": 659,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Coda: Docs, Tables and Where They Diverge",
+        "label": "Original topic reference: document platform vs Coda: Docs, Tables and Where They Diverge",
         "url": "https://shimodocs.com/blog/shimodocs-vs-coda"
       }
     ],
     "cover": "/blog/images/field-guide-documents-versus-table-apps.png",
-    "coverAlt": "ShimoDocs vs Coda: documents, tables, and workflow authority: Narrative record, Structured facts, Workflow state, Permission granularity.",
+    "coverAlt": "Office SDK vs Coda: documents, tables, and workflow authority: Narrative record, Structured facts, Workflow state, Permission granularity.",
     "concepts": [
       "Narrative record",
       "Structured facts",
@@ -3580,11 +3748,11 @@
       "soft": "#eaf1f9",
       "number": 83
     },
-    "contentHash": "5f0317f0d00a0afd9311be80d643f06ae775a88782b5dea5086ff766b03e1aba"
+    "contentHash": "9326cebcb295a3e9e649f2ab64b45c40ebaa11fac04619bdd48d7e3a0f5383f7"
   },
   {
     "slug": "field-guide-knowledge-base-versus-workspace",
-    "title": "ShimoDocs vs Slab: working documents or trusted knowledge?",
+    "title": "Office SDK vs Slab: working documents or trusted knowledge?",
     "description": "Evaluate a knowledge workflow through drafting, publication, discovery, ownership, and review expiry.",
     "category": "Comparisons",
     "format": "comparison",
@@ -3598,16 +3766,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 691,
+    "wordCount": 709,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Slab: Knowledge Base or Workspace?",
+        "label": "Original topic reference: document platform vs Slab: Knowledge Base or Workspace?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-slab"
       }
     ],
     "cover": "/blog/images/field-guide-knowledge-base-versus-workspace.png",
-    "coverAlt": "ShimoDocs vs Slab: working documents or trusted knowledge?: Knowledge owner, Draft state, Publication gate, Search quality.",
+    "coverAlt": "Office SDK vs Slab: working documents or trusted knowledge?: Knowledge owner, Draft state, Publication gate, Search quality.",
     "concepts": [
       "Knowledge owner",
       "Draft state",
@@ -3623,11 +3791,11 @@
       "soft": "#f8eeeb",
       "number": 84
     },
-    "contentHash": "8b6caacfb358d18ce7f838cb286de4fa023ccf269efec9b9e9b25d786729dd10"
+    "contentHash": "2806ff2965ef545f47fbc05644e97769713f01ac6c91c15f3e187e79cb405d3c"
   },
   {
     "slug": "field-guide-suite-replacement-boundaries",
-    "title": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries",
+    "title": "Office SDK vs Microsoft 365: file exchange and suite boundaries",
     "description": "Compare the exact proposed offers through file round trips, board pack workflows, integrations, and operating cost.",
     "category": "Comparisons",
     "format": "comparison",
@@ -3641,16 +3809,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 658,
+    "wordCount": 676,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Microsoft 365: Suite Against Suite",
+        "label": "Original topic reference: document platform vs Microsoft 365: Suite Against Suite",
         "url": "https://shimodocs.com/blog/shimodocs-vs-microsoft-365"
       }
     ],
     "cover": "/blog/images/field-guide-suite-replacement-boundaries.png",
-    "coverAlt": "ShimoDocs vs Microsoft 365: file exchange and suite boundaries: Suite boundary, File round trip, Automation dependency, Guest journey.",
+    "coverAlt": "Office SDK vs Microsoft 365: file exchange and suite boundaries: Suite boundary, File round trip, Automation dependency, Guest journey.",
     "concepts": [
       "Suite boundary",
       "File round trip",
@@ -3666,11 +3834,11 @@
       "soft": "#f1f3df",
       "number": 85
     },
-    "contentHash": "668725b80ce301e009aedd2b70d6ac88361850632fe0dc016d6fdb802c36f8a6"
+    "contentHash": "c69204770c074da10e5bbb5e3f20ae5ace77aa75cabdb242619f175556f812ad"
   },
   {
     "slug": "field-guide-document-management-system-of-record",
-    "title": "ShimoDocs vs SharePoint: where the authoritative document lives",
+    "title": "Office SDK vs SharePoint: where the authoritative document lives",
     "description": "Evaluate editing and document management through metadata, approval versions, lifecycle handoffs, and recovery.",
     "category": "Comparisons",
     "format": "architecture",
@@ -3684,16 +3852,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 696,
+    "wordCount": 704,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs SharePoint for Document Management",
+        "label": "Original topic reference: document platform vs SharePoint for Document Management",
         "url": "https://shimodocs.com/blog/shimodocs-vs-sharepoint"
       }
     ],
     "cover": "/blog/images/field-guide-document-management-system-of-record.png",
-    "coverAlt": "ShimoDocs vs SharePoint: where the authoritative document lives: Record identity, Metadata policy, Approval version, Retention owner.",
+    "coverAlt": "Office SDK vs SharePoint: where the authoritative document lives: Record identity, Metadata policy, Approval version, Retention owner.",
     "concepts": [
       "Record identity",
       "Metadata policy",
@@ -3709,11 +3877,11 @@
       "soft": "#e4f3f3",
       "number": 86
     },
-    "contentHash": "5b99b9043b3a99d56a071e81f1f2cfa0456630486f5e60b95f22b31a05d3648b"
+    "contentHash": "0e9a34bbe050b610afedc1c3b3228bc6040e4ae24450b9eb4d4ff73079396222"
   },
   {
     "slug": "field-guide-wiki-versus-office-records",
-    "title": "ShimoDocs vs Confluence: linked knowledge or office deliverables?",
+    "title": "Office SDK vs Confluence: linked knowledge or office deliverables?",
     "description": "Compare navigation, publishing, file output, and migration relationships using a real release workflow.",
     "category": "Comparisons",
     "format": "decision-brief",
@@ -3727,16 +3895,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 685,
+    "wordCount": 692,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Confluence: Wiki or Document Suite?",
+        "label": "Original topic reference: document platform vs Confluence: Wiki or Document Suite?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-confluence"
       }
     ],
     "cover": "/blog/images/field-guide-wiki-versus-office-records.png",
-    "coverAlt": "ShimoDocs vs Confluence: linked knowledge or office deliverables?: Linked knowledge, Office artifact, Publication state, Link migration.",
+    "coverAlt": "Office SDK vs Confluence: linked knowledge or office deliverables?: Linked knowledge, Office artifact, Publication state, Link migration.",
     "concepts": [
       "Linked knowledge",
       "Office artifact",
@@ -3752,7 +3920,7 @@
       "soft": "#f6eaf0",
       "number": 87
     },
-    "contentHash": "88f2943f132bb3b2b34ae7b47f6b69d3d28dd361a59daca791704ad0883d2ef8"
+    "contentHash": "5db7f78c0e538f81635dc9a05bdc6da0fde13e1934bc48e30e208f9598984ab1"
   },
   {
     "slug": "field-guide-financial-document-control-points",
@@ -3774,7 +3942,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Secure Document Collaboration for Financial Services",
+        "label": "Original topic reference: Secure Document Collaboration for Financial Services",
         "url": "https://shimodocs.com/blog/secure-document-collaboration-financial-services"
       }
     ],
@@ -3818,7 +3986,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Deploying Self-Hosted Collaboration on Kubernetes",
+        "label": "Original topic reference: Deploying Self-Hosted Collaboration on Kubernetes",
         "url": "https://shimodocs.com/blog/self-hosted-collaboration-kubernetes-deployment"
       }
     ],
@@ -3861,7 +4029,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: AI Agents Inside Your Documents: What to Secure",
+        "label": "Original topic reference: AI Agents Inside Your Documents: What to Secure",
         "url": "https://shimodocs.com/blog/ai-agents-in-documents-security"
       }
     ],
@@ -3904,7 +4072,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: How to Migrate from Google Workspace Without Losing Work",
+        "label": "Original topic reference: How to Migrate from Google Workspace Without Losing Work",
         "url": "https://shimodocs.com/blog/how-to-migrate-from-google-workspace"
       }
     ],
@@ -3929,7 +4097,7 @@
   },
   {
     "slug": "field-guide-wikis-documents-and-shared-facts",
-    "title": "ShimoDocs vs Notion: shared facts, knowledge, and final records",
+    "title": "Office SDK vs Notion: shared facts, knowledge, and final records",
     "description": "Compare the proposed content models through project handover, update ownership, synchronization, and portable exports.",
     "category": "Comparisons",
     "format": "comparison",
@@ -3943,16 +4111,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 662,
+    "wordCount": 676,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Notion: Documents, Wikis or Both?",
+        "label": "Original topic reference: document platform vs Notion: Documents, Wikis or Both?",
         "url": "https://shimodocs.com/blog/shimodocs-vs-notion"
       }
     ],
     "cover": "/blog/images/field-guide-wikis-documents-and-shared-facts.png",
-    "coverAlt": "ShimoDocs vs Notion: shared facts, knowledge, and final records: Shared facts, Knowledge page, Office deliverable, Sync rule.",
+    "coverAlt": "Office SDK vs Notion: shared facts, knowledge, and final records: Shared facts, Knowledge page, Office deliverable, Sync rule.",
     "concepts": [
       "Shared facts",
       "Knowledge page",
@@ -3968,11 +4136,11 @@
       "soft": "#eaf1f9",
       "number": 92
     },
-    "contentHash": "8e2b07287fb2143c686161fb5dbf19319231405d4f0d51d93da908b060aeae20"
+    "contentHash": "d9ab5835dc441e0aee819050f501d6f7c0a2bc76f60321c54e0363bef46c196f"
   },
   {
     "slug": "field-guide-browser-document-comparison",
-    "title": "ShimoDocs vs Google Docs: a practical browser editor test",
+    "title": "Office SDK vs Google Docs: a practical browser editor test",
     "description": "Run identical review, interruption, submitted-version, and export tasks before selecting a browser editor.",
     "category": "Comparisons",
     "format": "field-notes",
@@ -3986,16 +4154,16 @@
     "author": "Office SDK Editorial",
     "publishedAt": "2026-09-28",
     "readMinutes": 4,
-    "wordCount": 669,
+    "wordCount": 685,
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: ShimoDocs vs Google Docs: A Working Comparison",
+        "label": "Original topic reference: document platform vs Google Docs: A Working Comparison",
         "url": "https://shimodocs.com/blog/shimodocs-vs-google-docs"
       }
     ],
     "cover": "/blog/images/field-guide-browser-document-comparison.png",
-    "coverAlt": "ShimoDocs vs Google Docs: a practical browser editor test: Work sample, Review roles, Revision recovery, Export inspection.",
+    "coverAlt": "Office SDK vs Google Docs: a practical browser editor test: Work sample, Review roles, Revision recovery, Export inspection.",
     "concepts": [
       "Work sample",
       "Review roles",
@@ -4011,7 +4179,7 @@
       "soft": "#f8eeeb",
       "number": 93
     },
-    "contentHash": "f7b4a1cd2c796b29ac58eaa14df5d332617fb06cd782190cc2ad58072a7f4ede"
+    "contentHash": "7ddde0596a12b2fd0bad5842550e876aa9c0b8cd9016f2241a3033dff7c51648"
   },
   {
     "slug": "field-guide-private-cloud-editor-alternative",
@@ -4033,7 +4201,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Self-Hosted Google Docs Alternative for Private Deployment",
+        "label": "Original topic reference: Self-Hosted Google Docs Alternative for Private Deployment",
         "url": "https://shimodocs.com/blog/google-docs-alternative-private-cloud"
       }
     ],
@@ -4076,7 +4244,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Data Sovereignty in Document Collaboration",
+        "label": "Original topic reference: Data Sovereignty in Document Collaboration",
         "url": "https://shimodocs.com/blog/data-sovereignty-document-collaboration"
       }
     ],
@@ -4119,7 +4287,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: A Practical Guide to Self-Hosted Collaboration",
+        "label": "Original topic reference: A Practical Guide to Self-Hosted Collaboration",
         "url": "https://shimodocs.com/blog/self-hosted-collaboration-guide"
       }
     ],
@@ -4162,7 +4330,7 @@
     "source": null,
     "references": [
       {
-        "label": "ShimoDocs: Private Cloud Document Collaboration: Self-Hosted Guide",
+        "label": "Original topic reference: Private Cloud Document Collaboration: Self-Hosted Guide",
         "url": "https://shimodocs.com/blog/what-is-private-cloud-document-collaboration"
       }
     ],
