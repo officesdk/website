@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro'
 import BlogIndex from '../../blog/BlogIndex'
+import { blogCategories, blogEntries, formatDate } from '../../blog/data'
 
 const title = 'Office SDK Journal | Embedded Office workflows'
 const description = 'Practical Office SDK articles on embedded document workflows, format fit, security, migration, and operations.'
@@ -14,8 +15,37 @@ const blogSchema = {
   dateModified: '2026-09-29',
   publisher: { '@id': 'https://officesdk.com/#organization' },
 }
+const archiveGroups = blogCategories.map(category => ({
+  category,
+  entries: blogEntries
+    .filter(entry => entry.category === category)
+    .sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '')),
+}))
+const fieldGuideCount = blogEntries.filter(entry => entry.slug.startsWith('field-guide-')).length
 ---
 
 <SiteLayout {title} {description} canonical="/blog" schemas={[blogSchema]}>
   <BlogIndex client:load />
+  <section class="journal-archive" aria-label="Full article archive">
+    <div class="container">
+      <span class="section-index journal-archive-kicker">FULL ARCHIVE</span>
+      <h2>Every story, <em>one list.</em></h2>
+      <p class="journal-archive-sub">All {blogEntries.length} Journal articles — {fieldGuideCount} field guides included — on one page, served as plain HTML for readers, screen readers, and search crawlers alike.</p>
+      <div class="journal-archive-groups">
+        {archiveGroups.map(group => (
+          <div class="journal-archive-group">
+            <h3>{group.category}<span>{group.entries.length}</span></h3>
+            <ul>
+              {group.entries.map(entry => (
+                <li>
+                  <a href={`/blog/${entry.slug}`}>{entry.title}</a>
+                  {entry.publishedAt && <time dateTime={entry.publishedAt}>{formatDate(entry.publishedAt)}</time>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 </SiteLayout>
