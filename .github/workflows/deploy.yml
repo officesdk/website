@@ -37,6 +37,9 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Verify cached asset retention
+        run: bash scripts/deploy/test-retain-assets.sh
+
       - name: Prepare SSH
         shell: bash
         env:
@@ -71,6 +74,7 @@ jobs:
           scp_args=(-i "$HOME/.ssh/officesdk_deploy" -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes)
           scp "${scp_args[@]}" "$RUNNER_TEMP/officesdk-${RELEASE_ID}.tgz" "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.tgz"
           scp "${scp_args[@]}" deploy/nginx/officesdk.conf "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}.conf"
+          scp "${scp_args[@]}" scripts/deploy/retain-assets.sh "$DEPLOY_USER@$DEPLOY_HOST:/tmp/officesdk-${RELEASE_ID}-retain-assets.sh"
 
       - name: Activate release
         shell: bash
@@ -87,6 +91,7 @@ jobs:
           deploy_user="$3"
           artifact="/tmp/officesdk-${release_id}.tgz"
           config="/tmp/officesdk-${release_id}.conf"
+          retain_assets="/tmp/officesdk-${release_id}-retain-assets.sh"
           previous_release="$(readlink -f "$root/current" || true)"
           config_backup="$root/backups/nginx-${release_id}.conf"
           install -d -m 755 "$root/backups"
@@ -99,6 +104,7 @@ jobs:
             trap - ERR
             set +e
             if [ -n "$previous_release" ]; then
+              bash "$retain_assets" "$root/releases/$release_id" "$previous_release"
               ln -sfn "$previous_release" "$root/current"
             fi
             if [ -f "$config_backup" ]; then
@@ -112,6 +118,9 @@ jobs:
           install -d -m 755 "$root/releases/$release_id"
           tar -xzf "$artifact" -C "$root/releases/$release_id"
           test -s "$root/releases/$release_id/index.html"
+          if [ -n "$previous_release" ]; then
+            bash "$retain_assets" "$previous_release" "$root/releases/$release_id"
+          fi
           chown -R "$deploy_user:$deploy_user" "$root/releases/$release_id"
           install -m 644 "$config" /etc/nginx/sites-available/officesdk
           ln -sfn /etc/nginx/sites-available/officesdk /etc/nginx/sites-enabled/officesdk
@@ -122,7 +131,7 @@ jobs:
           test "$health_code" = 200
           grep -q 'Office SDK' /tmp/officesdk-home.html
           trap - ERR
-          rm -f "$artifact" "$config"
+          rm -f "$artifact" "$config" "$retain_assets"
           REMOTE
           chmod 700 "$RUNNER_TEMP/activate.sh"
           if [ -n "$DEPLOY_SUDO_PASSWORD" ]; then

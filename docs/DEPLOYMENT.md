@@ -6,12 +6,14 @@ This repository deploys the static Astro build to the Ubuntu/Nginx origin at `43
 
 1. A push to `main` runs `npm ci` and the Astro `npm run build` command on GitHub Actions.
 2. The workflow uploads the release archive and `deploy/nginx/officesdk.conf` over SSH.
-3. The release is extracted into `/var/www/officesdk/releases/<release-id>`.
+3. The release is extracted into `/var/www/officesdk/releases/<release-id>`. Missing hashed `/_astro/` assets are copied from the previous release before activation, so cached HTML and open tabs can still load their original CSS, scripts, and images. Existing new-release files are never overwritten; HTML and stable public files are not copied.
 4. `/var/www/officesdk/current` is switched atomically to the new release.
-5. Nginx is validated before activation, then reloaded. The previous release target and a copy of its Nginx configuration are retained; activation or origin health-check failures restore both automatically.
+5. Nginx is validated before activation, then reloaded. The previous release target and a copy of its Nginx configuration are retained; activation or origin health-check failures restore both automatically. Rollback first retains new hashed assets in the previous release to support pages already served from the failed release.
 6. The workflow checks the website through the public IP with `Host: officesdk.com` and `X-Forwarded-Proto: https` to reproduce HTTPS traffic from Cloudflare. Each check requires `200` and the expected content, with up to five attempts while the graceful Nginx reload settles.
 
 The deployment does not touch the existing ShimoDocs release tree.
+
+Hashed assets currently accumulate across releases; monitor disk usage rather than deleting them on each deployment. Purging Cloudflare does not clear HTML already loaded in a browser. HTML may remain at the edge for its one-hour shared TTL; purge changed HTML URLs when an update must appear immediately.
 
 ## GitHub Actions configuration
 
@@ -48,6 +50,7 @@ npm ci
 npm run dev       # Astro development server on port 4173
 npm run build     # static Astro output in dist/
 npm run preview   # serve the built dist/ directory locally
+bash scripts/deploy/test-retain-assets.sh
 ```
 
 The release archive contains the static route output, such as `dist/index.html`, `dist/product/index.html`, `dist/blog/index.html`, and one `dist/blog/<slug>/index.html` for each article. Nginx serves these files directly; no Astro or React process is started on the origin.
