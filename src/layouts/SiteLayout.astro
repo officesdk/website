@@ -65,6 +65,16 @@ const serializeSchema = (schema: Record<string, unknown>) => JSON.stringify(sche
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {image && <meta name="twitter:image" content={`${siteOrigin}${image}`} />}
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-9SF2PEB5YX"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-9SF2PEB5YX');
+    </script>
     <title>{title}</title>
     <script type="application/ld+json" set:html={serializeSchema(graph)}></script>
     {schemas.map((schema) => <script type="application/ld+json" data-blog-schema={articleSchema ? '' : undefined} set:html={serializeSchema(schema)}></script>)}
