@@ -36,6 +36,8 @@ import {
 } from '../content'
 import type { SeoPage } from '../seo'
 import EditorCarousel from './EditorCarousel'
+import type { EditorImage } from './EditorCarousel'
+import { trackEvent } from '../analytics'
 
 const GITHUB_ORGANIZATION = 'https://github.com/officesdk/'
 const CONTACT_EMAIL = 'support@officesdk.com'
@@ -51,7 +53,7 @@ const navItems = [
   { label: 'Product', href: '/' },
   { label: 'Formats', href: '/formats' },
   { label: 'Blog', href: '/blog' },
-  { label: 'contact', href: '/contact' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 function Logo() {
@@ -159,7 +161,7 @@ export function AudienceLine({ className = '' }: { className?: string }) {
   )
 }
 
-export function Hero() {
+export function Hero({ images }: { images: EditorImage[] }) {
   return (
     <section className="hero editor-hero" id="top">
       <div className="container hero-content">
@@ -171,9 +173,13 @@ export function Hero() {
               <ShieldCheck size={18} strokeWidth={1.8} aria-hidden="true" />
               <span><strong>Self-hosted</strong> on your infrastructure.</span>
             </p>
+            <div className="hero-actions home-conversion-actions">
+              <a className="button button-primary" href="/contact">Talk to our team <ArrowRight size={16} /></a>
+              <a className="button button-dark-ghost" href="/product/core-editors">Explore the editors <ArrowUpRight size={16} /></a>
+            </div>
           </div>
         </div>
-        <EditorCarousel />
+        <EditorCarousel images={images} />
       </div>
     </section>
   )
@@ -341,6 +347,7 @@ export function ContactForm() {
         body: JSON.stringify({ fields, typecast: true }),
       })
       if (response.status !== 201) throw new Error(`Teable returned ${response.status}`)
+      trackEvent('contact_form_submit', { form_id: 'contact' })
       setStatus('success')
       setValues(emptyContactValues)
       setEmailTouched(false)

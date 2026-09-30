@@ -60,6 +60,8 @@ There is no self-serve trial or pricing promise in this repository. Use the eval
 
 ## Operations and analytics
 
+The site records accepted contact inquiries, contact/GitHub clicks, and 75% article reading depth. Local and preview hosts do not load the production Google tag. Event definitions, GA4 key-event setup, internal-traffic filtering, ownership verification, and cache rollout are described in [the conversion checklist](docs/ANALYTICS-AND-CONVERSION.md).
+
 The internal operating record lives in the Feishu knowledge base under `Overseas Operations / officesdk`, with a `Daily Collection Status` table. The enabled daily workflow currently writes a `pending collection` status row; it does not yet read Google Search Console data through the GSC API.
 
 Google Search Console property access and API credentials must be confirmed before metric ingestion is added. Until then, missing clicks, impressions, indexing, or query values must remain unreported rather than being recorded as zero. The current automation is status logging, not a complete SEO analytics pipeline.

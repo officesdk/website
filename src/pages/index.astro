@@ -4,9 +4,10 @@ import { Hero, HomeEvidence, WorkflowThemes, ProductSection, FormatsSection, Sol
 import { CoreEditorsBand } from '../components/CoreEditorsStory'
 import CapabilityArchitecture from '../components/CapabilityArchitecture'
 import { faqs } from '../content'
+import { editorImages } from '../editor-images'
 
-const title = 'Office SDK | View, Edit & Convert Documents in Your App'
-const description = 'Embed Word, Excel and PowerPoint viewing, collaborative editing, annotations and conversion in your app, with a customizable UI and self-hosted deployment.'
+const title = 'Office SDK — Embed Word, Excel & PowerPoint | Self-Hosted'
+const description = 'Embed Word, Excel and PowerPoint editing in your app. Self-host on your infrastructure, keep control of files and permissions, and talk to our team about evaluation.'
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -19,7 +20,7 @@ const faqSchema = {
 ---
 
 <SiteLayout {title} {description} canonical="/" schemas={[faqSchema]}>
-  <Hero client:load />
+  <Hero client:load images={editorImages} />
   <CapabilityArchitecture client:load />
   <CoreEditorsBand />
   <HomeEvidence />

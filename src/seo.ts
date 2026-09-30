@@ -214,7 +214,7 @@ export const seoPages: Record<Exclude<SiteRoute, '/'>, SeoPage> = {
     path: '/contact',
     title: 'Contact Office SDK | Discuss an Office workflow',
     description: 'Contact the Office SDK team about Office file preview, editing, collaboration, format fit, deployment, and integration questions.',
-    h1: 'Bring the Office workflow you want to make easier.',
+    h1: 'Talk to our team.',
     eyebrow: 'CONTACT ENGINEERING',
     intro: 'Tell us what your product needs to do with Office files. A short workflow description is enough to start; include the file types, user action, and system boundary you are evaluating.',
     reviewedAt: '2026-09-29',

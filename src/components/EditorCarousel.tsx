@@ -19,7 +19,6 @@ const editors = [
     name: 'Document',
     tags: ['Markdown', 'Notes'],
     icon: FileText,
-    image: '/product/core-editors/hero-document.webp?v=a7e6bbc73b',
     alt: 'Document editor with the Northstar Atlas workspace, document outline, and rich content.',
     accent: '#51dce7',
     glow: '#267f98',
@@ -38,7 +37,6 @@ const editors = [
     name: 'Writer',
     tags: ['Word', 'Office'],
     icon: PenLine,
-    image: '/product/core-editors/hero-writer.webp?v=1dc33037ed',
     alt: 'Writer editor with the Northstar proposal, page layout, and document formatting tools.',
     accent: '#79acff',
     glow: '#6056b5',
@@ -57,7 +55,6 @@ const editors = [
     name: 'Sheet',
     tags: ['Excel', 'Office'],
     icon: FileSpreadsheet,
-    image: '/product/core-editors/hero-sheet.webp?v=cb610a8114',
     alt: 'Sheet editor with the Northstar operations workbook, tables, and charts.',
     accent: '#79d8ac',
     glow: '#268979',
@@ -76,7 +73,6 @@ const editors = [
     name: 'Presentation',
     tags: ['PPT', 'Office'],
     icon: Presentation,
-    image: '/product/core-editors/hero-presentation.webp?v=5a10162e2f',
     alt: 'Presentation editor with the Northstar quarterly review, slide thumbnails, and presentation tools.',
     accent: '#f1af8d',
     glow: '#b47940',
@@ -151,7 +147,9 @@ function annotationGeometry(annotation: EditorAnnotation, imageWidth: number, im
   return { label, target, path: roundedPath(points), corners }
 }
 
-export default function EditorCarousel() {
+export type EditorImage = { src: string; srcSet: string }
+
+export default function EditorCarousel({ images }: { images: EditorImage[] }) {
   const instanceId = useId()
   const [active, setActive] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -260,7 +258,7 @@ export default function EditorCarousel() {
                   </ul>
                 </div>
                 <div className="editor-slide-preview">
-                  <img className="editor-interface-image" src={editor.image} width={editor.imageWidth} height={editor.imageHeight} alt={editor.alt} fetchPriority={index === 0 ? 'high' : 'low'} decoding="async" draggable={false} />
+                  <img className="editor-interface-image" src={images[index].src} srcSet={images[index].srcSet} sizes="(max-width: 600px) 90vw, (max-width: 1100px) 80vw, 1080px" width={editor.imageWidth} height={editor.imageHeight} alt={editor.alt} fetchPriority={index === 0 ? 'high' : 'low'} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" draggable={false} />
                   <svg className="editor-annotation-lines" viewBox={`0 0 ${frame.width} ${frame.height}`} aria-hidden="true">
                     {editor.annotations.map((annotation, annotationIndex) => {
                       const { label, target, path, corners } = annotationGeometry(annotation, editor.imageWidth, editor.imageHeight)

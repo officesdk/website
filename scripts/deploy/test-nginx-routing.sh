@@ -55,6 +55,9 @@ if command -v ss >/dev/null; then
 fi
 fixture_root="$test_dir/site"
 mkdir -p "$fixture_root/blog/story" "$fixture_root/assets"
+mkdir -p "$fixture_root/_astro" "$fixture_root/fonts"
+printf '/* build fixture */' > "$fixture_root/_astro/site.fingerprint.css"
+printf 'font fixture' > "$fixture_root/fonts/example.woff2"
 printf '<!doctype html><html><body>HOME_FIXTURE</body></html>\n' > "$fixture_root/index.html"
 printf '<!doctype html><html><body>BLOG_FIXTURE</body></html>\n' > "$fixture_root/blog/index.html"
 printf '<!doctype html><html><body>ARTICLE_FIXTURE</body></html>\n' > "$fixture_root/blog/story/index.html"
@@ -160,6 +163,26 @@ if [[ "${NGINX_TEST_SMOKE_ONLY:-0}" != 1 ]]; then
   fi
   check_request 'Sitemap XML' officesdk.com /sitemap.xml https 200 '' text/xml '<urlset'
   check_request 'Robots text' officesdk.com /robots.txt https 200 '' text/plain 'Sitemap: https://officesdk.com/sitemap.xml'
+
+  check_cache() {
+    local path="$1" expected_status="$2" expected_cache="$3" status actual
+    status="$(curl --silent --show-error --max-time 5 -H 'Host: officesdk.com' -H 'X-Forwarded-Proto: https' --dump-header "$test_dir/headers" --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port$path")"
+    actual="$(response_header Cache-Control)"
+    checks=$((checks + 1))
+    if [[ "$status" == "$expected_status" && "$actual" == "$expected_cache" ]]; then
+      printf 'PASS cache %s\n' "$path"
+    else
+      printf 'FAIL cache %s: status=%s cache=%s\n' "$path" "$status" "$actual"
+      failures=$((failures + 1))
+    fi
+  }
+  check_cache / 200 'public, max-age=0, s-maxage=3600, must-revalidate'
+  check_cache /blog 200 'public, max-age=0, s-maxage=3600, must-revalidate'
+  check_cache /_astro/site.fingerprint.css 200 'public, max-age=31536000, immutable'
+  check_cache /fonts/example.woff2 200 'public, max-age=14400, must-revalidate'
+  check_cache /assets/pixel.png 200 'public, max-age=14400, must-revalidate'
+  check_cache /_astro/missing.js 404 'no-store'
+  check_cache /blog/missing 404 'no-store'
 fi
 
 printf '\nNginx routing: %s requests, %s failures. Temporary listener 127.0.0.1:%s will be removed.\n' "$checks" "$failures" "$port"
