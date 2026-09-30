@@ -23,6 +23,9 @@ const {
   articleSchema = false,
 } = Astro.props
 const siteOrigin = 'https://officesdk.com'
+// Pages without a specific cover fall back to the shared brand card so every
+// route ships og:image/twitter:image for link previews.
+const socialImage = image ?? '/brand/og-default.png'
 const organization = {
   '@type': 'Organization',
   '@id': `${siteOrigin}/#organization`,
@@ -60,11 +63,14 @@ const serializeSchema = (schema: Record<string, unknown>) => JSON.stringify(sche
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={`${siteOrigin}${canonical}`} />
-    {image && <meta property="og:image" content={`${siteOrigin}${image}`} />}
+    <meta property="og:image" content={`${siteOrigin}${socialImage}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Office SDK — Embed Word, Excel and PowerPoint in your app" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {image && <meta name="twitter:image" content={`${siteOrigin}${image}`} />}
+    <meta name="twitter:image" content={`${siteOrigin}${socialImage}`} />
     <!-- Google tag (gtag.js) -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];

@@ -55,16 +55,18 @@ if command -v ss >/dev/null; then
 fi
 fixture_root="$test_dir/site"
 mkdir -p "$fixture_root/blog/story" "$fixture_root/assets"
-mkdir -p "$fixture_root/_astro" "$fixture_root/fonts"
+mkdir -p "$fixture_root/_astro" "$fixture_root/fonts" "$fixture_root/product/core-editors"
 printf '/* build fixture */' > "$fixture_root/_astro/site.fingerprint.css"
 printf 'font fixture' > "$fixture_root/fonts/example.woff2"
 printf '<!doctype html><html><body>HOME_FIXTURE</body></html>\n' > "$fixture_root/index.html"
+printf '<!doctype html><html><body>PRODUCT_FIXTURE</body></html>\n' > "$fixture_root/product/index.html"
 printf '<!doctype html><html><body>BLOG_FIXTURE</body></html>\n' > "$fixture_root/blog/index.html"
 printf '<!doctype html><html><body>ARTICLE_FIXTURE</body></html>\n' > "$fixture_root/blog/story/index.html"
 printf '<!doctype html><html><body>NOT_FOUND_FIXTURE</body></html>\n' > "$fixture_root/404.html"
 printf '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://officesdk.com/blog/story</loc></url></urlset>\n' > "$fixture_root/sitemap.xml"
 printf 'User-agent: *\nAllow: /\nSitemap: https://officesdk.com/sitemap.xml\n' > "$fixture_root/robots.txt"
 printf '%s' 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jH1kAAAAASUVORK5CYII=' | decode_base64 > "$fixture_root/assets/pixel.png"
+printf '%s' 'UklGRhIAAABXRUJQVlA4TAYAAAAvAAAAAAfQ//73v/+BiOh/AAA=' | decode_base64 > "$fixture_root/product/core-editors/hero-document.webp"
 printf '%s' "$NGINX_TEST_CONFIG_BASE64" | decode_base64 > "$test_dir/site.conf"
 
 # Keep the production server rules, replacing only its listener and document root.
@@ -178,9 +180,11 @@ if [[ "${NGINX_TEST_SMOKE_ONLY:-0}" != 1 ]]; then
   }
   check_cache / 200 'public, max-age=0, s-maxage=3600, must-revalidate'
   check_cache /blog 200 'public, max-age=0, s-maxage=3600, must-revalidate'
+  check_cache /product 200 'public, max-age=0, s-maxage=3600, must-revalidate'
   check_cache /_astro/site.fingerprint.css 200 'public, max-age=31536000, immutable'
   check_cache /fonts/example.woff2 200 'public, max-age=14400, must-revalidate'
   check_cache /assets/pixel.png 200 'public, max-age=14400, must-revalidate'
+  check_cache /product/core-editors/hero-document.webp 200 'public, max-age=0, must-revalidate'
   check_cache /_astro/missing.js 404 'no-store'
   check_cache /blog/missing 404 'no-store'
 fi

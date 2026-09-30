@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro'
 import { blogEntries } from '../blog/data'
+import { blogTopics } from '../blog/topics'
 import { siteRoutes } from '../seo'
 
 export const prerender = true
@@ -26,8 +27,14 @@ const articleEntries = blogEntries.map((entry) => ({
   priority: '0.7',
 }))
 
+const topicEntries = blogTopics.map((topic) => ({
+  path: `/blog/topics/${topic.slug}`,
+  changefreq: 'weekly',
+  priority: '0.7',
+}))
+
 export const GET: APIRoute = () => {
-  const urls = [...staticEntries, ...articleEntries]
+  const urls = [...staticEntries, ...topicEntries, ...articleEntries]
     .map((entry) => {
       const lastmod = 'lastmod' in entry && typeof entry.lastmod === 'string' ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>` : ''
       return `<url><loc>https://officesdk.com${escapeXml(entry.path)}</loc>${lastmod}<changefreq>${entry.changefreq}</changefreq><priority>${entry.priority}</priority></url>`

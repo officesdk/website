@@ -1,7 +1,8 @@
 ---
 import { ArrowLeft, ArrowUpRight, Check, ChevronDown, Link2 } from 'lucide-react'
 import { BlogCard, EntryMeta, TopicTags } from '../../blog/BlogIndex'
-import { relatedArticles } from '../../blog/data'
+import { relatedArticles, relatedFieldGuides } from '../../blog/data'
+import { topicsForEntry } from '../../blog/topics'
 import type { BlogArticleData } from '../../blog/types'
 import InlineFigure from './InlineFigure.astro'
 
@@ -12,6 +13,8 @@ interface Props {
 const { article } = Astro.props
 let figureNumber = 0
 const sections = article.sections.map(section => ({ ...section, figureNumber: section.figure ? ++figureNumber : null }))
+const fieldGuides = relatedFieldGuides(article)
+const topicHubs = topicsForEntry(article)
 ---
 
 <article class={`blog-article hero-${article.recipe.hero} body-${article.recipe.body} format-${article.format}`} style={{ '--article-accent': article.recipe.accent, '--article-soft': article.recipe.soft }} data-layout={article.recipe.signature} data-format={article.format} data-structure={article.structure} data-slug={article.slug}>
@@ -70,6 +73,18 @@ const sections = article.sections.map(section => ({ ...section, figureNumber: se
     <div class="container">
       <div class="article-related-heading"><h2>Keep reading.</h2><a href="/blog">All stories <ArrowUpRight size={16} /></a></div>
       <div class="journal-grid">{relatedArticles(article).map(entry => <BlogCard entry={entry} />)}</div>
+    </div>
+  </section>
+  {topicHubs.length > 0 && <section class="article-topics" aria-label="Topic hubs covering this article">
+    <div class="container article-topics-inner">
+      <span class="article-topics-label">Topic hubs</span>
+      {topicHubs.map(topic => <a href={`/blog/topics/${topic.slug}`}>{topic.title} <ArrowUpRight size={13} /></a>)}
+    </div>
+  </section>}
+  <section class="article-related article-field-guides">
+    <div class="container">
+      <div class="article-related-heading"><h2>Field guides.</h2><a href="/blog/topics/self-hosting">Topic hubs <ArrowUpRight size={16} /></a></div>
+      <div class="journal-grid">{fieldGuides.map(entry => <BlogCard entry={entry} />)}</div>
     </div>
   </section>
 </article>

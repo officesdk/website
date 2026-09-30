@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronDown, Search, Tag, X } from 'lucide-react'
 import { blogCategories, blogEntries, blogTags, filterArticles, formatDate, formatNames, tagCounts } from './data'
+import { blogTopics } from './topics'
 import type { BlogEntry } from './types'
 
 const PAGE_SIZE = 12
@@ -200,6 +201,9 @@ export default function BlogIndex() {
           <nav className="journal-hero-topics" aria-label="Explore journal topics">
             {HERO_TOPICS.map(topic => <button key={topic.category} type="button" onClick={() => showTopic(topic.category)}>{topic.label}<ArrowRight size={14} /></button>)}
           </nav>
+          <nav className="journal-topic-hubs" aria-label="Journal topic hubs">
+            {blogTopics.map(topic => <a key={topic.slug} href={`/blog/topics/${topic.slug}`}>{topic.title}</a>)}
+          </nav>
         </div>
         <div className="journal-edition"><strong>{blogEntries.length}</strong><span>articles</span><span>{blogCategories.length} topic groups</span><time dateTime="2026-09-29">Updated Sep 29, 2026</time></div>
       </div>
@@ -211,6 +215,6 @@ export default function BlogIndex() {
       {entries.length ? <div className="journal-grid">{entries.map(entry => <BlogCard key={entry.slug} entry={entry} />)}</div> : <div className="journal-empty"><Search size={32} /><h3>No matching stories.</h3><p>Try another topic or a shorter search.</p><button className="button button-primary" type="button" onClick={() => update({ query: '', category: 'All', tag: 'All', page: 1 })}>Reset filters <ArrowRight size={16} /></button></div>}
       {pageCount > 1 && <nav className="journal-pagination" aria-label="Blog pagination"><button type="button" aria-label="Previous page" title="Previous page" disabled={page === 1} onClick={() => { update({ page: page - 1 }); document.getElementById('articles')?.scrollIntoView() }}><ArrowLeft size={19} /></button><div>{Array.from({ length: pageCount }, (_, index) => index + 1).filter(number => number === 1 || number === pageCount || Math.abs(number - page) <= 1).map((number, index, pages) => <span key={number}>{index > 0 && number - pages[index - 1] > 1 && <span className="pagination-gap">...</span>}<button type="button" aria-label={`Page ${number}`} aria-current={number === page ? 'page' : undefined} onClick={() => { update({ page: number }); document.getElementById('articles')?.scrollIntoView() }}>{number}</button></span>)}</div><button type="button" aria-label="Next page" title="Next page" disabled={page === pageCount} onClick={() => { update({ page: page + 1 }); document.getElementById('articles')?.scrollIntoView() }}><ArrowRight size={19} /></button></nav>}
     </section>
-    <section className="journal-closing"><div className="container"><h2>Bring the ideas into <em>your product.</em></h2><a href="/contact" className="button button-primary">Talk to Office SDK <ArrowRight size={17} /></a></div></section>
+    <section className="journal-closing"><div className="container"><h2>Bring the ideas into <em>your product.</em></h2><div className="journal-closing-actions"><a href="/contact" className="button button-primary">Talk to Office SDK <ArrowRight size={17} /></a><a href="/pricing" className="button button-dark-ghost" data-analytics-event="pricing_cta_click">See pricing <ArrowUpRight size={16} /></a></div></div></section>
   </div>
 }

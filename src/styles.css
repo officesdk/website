@@ -539,3 +539,10 @@ h1 em, h2 em { color: var(--blue); font-style: normal; }
   .core-story-screenshot-bar { font-size: 7px; }
   .core-story-cta h2 { font-size: 38px; }
 }
+
+/* Final CTA secondary text link (pricing entry point) */
+.final-cta-link { display: inline-flex; align-items: center; gap: 5px; margin-left: 10px; color: #b4c4cf; font-size: 13px; font-weight: 650; white-space: nowrap; }
+.final-cta-link:hover { color: var(--lime); }
+@media (max-width: 900px) {
+  .final-cta-actions .final-cta-link { justify-content: flex-start; margin: 4px 0 0; }
+}

@@ -1,4 +1,4 @@
-export type SiteRoute = '/' | '/product' | '/formats' | '/solutions' | '/deployment' | '/contact'
+export type SiteRoute = '/' | '/product' | '/formats' | '/solutions' | '/deployment' | '/contact' | '/pricing' | '/docs' | '/demo'
 
 export type SeoEvidence = {
   definition: string
@@ -225,6 +225,141 @@ export const seoPages: Record<Exclude<SiteRoute, '/'>, SeoPage> = {
       { label: 'DIRECT EMAIL', title: 'Prefer email?', body: 'Write to support@officesdk.com and include the file types, user action, deployment context, and where the result belongs. The form and email are two contact options for the same workflow context.' },
     ],
   },
+  '/pricing': {
+    path: '/pricing',
+    title: 'Office SDK Pricing | Self-hosted licensing for your deployment',
+    description: 'Understand how Office SDK is priced: a self-hosted license sized to your deployment, with evaluation support and no per-file or per-document fees.',
+    h1: 'Self-hosted licensing, sized to your deployment.',
+    eyebrow: 'PRICING MODEL',
+    intro: 'Office SDK runs on your infrastructure, so pricing follows the deployment rather than per-file usage. Tell us the editor count, environments, and workflow scope, and you receive a quote that matches the deployment you are actually evaluating.',
+    reviewedAt: '2026-09-30',
+    sections: [
+      { label: 'HOW PRICING WORKS', title: 'A license for the deployment, not per document.', body: 'The license covers the self-hosted Office SDK deployment in your environments. Opening, editing, and converting files inside that deployment is not metered, so usage growth does not change the invoice.' },
+      { label: 'WHAT SIZES THE QUOTE', title: 'Three inputs shape the number.', body: 'Concurrent editors, the environments you run (evaluation, staging, production), and the workflow scope you need first. A focused first scope keeps the entry price honest.' },
+      { label: 'WHAT IS INCLUDED', title: 'Support and upgrades travel with the license.', body: 'The quote includes integration support during evaluation, upgrade access, and help validating the exact formats and workflows you plan to run in production.' },
+      { label: 'START SMALL', title: 'Prove one workflow before you scale.', body: 'The recommended path is a single-server proof of concept on one workflow. Pricing for production is easier to accept after the evaluation has evidence behind it.' },
+    ],
+    evidence: {
+      definition: 'Office SDK pricing is a self-hosted deployment license sized by editors, environments, and workflow scope, without per-file or per-document charges.',
+      facts: [
+        { value: '1 license', label: 'deployment coverage', detail: 'One self-hosted license covers the Office SDK runtime in the environments you agree with the team.' },
+        { value: '0', label: 'per-document fees', detail: 'Preview, editing, and conversion inside the deployment are not metered per file or per document.' },
+        { value: '3 inputs', label: 'quote sizing', detail: 'Concurrent editors, environment count, and first workflow scope determine the quote.' },
+      ],
+      comparison: {
+        title: 'What changes the quote and what does not',
+        headers: ['Factor', 'Moves the quote', 'Why'],
+        rows: [
+          ['Concurrent editors', 'Yes', 'Sizing follows the people editing at the same time, not the document count'],
+          ['Environments', 'Partly', 'Evaluation, staging, and production are scoped explicitly'],
+          ['Files opened or converted', 'No', 'Document volume is not metered inside the deployment'],
+          ['First workflow scope', 'Partly', 'A focused first scope keeps the evaluation and the quote small'],
+        ],
+      },
+      steps: [
+        'Describe the first workflow and the formats it must handle.',
+        'Estimate concurrent editors and name the environments you run.',
+        'Request the quote and a single-server evaluation license together.',
+        'Revisit pricing after the proof of concept has recorded evidence.',
+      ],
+      references: [
+        { label: 'Deployment planning', url: '/deployment' },
+        { label: 'Talk to the team', url: '/contact' },
+        { label: 'Office SDK on GitHub', url: 'https://github.com/officesdk/' },
+      ],
+    },
+  },
+  '/docs': {
+    path: '/docs',
+    title: 'Office SDK Docs | Integration and deployment documentation',
+    description: 'Find Office SDK documentation: quickstart integration, frontend embed, backend callbacks, format coverage, and self-hosted deployment guidance.',
+    h1: 'Start integrating with the right document.',
+    eyebrow: 'DOCUMENTATION',
+    intro: 'The documentation set covers the whole integration path: embed the editor surface, connect your backend through callbacks, validate formats, and deploy on your own infrastructure. Start with the quickstart, then follow the surface you are building first.',
+    reviewedAt: '2026-09-30',
+    sections: [
+      { label: 'QUICKSTART', title: 'Open your first document.', body: 'The shortest path from an empty web app to a rendered Office document: load the SDK surface, supply a file source, and confirm the open event end to end.' },
+      { label: 'FRONTEND EMBED', title: 'Place the editor inside your product.', body: 'Mount the document surface in the page, size it to your layout, and choose preview, edit, or review per view. The surface receives context; your product keeps identity and permissions.' },
+      { label: 'BACKEND CALLBACKS', title: 'Connect saves to your system of record.', body: 'Callback endpoints let your backend issue access decisions and receive saved results, so storage and versioning stay in the system you already operate.' },
+      { label: 'DEPLOYMENT', title: 'Run it on your infrastructure.', body: 'Self-hosted deployment guidance covers the Ubuntu baseline, single-server proof of concept, and the production readiness checks your team should record.' },
+    ],
+    evidence: {
+      definition: 'Office SDK documentation maps the integration path from first open to production deployment: frontend embed, backend callbacks, format validation, and self-hosted operations.',
+      facts: [
+        { value: '4 areas', label: 'documentation set', detail: 'Quickstart, frontend embed, backend callbacks, and deployment form the core reading path.' },
+        { value: '2 sides', label: 'integration boundary', detail: 'The browser surface and your backend meet through defined context and callback contracts.' },
+        { value: '1 rule', label: 'validation first', detail: 'Every guide asks you to confirm the behavior with your own files before production.' },
+      ],
+      notes: [
+        { title: 'Read by the question you are answering', body: 'Pick the document that matches the decision in front of you. If the question is whether the file opens correctly, start with the quickstart. If the question is where a saved version lands, read the callback guide. If the question is what the server needs, start with deployment. Reading in this order keeps each check tied to one decision.' },
+        { title: 'Keep the boundary in the notes', body: 'While integrating, record which system issued the access decision, which system stored the result, and which version identifier the business record points to. These three facts resolve most later questions about a document without reopening the editor.' },
+      ],
+      comparison: {
+        title: 'Find the document by the next question',
+        headers: ['Your question', 'Start with', 'You leave with'],
+        rows: [
+          ['Does the file open in our app?', 'Quickstart', 'A rendered document and a verified open path'],
+          ['Where do saves go?', 'Backend callbacks', 'A save flow that lands in your storage with version identity'],
+          ['What does the server need?', 'Deployment', 'A sizing and environment plan for your infrastructure'],
+          ['Which formats behave how?', 'Formats page', 'An operation-by-format validation checklist'],
+        ],
+      },
+      steps: [
+        'Open the quickstart and render one of your own files.',
+        'Decide which view is preview, which is edit, and which is review.',
+        'Wire the callback endpoint and save one document into your storage.',
+        'Record the version and access decision with your business record.',
+      ],
+      references: [
+        { label: 'Office SDK on GitHub', url: 'https://github.com/officesdk/' },
+        { label: 'Format coverage', url: '/formats' },
+        { label: 'Deployment planning', url: '/deployment' },
+      ],
+    },
+  },
+  '/demo': {
+    path: '/demo',
+    title: 'Office SDK Demo | See the editors before you integrate',
+    description: 'Walk through the Office SDK editor surfaces: notes, Markdown, Word, Excel, and PowerPoint views inside one workflow story, then request a guided session.',
+    h1: 'See the editors before you integrate.',
+    eyebrow: 'PRODUCT DEMO',
+    intro: 'The fastest way to evaluate Office SDK is to watch one business workflow move across the editor surfaces: a brief in notes, the same work in Word, the numbers in Excel, and the result in PowerPoint. Then bring your own files to a guided session.',
+    reviewedAt: '2026-09-30',
+    sections: [
+      { label: 'SELF-GUIDED', title: 'Follow one workflow across four editors.', body: 'The core editors story walks a single illustrative workflow through the notes, Word, Excel, and PowerPoint surfaces, so you see the boundaries between preview, editing, and review without installing anything.' },
+      { label: 'GUIDED SESSION', title: 'Bring your files and your questions.', body: 'A guided walkthrough runs your representative files through the same surfaces and pauses on the integration points your product cares about: context, callbacks, and where results land.' },
+      { label: 'WHAT TO PREPARE', title: 'Three inputs make the session useful.', body: 'One workflow description, two or three representative files, and the system that owns storage and permissions. With these, the session ends at a proof-of-concept plan instead of a slide deck.' },
+      { label: 'AFTER THE DEMO', title: 'Leave with a one-workflow plan.', body: 'The output of a good demo is narrow: the workflow to prove first, the formats to validate, and the environment to run the proof of concept on.' },
+    ],
+    evidence: {
+      definition: 'An Office SDK demo is a walkthrough of one workflow across the editor surfaces, ending with a scoped proof-of-concept plan for your own files and infrastructure.',
+      facts: [
+        { value: '4 surfaces', label: 'one workflow story', detail: 'Notes, Word, Excel, and PowerPoint views appear in one continuous workflow narrative.' },
+        { value: '3 inputs', label: 'useful session prep', detail: 'A workflow description, representative files, and the storage owner make the session concrete.' },
+        { value: '1 output', label: 'scoped POC plan', detail: 'The session ends with the workflow, formats, and environment for the first proof of concept.' },
+      ],
+      comparison: {
+        title: 'Choose how to see the product',
+        headers: ['Format', 'Best for', 'Preparation'],
+        rows: [
+          ['Self-guided story', 'Understanding the surfaces at your own pace', 'None — open the core editors story'],
+          ['Guided session', 'Your files, your integration points', 'Workflow description and representative files'],
+          ['Proof of concept', 'Validating the workflow end to end', 'An evaluation environment and a named owner'],
+        ],
+      },
+      steps: [
+        'Open the core editors story and follow the workflow across the surfaces.',
+        'Note the views where preview, edit, and review should differ in your product.',
+        'Book a guided session with two or three of your own files.',
+        'Leave with the first workflow, format list, and environment for the POC.',
+      ],
+      references: [
+        { label: 'Open the core editors story', url: '/product/core-editors' },
+        { label: 'Request a guided session', url: '/contact' },
+        { label: 'Deployment planning', url: '/deployment' },
+      ],
+    },
+  },
 }
 
-export const siteRoutes: SiteRoute[] = ['/', '/product', '/formats', '/solutions', '/deployment', '/contact']
+export const siteRoutes: SiteRoute[] = ['/', '/product', '/formats', '/solutions', '/deployment', '/contact', '/pricing', '/docs', '/demo']

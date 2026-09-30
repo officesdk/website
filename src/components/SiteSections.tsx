@@ -5,8 +5,10 @@ import {
   ArrowRight,
   ArrowUpRight,
   BarChart3,
+  BookOpen,
   Check,
   ChevronDown,
+  CirclePlay,
   Eye,
   FileCheck2,
   FileOutput,
@@ -52,6 +54,8 @@ const TEABLE_FIELD_IDS = {
 const navItems = [
   { label: 'Product', href: '/' },
   { label: 'Formats', href: '/formats' },
+  { label: 'Docs', href: '/docs' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ]
@@ -259,6 +263,8 @@ export function SolutionsSection() {
 
 export function ResourcesSection() {
   const resources = [
+    { icon: BookOpen, title: 'Integration docs', body: 'Quickstart, callbacks, and deployment reading for the build team.', href: '/docs' },
+    { icon: CirclePlay, title: 'See the editors run', body: 'Follow one workflow across the notes, Word, Excel, and PowerPoint surfaces.', href: '/demo' },
     { icon: GitBranch, title: 'Office SDK on GitHub', body: 'Explore Office SDK projects and repositories.', href: GITHUB_ORGANIZATION, external: true },
     { icon: BarChart3, title: 'Office format fit', body: 'Frame the preview and editing boundaries that matter to your users.', href: '#formats' },
     { icon: ShieldCheck, title: 'Evaluation conversation', body: 'Bring your workflow, data boundary, and deployment questions to the next discussion.', href: `mailto:${CONTACT_EMAIL}?subject=Office%20SDK%20evaluation` },
@@ -386,7 +392,7 @@ export function SeoPageView({ page, children }: { page: SeoPage; children?: Reac
       <section className="seo-page-hero">
         <div className="seo-grid" aria-hidden="true" />
         <div className="container seo-page-hero-inner">
-          <div className="seo-page-copy"><span className="eyebrow"><span className="eyebrow-line" /> {page.eyebrow}</span><h1>{page.h1}</h1><p>{page.intro}</p><div className="hero-actions"><a className="button button-primary" href={isContact ? '#contact-form' : '/contact'}>{isContact ? 'Start the conversation' : 'Talk to engineering'} <ArrowRight size={16} /></a>{page.path === '/product' && <a className="button button-dark-ghost" href="/product/core-editors">See four editors in one story <ArrowUpRight size={16} /></a>}</div></div>
+          <div className="seo-page-copy"><span className="eyebrow"><span className="eyebrow-line" /> {page.eyebrow}</span><h1>{page.h1}</h1><p>{page.intro}</p><div className="hero-actions"><a className="button button-primary" href={isContact ? '#contact-form' : '/contact'} data-analytics-event={page.path === '/pricing' ? 'pricing_cta_click' : undefined}>{isContact ? 'Start the conversation' : 'Talk to engineering'} <ArrowRight size={16} /></a>{page.path === '/product' && <a className="button button-dark-ghost" href="/product/core-editors">See four editors in one story <ArrowUpRight size={16} /></a>}{page.path === '/demo' && <a className="button button-dark-ghost" href="/product/core-editors" data-analytics-event="demo_launch">Open the core editors story <ArrowUpRight size={16} /></a>}</div></div>
           <div className="seo-page-visual"><div className="visual-label"><span className="pulse-dot" /> OFFICE SDK / {page.eyebrow}</div><DocumentPreview format={page.path === '/formats' ? 'xlsx' : page.path === '/solutions' ? 'pptx' : 'docx'} mode={page.path === '/product' ? 'edit' : 'preview'} compact /><div className="seo-visual-note"><Workflow size={15} /><span>Product context <strong>→</strong> Office surface <strong>→</strong> business result</span></div></div>
         </div>
       </section>
@@ -411,15 +417,15 @@ export function SeoPageView({ page, children }: { page: SeoPage; children?: Reac
         </div>
       </section>}
       {children}
-      <section className="section seo-next-step"><div className="container"><span className="section-index">KEEP EXPLORING</span><h2>Choose the next proof point.</h2><div className="seo-link-rail"><a href="/product">Product capability <ArrowUpRight size={16} /></a><a href="/formats">Format boundary <ArrowUpRight size={16} /></a><a href="/solutions">Solution fit <ArrowUpRight size={16} /></a><a href="/deployment">Deployment fit <ArrowUpRight size={16} /></a></div></div></section>
+      <section className="section seo-next-step"><div className="container"><span className="section-index">KEEP EXPLORING</span><h2>Choose the next proof point.</h2><div className="seo-link-rail"><a href="/product">Product capability <ArrowUpRight size={16} /></a><a href="/formats">Format boundary <ArrowUpRight size={16} /></a><a href="/solutions">Solution fit <ArrowUpRight size={16} /></a><a href="/deployment">Deployment fit <ArrowUpRight size={16} /></a><a href="/docs">Docs <ArrowUpRight size={16} /></a><a href="/demo">Demo <ArrowUpRight size={16} /></a><a href="/pricing">Pricing <ArrowUpRight size={16} /></a></div></div></section>
     </>
   )
 }
 
 export function FinalCTA() {
-  return <section className="final-cta"><div className="container final-cta-inner" data-reveal><div><span className="section-index">READY TO TEST THE FIT?</span><h2>Put the Office file<br /><em>where the work is.</em></h2><p>Choose a workflow, bring the files that matter, and plan a focused evaluation with the Office SDK team.</p></div><div className="final-cta-actions"><a className="button button-primary" href={`mailto:${CONTACT_EMAIL}?subject=Office%20SDK%20evaluation`}>Contact Office SDK <ArrowUpRight size={17} /></a><a className="button button-dark-ghost" href="/product/core-editors">See the editors <ArrowRight size={17} /></a></div></div></section>
+  return <section className="final-cta"><div className="container final-cta-inner" data-reveal><div><span className="section-index">READY TO TEST THE FIT?</span><h2>Put the Office file<br /><em>where the work is.</em></h2><p>Choose a workflow, bring the files that matter, and plan a focused evaluation with the Office SDK team.</p></div><div className="final-cta-actions"><a className="button button-primary" href={`mailto:${CONTACT_EMAIL}?subject=Office%20SDK%20evaluation`}>Contact Office SDK <ArrowUpRight size={17} /></a><a className="button button-dark-ghost" href="/product/core-editors">See the editors <ArrowRight size={17} /></a><a className="final-cta-link" href="/pricing" data-analytics-event="pricing_cta_click">Or start from pricing <ArrowUpRight size={15} /></a></div></div></section>
 }
 
 export function Footer() {
-  return <footer className="site-footer"><div className="container"><div className="footer-main"><div><Logo /><p>Office file workflows for products that keep people moving.</p><a className="footer-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div><div className="footer-links"><div><span>Explore</span><a href="/product">Product</a><a href="/product/core-editors">Core editor story</a><a href="/formats">Formats</a><a href="/solutions">Solutions</a><a href="/deployment">Deployment</a></div><div><span>Evaluate</span><a href="/blog">Blog</a><a href={GITHUB_ORGANIZATION} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={13} /></a><a href="/#faq">FAQ</a></div><div><span>Office SDK</span><a href="/">Back to home <ArrowUpRight size={13} /></a><a href="/contact">Start an evaluation <ArrowUpRight size={13} /></a></div></div></div><div className="footer-bottom"><span>© 2026 Office SDK</span><span>Office document workflows for web products</span></div></div></footer>
+  return <footer className="site-footer"><div className="container"><div className="footer-main"><div><Logo /><p>Office file workflows for products that keep people moving.</p><a className="footer-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div><div className="footer-links"><div><span>Explore</span><a href="/product">Product</a><a href="/product/core-editors">Core editor story</a><a href="/formats">Formats</a><a href="/solutions">Solutions</a><a href="/deployment">Deployment</a></div><div><span>Evaluate</span><a href="/demo">Demo</a><a href="/docs">Docs</a><a href="/pricing">Pricing</a><a href="/blog">Blog</a><a href={GITHUB_ORGANIZATION} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={13} /></a><a href="/#faq">FAQ</a></div><div><span>Office SDK</span><a href="/">Back to home <ArrowUpRight size={13} /></a><a href="/contact">Start an evaluation <ArrowUpRight size={13} /></a></div></div></div><div className="footer-bottom"><span>© 2026 Office SDK</span><span>Office document workflows for web products</span></div></div></footer>
 }

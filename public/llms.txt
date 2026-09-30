@@ -11,6 +11,9 @@ Office SDK is an embedded web document surface for products that need Office fil
 - [Solutions](https://officesdk.com/solutions): content platforms, review and approval, education and research, and business systems.
 - [Deployment](https://officesdk.com/deployment): proof of concept, browser delivery, deployment baseline, and operating ownership.
 - [Journal](https://officesdk.com/blog): practical articles on integration, security, migration, AI documents, and operations.
+- [Docs](https://officesdk.com/docs): documentation reading path — quickstart, frontend embed, backend callbacks, and deployment guides.
+- [Demo](https://officesdk.com/demo): self-guided editor story and guided session options for evaluating the surfaces.
+- [Pricing](https://officesdk.com/pricing): self-hosted licensing model sized by editors, environments, and workflow scope.
 - [Contact](https://officesdk.com/contact): workflow, file, and deployment questions for the Office SDK team.
 
 ## Verified scope
